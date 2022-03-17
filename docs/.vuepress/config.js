@@ -29,6 +29,7 @@ module.exports = {
                     '/overview/getting_start',
                     '/overview/api_principals',
                     '/overview/first_move',
+                    '/overview/start_websocket',
                 ]
             },
             {
