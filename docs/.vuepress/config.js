@@ -1,7 +1,7 @@
 module.exports = {
     title: 'Autoxing REST API Book',
     description: "A complete guide to control Autoxing Tech's Robots with REST API",
-    base: "/",
+    base: "/axbot_rest_book/",
     markdown: {
         extendMarkdown: md => {
             md.set({ breaks: true })
