@@ -41,7 +41,7 @@ curl -X POST http://localhost:8000/chassis/current_map \
 ```bash
 curl -X POST http://localhost:8000/chassis/pose \
   -H "Content-Type: application/json" \
-  -d '{position: [0, 0, 0], ori: 1.57}'
+  -d '{"position": [0, 0, 0], "ori": 1.57}'
 ```
 
 - `position: [0, 0, 0]` 表示当前坐标为 `x=0, y=0, z=0`。

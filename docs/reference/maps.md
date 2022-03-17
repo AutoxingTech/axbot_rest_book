@@ -3,7 +3,7 @@
 ## 获取地图列表
 
 ```bash
-curl http://localhost:8000/maps/ | jq
+curl http://localhost:8000/maps/
 ```
 
 ```json
@@ -63,7 +63,7 @@ curl -X DELETE http://localhost:8000/maps
 ## 获取地图详情
 
 ```bash
-curl http://localhost:8000/maps/1 | jq
+curl http://localhost:8000/maps/1
 ```
 
 ```json

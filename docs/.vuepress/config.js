@@ -45,6 +45,7 @@ module.exports = {
                 children: [
                     '/reference/maps',
                     '/reference/moves',
+                    '/reference/mappings',
                 ],
                 sidebarDepth: 2
             }
