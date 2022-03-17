@@ -111,3 +111,48 @@ curl http://localhost:8000/chassis/moves
   }
 ]
 ```
+
+## 运动状态反馈
+
+使用 websocket 的 `/planning_state` 频道，获取运动状态更新。
+
+```json
+{
+  "topic": "/planning_state",
+  "move_state": "moving",
+  "target_poses": [
+    {
+      "pos": [2.3, 20.82],
+      "ori": 0
+    }
+  ],
+  "charger_pose": {
+    "pos": [0, 0],
+    "ori": 0
+  },
+  "going_back_to_charger": false,
+  "action_id": 4410,
+  "fail_reason": 0,
+  "fail_reason_str": "none",
+  "remaining_distance": 3.546117067337036,
+  "move_intent": "none",
+  "intent_target_pose": {
+    "pos": [0, 0],
+    "ori": 0
+  },
+  "stuck_state": "none"
+}
+```
+
+## 取消当前运动
+
+```bash
+curl -X PATCH \
+  -H "Content-Type: application/json"
+  -d '{state: "cancelled"}'
+  http://localhost:8000/chassis/moves/current
+```
+
+```json
+{ "state": "cancelled" }
+```
