@@ -1,6 +1,6 @@
 # REST API 基本原则
 
-每个 REST API，由 Request 和 Response 组成。
+REST API 为**一问一答**的形式。每个请求有一个 Request 和 Response 组成。
 
 Request 包含 **target** 和 **action** 两部分。
 Response 包含 **status** 和 **data** 两部分。

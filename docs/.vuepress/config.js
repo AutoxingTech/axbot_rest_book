@@ -22,14 +22,21 @@ module.exports = {
         // },
         sidebar: [
             {
-                title: '概览',   // required
+                title: '概览',
                 collapsable: false, // optional, defaults to true
                 sidebarDepth: 0,    // optional, defaults to 1
                 children: [
                     '/overview/getting_start',
                     '/overview/api_principals',
-                    '/overview/first_move',
-                    '/overview/start_websocket',
+                ]
+            },
+            {
+                title: '导引教程',
+                collapsable: false, // optional, defaults to true
+                sidebarDepth: 0,    // optional, defaults to 1
+                children: [
+                    '/guides/first_move',
+                    '/guides/start_websocket',
                 ]
             },
             {
