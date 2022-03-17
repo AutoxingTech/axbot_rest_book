@@ -10,7 +10,7 @@ module.exports = {
     },
     themeConfig: {
         nav: [
-            { text: '底盘JIRA', link: 'https://autoxing.atlassian.net/browse/RCSS' }
+            // { text: '底盘JIRA', link: 'https://autoxing.atlassian.net/browse/RCSS' }
         ],
         // sidebar: [
         //     '/overview/overview',
