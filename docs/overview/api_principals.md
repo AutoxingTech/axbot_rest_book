@@ -1,19 +1,19 @@
 # REST API 基本原则
 
-REST API 为**一问一答**的形式。每个请求有一个 Request 和 Response 组成。
+REST API 为**一问一答**的形式。每个请求由 Request 和 Response 组成。
 
 Request 包含 **target** 和 **action** 两部分。
 Response 包含 **status** 和 **data** 两部分。
 
-比如，获取设备信息 `GET /device/status`，则：
+比如，删除 3 号地图 `DELETE /maps/3`，则：
 
-- Request: action=`GET` target=`/device/status`
-- Response: status=`200` data=`{"version": "1.8.x", "sn": "618111110000110" ...}`
+- Request: action=`DELETE` target=`/maps/3`
+- Response: status=`204` data=`空`
 
 使用 REST API 就是：
 
 ```
-$ curl -X DELETE -i http://localhost:8000/mappings/3
+$ curl -X GET -i http://localhost:8000/device/status
 HTTP/1.1 204 No Content
 date: Thu, 17 Mar 2022 05:06:59 GMT
 server: uvicorn
@@ -32,16 +32,16 @@ Target 分 **列表** 和 **个体** 两种。以下举例：
 - **/chassis/moves** - move action 列表
 - **/chassis/moves/1150** - 第 1150 号 move action
 - **/services** - 服务列表
-- **/services/imu/recalibrate** - 校准 IMU 服务
+- **/services/imu/recalibrate** - IMU 校准服务
 
 ## ACTION
 
-常见 Action 为 查询、创建、删除、修改、覆盖。对应 REST API 为 `GET`、`POST`、`DELETE`、`PUT`、`PATCH`。
+常见 Action 为 查询、创建、删除、修改、覆盖。对应 REST API 为 `GET`、`POST`、`DELETE`、`PATCH`、`PUT`。
 以下举例说明。特别注意，对 **列表** 做 `POST`，意味着创建新对象。对 **列表** 做 `DELETE`，意味着删除全部对象。
 
 | Action | Target  | 说明                  |
 | ------ | ------- | --------------------- |
-| POST   | /maps   | 创建地图              |
+| POST   | /maps   | 创建新地图            |
 | GET    | /maps   | 查看地图列表          |
 | GET    | /maps/1 | 查看 1 号地图         |
 | PUT    | /maps/1 | 覆盖 1 号地图         |
@@ -54,20 +54,23 @@ Target 分 **列表** 和 **个体** 两种。以下举例：
 返回状态码。状态码遵循 HTTP 状态码的一般规则：
 
 - 2xx 为成功
-- 4xx 为请求端问题（缺少字段、URL 错误、资源不存在等）
+- 4xx 为请求端问题
 - 5xx 为服务器端问题。
 
 常见的有:
 
 - 200 OK 成功
 - 201 Created 创建成功
-- 400 Bad Request
-- 404 Not Found 资源不存在
+- 204 No Content 删除成功
+- 400 Bad Request 请求参数错误
+- 404 Not Found 资源不存在(URL 错误)
 - 500 Internal Server Error 服务器端故障
 
 ## DATA
 
 返回的数据为 JSON 格式，有 List 和 Object 两种。
+
+查看所有地图，返回的就是一个 List。
 
 ```bash
 curl http://localhost:8000/maps/ | jq
@@ -110,6 +113,8 @@ curl http://localhost:8000/maps/ | jq
   }
 ]
 ```
+
+获取地图详情，返回的就是一个 Object。
 
 ```bash
 curl http://localhost:8000/maps/1 | jq

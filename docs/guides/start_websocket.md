@@ -61,4 +61,7 @@ connected (press CTRL+C to quit)
 
 `linear_velocity: 0, angular_velocity: -0.6522` 表示线速度为 0，角速度为 -0.6522 弧度/s。也就是向右原地旋转。
 
-| **warning**: 一定要等到 `twist_feedback` 之后，再发出下一个命令。而不要一次发送大量命令。因为网络有延迟，如果一次发送大量命令，会导致命令堆积，可能会导致机器人一直运动。
+::: danger
+不要一次发送大量 `/twist`。一定要等到收到 `/twist_feedback` 之后，再发出下一个命令。
+因为网络有延迟、堆积，可能会导致机器人一直运动。
+:::
