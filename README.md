@@ -15,9 +15,3 @@ yarn install
 ```shell
 yarn run docs:dev
 ```
-
-
-
-
-
-

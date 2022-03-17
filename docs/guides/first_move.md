@@ -85,7 +85,7 @@ curl -X POST http://localhost:8000/chassis/moves \
 
 ## 查询运动任务的状态
 
-使用 `GET /moves/:id` 可以查看某个运动任务的状态。
+使用 `GET /chassis/moves/:id` 可以查看某个运动任务的状态。
 
 ```bash
 curl http://localhost:8000/chassis/moves/4409
