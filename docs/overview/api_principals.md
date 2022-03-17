@@ -13,7 +13,7 @@ Response 包含 **status** 和 **data** 两部分。
 使用 REST API 就是：
 
 ```
-$ curl -X GET -i http://localhost:8000/device/status
+$ curl -X DELETE -i http://localhost:8000/maps/3
 HTTP/1.1 204 No Content
 date: Thu, 17 Mar 2022 05:06:59 GMT
 server: uvicorn
