@@ -44,8 +44,7 @@ module.exports = {
                 collapsable: false,
                 children: [
                     '/reference/maps',
-                    '/reference/moves',
-                    '/reference/mappings',
+                    '/reference/moves'
                 ],
                 sidebarDepth: 2
             }
