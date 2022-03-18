@@ -1,0 +1,8 @@
+version: '3.9'
+
+services:
+  web:
+    image: 'autoxing/axbot_rest_book'
+    build: .
+    ports:
+      - '4200:80'

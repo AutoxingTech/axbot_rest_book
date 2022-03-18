@@ -10,7 +10,8 @@
   },
   "scripts": {
     "docs:dev": "vuepress dev docs --temp .temp",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "docker:build": "docker build . -t autoxing/axbot_rest_book"
   },
   "dependencies": {
     "markdown-it-imsize": "^2.0.1"
