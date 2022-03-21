@@ -16,9 +16,10 @@
 用 `POST /chassis/current_map` 可以把某张地图设置为当前地图。
 
 ```bash
-curl -X POST http://localhost:8000/chassis/current_map \
+curl -X POST \
   -H "Content-Type: application/json" \
-  -d '{"map_id": 286}'
+  -d '{"map_id": 286}' \
+  http://localhost:8000/chassis/current_map
 ```
 
 ```json
@@ -39,9 +40,10 @@ curl -X POST http://localhost:8000/chassis/current_map \
 建图时，一般会从充电桩上开始建图，所以，机器人在充电桩上的位姿，就是地图的原点。
 
 ```bash
-curl -X POST http://localhost:8000/chassis/pose \
+curl -X POST \
   -H "Content-Type: application/json" \
-  -d '{"position": [0, 0, 0], "ori": 1.57}'
+  -d '{"position": [0, 0, 0], "ori": 1.57}' \
+  http://localhost:8000/chassis/pose
 ```
 
 - `position: [0, 0, 0]` 表示当前坐标为 `x=0, y=0, z=0`。
@@ -56,9 +58,10 @@ curl -X POST http://localhost:8000/chassis/pose \
 此时，就可以控制机器人运动了。使用 `POST /chassis/moves`，创建一个新的运动任务。
 
 ```bash
-curl -X POST http://localhost:8000/chassis/moves \
+curl -X POST \
   -H "Content-Type: application/json" \
-  -d '{"type":"standard","target_x":0.731,"target_y":-1.525,"target_z":0},"creator":"head-unit"'
+  -d '{"type":"standard", "target_x":0.731, "target_y":-1.525, "target_z":0, "creator":"head-unit"}' \
+  http://localhost:8000/chassis/moves
 ```
 
 ```json

@@ -44,7 +44,9 @@ module.exports = {
                 collapsable: false,
                 children: [
                     '/reference/maps',
-                    '/reference/moves'
+                    '/reference/moves',
+                    '/reference/current_map_and_pose',
+                    '/reference/services',
                 ],
                 sidebarDepth: 2
             }
