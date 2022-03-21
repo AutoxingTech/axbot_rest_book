@@ -47,6 +47,7 @@ module.exports = {
                     '/reference/moves',
                     '/reference/current_map_and_pose',
                     '/reference/services',
+                    '/reference/bluetooth',
                 ],
                 sidebarDepth: 2
             }
