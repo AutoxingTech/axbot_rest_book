@@ -13,13 +13,13 @@
 
 也可以通过 [列举地图 API](../reference/maps.md#列举地图)，找到需要的地图。
 
-用 `POST /chassis/current_map` 可以把某张地图设置为当前地图。
+用 `POST /chassis/current-map` 可以把某张地图设置为当前地图。
 
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"map_id": 286}' \
-  http://localhost:8000/chassis/current_map
+  http://localhost:8000/chassis/current-map
 ```
 
 ```json
