@@ -20,7 +20,7 @@ class BluetoothConnectRequest {
 连接蓝牙后，通过 websocket 来通讯。
 
 ```bash
-$ wscat -c ws://localhost:8000/ws/topics
+$ wscat -c ws://localhost:8000/ws/v2/topics
 > {"enable_topic": "/bluetooth/outbound" }
 > {"enable_topic": "/bluetooth_state" }
 < {"topic": "/bluetooth_state", "stamp": 1644835395.429, "connected_devices": ["00:11:22:33:FF:EE", ... ] }

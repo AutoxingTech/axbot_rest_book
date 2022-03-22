@@ -39,7 +39,7 @@ curl http://localhost:8000/chassis/current-map
 可以通过监控 websocket `/map/info` 获得地图切换通知。
 
 ```bash
-$ wscat -c ws://localhost:8000/ws/topics
+$ wscat -c ws://localhost:8000/ws/v2/topics
 > {"enable_topic": "/map/info"}
 < {
   "topic": "/map/info",
@@ -69,11 +69,17 @@ class SetPoseRequest {
 }
 ```
 
+## 位姿反馈
+
 可以通过监控 websocket `/tracked_pose` 获得位姿变化通知。
 
 ```bash
-$ wscat -c ws://localhost:8000/ws/topics
+$ wscat -c ws://localhost:8000/ws/v2/topics
 > {"enable_topic": "/tracked_pose"}
-< {"topic": "/chassis/pose", "pos": [-3.553, -0.288], "ori": -1.28}
-< {"topic": "/chassis/pose", "pos": [-3.55, -0.285], "ori": -1.28}
+< {"topic": "/tracked_pose", "pos": [-3.553, -0.288], "ori": -1.28}
+< {"topic": "/tracked_pose", "pos": [-3.55, -0.285], "ori": -1.28}
 ```
+
+::: warning
+`enable_topic`时，需要加入`"v2": true`。这是为了解决 1.8.0 的不合理的设计。
+:::

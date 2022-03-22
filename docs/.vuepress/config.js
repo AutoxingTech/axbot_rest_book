@@ -28,6 +28,7 @@ module.exports = {
                 children: [
                     '/overview/getting_start',
                     '/overview/api_principals',
+                    '/overview/migration'
                 ]
             },
             {

@@ -11,7 +11,7 @@ curl -X POST http://localhost:8000/services/imu/recalibrate
 本调用只是发起 IMU 矫正，还需要静置 10 秒才能完成。可以通过 `/imu_state` websocket 监控校准过程和结果。监控完毕，可以关闭 `/imu_state` 通道。
 
 ```bash
-$ wscat -c ws://localhost:8000/ws/topics
+$ wscat -c ws://localhost:8000/ws/v2/topics
 connected (press CTRL+C to quit)
 > {"enable_topic": "/imu_state"}
 < {"topic": "/imu_state", "calibrate_state": 1, "calibrate_fail_reason": 0, ...}
@@ -48,7 +48,7 @@ class SetControlModeRequest {
 使用 `/wheel_state` topic，可以监控轮控状态。
 
 ```bash
-$ wscat -c ws://localhost:8000/ws/topics
+$ wscat -c ws://localhost:8000/ws/v2/topics
 > {"enable_topic": "/wheel_state"}
 < {"topic": "/wheel_state", "control_mode": "auto", "emergency_stop_pressed": true }
 ```
@@ -73,7 +73,7 @@ class SetEmergencyStopRequest {
 使用 `/wheel_state` topic，可以监控轮控状态。
 
 ```bash
-$ wscat -c ws://localhost:8000/ws/topics
+$ wscat -c ws://localhost:8000/ws/v2/topics
 > {"enable_topic": "/wheel_state"}
 < {"topic": "/wheel_state", "control_mode": "auto", "emergency_stop_pressed": true }
 ```
@@ -89,7 +89,7 @@ curl -X POST \
   http://localhost:8000/services/restart_service
 ```
 
-## 系统关机/重启
+## 系统关机或重启
 
 ```bash
 curl -X POST \

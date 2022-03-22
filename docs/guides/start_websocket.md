@@ -15,22 +15,24 @@
 为了方便学习，我们使用 `wscat` 工具来测试 websocket。Linux 下，用 `sudo apt install node-ws` 安装。
 
 ```bash
-$ wscat -c ws://localhost:8000/ws/topics
+$ wscat -c ws://localhost:8000/ws/v2/topics
 connected (press CTRL+C to quit)
 > {"enable_topic": "/slam/state"}
 < {"enabled_topics": ["/slam/state"]}
 > {"enable_topic": "/tracked_pose"}
 < {"enabled_topics": ["/tracked_pose", "/slam/state"]}
-< {"topic": "/chassis/pose", "pos": [-3.55, -0.288], "ori": -1.28}
-< {"topic": "/chassis/pose", "pos": [-3.55, -0.285], "ori": -1.28}
+< {"topic": "/tracked_pose", "pos": [-3.55, -0.288], "ori": -1.28}
+< {"topic": "/tracked_pose", "pos": [-3.55, -0.285], "ori": -1.28}
 < {"topic": "/slam/state", "state": "positioning", "reliable": true}
-< {"topic": "/chassis/pose", "pos": [-3.553, -0.285], "ori": -1.28}
-< {"topic": "/chassis/pose", "pos": [-3.553, -0.288], "ori": -1.28}
-< {"topic": "/chassis/pose", "pos": [-3.55, -0.285], "ori": -1.28}
-< {"topic": "/chassis/pose", "pos": [-3.55, -0.288], "ori": -1.28}
-< {"topic": "/chassis/pose", "pos": [-3.548, -0.288], "ori": -1.28}
-< {"topic": "/chassis/pose", "pos": [-3.55, -0.285], "ori": -1.28}
+< {"topic": "/tracked_pose", "pos": [-3.553, -0.285], "ori": -1.28}
+< {"topic": "/tracked_pose", "pos": [-3.553, -0.288], "ori": -1.28}
+< {"topic": "/tracked_pose", "pos": [-3.55, -0.285], "ori": -1.28}
+< {"topic": "/tracked_pose", "pos": [-3.55, -0.288], "ori": -1.28}
+< {"topic": "/tracked_pose", "pos": [-3.548, -0.288], "ori": -1.28}
+< {"topic": "/tracked_pose", "pos": [-3.55, -0.285], "ori": -1.28}
 ```
+
+`-H axbot-ws-version=1.9.0` 用于指定协议版本。协议是尽量向前兼容的。但是，偶尔会有不兼容性的改动，需要客户端上报协议版本。
 
 上例中，我们使用 `enable_topic` 指令，订阅了 **定位状态** 和 **位姿** 两个频道。
 后续，只要有定位状态和位姿的变化，服务器就会主动通知。
@@ -51,7 +53,7 @@ curl -X POST \
 使用 websocket，下发控制指令：
 
 ```bash
-$ wscat -c ws://localhost:8000/ws/topics
+$ wscat -c ws://localhost:8000/ws/v2/topics
 connected (press CTRL+C to quit)
 > {"topic": "/twist", "linear_velocity": 0, "angular_velocity": -0.6522}
 < {"topic": "/twist_feedback"}
