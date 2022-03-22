@@ -79,7 +79,3 @@ $ wscat -c ws://localhost:8000/ws/v2/topics
 < {"topic": "/tracked_pose", "pos": [-3.553, -0.288], "ori": -1.28}
 < {"topic": "/tracked_pose", "pos": [-3.55, -0.285], "ori": -1.28}
 ```
-
-::: warning
-`enable_topic`时，需要加入`"v2": true`。这是为了解决 1.8.0 的不合理的设计。
-:::
