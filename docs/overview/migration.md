@@ -18,7 +18,7 @@
 之前 `{"enable_topic": "/tracked_pose"}`, `{"enable_topic": "/path"}`, `{"enable_topic": "/map"}`，返回的却是 `/chassis/pose`, `/chassis/path`, `/chassis/occupancy_grid`。收到的消息名字和请求的名字不一致。
 
 ```bash
-$ wscat -c http://localhost:8000/ws/topics
+$ wscat -c ws://localhost:8000/ws/topics
 > {"enable_topic": "/tracked_pose"}
 < {"topic": "/chassis/pose", "pos": [-3.548, -0.288], "ori": -1.28}
 ```
@@ -26,7 +26,7 @@ $ wscat -c http://localhost:8000/ws/topics
 把 websocket path 从 `/ws/topics` 升级为 `/ws/v2/topics`。名字就一致了。
 
 ```bash
-$ wscat -c http://localhost:8000/ws/v2/topics
+$ wscat -c ws://localhost:8000/ws/v2/topics
 > {"enable_topic": "/tracked_pose"}
 < {"topic": "/tracked_pose", "pos": [-3.548, -0.288], "ori": -1.28}
 ```
@@ -46,7 +46,7 @@ Deprecated by:
 之前使用 `/chassis_state` 来监听远控和急停模式变化。它的返回值中，有一个 `parts` 的重复部分。
 
 ```
-$ wscat -c http://localhost:8000/ws/topics
+$ wscat -c ws://localhost:8000/ws/topics
 > {"enable_topic": "/chassis_state" }
 < {
     "topic": "/chassis_state",

@@ -10,7 +10,7 @@
 
 ## 安全验证
 
-我们假定和机器人的通讯是在安全的内网环境，目前只有一个简单的 KEY 验证。所以，只需要增加以下 HTTP header，就可以通过验证。
+我们假定和机器人的通讯是在安全的内网环境，目前只有一个简单的 KEY 验证。所以，只需要增加以下 HTTP header，就可以通过验证。(XXXXXXXXXXXXXXXXX 隐去了真实的 Secret。需要申请获得。)
 
 ```
 Secret: XXXXXXXXXXXXXXXXX
@@ -32,3 +32,7 @@ curl -H "Secret: XXXXXXXXXXXXXXXXX" http://localhost:8000/device/status | jq
   "nickname": "proto_pi_1000"
 }
 ```
+
+::: tip
+后续请求都需要加 `-H "Secret: XXX"。为了简便，文档中不再重复。
+:::
