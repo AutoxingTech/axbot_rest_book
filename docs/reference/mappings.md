@@ -49,6 +49,7 @@ curl -X POST \
 ```ts
 interface MappingFinishRequest {
   state: 'finished' | 'cancelled'; // 结束建图或者取消建图
+  new_map_only: boolean = false; // 只对增量建图有效。false，则保存整个地图。true，则只保存增量部分。
 }
 ```
 
