@@ -32,6 +32,9 @@ curl -X POST \
 ```ts
 interface MappingCreateRequest {
   continue_mapping: boolean; // false 为新建图。true 为增量建图。
+  initial_x?: number; // 发起建图时，可以用于指定起始坐标和朝向。如果不指定，则为0, 0。
+  initial_y?: number;
+  initial_ori?: number;
 }
 ```
 
