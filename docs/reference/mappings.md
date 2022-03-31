@@ -35,6 +35,7 @@ interface MappingCreateRequest {
   // false 为新建图
   continue_mapping: boolean = false;
 
+  // (since 1.9)
   // undefined: 如果是新建图，则用 0, 0, 0 作为起点；如果是增量建图，则等价于 "current_pose"。
   // current_pose: 用当前定位位姿作为起点
   start_pose_type: undefined | 'current_pose';
@@ -55,7 +56,11 @@ curl -X POST \
 ```ts
 interface MappingFinishRequest {
   state: 'finished' | 'cancelled'; // 结束建图或者取消建图
-  new_map_only: boolean = false; // false，则保存整个地图。true，则只保存增量部分(只对增量建图有效)。
+
+  // (since 1.9)
+  // false，则保存整个地图。
+  // true，则只保存增量部分(只对增量建图有效)。
+  new_map_only: boolean = false;
 }
 ```
 
