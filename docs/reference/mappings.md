@@ -31,14 +31,14 @@ curl -X POST \
 
 ```ts
 interface MappingCreateRequest {
+  // false(default) 为新建图
   // true 为增量建图：继承当前地图、当前位姿
-  // false 为新建图
-  continue_mapping: boolean = false;
+  continue_mapping: boolean;
 
   // (since 1.9)
-  // undefined: 如果是新建图，则用 0, 0, 0 作为起点；如果是增量建图，则等价于 "current_pose"。
+  // zero(default): 从原点为建图起点
   // current_pose: 用当前定位位姿作为起点
-  start_pose_type: undefined | 'current_pose';
+  start_pose_type: 'zero' | 'current_pose';
 }
 ```
 
@@ -58,9 +58,9 @@ interface MappingFinishRequest {
   state: 'finished' | 'cancelled'; // 结束建图或者取消建图
 
   // (since 1.9)
-  // false，则保存整个地图。
+  // false(default)，则保存整个地图。
   // true，则只保存增量部分(只对增量建图有效)。
-  new_map_only: boolean = false;
+  new_map_only: boolean;
 }
 ```
 
