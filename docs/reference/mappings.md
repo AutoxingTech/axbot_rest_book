@@ -115,7 +115,7 @@ curl http://localhost:8000/mappings/
       "bag_id":27,
       "bag_url":"http://localhost:8000/bags/27.bag",
       "download_url":"http://localhost:8000/mappings/48/download",
-      "trajectory_url": "http://localhost:8000/mappings/48/trajectory.json"
+      "trajectories_url": "http://localhost:8000/mappings/48/trajectories.json"
    },
    {
       "id":47,
@@ -155,14 +155,14 @@ curl http://localhost:8000/mappings/48
   "bag_id": 27,
   "bag_url": "http://localhost:8000/bags/27.bag",
   "download_url": "http://localhost:8000/mappings/48/download",
-  "trajectory_url": "http://localhost:8000/mappings/48/trajectory.json"
+  "trajectories_url": "http://localhost:8000/mappings/48/trajectories.json"
 }
 ```
 
 ## 获取建图轨迹
 
 ```bash
-curl http://localhost:8000/mappings/48/trajectory.json
+curl http://localhost:8000/mappings/48/trajectories.json
 ```
 
 ```json
