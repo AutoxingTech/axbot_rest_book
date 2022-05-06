@@ -114,7 +114,8 @@ curl http://localhost:8000/mappings/
       "state":"finished",
       "bag_id":27,
       "bag_url":"http://localhost:8000/bags/27.bag",
-      "download_url":"http://localhost:8000/mappings/48/download"
+      "download_url":"http://localhost:8000/mappings/48/download",
+      "trajectory_url": "http://localhost:8000/mappings/48/trajectory.json"
    },
    {
       "id":47,
@@ -153,6 +154,28 @@ curl http://localhost:8000/mappings/48
   "state": "finished",
   "bag_id": 27,
   "bag_url": "http://localhost:8000/bags/27.bag",
-  "download_url": "http://localhost:8000/mappings/48/download"
+  "download_url": "http://localhost:8000/mappings/48/download",
+  "trajectory_url": "http://localhost:8000/mappings/48/trajectory.json"
 }
+```
+
+## 获取建图轨迹
+
+```bash
+curl http://localhost:8000/mappings/48/trajectory.json
+```
+
+```json
+[
+  {
+    "id": 0,
+    "coordinates": [
+      [0, 0.01],
+      [0.01, 0.11],
+      [0, 0.01],
+      [0.01, 0.11],
+      [-0.12, 0.17]
+    ]
+  }
+]
 ```
