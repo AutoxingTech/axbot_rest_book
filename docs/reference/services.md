@@ -115,6 +115,14 @@ class ShutdownRequest {
 curl -X POST http://localhost:8000/services/wheel_control/clear_errors
 ```
 
+## 清除侧翻错误
+
+Error 8004(严重侧翻错误)，说明机器人有可能已经跌落。需要人工通过监控等方法确认安全后，再调用此接口清除错误。
+
+```bash
+curl -X POST http://localhost:8000/services/monitor/clear_flip_error
+```
+
 ## 开关激光雷达
 
 ```bash
