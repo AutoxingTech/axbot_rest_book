@@ -1,6 +1,6 @@
 # Websocket 频道参考
 
-## `/wheel_state`
+## `/wheel_state` 轮控状态
 
 ```json
 {
@@ -10,7 +10,7 @@
 }
 ```
 
-## `/vision_detected_objects`
+## `/vision_detected_objects` 视觉检测的物体
 
 ::: warning
 还在开发中。
@@ -42,7 +42,7 @@
 }
 ```
 
-## `/battery_state`
+## `/battery_state` 电池信息
 
 ```json
 {
@@ -52,5 +52,169 @@
   "current": 3.6, // 电池电流。充电时，一般为负。运行时，一般为正。
   "percentage": 0.64, // 电量
   "power_supply_status": "discharging" // charging/discharing/full
+}
+```
+
+## `/tracked_pose` 定位位姿
+
+自车在当前地图下的位姿。
+
+```json
+{
+  "topic": "/tracked_pose",
+  "pos": [3.7325, -10.8525],
+  "ori": -1.56 // 朝向。X轴正向为0。Y 轴正向为 pi/2
+}
+```
+
+## `/planning_state` MoveAction 执行状态
+
+用于实时返回当前 MoveAction 的执行状态。
+
+```ts
+enum ActionType
+{
+  none,
+  standard, // 一般运动
+  charge // 充电
+  along_given_route, // 沿固定轨迹行驶
+  return_to_elevator_waiting_point, // 返回电梯待命点(当进电梯失败时用)
+  pull_over // 靠边停车
+}
+
+enum MoveState
+{
+  none,
+  idle,
+  moving,
+  succeeded,
+  failed,
+  cancelled
+}
+```
+
+```json
+{
+  "topic": "/planning_state",
+  "action_id": 561,
+  "action_type": "standard", // see ActionType
+  "move_state": "moving", // see MoveState
+  "target_poses": [
+    {
+      "pos": [4.08, 2.99],
+      "ori": 0
+    }
+  ],
+  "fail_reason": 0, // 当 move_state 为 failed 时，显示错误原因
+  "fail_reason_str": "none", // 当 move_state 为 failed 时，显示错误原因
+  "remaining_distance": 2.8750057220458984, // 剩余距离
+
+  // 目标点的位姿
+  // 当前运动目标。不一定是传入的目标坐标(当对桩时，会实时返回检测的充电桩的位置)。
+  "intent_target_pose": {
+    "pos": [0, 0],
+    "ori": 0
+  }
+}
+```
+
+## `/scan_matched_points2` 点云
+
+世界坐标系下的点云。
+
+```json
+{
+  "topic": "/scan_matched_points2",
+  "stamp": 1653302201889,
+  "points": [
+    [7.83, 3.84, 0.04],
+    [7.8, 3.88, 0.04],
+    [7.79, 4.14, 0.04]
+    ...
+  ]
+}
+```
+
+## `/path` 路线
+
+当前路线。
+
+```json
+{
+  "topic": "/path",
+  "stamp": 1653301966860,
+  "positions": [
+    [0.94, 0.27],
+    [0.94, 0.25],
+    [0.96, 0.25]
+  ]
+}
+```
+
+## `/trajectory` 建图轨迹回显
+
+实时反馈建图过程中的轨迹
+
+```json
+{
+  "topic": "/trajectory",
+  "points": [
+    [2.0, 3.0],
+    [2.1, 3.1],
+    [2.4, 3.0],
+    [2.7, 2.9],
+    [3.0, 2.8],
+    [3.6, 2.6],
+    [3.7, 2.5],
+    [3.9, 2.3],
+    [4.1, 2.1],
+    [3.9, -1.1],
+    [3.8, -2.2]
+  ]
+}
+```
+
+## `/alerts` 警告信息
+
+实时反馈当前的警告信息
+
+```json
+{
+  "topic": "/alerts",
+  "alerts": [
+    {
+      "code": 6004,
+      "level": "error",
+      "msg": "Kernel temperature is higher than 80!"
+    }
+  ]
+}
+```
+
+## `/platform_monitor/travelled_distance` 里程信息
+
+::: warning
+调试用，可能会变。
+:::
+
+```json
+{
+  "topic": "/platform_monitor/travelled_distance",
+  "start_time": 1653303520, // 本次 move 起始时间
+  "duration": 60, // 本次 move 执行时间
+  "distance": 27.89, // 本次 move 移动距离
+  "accumulated_distance": 5230.0 // 系统启动后运行总距离
+}
+```
+
+## `/rgb_cameras/:NAME/video` RGB 视频流
+
+h264 编码的视频流。
+
+```json
+{
+  "topic": "/rgb_cameras/front/video",
+  "stamp": 1653303702.821,
+  "data": "AAAAAWHCYADAAb5Bv4yqqseHIsjRwL5E4C4uX/CmRcXVaxddV3zf5uZO..."
 }
 ```
