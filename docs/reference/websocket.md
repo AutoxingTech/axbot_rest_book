@@ -41,3 +41,16 @@
   ]
 }
 ```
+
+## `/battery_state`
+
+```json
+{
+  "topic": "/battery_state",
+  "secs": 1653299708, // 时间戳
+  "voltage": 26.3, // 电池电压
+  "current": 3.6, // 电池电流。充电时，一般为负。运行时，一般为正。
+  "percentage": 0.64, // 电量
+  "power_supply_status": "discharging" // charging/discharing/full
+}
+```
