@@ -209,7 +209,7 @@ enum MoveState
 
 ## RGB 视频流
 
-h264 编码的视频流。如果是 Browser 或者 Node.JS，可以用 [jmuxer](https://github.com/samirkumardas/jmuxer) 解码。
+h264 编码的视频流。
 
 ```json
 {
@@ -218,6 +218,10 @@ h264 编码的视频流。如果是 Browser 或者 Node.JS，可以用 [jmuxer](
   "data": "AAAAAWHCYADAAb5Bv4yqqseHIsjRwL5E4C4uX/CmRcXVaxddV3zf5uZO..."
 }
 ```
+
+如果是 Browser 或者 Node.JS，可以用 [jmuxer](https://github.com/samirkumardas/jmuxer) 解码。
+
+![](./rgb_camera.png)
 
 ## 传感器控制器状态
 
