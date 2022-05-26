@@ -50,6 +50,7 @@ module.exports = {
                     '/reference/services',
                     '/reference/bluetooth',
                     '/reference/device',
+                    '/reference/videos',
                     '/reference/websocket',
                 ],
                 sidebarDepth: 2

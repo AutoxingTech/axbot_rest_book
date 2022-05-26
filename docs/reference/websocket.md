@@ -1,6 +1,6 @@
 # Websocket 频道参考
 
-## `/wheel_state` 轮控状态
+## 轮控状态
 
 ```json
 {
@@ -10,7 +10,7 @@
 }
 ```
 
-## `/vision_detected_objects` 视觉检测的物体
+## 视觉检测的物体
 
 ::: warning
 还在开发中。
@@ -42,7 +42,7 @@
 }
 ```
 
-## `/battery_state` 电池信息
+## 电池信息
 
 ```json
 {
@@ -55,7 +55,7 @@
 }
 ```
 
-## `/tracked_pose` 定位位姿
+## 定位位姿
 
 自车在当前地图下的位姿。
 
@@ -67,7 +67,7 @@
 }
 ```
 
-## `/planning_state` MoveAction 执行状态
+## MoveAction 执行状态
 
 用于实时返回当前 MoveAction 的执行状态。
 
@@ -118,7 +118,7 @@ enum MoveState
 }
 ```
 
-## `/scan_matched_points2` 点云
+## 点云
 
 世界坐标系下的点云。
 
@@ -135,7 +135,7 @@ enum MoveState
 }
 ```
 
-## `/path` 路线
+## 路线
 
 当前路线。
 
@@ -151,7 +151,7 @@ enum MoveState
 }
 ```
 
-## `/trajectory` 建图轨迹回显
+## 建图轨迹回显
 
 实时反馈建图过程中的轨迹
 
@@ -174,7 +174,7 @@ enum MoveState
 }
 ```
 
-## `/alerts` 警告信息
+## 警告信息
 
 实时反馈当前的警告信息
 
@@ -191,7 +191,7 @@ enum MoveState
 }
 ```
 
-## `/platform_monitor/travelled_distance` 里程信息
+## 里程信息
 
 ::: warning
 调试用，可能会变。
@@ -207,14 +207,45 @@ enum MoveState
 }
 ```
 
-## `/rgb_cameras/:NAME/video` RGB 视频流
+## RGB 视频流
 
-h264 编码的视频流。
+h264 编码的视频流。如果是 Browser 或者 Node.JS，可以用 [jmuxer](https://github.com/samirkumardas/jmuxer) 解码。
 
 ```json
 {
   "topic": "/rgb_cameras/front/video",
   "stamp": 1653303702.821,
   "data": "AAAAAWHCYADAAb5Bv4yqqseHIsjRwL5E4C4uX/CmRcXVaxddV3zf5uZO..."
+}
+```
+
+## 传感器控制器状态
+
+```ts
+type PowerState =
+  | 'awake' // 工作中
+  | 'awakening' // 正在从睡眠中唤醒，会持续2、3秒
+  | 'sleeping'; // 睡眠中
+```
+
+```json
+{
+  "topic": "/sensor_manager_state",
+  "power_state": "awake" // 见 PowerState
+}
+```
+
+## 附近的机器人
+
+```json
+{
+  "topic": "/nearby_robots",
+  "robots": [
+    {
+      "uid": "xx",
+      "trend": "",
+      ""
+    }
+  ]
 }
 ```
