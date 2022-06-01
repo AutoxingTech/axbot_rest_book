@@ -223,6 +223,14 @@ h264 编码的视频流。
 
 ![](./rgb_camera.png)
 
+目前的频道有（不同的机型可能不同）：
+
+- `/rgb_cameras/front/video` 前视
+- `/rgb_cameras/back/video` 后视
+- `/rgb_cameras/front_argmented/video` 加标注的前视
+
+![](./detect.png)
+
 ## 传感器控制器状态
 
 ```ts
