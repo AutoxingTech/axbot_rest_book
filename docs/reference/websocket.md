@@ -19,11 +19,11 @@
 ```ts
 enum VisualObjectLabel {
   none = 0,
-  person = 1,
-  platformHandTruck = 2,
-  scaffold = 3,
-  queueStand = 4,
-  portableGrandstand = 5,
+  person = 1, // 人
+  platformHandTruck = 2, // 手推板车
+  scaffold = 3, // 脚手架
+  queueStand = 4, // 排队栏杆
+  portableGrandstand = 5, // 移动式看台
 }
 ```
 
