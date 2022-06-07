@@ -16,6 +16,17 @@
 还在开发中。
 :::
 
+```ts
+enum VisualObjectLabel {
+  none = 0,
+  person = 1,
+  platformHandTruck = 2,
+  scaffold = 3,
+  queueStand = 4,
+  portableGrandstand = 5,
+}
+```
+
 ```json
 {
   "topic": "/vision_detected_objects",
@@ -24,7 +35,7 @@
       "pose": { "pos": [0.32, 0.97], "ori": 0.0 }, // 物体的位置和朝向
       "dimensions": [0.0, 0.0, 0.0], // 物体的宽、长、高
       "value": 0.8005573153495789,
-      "label": 1 // 物体类型 1 - 人
+      "label": 1 // VisualObjectLabel
     },
     {
       "pose": { "pos": [0.63, 1.08], "ori": 0.0 },
