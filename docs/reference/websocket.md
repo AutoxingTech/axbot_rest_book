@@ -242,6 +242,28 @@ h264 编码的视频流。
 
 ![](./detect.png)
 
+## RGB 图像流
+
+jpeg 编码的图像流。
+
+::: tip
+图像的数据量要远远大于 H264 视频流。如果走公网流量，推荐使用 H264 视频流。
+:::
+
+```json
+{
+  "topic": "/rgb_cameras/front/compressed",
+  "stamp": 1653303702.821,
+  "format": "jpeg",
+  "data": "YXNkZmFzZndlcndldHNhZGZhc2Rmd2V0cjJ5NDVqdHltNDU2..."
+}
+```
+
+目前的频道有（不同的机型可能不同）：
+
+- `/rgb_cameras/front/compressed` 前视
+- `/rgb_cameras/back/compressed` 后视
+
 ## 传感器控制器状态
 
 ```ts
