@@ -311,3 +311,43 @@ type PowerState =
   ]
 }
 ```
+
+## 外部接入 RGB 相机数据
+
+如果底盘没有安装摄像头，可以从外部接入 RGB 相机数据，从而实现图像识别，监控。
+
+**控制频道**
+
+头壳接收这个 websocket 消息，做如下工作：
+
+- 启动对应的设备
+- 设置对应的分辨率、FPS
+- 把数据按照指定的频道回传
+
+```json
+{
+  "topic": "/external_rgb_camera_control",
+  "enabled_devices": [
+    {
+      "name": "前视",
+      "width": 320,
+      "height": 240,
+      "fps": 5,
+      "external_data_topic": "/external_rgb_data/front"
+    }
+  ]
+}
+```
+
+**数据频道**
+
+把摄像头数据，通过 websocket 发给底盘，回传给底盘。
+
+```json
+{
+  "topic": "/external_rgb_data/front", // 用控制频道指定的名称
+  "format": "jpeg", // 目前只支持 jpeg,
+  "stamp": 1655896161.012, // 图片的 Unix Timestamp
+  "data": "Aasdfwe3424..." // base64编码的 jpeg 图像
+}
+```
