@@ -89,7 +89,8 @@
 
 - 启用了 vision-based-detector
   - Add websocket topic `/vision_detected_objects`.
-- REST API `/device/info` 中的 caps，增加 `supportsExternalRgbCamera`。说明支持从外接摄像头回传 RGB 数据。
+  - REST caps 增加 `supportsVisionBasedDetector`。说明支持基于 RGB 的视觉识别。
+- REST caps 增加 `supportsExternalRgbCamera`。说明支持从外接摄像头回传 RGB 数据。
 
 ## 1.8.8-rc1
 
