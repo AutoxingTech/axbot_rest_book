@@ -85,6 +85,12 @@
   - [RCSS-1220] 将充电的观察点和挂节点距离统一(0.6m)，优化充电体验并提高效率. (**planning**)
   - [RCSS-1407] 解决了多个充电区域太近，识别串皮的问题。
 
+## 1.8.8-rc2
+
+- 启用了 vision-based-detector
+  - Add websocket topic `/vision_detected_objects`.
+- REST API `/device/info` 中的 caps，增加 `supportsExternalRgbCamera`。说明支持从外接摄像头回传 RGB 数据。
+
 ## 1.8.8-rc1
 
 - [RCSS-1575] 修复了静止时(往往在充电)，定位飞的问题
