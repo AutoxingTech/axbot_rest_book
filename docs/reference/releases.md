@@ -1,98 +1,15 @@
 # Changelog of Releases
 
-## 1.9.0-rc4
+## Stable Releases
 
-- v2x 通讯增加头。为了将来做版本兼容。
-- `/usb_4g_state` 中，新增信号强度。
-- v2x_node 中加入更多 log，便于分析问题。
-- 上报 4G 模块的错误统计信息。
-- [RCSS-1445] 支持 websocket /nearby_robots，可以显示附近的所有机器人。
-- REST API:
-  - 新增视频列表 `/videos`。
-  - `/bags` 和 `/videos` 中增加 `size_bytes` 字段。
-  - 把 `/device/info` 中的内容并入 `/device/status`。
-    - `/device/status` 包含 `/device/info` 中的所有字段，并且还多 `nickname`, `sn`, `version` 三个老字段。
-    - 这三个老字段对应的新字段是 `device.nickname` `device.name` 和 `axbot_version`，也同时提供。
-    - 等将来所有机器都支持 `/device/info` 后，再废弃 `/device/status`。
-- Bug Fix:
-  - [RCSS-1564] 修复路线起点处有半个像素的不平滑。
-  - 解决唤醒过程中雷达转速不对，导致守护机制重启雷达的问题。
-  - 修复了 awaken 上报的笔误。awaken 也写成了 sleep。
-
-## 1.9.0-rc3
-
-- 增加 mmc_lift.service。用于监控磁盘寿命。
-- [RCSS-1476] 使用 `v2x_node` 获取周围机器人的信息。
-- [RCSS-1477] **电梯门识别结果** 和 **电梯占用状态** 中，将设备 ID 作为名称 (**feature_detectors**)
-- [RCSS-1449] 充电桩位姿优化。对模板匹配的结果进行精调，使 position 和 heading 更准确 (**feature_detectors**)
-- Bug fix:
-  - [RCSS-1399] 改进充电桩结果过滤 (**feature_detectors**)
-  - 修复香橙派 logrotate 系统文件损坏
-  - 修复香橙派前后摄像头绑定错误
-  - [RCSS-1531] 修复二级路算失败的问题 (**ax_navi**)
-  - [RCSS-1457] 修复 NavFn 算法中路线终点处不平滑的问题 (**ax_navi**)
-
-## 1.9.0-rc2
-
-- 增加 rf2o，并融合激光里程计进行打滑检测和修正 (**odom_error_detect**)
-- Bug Fix:
-  - 修复安全距离判定导致的停车问题 (**planning**)
-
-## 1.9.0-rc1
-
-- [RCSS-195] 使用融合后的轮速，防止打滑。
-- 默认使用新的 Dijkstra 算路算法。
-- 默认通过 V2X 广播位姿。
-- V2X 位姿广播中，带有方向信息。
-- 启动时，配置树莓派默认声卡。
-- Bug Fix:
-  - [RCSS-1521] Fix 当激光休眠后，gyro 的微小波动，会引起 cartographer 朝向漂移。 (**cartographer_ros**)
-  - Restart udev service during module_prep. (**platform-build**)
-  - 修复树莓派深度相机 USB 绑定错误。
-
-## 1.9.0-rc0
-
-- 支持香橙派。
-- [RCSS-1317] 支持深度相机自动休眠
-- [RCSS-1316] 支持激光雷达自动休眠
-- [RCSS-1418] 新增大角度侧翻报警，不自动恢复
-- 增加 CPU 占用率报警。
-- Load Avergage 报警门限提高，防止误报。
-- [RCSS-1391] 增量建图，支持只保存新增的部分地图
-- [RCSS-1442] 统一使用 `common.yaml` 中的全局参数控制障碍物碰撞系数。
-- 增加当 imu 接接触不良。断线报警。 (**ax_platform_monitor**)
-- [RCSS-1341] 机器人支持调度靠边指令。 (**planning**)
-- [RCSS-1093] 接入 RGB 摄像机。支持设置 FPS、设置旋转。
-- 紧急 Bag 保存，支持保存现场录像。
-- [RCSS-1222] 支持单独配置哪些报警要存储 bag 包。
-- [RCSS-1171] 支持静止状态下 Gyroscope 零飘自校正。 (**sensor-drivers**)
-- [RCSS-1357] 支持长按 3 秒，安全关机（之前是 10 秒强制掉电）。
-- [RCSS-1300] 硬件按钮急停、解除急停，可以看到 Action Log。
-- 从收到重启、关机指令，到硬件断电的时间，从 30 秒缩短到 15 秒。
-- 支持继承当前定位坐标，开始新建图。(建图 API 中，start_pose_type = "current_pose")
-- 支持轮子打滑报警。
-- 支持轮子失控报警。
-- [RCSS-1272] 支持充电桩“位置提示”，加速充电桩的识别。 (**feature_detectors**)
-- [RCSS-1261] 支持远程开关、重启激光雷达。
-- 支持远程开关深度相机。
-- 支持远程软重启轮子。
-- 增大低速下三级算路的搜索空间，选取更优路。 (**planning**)
-- [RCSS-1128] 深度相机支持 ROI. (**sensor-drivers**)
-- [RCSS-1239] 用上一次识别到的充电桩生成观测点，优化充电流程. (**planning**)
-- Bug Fix:
-  - [RCSS-1342] 充电桩识别要 hold 住当前结果，不跳到新的结果上 (**feature_detectors**)
-  - 修复二级选路时路线震荡问题。 (**planning**)
-  - [RCSS-1220] 将充电的观察点和挂节点距离统一(0.6m)，优化充电体验并提高效率. (**planning**)
-  - [RCSS-1407] 解决了多个充电区域太近，识别串皮的问题。
-
-## 1.8.8-rc2
+### 1.8.8-rc2
 
 - 启用了 vision-based-detector
   - Add websocket topic `/vision_detected_objects`.
   - REST caps 增加 `supportsVisionBasedDetector`。说明支持基于 RGB 的视觉识别。
 - REST caps 增加 `supportsExternalRgbCamera`。说明支持从外接摄像头回传 RGB 数据。
 
-## 1.8.8-rc1
+### 1.8.8-rc1
 
 - [RCSS-1575] 修复了静止时(往往在充电)，定位飞的问题
 - [RCSS-1615] 支持屁股对桩
@@ -100,7 +17,7 @@
 - Bug Fix:
   - [RCSS-1700] 修复急停状态时 v2x 不发送自车位置
 
-## 1.8.8-rc0
+### 1.8.8-rc0
 
 - 平台
   - 支持新机型 Tray (开放架子)
@@ -193,11 +110,11 @@
   - Optimize ROS message subscription with message center.
   - Forward `/imu_state` with websocket.
 
-## 1.8.7
+### 1.8.7
 
 - 支持使用 CP210x 和 pl2303 两款 UART-to-USB 转接芯片的 V2X 芯片的绑定。
 
-## 1.8.7-rc1
+### 1.8.7-rc1
 
 - 新增报警 6506(时间不同步) 。当系统时间和 NTP 时间相差 1 分钟以上，则报警。
 - Bug fix:
@@ -206,7 +123,7 @@
   - 修复了统计信息中的错误
   - lidar_odom covariance 修正为 2x2 矩阵
 
-## 1.8.7-rc0
+### 1.8.7-rc0
 
 - [RCSS-1609] 支持机器人在桩上充电后自动复位。 (**planning**)
 - [RCSS-1592] 加动态开关，能开关融合 odom。默认关闭。`/odom_error_detector/fuse_lidar_odom` (**odom_error_detect**)
@@ -237,12 +154,12 @@
   - [RCSS-1579] fix bugs in elevator occupancy status filtering. (**feature_detectors**)
   - [RCSS-1596] 延长蓝牙断线超时时间。减少梯控通讯连接中断。
 
-## 1.8.6
+### 1.8.6
 
 - 支持参数 /occupancy_grid_server/use_depth_cameras。在避障图中禁用深度相机。可以动态修改。
 - 2008(严重打滑) 自动录制 bag 包。
 
-## 1.8.6-rc1
+### 1.8.6-rc1
 
 - 增加 v2x 守护服务。 `systemctl cat v2x_guard.service`
 - 错误码 2008，重新定义为严重打滑。
@@ -253,7 +170,7 @@
 - Bug fix:
   - 解决了 journalctl -f 查看 log 不及时的问题。
 
-## 1.8.6-rc0
+### 1.8.6-rc0
 
 - [RCSS-1477] **电梯门识别结果** 和 **电梯占用状态** 中，将设备 ID 作为名称 (**feature_detectors**)
 - [RCSS-1476] 使用 `v2x_node` 获取周围机器人的信息。
@@ -261,12 +178,12 @@
 - 管理平台，可以看到周围的机器人（新增 websocket topic `/nearby_robots`）
 - 使用 clang 替代 gcc 进行编译。
 
-## 1.8.5-rc2
+### 1.8.5-rc2
 
 - Bug Fix:
   - rc1 新增的打滑报警忘了开了。
 
-## 1.8.5-rc1
+### 1.8.5-rc1
 
 - 新增打滑检测、报警
 - 新增 systemCpuUsageVeryHigh 报警
@@ -274,26 +191,26 @@
 - Bug Fix:
   - 修复树莓派深度相机 USB 绑定错误。
 
-## 1.8.5-rc0
+### 1.8.5-rc0
 
 - Bug Fix:
   - [RCSS-1441] 补桩逻辑不全，机器人任然偶现有充不上电的情况
   - [RCSS-1416] 4g 模块异常守护
 
-## 1.8.4-rc1
+### 1.8.4-rc1
 
 - Bug Fix:
   - [RCSS-1508] 解决绍兴几个地铁站，长隧道误报 7002 丢定位的问题。
   - 7002(丢定位)，加入停止运动的白名单中。
 
-## 1.8.4-rc0
+### 1.8.4-rc0
 
 - Bug Fix:
   - 解决切换地图时 1005(超过 1s 没有避障图 /maps/5cm 消息) 误报。
   - Fix [RCSS-1495] 建图时，不应该有残留的虚拟墙。
   - 内存报警门限，从 2G 改为 3G。
 
-## 1.8.3
+### 1.8.3
 
 - [RCSS-1171] 自动持续矫正 Gyroscrope Bias。
 - 新增视频驱动，读取 RGB 摄像头数据。
@@ -307,22 +224,22 @@
   - 缓解光滑地面顶桩的问题。充电的轮子电流保护阈值由 `2.0A` 改为 `1.5A`。
   - 修复了定位模式下，应该优先匹配附近点云的 bug。
 
-## 1.8.2
+### 1.8.2
 
 - bug fix:
   - 急停时，不应该触发机器人卡死报警
   - 修复建图后，pbstream 下载错误的问题
 
-## 1.8.1
+### 1.8.1
 
 - 修改了 ax_first_time_init，使用新的 frpc 配置，增加连接稳定性。（只对母盘有影响）
 
-## 1.8.1-rc2 2022/03/23
+### 1.8.1-rc2 2022/03/23
 
 - Bug Fix:
   - 解决了开机时，如果 imu 矫正失败，导致 IMU 永远无数据的问题。
 
-## 1.8.1-rc1 2022/03/17
+### 1.8.1-rc1 2022/03/17
 
 - [RCSS-1344] planning 增加开关，可以禁用动态充电桩。 (**planning**)
 - Bug Fix:
@@ -330,29 +247,29 @@
   - 解决了 `POWER_SUPPLY_STATUS_FULL` 电池满状态不可靠的问题。改用充电电流判断。 (**sensor-drivers**)
   - [RCSS-1297] 解决了电梯区域有重复点，导致电梯开关门状态识别错误的问题。(**feature_detectors**)
 
-## 1.8.1-rc0 2022/03/11
+### 1.8.1-rc0 2022/03/11
 
 - Bug Fix:
   - [RCSS-1310] Fix a bug in clustering of charger detection result. (**feature_detectors**)
   - 将观察点的观测时间改为动态参数，默认值为 `2s` 。 (**planning**)
   - 修复重新上桩时后退不足导致旋转失败的问题。 (**planning**)
 
-## 1.8.0 2022/03/08
+### 1.8.0 2022/03/08
 
 - 新增报警 10003，充电簧片有信号，但是没有充电电流
 
-## 1.8.0-rc7 2022/03/07
+### 1.8.0-rc7 2022/03/07
 
 - Bug Fix:
   - [RCSS-1290] 发起回桩充电时，如果恰好已经在观察点，则不会使用识别结果，可能导致直接撞墙 (**planning**)
   - [RCSS-1228] 新增对桩 `Touch` 后长时间没收到电流时进行补桩。 (**planning**)
 
-## 1.8.0-rc6 2022/03/02
+### 1.8.0-rc6 2022/03/02
 
 - Bug Fix:
   - 消杀机器本来就没有深度摄像头，误报 11006(未找到深度摄像头设备)
 
-## 1.8.0-rc5 2022/03/01
+### 1.8.0-rc5 2022/03/01
 
 - 新增错误 11006 未找到深度摄像头设备
 - 监控平台，支持显示都谁在看某个机器人
@@ -370,7 +287,7 @@
   - 修改 map2wolrd 时坐标移到像素中心。
   - [RCSS-1238] 到观测点时至少停留 1s 等待动态识别的充电桩结果，没有结果时再进行搜索。
 
-## 1.8.0-rc4
+### 1.8.0-rc4
 
 - 新增 更新/删除/覆盖 地图的 Action Log 显示。
 - Websocket 新增 `/device_info`. 使用 `{"topic": "/get_device_info"}` 发起请求。
@@ -391,7 +308,7 @@
   - [RCSS-1201] Use Asia/Shanghai timezone for file name. (**ax-platform-control**)
   - [RCSS-1149] 修复对桩旋转不到位，导致歪斜（修改挂节点距离为 0.6m）。 (**planning**)
 
-## 1.8.0-rc3
+### 1.8.0-rc3
 
 - [RCSS-1208] Websocket /map_info 中 增加 uid (**ax-platform-control**)
 - Bug Fix:
@@ -404,7 +321,7 @@
   - [RCSS-1169] 修复机器人回桩未充上电，也没有补桩。 (**planning**)
   - [RCSS-1159] 修复在电梯门口退回待梯点时卡住的问题。 (**planning**)
 
-## 1.8.0-rc2
+### 1.8.0-rc2
 
 - 监控平台，支持 Action Log。
 
@@ -416,7 +333,7 @@
   - [RCSS-1119] 为轮动打补丁，如果删除非常高的速度，则不相信 (**wheel_control**)
   - [RCSS-1110] 修复启动时报 BUS_UNLINK_ERROR. (**wheel_control**)
 
-## 1.8.0-rc1
+### 1.8.0-rc1
 
 - [RCSS-490] 支持增量更新地图
 - [RCSS-1051] 当电梯满时，快速放弃乘梯
@@ -446,17 +363,17 @@
   - [RCSS-1004] 在狭窄区域内退梯，卡死
   - [RCSS-1010] 回桩对桩过程中有人经过时，机器人卡死
 
-## 1.7.4
+### 1.7.4
 
 - 支持远程清除避障图
 
 ![](images/2022-03-01-22-58-23.png)
 
-## 1.7.3
+### 1.7.3
 
 - 增加卡死上报
 
-## 1.7.2
+### 1.7.2
 
 - 可以在 Web 界面远程查看聚合后的 Changelog
 
@@ -471,3 +388,90 @@
   - 修复了建图过程中，内存占用高的问题。(axrosbag 暂停录制一些 topic。)
   - 修复了建图时间太长，保存地图时内存占用过高的问题。(bag 包最多记录 30MB。)
   - 修复了连续发起移动指令，切换任务时会卡一下的问题。
+
+## Upcoming Releases
+
+### 1.9.0-rc4
+
+- v2x 通讯增加头。为了将来做版本兼容。
+- `/usb_4g_state` 中，新增信号强度。
+- v2x_node 中加入更多 log，便于分析问题。
+- 上报 4G 模块的错误统计信息。
+- [RCSS-1445] 支持 websocket /nearby_robots，可以显示附近的所有机器人。
+- REST API:
+  - 新增视频列表 `/videos`。
+  - `/bags` 和 `/videos` 中增加 `size_bytes` 字段。
+  - 把 `/device/info` 中的内容并入 `/device/status`。
+    - `/device/status` 包含 `/device/info` 中的所有字段，并且还多 `nickname`, `sn`, `version` 三个老字段。
+    - 这三个老字段对应的新字段是 `device.nickname` `device.name` 和 `axbot_version`，也同时提供。
+    - 等将来所有机器都支持 `/device/info` 后，再废弃 `/device/status`。
+- Bug Fix:
+  - [RCSS-1564] 修复路线起点处有半个像素的不平滑。
+  - 解决唤醒过程中雷达转速不对，导致守护机制重启雷达的问题。
+  - 修复了 awaken 上报的笔误。awaken 也写成了 sleep。
+
+### 1.9.0-rc3
+
+- 增加 mmc_lift.service。用于监控磁盘寿命。
+- [RCSS-1476] 使用 `v2x_node` 获取周围机器人的信息。
+- [RCSS-1477] **电梯门识别结果** 和 **电梯占用状态** 中，将设备 ID 作为名称 (**feature_detectors**)
+- [RCSS-1449] 充电桩位姿优化。对模板匹配的结果进行精调，使 position 和 heading 更准确 (**feature_detectors**)
+- Bug fix:
+  - [RCSS-1399] 改进充电桩结果过滤 (**feature_detectors**)
+  - 修复香橙派 logrotate 系统文件损坏
+  - 修复香橙派前后摄像头绑定错误
+  - [RCSS-1531] 修复二级路算失败的问题 (**ax_navi**)
+  - [RCSS-1457] 修复 NavFn 算法中路线终点处不平滑的问题 (**ax_navi**)
+
+### 1.9.0-rc2
+
+- 增加 rf2o，并融合激光里程计进行打滑检测和修正 (**odom_error_detect**)
+- Bug Fix:
+  - 修复安全距离判定导致的停车问题 (**planning**)
+
+### 1.9.0-rc1
+
+- [RCSS-195] 使用融合后的轮速，防止打滑。
+- 默认使用新的 Dijkstra 算路算法。
+- 默认通过 V2X 广播位姿。
+- V2X 位姿广播中，带有方向信息。
+- 启动时，配置树莓派默认声卡。
+- Bug Fix:
+  - [RCSS-1521] Fix 当激光休眠后，gyro 的微小波动，会引起 cartographer 朝向漂移。 (**cartographer_ros**)
+  - Restart udev service during module_prep. (**platform-build**)
+  - 修复树莓派深度相机 USB 绑定错误。
+
+### 1.9.0-rc0
+
+- 支持香橙派。
+- [RCSS-1317] 支持深度相机自动休眠
+- [RCSS-1316] 支持激光雷达自动休眠
+- [RCSS-1418] 新增大角度侧翻报警，不自动恢复
+- 增加 CPU 占用率报警。
+- Load Avergage 报警门限提高，防止误报。
+- [RCSS-1391] 增量建图，支持只保存新增的部分地图
+- [RCSS-1442] 统一使用 `common.yaml` 中的全局参数控制障碍物碰撞系数。
+- 增加当 imu 接接触不良。断线报警。 (**ax_platform_monitor**)
+- [RCSS-1341] 机器人支持调度靠边指令。 (**planning**)
+- [RCSS-1093] 接入 RGB 摄像机。支持设置 FPS、设置旋转。
+- 紧急 Bag 保存，支持保存现场录像。
+- [RCSS-1222] 支持单独配置哪些报警要存储 bag 包。
+- [RCSS-1171] 支持静止状态下 Gyroscope 零飘自校正。 (**sensor-drivers**)
+- [RCSS-1357] 支持长按 3 秒，安全关机（之前是 10 秒强制掉电）。
+- [RCSS-1300] 硬件按钮急停、解除急停，可以看到 Action Log。
+- 从收到重启、关机指令，到硬件断电的时间，从 30 秒缩短到 15 秒。
+- 支持继承当前定位坐标，开始新建图。(建图 API 中，start_pose_type = "current_pose")
+- 支持轮子打滑报警。
+- 支持轮子失控报警。
+- [RCSS-1272] 支持充电桩“位置提示”，加速充电桩的识别。 (**feature_detectors**)
+- [RCSS-1261] 支持远程开关、重启激光雷达。
+- 支持远程开关深度相机。
+- 支持远程软重启轮子。
+- 增大低速下三级算路的搜索空间，选取更优路。 (**planning**)
+- [RCSS-1128] 深度相机支持 ROI. (**sensor-drivers**)
+- [RCSS-1239] 用上一次识别到的充电桩生成观测点，优化充电流程. (**planning**)
+- Bug Fix:
+  - [RCSS-1342] 充电桩识别要 hold 住当前结果，不跳到新的结果上 (**feature_detectors**)
+  - 修复二级选路时路线震荡问题。 (**planning**)
+  - [RCSS-1220] 将充电的观察点和挂节点距离统一(0.6m)，优化充电体验并提高效率. (**planning**)
+  - [RCSS-1407] 解决了多个充电区域太近，识别串皮的问题。
