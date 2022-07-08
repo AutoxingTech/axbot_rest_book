@@ -2,6 +2,19 @@
 
 ## Stable Releases
 
+### 1.8.8-rc3
+
+- [RCSS-858] 支持远程调参。
+- 支持 50x50 的深度摄像头。增量了阳光降噪能力（部分牺牲了小物体的识别能力）。
+- 暂时禁用了休眠功能。
+- [RCSS-1706] 对于失败的 API Call，也记录并上传到 Action Log。
+- Bug Fixes:
+  - 修复了未知心跳引起的误报警。
+  - [RCSS-1711] Fix false heartbeat alarm of `rgb_camera_node`
+  - [RCSS-1708] 修复上桩过程中 `/planning_state` 发布卡住状态.
+  - 修复了重启时，还没有定位，就报(0,0)坐标的问题。
+  - [RCSS-1704] 修复了充电桩识别模块 log 过多的问题。
+
 ### 1.8.8-rc2
 
 - 启用了 vision-based-detector
