@@ -1,17 +1,13 @@
 # 版本迁移
 
-目前处于活跃的研发阶段，API 处于不断演进中，并不绝对稳定。
+API 并不是永远不变的。因为业务变化，可能存在老的 API 被废弃的情况。API 的更新，我们会遵守以下原则：
 
-为了提供原则一致，易用的 API，我们往往会 deprecate 老的 API，并提供新的 API。
-做这种替代时，我们遵守以下原则：
-
-- 一旦新 API 合并 master，本文档就只描述新 API。
 - 会提供至少一个版本的替换期。替换期中，新、旧 API 会共存。
 
 替换期中，希望客户端共同演进，尽早用上新的 API。
 以下记录了每个版本的 API 替换注意事项。
 
-## 1.9.0
+## 1.8.8
 
 ### Deprecate websocket `/chassis/pose`, `/chassis/path`, `/chassis/occupancy_grid`
 
