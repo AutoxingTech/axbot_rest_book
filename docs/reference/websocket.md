@@ -10,6 +10,18 @@
 }
 ```
 
+## 定位状态
+
+```json
+{
+  "topic": "/slam/state",
+  "state": "positioning", // 'inactive/slam/positioning' 闲置/建图/定位
+  "reliable": true,
+  "inter_constraint_count": 20,
+  "good_constaint_count": 20
+}
+```
+
 ## 视觉检测的物体
 
 ::: warning
