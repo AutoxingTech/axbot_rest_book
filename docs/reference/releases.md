@@ -2,6 +2,14 @@
 
 ## Stable Releases
 
+### 1.8.8-rc4
+
+- 增加 imu 外参矫正脚本 `/opt/ax/bin/calibrate_imu.py
+- [RCSS-1587] 增加 Debug 用的深度点云查看功能。
+- Fix bug
+  - Fix ROS service exception when setting map or start/stop slamming.
+  - Fix bug: `/slam/state` is not send when websocket is connected for the first time.
+
 ### 1.8.8-rc3
 
 - [RCSS-858] 支持远程调参。
