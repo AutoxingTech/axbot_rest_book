@@ -4,7 +4,8 @@
 
 ### 1.8.8-rc4
 
-- 增加 imu 外参矫正脚本 `/opt/ax/bin/calibrate_imu.py
+- 增加 imu 外参矫正脚本 `/opt/ax/bin/calibrate_imu.py`
+- 缓存远程配置，如果启动时网络不可用，则使用缓存的配置。
 - [RCSS-1587] 增加 Debug 用的深度点云查看功能。
 - Fix bug
   - Fix ROS service exception when setting map or start/stop slamming.
