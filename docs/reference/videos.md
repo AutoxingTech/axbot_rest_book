@@ -17,15 +17,15 @@ curl http://localhost:8000/videos/
     "filename": "2022-05-24 19_58_43-back.h264",
     "size": "0.0B",
     "end": "24-May-2022 19:58:43",
-    "url": "http://tunnel.autoxing.com:10126/videos/2022-05-24%2019_58_43-back.h264",
-    "download_url": "http://tunnel.autoxing.com:10126/videos/2022-05-24%2019_58_43-back.h264/download"
+    "url": "http://localhost:8000/videos/2022-05-24%2019_58_43-back.h264",
+    "download_url": "http://localhost:8000/videos/2022-05-24%2019_58_43-back.h264/download"
   },
   {
     "filename": "2022-05-24 19_58_43-front.h264",
     "size": "0.0B",
     "end": "24-May-2022 19:58:43",
-    "url": "http://tunnel.autoxing.com:10126/videos/2022-05-24%2019_58_43-front.h264",
-    "download_url": "http://tunnel.autoxing.com:10126/videos/2022-05-24%2019_58_43-front.h264/download"
+    "url": "http://localhost:8000/videos/2022-05-24%2019_58_43-front.h264",
+    "download_url": "http://localhost:8000/videos/2022-05-24%2019_58_43-front.h264/download"
   }
 ]
 ```
