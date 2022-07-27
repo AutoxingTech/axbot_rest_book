@@ -1,6 +1,6 @@
 # Mapping API
 
-## 发起建图
+## Start Mapping
 
 ```bash
 curl -X POST \
@@ -42,7 +42,7 @@ interface MappingCreateRequest {
 }
 ```
 
-## 结束/取消 建图
+## Finish/Cancel Mapping
 
 ```bash
 curl -X POST \
@@ -66,7 +66,7 @@ interface MappingFinishRequest {
 
 建图结束后，结果会进入建图列表中。后续可以根据建图任务的 ID，获取建图结果。
 
-## 建图过程回显
+## Visualization of Mapping Process
 
 建图过程中，使用 websocket 接收回显数据。其中最主要的两条数据是：
 
@@ -93,7 +93,7 @@ interface MappingFinishRequest {
 }
 ```
 
-## 获取建图成果列表
+## Mapping List
 
 ```bash
 curl http://localhost:8000/mappings/
@@ -134,7 +134,7 @@ curl http://localhost:8000/mappings/
    },
 ```
 
-## 获取建图详情
+## Mapping Detail
 
 ```bash
 curl http://localhost:8000/mappings/48
@@ -159,7 +159,7 @@ curl http://localhost:8000/mappings/48
 }
 ```
 
-## 获取建图轨迹
+## Get Mapping Trajectory
 
 ```bash
 curl http://localhost:8000/mappings/48/trajectories.json

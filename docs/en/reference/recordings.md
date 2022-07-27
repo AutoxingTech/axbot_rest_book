@@ -1,6 +1,6 @@
 # Recording API
 
-## 记录 Bag
+## Create a Recording
 
 ```bash
 curl -X POST \
@@ -28,7 +28,7 @@ interface CreateRecordingRequest {
 }
 ```
 
-## 查看 bag 列表
+## Get Recording List
 
 ```bash
 curl http://localhost:8000/recording/

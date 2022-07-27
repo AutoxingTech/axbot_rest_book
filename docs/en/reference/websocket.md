@@ -1,6 +1,6 @@
 # Websocket Reference
 
-## 轮控状态
+## Wheel State
 
 ```json
 {
@@ -10,7 +10,7 @@
 }
 ```
 
-## 定位状态
+## Positioning State
 
 ```json
 {
@@ -22,7 +22,7 @@
 }
 ```
 
-## 视觉检测的物体
+## Vision Detected Objects
 
 ::: warning
 还在开发中。
@@ -65,7 +65,7 @@ enum VisualObjectLabel {
 }
 ```
 
-## 电池信息
+## Battery Information
 
 ```json
 {
@@ -78,7 +78,7 @@ enum VisualObjectLabel {
 }
 ```
 
-## 定位位姿
+## Current Pose
 
 自车在当前地图下的位姿。
 
@@ -90,7 +90,7 @@ enum VisualObjectLabel {
 }
 ```
 
-## MoveAction 执行状态
+## Move Action State
 
 用于实时返回当前 MoveAction 的执行状态。
 
@@ -141,7 +141,7 @@ enum MoveState
 }
 ```
 
-## 点云
+## Lidar Point Cloud
 
 世界坐标系下的点云。
 
@@ -158,7 +158,7 @@ enum MoveState
 }
 ```
 
-## 路线
+## Route
 
 当前路线。
 
@@ -174,7 +174,7 @@ enum MoveState
 }
 ```
 
-## 建图轨迹回显
+## Mapping Trajectory
 
 实时反馈建图过程中的轨迹
 
@@ -197,7 +197,7 @@ enum MoveState
 }
 ```
 
-## 警告信息
+## Alerts
 
 实时反馈当前的警告信息
 
@@ -214,7 +214,7 @@ enum MoveState
 }
 ```
 
-## 里程信息
+## Traveled Distance
 
 ::: warning
 调试用，可能会变。
@@ -230,7 +230,7 @@ enum MoveState
 }
 ```
 
-## RGB 视频流
+## RGB Video Stream
 
 h264 编码的视频流。
 
@@ -254,7 +254,7 @@ h264 编码的视频流。
 
 ![](./detect.png)
 
-## RGB 图像流
+## RGB Image Stream
 
 jpeg 编码的图像流。
 

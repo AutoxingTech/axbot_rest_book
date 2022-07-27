@@ -11,7 +11,7 @@ One can use `RobotAdmin` platform to set a map on which the robot resides.
 
 ![](./2022-03-17-17-21-44.png)
 
-Or use [Map List API](../reference/maps.md#list-map)，to find and map id.
+Or use [Map List API](../reference/maps.md#map-list)，to find and map id.
 And use `POST /chassis/current-map` to set the map as current map.
 
 ```bash

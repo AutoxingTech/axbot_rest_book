@@ -1,6 +1,6 @@
 # Current Map and Pose API
 
-## 设置当前地图
+## Set Current Map
 
 ```bash
 curl -X POST \
@@ -17,7 +17,7 @@ class SetCurrentMapRequest {
 }
 ```
 
-## 获取当前地图
+## Get Current Map
 
 ```bash
 curl http://localhost:8000/chassis/current-map
@@ -51,7 +51,7 @@ $ wscat -c ws://localhost:8000/ws/v2/topics
 }
 ```
 
-## 设置位姿
+## Set Pose
 
 ```bash
 curl -X POST \
@@ -69,7 +69,7 @@ class SetPoseRequest {
 }
 ```
 
-## 位姿反馈
+## Pose Feedback
 
 可以通过监控 websocket `/tracked_pose` 获得位姿变化通知。
 

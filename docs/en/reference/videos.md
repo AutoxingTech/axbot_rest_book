@@ -5,7 +5,7 @@
 
 实时视频，参见 [Websocket](websocket.md#rgb-视频流) 中内容。
 
-## 列举视频
+## Video List
 
 ```bash
 curl http://localhost:8000/videos/
@@ -30,19 +30,19 @@ curl http://localhost:8000/videos/
 ]
 ```
 
-## 下载视频
+## Download Video
 
 ```bash
 curl http://localhost:8000/videos/2022-05-24%2019_58_43-front.h264/download
 ```
 
-## 删除视频
+## Delete a Video
 
 ```bash
 curl -X DELETE http://localhost:8000/videos/2022-05-24%2019_58_43-front.h264
 ```
 
-## 删除全部视频
+## Delete All Videos
 
 ```bash
 curl -X DELETE http://localhost:8000/videos/

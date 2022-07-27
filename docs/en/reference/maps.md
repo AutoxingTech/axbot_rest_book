@@ -1,6 +1,6 @@
 # Map API
 
-## List Map
+## Map List
 
 ```bash
 curl http://localhost:8000/maps/
@@ -54,13 +54,13 @@ curl http://localhost:8000/maps/
 | image_url        | 地图图片                                                                    |
 | thumbnail_url    | 地图缩略图图片                                                              |
 
-## 删除全部地图
+## Delete All Maps
 
 ```bash
 curl -X DELETE http://localhost:8000/maps
 ```
 
-## 获取地图详情
+## Get Map Detail
 
 ```bash
 curl http://localhost:8000/maps/1
@@ -95,7 +95,7 @@ curl http://localhost:8000/maps/1
 | grid_resolution | 每个像素代表的世界距离。一般是 0.05，表示 5 厘米。 |
 | overlays        | GeoJson 格式的地图叠加物。                         |
 
-## 修改地图
+## Modify Map
 
 ```bash
 curl -X PATCH \

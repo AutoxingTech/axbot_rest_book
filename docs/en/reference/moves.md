@@ -1,6 +1,6 @@
 # Move API
 
-## 创建 Move Action
+## Create Move Action
 
 ```bash
 curl -X POST \
@@ -38,7 +38,7 @@ interface MoveActionCreate {
 }
 ```
 
-## 获取 Move Action 详情
+## Get Move Action Detail
 
 ```bash
 curl http://localhost:8000/chassis/moves/4409
@@ -79,7 +79,7 @@ interface MoveAction extends MoveActionCreate {
 }
 ```
 
-## 查看所有 Move Actions
+## Move Action List
 
 ```bash
 curl http://localhost:8000/chassis/moves
@@ -112,7 +112,7 @@ curl http://localhost:8000/chassis/moves
 ]
 ```
 
-## 运动状态反馈
+## Move State Feedback
 
 使用 websocket 的 `/planning_state` 频道，获取运动状态更新。
 
@@ -144,7 +144,7 @@ curl http://localhost:8000/chassis/moves
 }
 ```
 
-## 取消当前运动
+## Cancel Current Move Action
 
 ```bash
 curl -X PATCH \

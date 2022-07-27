@@ -1,6 +1,6 @@
 # Bluetooth API
 
-## 连接蓝牙
+## Connect Bluetooth
 
 ```bash
 curl -X POST \
@@ -9,11 +9,11 @@ curl -X POST \
   http://localhost:8000/bluetooth/connect
 ```
 
-**参数说明**
+**Parameters**
 
 ```ts
 class BluetoothConnectRequest {
-  address: string; // "00:11:22:33:FF:EE" 形式的地址
+  address: string; // address, in form of "00:11:22:33:FF:EE"
 }
 ```
 

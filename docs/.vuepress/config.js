@@ -22,20 +22,11 @@ module.exports = {
                 // },
                 sidebar: [
                     {
-                        title: '概览',
-                        collapsable: false, // optional, defaults to true
-                        sidebarDepth: 0,    // optional, defaults to 1
-                        children: [
-                            '/overview/getting_start',
-                            '/overview/api_principals',
-                            '/overview/migration'
-                        ]
-                    },
-                    {
                         title: '导引教程',
                         collapsable: false, // optional, defaults to true
                         sidebarDepth: 0,    // optional, defaults to 1
                         children: [
+                            '/overview/getting_start',
                             '/guides/first_move',
                             '/guides/start_websocket',
                         ]
@@ -53,6 +44,8 @@ module.exports = {
                             '/reference/videos',
                             '/reference/recordings',
                             '/reference/websocket',
+                            '/overview/api_principals',
+                            '/overview/migration'
                         ],
                         sidebarDepth: 2
                     }
@@ -64,20 +57,11 @@ module.exports = {
                 ],
                 sidebar: [
                     {
-                        title: 'Overview',
-                        collapsable: false, // optional, defaults to true
-                        sidebarDepth: 0,    // optional, defaults to 1
-                        children: [
-                            '/en/overview/getting_start',
-                            '/en/overview/api_principals',
-                            '/en/overview/migration'
-                        ]
-                    },
-                    {
                         title: 'Guide',
                         collapsable: false, // optional, defaults to true
                         sidebarDepth: 0,    // optional, defaults to 1
                         children: [
+                            '/en/overview/getting_start',
                             '/en/guides/first_move',
                             '/en/guides/start_websocket',
                         ]
@@ -95,6 +79,8 @@ module.exports = {
                             '/en/reference/videos',
                             '/en/reference/recordings',
                             '/en/reference/websocket',
+                            '/en/overview/api_principals',
+                            '/en/overview/migration'
                         ],
                         sidebarDepth: 2
                     }
