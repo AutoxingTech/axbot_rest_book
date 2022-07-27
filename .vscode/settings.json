@@ -8,5 +8,8 @@
         "**/Thumbs.db": true,
         ".temp": true,
         "node_modules": true
-    }
+    },
+    "cSpell.words": [
+        "Autoxing"
+    ]
 }
