@@ -1,16 +1,16 @@
 # REST API Principles
 
-REST API 为**一问一答**的形式。每个请求由 Request 和 Response 组成。
+REST APIs are in one-request-one-response form.
 
-Request 包含 **target** 和 **action** 两部分。
-Response 包含 **status** 和 **data** 两部分。
+Request contains **target** and **action**.
+Response contains **status** and **data**.
 
-比如，删除 3 号地图 `DELETE /maps/3`，则：
+For example, to delete map 3, we use `DELETE /maps/3`：
 
 - Request: action=`DELETE` target=`/maps/3`
 - Response: status=`204` data=`空`
 
-使用 REST API 就是：
+The REST API is：
 
 ```
 $ curl -X DELETE -i http://localhost:8000/maps/3
@@ -21,22 +21,23 @@ Vary: Accept, Cookie
 Content-Length: 0
 ```
 
-204 - No Content 说明成功删除。
+204 - No Content means an object is delete successfully.
 
 ## TARGET
 
-Target 分 **列表** 和 **个体** 两种。以下举例：
+There are two kinds of **target**, **list** and **single**. For example:
 
-- **/maps** - 地图列表
-- **/maps/3** - 3 号地图
-- **/chassis/moves** - move action 列表
-- **/chassis/moves/1150** - 第 1150 号 move action
-- **/services** - 服务列表
-- **/services/imu/recalibrate** - IMU 校准服务
+- **/maps** - Map list
+- **/maps/3** - Map 3(single)
+- **/chassis/moves** - move action list
+- **/chassis/moves/1150** - move action 1150(single)
+- **/services** - Service list
+- **/services/imu/recalibrate** - IMU calibration service(single)
 
 ## ACTION
 
-常见 Action 为 查询、创建、删除、修改、覆盖。对应 REST API 为 `GET`、`POST`、`DELETE`、`PATCH`、`PUT`。
+Common actions are `query`, `create`, `delete`, `modify` and `overwrite`.
+The corresponding HTTP request type are `GET`, `POST`, `DELETE`, `PATCH` and `PUT`.
 以下举例说明。特别注意，对 **列表** 做 `POST`，意味着创建新对象。对 **列表** 做 `DELETE`，意味着删除全部对象。
 
 | Action | Target  | 说明                  |
