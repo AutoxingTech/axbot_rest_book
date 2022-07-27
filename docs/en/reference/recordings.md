@@ -1,4 +1,4 @@
-# Recording 记录 API
+# Recording API
 
 ## 记录 Bag
 

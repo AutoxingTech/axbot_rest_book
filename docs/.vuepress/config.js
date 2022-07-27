@@ -7,55 +7,101 @@ module.exports = {
         }
     },
     themeConfig: {
-        nav: [
-            // { text: '底盘JIRA', link: 'https://autoxing.atlassian.net/browse/RCSS' }
-        ],
-        // sidebar: [
-        //     '/overview/overview',
-        //     '/reference/reference'
-        // ],
-        // sidebar: {
-        //     '/overview/': ["overview"],
-        //     '/reference/': ["reference"]
-        // },
-        sidebar: [
-            {
-                title: '概览',
-                collapsable: false, // optional, defaults to true
-                sidebarDepth: 0,    // optional, defaults to 1
-                children: [
-                    '/overview/getting_start',
-                    '/overview/api_principals',
-                    '/overview/migration'
-                ]
-            },
-            {
-                title: '导引教程',
-                collapsable: false, // optional, defaults to true
-                sidebarDepth: 0,    // optional, defaults to 1
-                children: [
-                    '/guides/first_move',
-                    '/guides/start_websocket',
-                ]
-            },
-            {
-                title: '参考手册',
-                collapsable: false,
-                children: [
-                    '/reference/maps',
-                    '/reference/moves',
-                    '/reference/current_map_and_pose',
-                    '/reference/services',
-                    '/reference/bluetooth',
-                    '/reference/device',
-                    '/reference/videos',
-                    '/reference/recordings',
-                    '/reference/websocket',
+        locales: {
+            "/": {
+                nav: [
+                    // { text: '底盘JIRA', link: 'https://autoxing.atlassian.net/browse/RCSS' }
                 ],
-                sidebarDepth: 2
+                // sidebar: [
+                //     '/overview/overview',
+                //     '/reference/reference'
+                // ],
+                // sidebar: {
+                //     '/overview/': ["overview"],
+                //     '/reference/': ["reference"]
+                // },
+                sidebar: [
+                    {
+                        title: '概览',
+                        collapsable: false, // optional, defaults to true
+                        sidebarDepth: 0,    // optional, defaults to 1
+                        children: [
+                            '/overview/getting_start',
+                            '/overview/api_principals',
+                            '/overview/migration'
+                        ]
+                    },
+                    {
+                        title: '导引教程',
+                        collapsable: false, // optional, defaults to true
+                        sidebarDepth: 0,    // optional, defaults to 1
+                        children: [
+                            '/guides/first_move',
+                            '/guides/start_websocket',
+                        ]
+                    },
+                    {
+                        title: '参考手册',
+                        collapsable: false,
+                        children: [
+                            '/reference/maps',
+                            '/reference/moves',
+                            '/reference/current_map_and_pose',
+                            '/reference/services',
+                            '/reference/bluetooth',
+                            '/reference/device',
+                            '/reference/videos',
+                            '/reference/recordings',
+                            '/reference/websocket',
+                        ],
+                        sidebarDepth: 2
+                    }
+                ],
+                lastUpdated: 'Last Updated'
+            },
+            "/en/": {
+                nav: [
+                ],
+                sidebar: [
+                    {
+                        title: 'Overview',
+                        collapsable: false, // optional, defaults to true
+                        sidebarDepth: 0,    // optional, defaults to 1
+                        children: [
+                            '/en/overview/getting_start',
+                            '/en/overview/api_principals',
+                            '/en/overview/migration'
+                        ]
+                    },
+                    {
+                        title: 'Guide',
+                        collapsable: false, // optional, defaults to true
+                        sidebarDepth: 0,    // optional, defaults to 1
+                        children: [
+                            '/en/guides/first_move',
+                            '/en/guides/start_websocket',
+                        ]
+                    },
+                    {
+                        title: 'Reference',
+                        collapsable: false,
+                        children: [
+                            '/en/reference/maps',
+                            '/en/reference/moves',
+                            '/en/reference/current_map_and_pose',
+                            '/en/reference/services',
+                            '/en/reference/bluetooth',
+                            '/en/reference/device',
+                            '/en/reference/videos',
+                            '/en/reference/recordings',
+                            '/en/reference/websocket',
+                        ],
+                        sidebarDepth: 2
+                    }
+                ],
+                lastUpdated: 'Last Updated'
             }
-        ],
-        lastUpdated: 'Last Updated'
+        }
     },
     locales: {
         // The key is the path for the locale to be nested under.

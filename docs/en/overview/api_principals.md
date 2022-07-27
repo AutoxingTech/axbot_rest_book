@@ -1,4 +1,4 @@
-# REST API 基本原则
+# REST API Principles
 
 REST API 为**一问一答**的形式。每个请求由 Request 和 Response 组成。
 

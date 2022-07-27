@@ -1,4 +1,4 @@
-# 设备信息
+# Device Information API
 
 ```bash
 curl http://localhost:8000/device/info

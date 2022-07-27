@@ -1,4 +1,4 @@
-# 蓝牙 API
+# Bluetooth API
 
 ## 连接蓝牙
 
