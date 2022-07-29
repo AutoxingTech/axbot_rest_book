@@ -100,7 +100,7 @@
   - Support service `/services/start_global_positioning` and websocket topic `/global_positioning_state`
   - Support websocket topics `/odom_state`.
   - Support websocket topics `/rgb_cameras/front/compressed` and `/rgb_cameras/back/compressed`.
-  - Support websocket `/rgb_cameras/front_argmented/video`.
+  - Support websocket `/rgb_cameras/front_augmented/video`.
   - `/device/status` and `/device/info` is almost the same. Except that `/device/status` contains 3 more fields: `sn`, `nickname` and `version`. In the future, when all devices are updated, `/device/status` shall be obsoleted.
   - Add `size_bytes` in Bag and VideoFile object.
   - Add video list. `/videos`

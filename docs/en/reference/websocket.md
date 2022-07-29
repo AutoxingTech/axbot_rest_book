@@ -250,7 +250,7 @@ h264 编码的视频流。
 
 - `/rgb_cameras/front/video` 前视
 - `/rgb_cameras/back/video` 后视
-- `/rgb_cameras/front_argmented/video` 加标注的前视
+- `/rgb_cameras/front_augmented/video` 加标注的前视
 
 ![](./detect.png)
 
