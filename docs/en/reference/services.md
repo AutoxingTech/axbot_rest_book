@@ -164,3 +164,24 @@ class EnableDepthCameraRequest {
   enable: boolean;
 }
 ```
+
+## Setup Wifi
+
+Switch WIFI to Access-Point or Station mode.
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json"
+  -d '{"mode": "station", "ssid":"xxxxxxxxx", "psk": "xxxxx"}'
+  http://localhost:8000/services/services
+```
+
+**Parameters**
+
+```ts
+class SetupWifiRequest {
+  mode: 'ap' | 'station';
+  ssid?: string; // SSID, required for station mode
+  psk?: string; // Wi-Fi Protected Access Pre-Shared Key, required for station mode
+}
+```

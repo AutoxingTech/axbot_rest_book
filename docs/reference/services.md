@@ -164,3 +164,24 @@ class EnableDepthCameraRequest {
   enable: boolean;
 }
 ```
+
+## 配置 Wifi
+
+把 WIFI 切换到 Access Point 模式，或者 Station 模式。
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json"
+  -d '{"mode": "station", "ssid":"xxxxxxxxx", "psk": "xxxxx"}'
+  http://localhost:8000/services/services
+```
+
+**参数说明**
+
+```ts
+class SetupWifiRequest {
+  mode: 'ap' | 'station'; // Access-Point 或者 Station 模式
+  ssid?: string; // SSID。Station 模式需要
+  psk?: string; // Wi-Fi Protected Access Pre-Shared Key。Station 模式需要
+}
+```
