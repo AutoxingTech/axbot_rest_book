@@ -6,15 +6,15 @@ To control the robot, first we must establish a connection.
 
 There are two ways to connect to the robot:
 
-1. Deploy your control program on the robot's main board. Use `http://localhost:8000`.
-2. Use a wired or wifi connection to connect to the robot and form a local network. Use `http://192.168.12.1:8000`.
+1. Deploy your control program to the robot's main board. Use `http://localhost:8000`.
+2. Connect to the robot with a wired or WIFI connection and form a local network. Use `http://192.168.12.1:8000`.
 
-In this document, we shall login onto the robot and use `localhost:8000`.
+In this document, we shall log in to the robot and use `localhost:8000`.
 
 ## Authentication
 
 A secure local network is assumed, so we only have a simple HTTP header based authentication.
-(The real secret is masked as XXXXXXXXXXXXXXXXX)
+(The real secret is hidden as XXXXXXXXXXXXXXXXX)
 
 ```
 Secret: XXXXXXXXXXXXXXXXX

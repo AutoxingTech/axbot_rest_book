@@ -2,7 +2,7 @@ module.exports = {
     base: "/axbot_rest_book/",
     markdown: {
         extendMarkdown: md => {
-            md.set({ breaks: true })
+            md.set({ breaks: false })
             md.use(require('markdown-it-imsize'))
         }
     },
