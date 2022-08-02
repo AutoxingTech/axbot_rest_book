@@ -185,3 +185,7 @@ class SetupWifiRequest {
   psk?: string; // Wi-Fi Protected Access Pre-Shared Key, required for station mode
 }
 ```
+
+A static HTML page is also provided and can be accessed from local network. http://localhost:8000/wifi_setup
+
+![](./wifi_setup.png)

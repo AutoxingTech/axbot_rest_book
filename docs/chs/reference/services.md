@@ -185,3 +185,7 @@ class SetupWifiRequest {
   psk?: string; // Wi-Fi Protected Access Pre-Shared Key。Station 模式需要
 }
 ```
+
+也提供了一个静态 HTML 页面，可以用来设置 Wifi: http://localhost:8000/wifi_setup
+
+![](./wifi_setup.png)
