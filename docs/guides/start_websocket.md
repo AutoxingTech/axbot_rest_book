@@ -12,7 +12,8 @@
 
 ## 获取机器人位姿
 
-为了方便学习，我们使用 `wscat` 工具来测试 websocket。Linux 下，用 `sudo apt install node-ws` 安装。
+为了方便学习，我们使用 `wscat` 工具来测试 websocket。Ubuntu 下，用 `sudo apt install node-ws` 安装。
+或者用 NodeJS `sudo npm -g i wscat` 安装。
 
 ```bash
 $ wscat -c ws://localhost:8000/ws/v2/topics
@@ -32,8 +33,8 @@ connected (press CTRL+C to quit)
 < {"topic": "/tracked_pose", "pos": [-3.55, -0.285], "ori": -1.28}
 ```
 
-`/ws/v2/topics` 中的 `v2` 用于指定协议版本。协议是尽量向前兼容的。
-但是，偶尔会有不兼容性的改动，所以需要客户端上报期待的协议版本。
+`/ws/v2/topics` 中的 `v2` 用于指定协议版本。目前只有 `v2` 唯一版本。
+将来如果出现 API 不兼容的重大升级，会提供升级版本的 API。
 
 上例中，我们使用 `enable_topic` 指令，订阅了 **定位状态** 和 **位姿** 两个频道。
 后续，只要有定位状态和位姿的变化，服务器就会主动通知。
