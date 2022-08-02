@@ -72,8 +72,9 @@ connected (press CTRL+C to quit)
 `linear_velocity: 0, angular_velocity: -0.6522` means stay on the same spot(linear velocity 0) and rotate to the right(with angular velocity -0.6522 radian / second).
 
 ::: danger
-Don't send lots of `/twist` command. One must wait for `/twist_feedback` before sending another twist command.
-This is especially important for Internet, because with sluggish communication, commands tends to pile up in socket buffer.
+Don't send lots of `/twist` command. One must wait for `/twist_feedback` before sending another one.
+It's especially important for Internet that goes sluggish.
+Commands tends to pile up in socket buffer.
 Even when you stop sending commands, piled commands will still be received on the remote side.
 The robot will move for a very long time before all commands are consumed.
 :::
