@@ -3,7 +3,7 @@
 Besides REST API, we have websocket for realtime information.
 
 Unlike REST API's request/response behavior, Websocket allows constantly two-way communication between the client and the server(robot).
-This is especially useful when the robot needs to report back constantly changing information, such as:
+This is especially useful when the robot needs to report back fast changing information, such as:
 
 - The pose of the robot
 - Move action state
@@ -34,14 +34,14 @@ connected (press CTRL+C to quit)
 < {"topic": "/tracked_pose", "pos": [-3.55, -0.285], "ori": -1.28}
 ```
 
-The `v2` in `/ws/v2/topics` is Websocket API version.
+The `v2` in `/ws/v2/topics` is the Websocket API version.
 For now, `v2` is the only version. We tried to maintain a stable API, but if major change happens and API must be changed,
 we shall provide a updated version.
 
-In the example above, we subscribed to two topics:
+In the example above, two topics are subscribed:
 
-- `/slam/state` for positioning state
-- `/tracked_pose` for pose update
+- `/slam/state` for positioning state update.
+- `/tracked_pose` for pose update.
 
 Afterwards when positioning state or robot pose changes, the server will notify use actively.
 
@@ -72,9 +72,10 @@ connected (press CTRL+C to quit)
 `linear_velocity: 0, angular_velocity: -0.6522` means stay on the same spot(linear velocity 0) and rotate to the right(with angular velocity -0.6522 radian / second).
 
 ::: danger
-Don't send lots of `/twist` command. One must wait for `/twist_feedback` before sending another one.
+Don't send lots of `/twist` commands. One must wait for `/twist_feedback` before sending another twist.
 It's especially important for Internet that goes sluggish.
+
 Commands tends to pile up in socket buffer.
-Even when you stop sending commands, piled commands will still be received on the remote side.
-The robot will move for a very long time before all commands are consumed.
+Even when you stop sending commands, buffered commands will still be received on the remote side.
+The robot will move for a very long time until all commands are consumed.
 :::
