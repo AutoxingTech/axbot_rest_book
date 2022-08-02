@@ -13,7 +13,8 @@ This is especially useful when the robot needs to report back constantly changin
 
 ## Get the Pose of the Robot
 
-为了方便学习，我们使用 `wscat` 工具来测试 websocket。Linux 下，用 `sudo apt install node-ws` 安装。
+For studying purpose, we use `wscat` to test Websocket.
+On Ubuntu, use `sudo apt install node-ws` to install it. Or with NodeJS, use `sudo npm -g i wscat`.
 
 ```bash
 $ wscat -c ws://localhost:8000/ws/v2/topics
@@ -33,17 +34,22 @@ connected (press CTRL+C to quit)
 < {"topic": "/tracked_pose", "pos": [-3.55, -0.285], "ori": -1.28}
 ```
 
-`/ws/v2/topics` 中的 `v2` 用于指定协议版本。协议是尽量向前兼容的。
-但是，偶尔会有不兼容性的改动，所以需要客户端上报期待的协议版本。
+The `v2` in `/ws/v2/topics` is Websocket API version.
+For now, `v2` is the only version. We tried to maintain a stable API, but if major change happens and API must be changed,
+we shall provide a updated version.
 
-上例中，我们使用 `enable_topic` 指令，订阅了 **定位状态** 和 **位姿** 两个频道。
-后续，只要有定位状态和位姿的变化，服务器就会主动通知。
+In the example above, we subscribed to two topics:
 
-## 远程遥控
+- `/slam/state` for positioning state
+- `/tracked_pose` for pose update
 
-Websocket 协议也支持简单的问答，问答是并行的、非阻塞的。实时性比 REST API 好。适合用于做远程遥控等操作。
+Afterwards when positioning state or robot pose changes, the server will notify use actively.
 
-首先切换到远控模式：
+## Remote Control
+
+Websocket is more responsive than REST API. It's more suitable for realtime activities, such as remote control.
+
+First, we need to switch control mode to `remote`:
 
 ```bash
 curl -X POST \
@@ -52,7 +58,7 @@ curl -X POST \
   http://localhost:8000/services/wheel_control/set_control_mode
 ```
 
-使用 websocket，下发控制指令：
+And then, use websocket to send control commands:
 
 ```bash
 $ wscat -c ws://localhost:8000/ws/v2/topics
@@ -63,9 +69,11 @@ connected (press CTRL+C to quit)
 < {"topic": "/twist_feedback"}
 ```
 
-`linear_velocity: 0, angular_velocity: -0.6522` 表示线速度为 0，角速度为 -0.6522 弧度/s。也就是向右原地旋转。
+`linear_velocity: 0, angular_velocity: -0.6522` means stay on the same spot(linear velocity 0) and rotate to the right(with angular velocity -0.6522 radian / second).
 
 ::: danger
-不要一次发送大量 `/twist`。一定要等到收到 `/twist_feedback` 之后，再发出下一个命令。
-因为网络有延迟、堆积，可能会导致机器人一直运动。
+Don't send lots of `/twist` command. One must wait for `/twist_feedback` before sending another twist command.
+This is especially important for Internet, because with sluggish communication, commands tends to pile up in socket buffer.
+Even when you stop sending commands, piled commands will still be received on the remote side.
+The robot will move for a very long time before all commands are consumed.
 :::
