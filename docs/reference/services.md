@@ -173,7 +173,7 @@ Switch WIFI to Access-Point or Station mode.
 curl -X POST \
   -H "Content-Type: application/json"
   -d '{"mode": "station", "ssid":"xxxxxxxxx", "psk": "xxxxx"}'
-  http://localhost:8000/services/services
+  http://localhost:8000/services/setup_wifi
 ```
 
 **Parameters**
