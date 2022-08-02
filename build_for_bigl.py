@@ -42,5 +42,8 @@ def modify():
 
 exec("npm run docs:build")
 modify()
-# exec("docker build . -f Dockerfile_bigl -t autoxing/biglbot_rest_book")
+exec("docker build . -f Dockerfile_bigl -t autoxing/biglbot_rest_book")
 exec("rsync -rv docs/.vuepress/dist/* build-pi:/opt/www/biglbot_rest_book/")
+
+# exec("npm run docs:build")
+# exec("rsync -rv docs/.vuepress/dist/* build-pi:/opt/www/axbot_rest_book/")
