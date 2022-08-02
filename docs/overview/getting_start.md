@@ -14,29 +14,53 @@ In this document, we shall log in to the robot and use `localhost:8000`.
 ## Authentication
 
 A secure local network is assumed, so we only have a simple HTTP header based authentication.
-(The real secret is hidden as XXXXXXXXXXXXXXXXX)
+All HTTP requests must have a header `Secret`.
 
-```
-Secret: XXXXXXXXXXXXXXXXX
-```
+But for simplicity, in this tutorial, we will not repeat it everywhere.
 
 ## First Request: Query Device Info
 
 The following command uses `curl` to make a HTTP request, and use [jq](https://stedolan.github.io/jq/) to format the output：
 
 ```bash
+# The secret is hidden. The real one must be requested.
 curl -H "Secret: XXXXXXXXXXXXXXXXX" http://localhost:8000/device/status | jq
 ```
 
 ```json
 {
-  "time": "2022/03/17 12:28:21",
-  "version": "1.8.x",
-  "sn": "618111110000110",
-  "nickname": "proto_pi_1000"
+  "rosversion": "1.15.11",
+  "rosdistro": "noetic",
+  "axbot_version": "1.8.8-rc4-pi64",
+  "device": {
+    "model": "hygeia",
+    "sn": "718xxxxxxx",
+    "name": "718xxxxxxxx",
+    "nickname": "hygeia_1016"
+  },
+  "baseboard": { "firmware_version": "22a32218" },
+  "wheel_control": { "firmware_version": "amps_20211103" },
+  "robot": {
+    "inscribed_radius": 0.248,
+    "height": 1.2,
+    "thickness": 0.546,
+    "wheel_distance": 0.36,
+    "width": 0.496
+  },
+  "caps": {
+    "supportsImuRecalibrateService": true,
+    "supportsShutdownService": true,
+    "supportsRestartService": true,
+    "supportsResetOccupancyGridService": true,
+    "supportsImuRecalibrationFeedback": true,
+    "supportsSetControlModeService": true,
+    "supportsSetEmergencyStopService": true,
+    "supportsWheelStateTopic": true,
+    "supportsWsV2": true,
+    "supportsRgbCamera": true,
+    "supportsExternalRgbCamera": true,
+    "supportsVisionBasedDetector": true
+  },
+  "time": "2022/08/02 16:46:58"
 }
 ```
-
-::: tip
-All request must have `-H "Secret: XXX". But for simplicity, in this tutorial, we will not repeat it anymore.
-:::
