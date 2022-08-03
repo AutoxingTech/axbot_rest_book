@@ -2,6 +2,11 @@
 
 ## Stable Releases
 
+### 1.8.8
+
+- Fix bug:
+  - Restore content of network configuration file, which might be messed by other releases.
+
 ### 1.8.8-rc4
 
 - 增加 imu 外参矫正脚本 `/opt/ax/bin/calibrate_imu.py`
