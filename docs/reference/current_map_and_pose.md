@@ -9,7 +9,7 @@ curl -X POST \
   http://localhost:8000/chassis/current-map
 ```
 
-**参数说明**
+**Request Params**
 
 ```ts
 class SetCurrentMapRequest {
@@ -34,9 +34,10 @@ curl http://localhost:8000/chassis/current-map
 }
 ```
 
-`id`，对应 `/maps` [地图列表](./maps.md#获取地图列表)中的数据。
+`id` represents a map of [Map List](./maps.md#map-list).
 
-可以通过监控 websocket `/map/info` 获得地图切换通知。
+Latched topic `/map/info` contains the information of currently used map.
+When current map changes, a new message will be received.
 
 ```bash
 $ wscat -c ws://localhost:8000/ws/v2/topics
@@ -60,18 +61,18 @@ curl -X POST \
   http://localhost:8000/chassis/pose
 ```
 
-**参数说明**
+**Request Params**
 
 ```ts
 class SetPoseRequest {
-  position: [number, number, number]; // 坐标 x, y, z。 z永远为0。
-  ori: number; // 位姿朝向。弧度。地图的右边是 ori=0。逆时针旋转。
+  position: [number, number, number]; // coordinates x, y, z. z is always 0。
+  ori: number; // heading of the robot, in radian, counter-clockwise. 0 means x-positive.
 }
 ```
 
 ## Pose Feedback
 
-可以通过监控 websocket `/tracked_pose` 获得位姿变化通知。
+Latched topic `/tracked_pose` contains the latest robot pose.
 
 ```bash
 $ wscat -c ws://localhost:8000/ws/v2/topics

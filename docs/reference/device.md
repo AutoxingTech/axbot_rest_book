@@ -8,17 +8,18 @@ curl http://localhost:8000/device/info
 {
   "rosversion": "1.15.11",
   "rosdistro": "noetic",
-  "axbot_version": "1.9.x", // 软件版本号
+  "axbot_version": "1.9.x", // The version of main package
   "device": {
-    "model": "hygeia", // 设备型号 hygeia/waiter/hotel/tray
-    "sn": "71822043000350z", // SN码
-    "name": "71822043000350z" // 设备 SN
+    "model": "hygeia", // device model. hygeia/waiter/hotel/tray/longtray etc.
+    "sn": "71822043000350z", // SN
+    "name": "71822043000350z" // Some prototype devices has a name.
+    // But for most devices, it's the same as SN.
   },
   "baseboard": {
-    "firmware_version": "22a32218" // 主板固件版本
+    "firmware_version": "22a32218"
   },
   "wheel_control": {
-    "firmware_version": "amps_20211103" // 轮控固件版本
+    "firmware_version": "amps_20211103" // wheel firmware version
   },
   "robot": {
     "footprint": [],
@@ -29,16 +30,16 @@ curl http://localhost:8000/device/info
     "width": 0.496
   },
   "caps": {
-    "supportsImuRecalibrateService": true, // 是否支持 /services/imu/recalibrate
-    "supportsShutdownService": true, // 是否支持 /services/baseboard/shutdown
-    "supportsRestartService": true, // 是否支持 /services/restart_service
-    "supportsResetOccupancyGridService": true, // 是否支持 /services/occupancy_grid_server/reset
-    "supportsImuRecalibrationFeedback": true, // 是否支持 /imu_state WebSocket 频道
-    "supportsSetControlModeService": true, // 是否支持 /services/wheel_control/set_control_mode
-    "supportsSetEmergencyStopService": true, // 是否支持 /services/wheel_control/set_emergency_stop
-    "supportsWheelStateTopic": true, // 是否支持 /wheel_state WebSocket 频道
-    "supportsWsV2": true, // 是否支持 ws://HOST/ws/v2/topics
-    "supportsRgbCamera": true // 是否支持 RGB 监控摄像头
+    "supportsImuRecalibrateService": true, // supports /services/imu/recalibrate
+    "supportsShutdownService": true, // supports /services/baseboard/shutdown
+    "supportsRestartService": true, // supports /services/restart_service
+    "supportsResetOccupancyGridService": true, // supports /services/occupancy_grid_server/reset
+    "supportsImuRecalibrationFeedback": true, // supports /imu_state WebSocket topic
+    "supportsSetControlModeService": true, // supports /services/wheel_control/set_control_mode
+    "supportsSetEmergencyStopService": true, // supports /services/wheel_control/set_emergency_stop
+    "supportsWheelStateTopic": true, // supports /wheel_state WebSocket topic
+    "supportsWsV2": true, // supports ws://HOST/ws/v2/topics
+    "supportsRgbCamera": true // supports RGB related topics
   }
 }
 ```
