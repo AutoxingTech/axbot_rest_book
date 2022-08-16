@@ -232,7 +232,7 @@ enum MoveState
 
 ## RGB Video Stream
 
-h264 编码的视频流。
+h264 encoded data stream.
 
 ```json
 {
@@ -242,24 +242,25 @@ h264 编码的视频流。
 }
 ```
 
-如果是 Browser 或者 Node.JS，可以用 [jmuxer](https://github.com/samirkumardas/jmuxer) 解码。
+For Browser for Node. Use [jmuxer](https://github.com/samirkumardas/jmuxer) can decode it.
 
 ![](./rgb_camera.png)
 
-目前的频道有（不同的机型可能不同）：
+Currently topics: (Different devices may differ)
 
-- `/rgb_cameras/front/video` 前视
-- `/rgb_cameras/back/video` 后视
-- `/rgb_cameras/front_augmented/video` 加标注的前视
+- `/rgb_cameras/front/video`
+- `/rgb_cameras/back/video`
+- `/rgb_cameras/front_augmented/video` Augmented video stream
+  for debugging vision based object detection.
 
 ![](./detect.png)
 
 ## RGB Image Stream
 
-jpeg 编码的图像流。
+jpeg encoded image stream.
 
 ::: tip
-图像的数据量要远远大于 H264 视频流。如果走公网流量，推荐使用 H264 视频流。
+Image stream is considerably larger than H264 video stream. For internet, please use video stream.
 :::
 
 ```json
@@ -271,10 +272,10 @@ jpeg 编码的图像流。
 }
 ```
 
-目前的频道有（不同的机型可能不同）：
+Currently topics: (Different devices may differ)
 
-- `/rgb_cameras/front/compressed` 前视
-- `/rgb_cameras/back/compressed` 后视
+- `/rgb_cameras/front/compressed`
+- `/rgb_cameras/back/compressed`
 
 ## 传感器控制器状态
 

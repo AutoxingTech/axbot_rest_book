@@ -1,4 +1,4 @@
-# Data Specifications
+# Answers to Data Specifications
 
 Generally, you can plug a LAN cable into the chassis and join a local network.
 Then all ROS topics and services will be accessible.
@@ -81,12 +81,15 @@ depth_camera:
 
 > 以周期流 (~5Hz) 在机器人框架上提供 以米(meters in float)为单位的扫描范围数据，或以周期流 (~5Hz) 在机器人固定框架（例 /map) 上提供 三维点云
 
-- Websocket topic `/scan_matched_points2` is world frame cloud points.
+- Websocket topic `/scan_matched_points2` is world frame [cloud points](./websocket.md#lidar-point-cloud).
 - ROS topic `/scan_matched_points2` can also be subscribed.
 
 ### 相机影像数据
 
 > 周期流(>5Hz), 图片格式： jpeg/raw/h264, 最小分辨率 至少 180p
+
+- Websocket [RGB Camera](./websocket.md#rgb-image-stream) and [RGB Camera](./websocket.md#rgb-video-stream)
+- ROS topics: `/rgb_cameras/back/compressed(sensor_msgs/CompressedImage)` and `/rgb_cameras/front/compressed(sensor_msgs/CompressedImage)`
 
 ## Robot maps(机器人地图)
 
