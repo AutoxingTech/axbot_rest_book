@@ -9,32 +9,36 @@ curl -X POST \
   http://localhost:8000/chassis/moves
 ```
 
-**返回**
+**Returns**
 
 ```json
 {
-  "id": 5 // 返回新创建的id
+  "id": 5 // The Id of the newly created action
 }
 ```
 
-**参数说明**
+**Request Parameters**
 
 ```ts
 interface MoveActionCreate {
-  creator: string; // 创建者，用于后续确定谁创建的任务，方便调试
+  creator: string; // Initiator of the action. For diagnosis only.
   type:
-    | 'standard' // 一般运动
-    | 'charge' // 充电
-    | 'return_to_elevator_waiting_point' // 返回电梯待梯点
-    | 'enter_elevator' // 进电梯
-    | 'leave_elevator'; // 出电梯
+    | 'standard'
+    | 'charge' // to to charger and docker with it
+    | 'return_to_elevator_waiting_point'
+    | 'enter_elevator'
+    | 'leave_elevator';
   target_x?: number;
   target_y?: number;
   target_z?: number;
   target_ori?: number;
-  target_accuracy?: number; // 如果不提供，则使用默认的精度。
-  use_target_zone?: boolean = false; // 如果为 true，则进入 target_accuracy 的范围就立刻停车。
-  charge_retry_count?: number; // 充电重试次数。只有当 type = "charge" 时有效。
+  target_accuracy?: number; // in meters. optional.
+
+  // if true, action will succeed right away
+  // when within radius of `target_accuracy`
+  use_target_zone?: boolean = false;
+
+  charge_retry_count?: number; // retry times before `charge` action fails.
 }
 ```
 
@@ -66,20 +70,25 @@ curl http://localhost:8000/chassis/moves/4409
 }
 ```
 
-**返回值说明**
+**Response Explained**
 
 ```ts
 interface MoveAction extends MoveActionCreate {
   state: 'idle' | 'moving' | 'succeeded' | 'failed' | 'cancelled';
   create_time: number; // unix timestamp, like 1647509573
   last_modified_time: number; // unix timestamp, like 1647509573
-  fail_reason: number; // 失败错误码，当 state="failed" 时有效
-  fail_reason_str: string; // 内部失败错误信息-用于调试，当 state="failed" 时有效
-  fail_message: string; // 中文的失败错误信息-用于调试，当 state="failed" 时有效
+  fail_reason: number; // fail code. Only valid when state="failed"
+  // internal fail messge - for debugging. Only valid when state="failed"
+  fail_reason_str: string;
+  // internal fail message in Chinese
+  // for debugging，Only valid when state="failed"
+  fail_message: string;
 }
 ```
 
 ## Move Action List
+
+The history of all move actions
 
 ```bash
 curl http://localhost:8000/chassis/moves
@@ -114,7 +123,7 @@ curl http://localhost:8000/chassis/moves
 
 ## Move State Feedback
 
-使用 websocket 的 `/planning_state` 频道，获取运动状态更新。
+Use websocket `/planning_state` to get updated of move state.
 
 ```json
 {
@@ -131,7 +140,7 @@ curl http://localhost:8000/chassis/moves
     "ori": 0
   },
   "going_back_to_charger": false,
-  "action_id": 4410,
+  "action_id": 4410, // The current executing(or last) move action ID.
   "fail_reason": 0,
   "fail_reason_str": "none",
   "remaining_distance": 3.546117067337036,

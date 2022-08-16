@@ -11,7 +11,7 @@ curl http://localhost:8000/device/info
   "axbot_version": "1.9.x", // The version of main package
   "device": {
     "model": "hygeia", // device model. hygeia/waiter/hotel/tray/longtray etc.
-    "sn": "71822043000350z", // SN
+    "sn": "71822043000350z", // SN. Unique for all devices.
     "name": "71822043000350z" // Some prototype devices has a name.
     // But for most devices, it's the same as SN.
   },

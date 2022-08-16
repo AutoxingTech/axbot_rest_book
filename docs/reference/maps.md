@@ -93,7 +93,7 @@ curl http://localhost:8000/maps/1
 | grid_origin_x   | 地图图片左下角像素的世界坐标 X。                   |
 | grid_origin_y   | 地图图片左下角像素的世界坐标 Y。                   |
 | grid_resolution | 每个像素代表的世界距离。一般是 0.05，表示 5 厘米。 |
-| overlays        | GeoJson 格式的地图叠加物。                         |
+| overlays        | GeoJson Overlays. Contains POIs etc.               |
 
 ## Modify Map
 
