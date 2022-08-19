@@ -1,5 +1,45 @@
 # Websocket Reference
 
+## Map
+
+Currently used map.
+
+![](./map.png)
+
+```json
+{
+  "topic": "/map",
+  "stamp": 1660896129737,
+  "resolution": 0.10000000149011612,
+  "size": [182, 59],
+  "origin": [-8.1, -4.8],
+  "data": "iVBORw0KGgoAAAANSUhEUgAAALYAAAA7BAAAAA..." // Base64 encoded PNG file
+}
+```
+
+## Obstacle Map
+
+Only for debugging.
+
+![](./obstacle_map.png)
+
+```
+{
+  "topic": "/maps/5cm/1hz",
+  "stamp": 1660896742341,
+  "resolution": 0.05000000074505806,
+  "size": [
+    200,
+    200
+  ],
+  "origin": [
+    -2.8,
+    -6.2
+  ],
+  "data": "iVBORw0KGgoAAAANSUhEUgAAAMgAAADICA..." // based64 encoded PNG file
+}
+```
+
 ## Wheel State
 
 ```json
@@ -67,6 +107,8 @@ enum VisualObjectLabel {
 
 ## Battery Information
 
+![](./battery.png)
+
 ```json
 {
   "topic": "/battery_state",
@@ -80,7 +122,7 @@ enum VisualObjectLabel {
 
 ## Current Pose
 
-自车在当前地图下的位姿。
+Current pose in world frame.
 
 ```json
 {
@@ -143,7 +185,9 @@ enum MoveState
 
 ## Lidar Point Cloud
 
-世界坐标系下的点云。
+![](./pointcloud.png)
+
+The point cloud in world frame.
 
 ```json
 {
@@ -160,7 +204,9 @@ enum MoveState
 
 ## Route
 
-当前路线。
+Current route.
+
+![](./route.png)
 
 ```json
 {
@@ -176,7 +222,7 @@ enum MoveState
 
 ## Mapping Trajectory
 
-实时反馈建图过程中的轨迹
+Realtime trajectory during mapping.
 
 ```json
 {
@@ -199,7 +245,9 @@ enum MoveState
 
 ## Alerts
 
-实时反馈当前的警告信息
+Currently active alerts.
+
+![](./alerts.png)
 
 ```json
 {

@@ -1,5 +1,18 @@
 # Mapping API
 
+With Mapping API, you can:
+
+1. Create/finish/cancel/delete a mapping task.
+2. View all mapping tasks.
+3. Save(the artifacts of) a mapping task as a map.
+
+A task has a state. It can be running/finished/cancelled/failed.
+
+When a task is successfully created, it's in running state.
+When finished, it will contain a map and a bag file. The bag file contains the sensor data which are used during creation of the map.
+
+A mapping task (in `/mappings`) can't be used for navigation. You have to save the artifacts of a mapping task into `/maps` first.
+
 ## Start Mapping
 
 ```bash
@@ -27,20 +40,34 @@ curl -X POST \
 }
 ```
 
-**参数**
+**Request Params**
 
 ```ts
 interface MappingCreateRequest {
-  // false(default) 为新建图
-  // true 为增量建图：继承当前地图、当前位姿
+  // false(default) for creating new map.
+  // true for incremental mapping.
+  // If true, the current map(and its coordinates) will be inherited.
   continue_mapping: boolean;
 
-  // (since 1.9)
-  // zero(default): 从原点为建图起点
-  // current_pose: 用当前定位位姿作为起点
+  // (since 1.8.8)
+  // zero(default): Use x=0,y=0,ori=0 as start point. (Start new coordinate frame)
+  // current_pose: Use current pose as start point. (Inherit coordinate frame)
   start_pose_type: 'zero' | 'current_pose';
 }
 ```
+
+## Visualization of Mapping Process
+
+During mapping, use Websocket to receive realtime feedbacks:
+
+- [Current Pose](./websocket.md#current-pose)
+- [Map](./websocket.md#map). Updated at regular interval.
+- [Trajectory](./websocket.md#mapping-trajectory) History trajectory which can help you know which part of the map has been visited.
+- [Point Cloud](./websocket.md#lidar-point-cloud) and [Obstacle Map](./websocket.md#obstacle-map) Can help avoid collision during remote mapping.
+
+They can be rendered like this:
+
+![](./mapping.png)
 
 ## Finish/Cancel Mapping
 
@@ -51,47 +78,21 @@ curl -X POST \
   http://localhost:8000/mappings/current
 ```
 
-**参数**
+**Request Params**
 
 ```ts
 interface MappingFinishRequest {
-  state: 'finished' | 'cancelled'; // 结束建图或者取消建图
+  state: 'finished' | 'cancelled'; // Finish or cancel mapping task
 
-  // (since 1.9)
-  // false(default)，则保存整个地图。
-  // true，则只保存增量部分(只对增量建图有效)。
+  // (since 1.8.8)
+  // false(default), save the whole map.
+  // true, Only save the incremented part of the map.(For incremental mapping only.)
   new_map_only: boolean;
 }
 ```
 
-建图结束后，结果会进入建图列表中。后续可以根据建图任务的 ID，获取建图结果。
-
-## Visualization of Mapping Process
-
-建图过程中，使用 websocket 接收回显数据。其中最主要的两条数据是：
-
-**位姿**
-
-```json
-{
-  "topic": "/chassis/pose",
-  "pos": [-0.003, -0.013],
-  "ori": 1.57
-}
-```
-
-**地图**
-
-```json
-{
-  "topic": "/chassis/occupancy_grid",
-  "stamp": 1647520941279,
-  "resolution": 0.10000000149011612,
-  "size": [166, 129], // 像素 size
-  "origin": [-8.3, -6], // 左下角的世界坐标
-  "data": "iVBORw0KGgoAAAANSUhEUgAAAKYAAACBBAAAAACqunM..." // Base64 后的 PNG
-}
-```
+When a mapping task finished, the artifacts will be saved.
+You can request them with the `mapping_id` afterwards.
 
 ## Mapping List
 
@@ -151,7 +152,7 @@ curl http://localhost:8000/mappings/48
   "url": "http://localhost:8000/mappings/48",
   "start_time": 1647520760,
   "end_time": 1647520995,
-  "state": "finished",
+  "state": "finished", // The current state: running, finished, cancelled, failed
   "bag_id": 27,
   "bag_url": "http://localhost:8000/bags/27.bag",
   "download_url": "http://localhost:8000/mappings/48/download",

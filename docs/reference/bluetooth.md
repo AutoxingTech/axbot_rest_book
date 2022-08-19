@@ -17,7 +17,7 @@ class BluetoothConnectRequest {
 }
 ```
 
-连接蓝牙后，通过 websocket 来通讯。
+When bluetooth is connected. Use Websocket to communicate with device.
 
 ```bash
 $ wscat -c ws://localhost:8000/ws/v2/topics
