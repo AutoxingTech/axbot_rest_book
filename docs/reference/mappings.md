@@ -92,7 +92,7 @@ interface MappingFinishRequest {
 ```
 
 When a mapping task finished, the artifacts will be saved.
-You can request them with the `mapping_id` afterwards.
+You can request them with `/mappings/:id` afterwards.
 
 ## Mapping List
 
