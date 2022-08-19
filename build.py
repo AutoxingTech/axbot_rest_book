@@ -4,6 +4,7 @@ import re
 import os
 import subprocess
 import sys
+import argparse
 
 
 def exec(cmd: str, debug=False):
@@ -40,10 +41,20 @@ def modify():
                         f.write(new_txt)
 
 
-exec("npm run docs:build")
-modify()
-exec("docker build . -f Dockerfile_bigl -t autoxing/biglbot_rest_book")
-exec("rsync -rv docs/.vuepress/dist/* build-pi:/opt/www/biglbot_rest_book/")
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    "--bigl", action="store_true", default=False, help="For BIGL, a Singapore company"
+)
 
-# exec("npm run docs:build")
-# exec("rsync -rv docs/.vuepress/dist/* build-pi:/opt/www/axbot_rest_book/")
+args = parser.parse_args()
+
+bigl = args.bigl
+
+exec("npm run docs:build")
+
+if bigl:
+    modify()
+    exec("docker build . -f Dockerfile_bigl -t autoxing/biglbot_rest_book")
+    exec("rsync -rv docs/.vuepress/dist/* build-pi:/opt/www/biglbot_rest_book/")
+else:
+    exec("rsync -rv docs/.vuepress/dist/* build-pi:/opt/www/axbot_rest_book/")

@@ -95,8 +95,12 @@
 
 - Fix bug:
   - 任务被取消或者任务失败时，清除 v2x 发布的路线.
-  - 支持禁用雷达转速不稳自动重启的功能，但是默认开启。`/sensor_manager/reset_lidar_on_scan_rate_error`
-  - 支持当雷达转速不稳时，延迟重启(或许能减少雷神雷达重启的问题)。默认 1 秒。 `/monitor/lidar/scan_rate_error_delay`
+  - 适配了雷神雷达：
+    - 支持禁用雷达转速不稳自动重启的功能，但是默认开启。`/sensor_manager/reset_lidar_on_scan_rate_error`
+    - 支持当雷达转速不稳时，延迟重启(或许能减少雷神雷达重启的问题)。默认 1 秒。 `/monitor/lidar/scan_rate_error_delay`
+    - 微调了雷神的降噪参数，避免立柱的噪点
+    - [RCSS-1735] 更改了雷神的降噪方案
+    - 加长了雷神雷达自检测的时间为 6 秒
 
 ### 1.8.8
 
