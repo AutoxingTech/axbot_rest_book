@@ -188,6 +188,8 @@ This way(with `mapping_id`) is more efficient than [POSTing the whole map](./map
 
 ![](./save_mapping_as_map.png)
 
+**Request**
+
 ```bash
 curl -X POST http://localhost:8000/maps/
 ```
@@ -199,7 +201,7 @@ curl -X POST http://localhost:8000/maps/
 }
 ```
 
-** Response **
+**Response**
 
 ```json
 {
