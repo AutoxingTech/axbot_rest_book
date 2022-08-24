@@ -186,7 +186,7 @@ curl http://localhost:8000/mappings/48/trajectories.json
 Only when saved as a map, the robot can load and use it for navigation.
 This way(with `mapping_id`) is more efficient than [POSTing the whole map](./maps.md#create-a-map) with all fields.
 
-![](./save_mapping_as_map)
+![](./save_mapping_as_map.png)
 
 ```bash
 curl -X POST http://localhost:8000/maps/
