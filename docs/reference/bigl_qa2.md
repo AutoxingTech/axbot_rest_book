@@ -19,7 +19,7 @@ Currently, only some [motion metrics](./robot_params.md) can be tuned at runtime
 
 ## how does map saving work - cloud to local or local to cloud
 
-These are implemented on APP side. May be someone self could answer it.
+These are implemented on APP side. May be someone else could answer it.
 
 ## currently docking we need to give x,y,z attributes. we would like to have auto docking
 
@@ -33,4 +33,4 @@ No, with this layer of REST API, you can only cancel an action. Pausing/Resuming
 
 Bluetooth is used to query or operate elevator, auto gates.
 
-At current stage, REST API only serves as a communication channel. The APP logic communicates with devices directly. This may change in the future.
+At current stage, [Bluetooth API](./bluetooth.md) only serves as a communication channel. The APP logic communicates with devices directly(with websocket channel). This may change in the future.
