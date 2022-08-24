@@ -44,6 +44,7 @@ module.exports = {
                             '/reference/device',
                             '/reference/videos',
                             '/reference/recordings',
+                            '/reference/robot_params',
                             '/reference/websocket',
                             '/overview/api_principals',
                             '/overview/migration'
