@@ -95,6 +95,44 @@ curl http://localhost:8000/maps/1
 | grid_resolution | 每个像素代表的世界距离。一般是 0.05，表示 5 厘米。 |
 | overlays        | GeoJson Overlays. Contains POIs etc.               |
 
+## Create a Map
+
+```bash
+curl -X POST \
+    -H "Content-Type: application/json" \
+    http://localhost:8000/maps/
+```
+
+**Parameters**
+
+| name             | type   | description                                     |
+| ---------------- | ------ | ----------------------------------------------- |
+| map_name         | float  | name of the map                                 |
+| map_version      | int    | version of the map                              |
+| grid_origin_x    | float  | X coordinate of the lower-left corner           |
+| grid_origin_y    | float  | Y coordinate of the lower-left corner           |
+| grid_resolution  | float  | the size of a single pixel                      |
+| overlays_version | int    | overlays version                                |
+| overlays         | string | overlays. in GeoJson format                     |
+| carto_map        | string | base64 encoded binary map data(for positioning) |
+| occupancy_grid   | string | base64 encoded PNG image data(for display)      |
+
+**Response**
+
+```json
+{
+  "id": 119, // The newly created map id. Use this id to load it into robot.
+  "uid": "9b94ac16-239b-11ed-9446-1e49da274768",
+  "map_name": "From Mapping 4",
+  "create_time": 1657015615,
+  "map_version": 1,
+  "overlays_version": 1,
+  "thumbnail_url": "http://localhost:8000/maps/119/thumbnail",
+  "image_url": "http://localhost:8000/maps/119.png",
+  "url": "http://localhost:8000/maps/119"
+}
+```
+
 ## Modify Map
 
 ```bash
@@ -107,14 +145,14 @@ curl -X PATCH \
 
 可以修改以下一个或多个字段。
 
-| name             | type   | description                                        |
-| ---------------- | ------ | -------------------------------------------------- |
-| map_name         | float  | 地图名称                                           |
-| map_version      | int    | 地图版本                                           |
-| grid_origin_x    | float  | 地图图片左下角像素的世界坐标 X                     |
-| grid_origin_y    | float  | 地图图片左下角像素的世界坐标 Y                     |
-| grid_resolution  | float  | 每个像素代表的世界距离。一般是 0.05，表示 5 厘米。 |
-| overlays_version | int    | 地图叠加物版本                                     |
-| overlays         | string | 地图叠加物。GeoJSON 编码成 string                  |
-| carto_map        | string | base64 后的地图数据                                |
-| occupancy_grid   | string | base64 后的地图 PNG 图像数据                       |
+| name             | type   | description                                     |
+| ---------------- | ------ | ----------------------------------------------- |
+| map_name         | float  | name of the map                                 |
+| map_version      | int    | version of the map                              |
+| grid_origin_x    | float  | X coordinate of the lower-left corner           |
+| grid_origin_y    | float  | Y coordinate of the lower-left corner           |
+| grid_resolution  | float  | the size of a single pixel                      |
+| overlays_version | int    | overlays version                                |
+| overlays         | string | overlays. in GeoJson format                     |
+| carto_map        | string | base64 encoded binary map data(for positioning) |
+| occupancy_grid   | string | base64 encoded PNG image data(for display)      |

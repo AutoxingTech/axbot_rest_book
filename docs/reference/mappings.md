@@ -145,7 +145,7 @@ curl http://localhost:8000/mappings/48
 {
   "id": 48,
   "thumbnail_url": "http://localhost:8000/mappings/48/thumbnail",
-  "image_url": "http://localhost:8000/mappings/48.png",
+  "image_url": "http://localhost:8000/mappings/48.png", // Base64 encoded map image(PNG, used for display)
   "grid_origin_x": -8.050000190734863,
   "grid_origin_y": -5.650000095367432,
   "grid_resolution": 0.05,
@@ -155,7 +155,7 @@ curl http://localhost:8000/mappings/48
   "state": "finished", // The current state: running, finished, cancelled, failed
   "bag_id": 27,
   "bag_url": "http://localhost:8000/bags/27.bag",
-  "download_url": "http://localhost:8000/mappings/48/download",
+  "download_url": "http://localhost:8000/mappings/48/download", // get Base64 encoded map data(binary, used for positioning)
   "trajectories_url": "http://localhost:8000/mappings/48/trajectories.json"
 }
 ```
@@ -179,4 +179,38 @@ curl http://localhost:8000/mappings/48/trajectories.json
     ]
   }
 ]
+```
+
+## Save Mapping Artifacts Directly as a Map
+
+Only when saved as a map, the robot can load and use it for navigation.
+This way(with `mapping_id`) is more efficient than [POSTing the whole map](./maps.md#create-a-map) with all fields.
+
+![](./save_mapping_as_map)
+
+```bash
+curl -X POST http://localhost:8000/maps/
+```
+
+```json
+{
+  "map_name": "From Mapping 4", // Give the map a name
+  "mapping_id": 4 // Mapping Action id
+}
+```
+
+** Response **
+
+```json
+{
+  "id": 119, // The newly created map id. Use this id to load it into robot.
+  "uid": "9b94ac16-239b-11ed-9446-1e49da274768",
+  "map_name": "From Mapping 4",
+  "create_time": 1657015615,
+  "map_version": 1,
+  "overlays_version": 1,
+  "thumbnail_url": "http://localhost:8000/maps/119/thumbnail",
+  "image_url": "http://localhost:8000/maps/119.png",
+  "url": "http://localhost:8000/maps/119"
+}
 ```
