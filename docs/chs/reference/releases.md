@@ -1,5 +1,32 @@
 # Changelog of Releases
 
+### 1.10.0-rc2
+
+- 支持 LC303 光流
+- 解决了部分打滑导致的丢定位问题。当打滑不严重时，不会定位错误。
+- 新增 REST API: `/wake_up_device`.
+- REST API `/imu/recalibrate`，新增 `calibrate_pose` 参数。可以校正外参。
+- [RCSS-1858] Add param `/detectors/elevator_occupancy_radius`: radius of elevator stand circle. (**feature_detectors**)
+- [RCSS-1846] enhance gate state logic (**feature_detectors**)
+- [RCSS-1836] auto switch elevator gate on/off using `map/info`, `enableDoor` field. (**feature_detectors**)
+- [RCSS-1824] 加长底盘支持后退出电梯。 (**planning**)
+- [RCSS-1847] Add `/occupancy_grid_server/depth_simple_marking_keep_time`. (**platform-build**)
+- [RCSS-1832] 修改配置文件，餐厅与酒店机器人的下视深度相机配置为近处带记忆远处不带记忆
+- 把所有传感器的外参都放在了参数文件中。
+- Bug Fixes
+  - [RCSS-1865] 支持配置乘梯点不同状态时的超时时间。(**planning**)
+  - [RCSS-1866] 任务开始一级路线有障碍物，选路时直接切换新路线（不 hold 2s）。(**planning**)
+  - [RCSS-1841] 修复回桩充电卡死问题。(**planning**)
+  - 尝试解决雷达型号检测错误的问题。(**sensor-drivers**)
+  - [RCSS-1860] Sync h264 and compressed image timestamp in `rgb_camera_node`. (**sensor-drivers**)
+  - 到终点还剩一个车身的距离时，不再因压脚地势而进入避让模式。 (**planning**)
+  - 修复避让模式切换行进模式时的前后震荡。 (**planning**)
+  - 提高机器人被阻挡时进入避让模式的阈值。 (**planning**)
+  - 修复机器人避让模式切换到行进模式太慢。 (**planning**)
+  - 修复旋转时短暂卡顿不流畅。 (**planning**)
+  - 修复靠近终点旋转时的左右震荡。 (**planning**)
+  - [RCSS-1833] 修复近距离情况下机器人不能到达终点的 BUG。 (**planning**)
+
 ### 1.10.0-rc1
 
 - 支持 bottom sensor pack 元器件。（包括光流、ESP Now 通讯）
