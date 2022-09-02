@@ -3,18 +3,22 @@
 ### 1.10.0-rc2
 
 - 支持 LC303 光流
+- [RCSS-1824] 加长底盘支持后退出电梯
 - 解决了部分打滑导致的丢定位问题。当打滑不严重时，不会定位错误。
 - 新增 REST API: `/wake_up_device`.
 - REST API `/imu/recalibrate`，新增 `calibrate_pose` 参数。可以校正外参。
-- [RCSS-1858] Add param `/detectors/elevator_occupancy_radius`: radius of elevator stand circle. (**feature_detectors**)
-- [RCSS-1846] enhance gate state logic (**feature_detectors**)
-- [RCSS-1836] auto switch elevator gate on/off using `map/info`, `enableDoor` field. (**feature_detectors**)
-- [RCSS-1824] 加长底盘支持后退出电梯。 (**planning**)
-- [RCSS-1847] Add `/occupancy_grid_server/depth_simple_marking_keep_time`. (**platform-build**)
-- [RCSS-1832] 修改配置文件，餐厅与酒店机器人的下视深度相机配置为近处带记忆远处不带记忆
+- monitor 增加了对自身心跳的监控
+- 增加了 mmc 寿命监控
 - 把所有传感器的外参都放在了参数文件中。
+- 电梯检测
+  - [RCSS-1858] Add param `/detectors/elevator_occupancy_radius`: radius of elevator stand circle.
+  - [RCSS-1846] enhance gate state logic
+  - [RCSS-1836] auto switch elevator gate on/off using `map/info`, `enableDoor` field.
+- 避障图
+  - [RCSS-1847] Add `/occupancy_grid_server/depth_simple_marking_keep_time`.
+  - [RCSS-1832] 修改配置文件，餐厅与酒店机器人的下视深度相机配置为近处带记忆远处不带记忆
 - Bug Fixes
-  - [RCSS-1865] 支持配置乘梯点不同状态时的超时时间。(**planning**)
+  - [RCSS-1865] 支持配置乘梯点不同状态时的超时时间。
   - [RCSS-1866] 任务开始一级路线有障碍物，选路时直接切换新路线（不 hold 2s）。(**planning**)
   - [RCSS-1841] 修复回桩充电卡死问题。(**planning**)
   - 尝试解决雷达型号检测错误的问题。(**sensor-drivers**)
