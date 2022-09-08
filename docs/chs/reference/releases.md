@@ -1,5 +1,11 @@
 # Changelog of Releases
 
+### 1.10.0-rc3
+
+- Bug Fixes:
+  - 改正了启动时深度相机恰巧接触不良，后续又连上还不工作的 bug
+  - 改成了 IMU 外参校准的 bug
+
 ### 1.10.0-rc2
 
 - 支持 LC303 光流
