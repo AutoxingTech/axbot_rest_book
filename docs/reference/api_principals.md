@@ -38,40 +38,47 @@ There are two kinds of **target**, **list** and **single**. For example:
 
 Common actions are `query`, `create`, `delete`, `modify` and `overwrite`.
 The corresponding HTTP request type are `GET`, `POST`, `DELETE`, `PATCH` and `PUT`.
-以下举例说明。特别注意，对 **列表** 做 `POST`，意味着创建新对象。对 **列表** 做 `DELETE`，意味着删除全部对象。
 
-| Action | Target  | 说明                  |
-| ------ | ------- | --------------------- |
-| POST   | /maps   | 创建新地图            |
-| GET    | /maps   | 查看地图列表          |
-| GET    | /maps/1 | 查看 1 号地图         |
-| PUT    | /maps/1 | 覆盖 1 号地图         |
-| PATCH  | /maps/1 | 修改 1 号地图部分字段 |
-| DELETE | /maps/1 | 删除 1 号地图         |
-| DELETE | /maps   | 删除全部地图          |
+The common patterns are summarized below. Especially:
+
+- `POST` to a list, means creating a new object.
+- `DELETE` a list means deleting all objects in that list.
+
+| Action | Target  | 说明                                |
+| ------ | ------- | ----------------------------------- |
+| POST   | /maps   | Create a new map with provided data |
+| GET    | /maps   | Get the list of all maps            |
+| GET    | /maps/1 | Get the detail of map 1             |
+| PUT    | /maps/1 | Overwrite map 1 with provided data  |
+| PATCH  | /maps/1 | Partially update map 1              |
+| DELETE | /maps/1 | Delete map 1                        |
+| DELETE | /maps   | Delete all maps                     |
 
 ## STATUS
 
-返回状态码。状态码遵循 HTTP 状态码的一般规则：
+The response status code is consistent with [HTTP Status Code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).
 
-- 2xx 为成功
-- 4xx 为请求端问题
-- 5xx 为服务器端问题。
+- 2xx are successful responses.
+- 4xx are client error responses.
+- 5xx are server error responses.
 
-常见的有:
+Among them, the most common ones are:
 
-- 200 OK 成功
-- 201 Created 创建成功
-- 204 No Content 删除成功
-- 400 Bad Request 请求参数错误
-- 404 Not Found 资源不存在(URL 错误)
-- 500 Internal Server Error 服务器端故障
+- 200 OK
+- 201 Created - Object created or service executed.
+- 204 No Content - Deleted successfully.
+- 400 Bad Request - The request parameter is mal-formatted. Or some other precondition is not met.
+- 404 Not Found - The resource doesn't exist. (Bad URL)
+- 500 Internal Server Error - The server runs into error.
 
 ## DATA
 
-返回的数据为 JSON 格式，有 List 和 Object 两种。
+The response data is in JSON format. It can be:
 
-查看所有地图，返回的就是一个 List。
+- An object
+- Or a list.
+
+For example. Listing all maps returns a list.
 
 ```bash
 curl http://localhost:8000/maps/ | jq
@@ -115,7 +122,7 @@ curl http://localhost:8000/maps/ | jq
 ]
 ```
 
-获取地图详情，返回的就是一个 Object。
+While getting detail of a map, returns an object.
 
 ```bash
 curl http://localhost:8000/maps/1 | jq

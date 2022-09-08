@@ -1,5 +1,21 @@
 # Map API
 
+A map contains the following fields:
+
+| name             | type   | description                                                  |
+| ---------------- | ------ | ------------------------------------------------------------ |
+| uid              | string | Unique ID.                                                   |
+| map_name         | float  | name of the map                                              |
+| map_version      | int    | version of the map                                           |
+| create_time      | int    | Unix timestamp, like 1644568815                              |
+| grid_origin_x    | float  | X coordinate of the lower-left corner                        |
+| grid_origin_y    | float  | Y coordinate of the lower-left corner                        |
+| grid_resolution  | float  | the size of a single pixel. Typically 0.05(m/pixel)          |
+| overlays_version | int    | overlays version                                             |
+| overlays         | string | Overlays in GeoJson Format. Contains POIs/virtual walls etc. |
+| carto_map        | string | base64 encoded binary map data(for positioning)              |
+| occupancy_grid   | string | base64 encoded PNG image data(for display)                   |
+
 ## Map List
 
 ```bash
@@ -44,15 +60,12 @@ curl http://localhost:8000/maps/
 ]
 ```
 
-**重点字段说明**
+**Extra Fields**
 
-| name             | description                                                                 |
-| ---------------- | --------------------------------------------------------------------------- |
-| uid              | 全局唯一 ID。唯一标识这个地图。它的坐标系是固定的，即使增量建图也不会改变。 |
-| map_version      | 地图版本号。如果增量建图，版本号会增加                                      |
-| overlays_version | 地图叠加层的版本号。如果叠加层变化，版本号增加。                            |
-| image_url        | 地图图片                                                                    |
-| thumbnail_url    | 地图缩略图图片                                                              |
+| name          | description                                                      |
+| ------------- | ---------------------------------------------------------------- |
+| image_url     | The image(PNG) representation of the map, in original resolution |
+| thumbnail_url | The image(PNG) representation of the map, in low resolution      |
 
 ## Delete All Maps
 
@@ -81,19 +94,17 @@ curl http://localhost:8000/maps/1
   "overlays": "{\"type\": \"FeatureCollection\", \"features\": [{\"id\": ...",
   "thumbnail_url": "http://localhost:8000/maps/1/thumbnail",
   "image_url": "http://localhost:8000/maps/1.png",
-  "download_url": "http://localhost:8000/maps/1/download",
   "pbstream_url": "http://localhost:8000/maps/1.pbstream"
 }
 ```
 
-**重点字段说明**
+**Extra Fields**
 
-| name            | description                                        |
-| --------------- | -------------------------------------------------- |
-| grid_origin_x   | 地图图片左下角像素的世界坐标 X。                   |
-| grid_origin_y   | 地图图片左下角像素的世界坐标 Y。                   |
-| grid_resolution | 每个像素代表的世界距离。一般是 0.05，表示 5 厘米。 |
-| overlays        | GeoJson Overlays. Contains POIs etc.               |
+| name          | description                                                   |
+| ------------- | ------------------------------------------------------------- |
+| image_url     | URL to get the image(PNG) of the map, in original resolution. |
+| thumbnail_url | URL to get the thumbnail(PNG) image of the map                |
+| pbstream_url  | URL to get the data of the map. Binary.                       |
 
 ## Create a Map
 
@@ -102,20 +113,6 @@ curl -X POST \
     -H "Content-Type: application/json" \
     http://localhost:8000/maps/
 ```
-
-**Parameters**
-
-| name             | type   | description                                     |
-| ---------------- | ------ | ----------------------------------------------- |
-| map_name         | float  | name of the map                                 |
-| map_version      | int    | version of the map                              |
-| grid_origin_x    | float  | X coordinate of the lower-left corner           |
-| grid_origin_y    | float  | Y coordinate of the lower-left corner           |
-| grid_resolution  | float  | the size of a single pixel                      |
-| overlays_version | int    | overlays version                                |
-| overlays         | string | overlays. in GeoJson format                     |
-| carto_map        | string | base64 encoded binary map data(for positioning) |
-| occupancy_grid   | string | base64 encoded PNG image data(for display)      |
 
 **Response**
 
@@ -135,24 +132,11 @@ curl -X POST \
 
 ## Modify Map
 
+Modify the name and overlays
+
 ```bash
 curl -X PATCH \
     -H "Content-Type: application/json" \
-    http://localhost:8000/maps/1
+    -d '{"map_name": "...", "overlays": "..."}'
+    http://localhost:8000/maps/1 {}
 ```
-
-**参数**
-
-可以修改以下一个或多个字段。
-
-| name             | type   | description                                     |
-| ---------------- | ------ | ----------------------------------------------- |
-| map_name         | float  | name of the map                                 |
-| map_version      | int    | version of the map                              |
-| grid_origin_x    | float  | X coordinate of the lower-left corner           |
-| grid_origin_y    | float  | Y coordinate of the lower-left corner           |
-| grid_resolution  | float  | the size of a single pixel                      |
-| overlays_version | int    | overlays version                                |
-| overlays         | string | overlays. in GeoJson format                     |
-| carto_map        | string | base64 encoded binary map data(for positioning) |
-| occupancy_grid   | string | base64 encoded PNG image data(for display)      |
