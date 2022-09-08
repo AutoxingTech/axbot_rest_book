@@ -46,8 +46,15 @@ module.exports = {
                             '/reference/videos',
                             '/reference/recordings',
                             '/reference/robot_params',
-                            '/reference/websocket',
-                            '/reference/deprecations'
+                            '/reference/websocket'
+                        ],
+                        sidebarDepth: 2
+                    },
+                    {
+                        title: 'Other',
+                        collapsable: false,
+                        children: [
+                            '/other/deprecations'
                         ],
                         sidebarDepth: 2
                     }
@@ -84,6 +91,14 @@ module.exports = {
                             '/chs/reference/recordings',
                             '/chs/reference/websocket',
                             '/chs/reference/deprecations'
+                        ],
+                        sidebarDepth: 2
+                    },
+                    {
+                        title: '其它',
+                        collapsable: false,
+                        children: [
+                            '/chs/other/deprecations'
                         ],
                         sidebarDepth: 2
                     }
