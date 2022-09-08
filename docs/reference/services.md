@@ -5,7 +5,18 @@
 Calibrate IMU. The robot must be set still on hard and flat surface.
 
 ```bash
-curl -X POST http://localhost:8000/services/imu/recalibrate
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"calibrate_pose": false}' \
+  http://localhost:8000/services/imu/recalibrate
+```
+
+**Parameters**
+
+```ts
+interface CalibrateImuRequest {
+  calibrate_pose?: boolean; // Experimental Feature. default to false.
+}
 ```
 
 This service call only initiates the calibration. The actual process usually takes 10 seconds.
@@ -34,8 +45,8 @@ connected (press CTRL+C to quit)
 
 ```bash
 curl -X POST \
-  -H "Content-Type: application/json"
-  -d '{"control_mode": "auto"}'
+  -H "Content-Type: application/json" \
+  -d '{"control_mode": "auto"}' \
   http://localhost:8000/services/wheel_control/set_control_mode
 ```
 
@@ -196,3 +207,13 @@ class SetupWifiRequest {
 A static HTML page is also provided and can be accessed from local network. http://localhost:8000/wifi_setup
 
 ![](./wifi_setup.png)
+
+## Wake Up Device
+
+Awake the robot from sleeping state. If robot is already in awake state, it does nothing.
+
+```bash
+curl -X POST http://localhost:8000/services/wake_up_device
+```
+
+Monitor websocket [Sensor Manager State](./websocket.md#sensor-manager-state) for sleep/awake/awakening state.

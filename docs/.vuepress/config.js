@@ -54,7 +54,8 @@ module.exports = {
                         title: 'Other',
                         collapsable: false,
                         children: [
-                            '/other/deprecations'
+                            '/other/deprecations',
+                            '/other/changelog'
                         ],
                         sidebarDepth: 2
                     }
@@ -89,8 +90,7 @@ module.exports = {
                             '/chs/reference/device',
                             '/chs/reference/videos',
                             '/chs/reference/recordings',
-                            '/chs/reference/websocket',
-                            '/chs/reference/deprecations'
+                            '/chs/reference/websocket'
                         ],
                         sidebarDepth: 2
                     },
@@ -98,7 +98,8 @@ module.exports = {
                         title: '其它',
                         collapsable: false,
                         children: [
-                            '/chs/other/deprecations'
+                            '/chs/other/deprecations',
+                            '/chs/other/changelog'
                         ],
                         sidebarDepth: 2
                     }
