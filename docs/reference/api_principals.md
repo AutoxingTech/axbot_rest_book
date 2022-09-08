@@ -44,7 +44,7 @@ The common patterns are summarized below. Especially:
 - `POST` to a list, means creating a new object.
 - `DELETE` a list means deleting all objects in that list.
 
-| Action | Target  | 说明                                |
+| Action | Target  | Description                         |
 | ------ | ------- | ----------------------------------- |
 | POST   | /maps   | Create a new map with provided data |
 | GET    | /maps   | Get the list of all maps            |
