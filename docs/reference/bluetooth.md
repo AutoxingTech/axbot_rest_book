@@ -1,5 +1,8 @@
 # Bluetooth API
 
+Currently, bluetooth APIs only help establishing a communication channel.
+Then the user and the device will talk in their predefined protocol.
+
 ## Connect Bluetooth
 
 ```bash
@@ -30,13 +33,11 @@ $ wscat -c ws://localhost:8000/ws/v2/topics
 < {"topic": "/bluetooth/outbound", "device_address": "00:11:22:33:FF:EE", "data": "..." }
 ```
 
-- `/bluetooth_state` 用于监控连接状态。
-- `/bluetooth/inbound` 用于发送命令。
-- `/bluetooth/outbound` 用于接收数据。
+- `/bluetooth_state` The bluetooth connection state
+- `/bluetooth/inbound` For sending data to robot
+- `/bluetooth/outbound` For receiving data from robot
 
-发送和接收的数据，都是 json 再编码成字符串。
-
-## 断开蓝牙
+## Disconnect
 
 ```bash
 curl -X POST \
@@ -45,10 +46,10 @@ curl -X POST \
   http://localhost:8000/bluetooth/disconnect
 ```
 
-**参数说明**
+**Parameters**
 
 ```ts
 class BluetoothDisconnectRequest {
-  address: string; // "00:11:22:33:FF:EE" 形式的地址
+  address: string; // Mac address, in form of "00:11:22:33:FF:EE"
 }
 ```

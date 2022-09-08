@@ -2,13 +2,15 @@
 
 ## Recalibrate IMU
 
-矫正 IMU，必须在水平地面上，并且机器处于静止时，才可发起。
+Calibrate IMU. The robot must be set still on hard and flat surface.
 
 ```bash
 curl -X POST http://localhost:8000/services/imu/recalibrate
 ```
 
-本调用只是发起 IMU 矫正，还需要静置 10 秒才能完成。可以通过 `/imu_state` websocket 监控校准过程和结果。监控完毕，可以关闭 `/imu_state` 通道。
+This service call only initiates the calibration. The actual process usually takes 10 seconds.
+
+So one should use Websocket `/imu_state` to monitor the progress and result. When calibration finished, stop listen to `/imu_state`.
 
 ```bash
 $ wscat -c ws://localhost:8000/ws/v2/topics
@@ -21,12 +23,12 @@ connected (press CTRL+C to quit)
 > {"disable_topic": "/imu_state"}
 ```
 
-**说明**
+**Fields**
 
-| Field                 | 说明                           |
-| --------------------- | ------------------------------ |
-| calibrate_state       | 1 校准中 2 校准成功 3 校准失败 |
-| calibrate_fail_reason | 0 没有失败 1 校准过程中有晃动  |
+| Field                 | Description                                    |
+| --------------------- | ---------------------------------------------- |
+| calibrate_state       | 1 calibrating 2 succ 3 failed                  |
+| calibrate_fail_reason | 0 none 1 there is vibration during calibration |
 
 ## Set Control Mode
 
@@ -37,7 +39,7 @@ curl -X POST \
   http://localhost:8000/services/wheel_control/set_control_mode
 ```
 
-**参数说明**
+**Parameters**
 
 ```ts
 class SetControlModeRequest {
@@ -45,7 +47,7 @@ class SetControlModeRequest {
 }
 ```
 
-使用 `/wheel_state` topic，可以监控轮控状态。
+Use `/wheel_state` websocket topic，to monitor wheel state.
 
 ```bash
 $ wscat -c ws://localhost:8000/ws/v2/topics
@@ -62,7 +64,7 @@ curl -X POST \
   http://localhost:8000/services/wheel_control/set_emergency_stop
 ```
 
-**参数说明**
+**Parameters**
 
 ```ts
 class SetEmergencyStopRequest {
@@ -70,7 +72,7 @@ class SetEmergencyStopRequest {
 }
 ```
 
-使用 `/wheel_state` topic，可以监控轮控状态。
+Use `/wheel_state` topic, to monitor emergency stop state.
 
 ```bash
 $ wscat -c ws://localhost:8000/ws/v2/topics
@@ -80,7 +82,7 @@ $ wscat -c ws://localhost:8000/ws/v2/topics
 
 ## Restart Service
 
-重启底盘所有服务。
+Restart all services.
 
 ```bash
 curl -X POST \
@@ -98,14 +100,14 @@ curl -X POST \
   http://localhost:8000/services/baseboard/shutdown
 ```
 
-**参数说明**
+**Parameters**
 
 ```ts
 class ShutdownRequest {
   target:
-    | 'main_computing_unit' // 只重启/关闭主计算板
-    | 'main_power_supply'; // 关闭/重启总电源
-  reboot: boolean; // true = 重启， false = 关闭
+    | 'main_computing_unit' // only reboot/shutdown the main computing board
+    | 'main_power_supply'; // reboot/shutdown the whole device
+  reboot: boolean; // true = reboot， false = shutdown
 }
 ```
 
@@ -117,7 +119,8 @@ curl -X POST http://localhost:8000/services/wheel_control/clear_errors
 
 ## Clear Flip Error
 
-Error 8004(严重侧翻错误)，说明机器人有可能已经跌落。需要人工通过监控等方法确认安全后，再调用此接口清除错误。
+Error 8004(flip error) usually means serious trouble - the robot might have fallen over.
+It requires human checking. If the problem is solved, use this service to clear the error to make the robot operational again.
 
 ```bash
 curl -X POST http://localhost:8000/services/monitor/clear_flip_error
@@ -125,7 +128,11 @@ curl -X POST http://localhost:8000/services/monitor/clear_flip_error
 
 ## Clear Slide Error
 
-Error 2008(严重打滑)，说明机器人很可能撞到了无法检测到、也无法通过的障碍。需要人工确认，再调用此接口清除。
+:::warning
+Experimental Feature
+:::
+
+Error 2008(slide error) means the the robot may have serious impact with some invisible obstacle. It demands human checking before clearing the error.
 
 ```bash
 curl -X POST http://localhost:8000/services/monitor/clear_slipping_error
@@ -140,7 +147,7 @@ curl -X POST \
   http://localhost:8000/services/baseboard/power_on_lidar
 ```
 
-**参数说明**
+**Parameters**
 
 ```ts
 class PowerOnRequest {
@@ -157,7 +164,7 @@ curl -X POST \
   http://localhost:8000/services/depth_camera/enable_cameras
 ```
 
-**参数说明**
+**Parameters**
 
 ```ts
 class EnableDepthCameraRequest {

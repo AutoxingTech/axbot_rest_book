@@ -65,7 +65,7 @@ Only for debugging.
 ## Vision Detected Objects
 
 ::: warning
-还在开发中。
+Experimental Feature
 :::
 
 ```ts
@@ -134,17 +134,17 @@ Current pose in world frame.
 
 ## Move Action State
 
-用于实时返回当前 MoveAction 的执行状态。
+Return the execution state of the latest move action.
 
 ```ts
 enum ActionType
 {
   none,
-  standard, // 一般运动
-  charge // 充电
-  along_given_route, // 沿固定轨迹行驶
-  return_to_elevator_waiting_point, // 返回电梯待命点(当进电梯失败时用)
-  pull_over // 靠边停车
+  standard,
+  charge
+  along_given_route, // move along a given track
+  return_to_elevator_waiting_point, // used when failed to enter elevator
+  pull_over // pull over to make space (for other robots to pass)
 }
 
 enum MoveState
@@ -170,12 +170,11 @@ enum MoveState
       "ori": 0
     }
   ],
-  "fail_reason": 0, // 当 move_state 为 failed 时，显示错误原因
-  "fail_reason_str": "none", // 当 move_state 为 failed 时，显示错误原因
-  "remaining_distance": 2.8750057220458984, // 剩余距离
+  "fail_reason": 0, // valid when move_state == failed
+  "fail_reason_str": "none", // valid when move_state == failed
+  "remaining_distance": 2.8750057220458984, // in meters
 
-  // 目标点的位姿
-  // 当前运动目标。不一定是传入的目标坐标(当对桩时，会实时返回检测的充电桩的位置)。
+  // The pose of the current target
   "intent_target_pose": {
     "pos": [0, 0],
     "ori": 0
@@ -265,7 +264,7 @@ Currently active alerts.
 ## Traveled Distance
 
 ::: warning
-调试用，可能会变。
+Experimental Feature
 :::
 
 ```json
@@ -329,19 +328,21 @@ Currently topics: (Different devices may differ)
 
 ```ts
 type PowerState =
-  | 'awake' // 工作中
-  | 'awakening' // 正在从睡眠中唤醒，会持续2、3秒
-  | 'sleeping'; // 睡眠中
+  | 'awake' // operational
+  | 'awakening' // Recovering from sleeping to awake. Usually lasts 2-3 seconds.
+  | 'sleeping'; // when sleeping, some sensors are turned off.
 ```
 
 ```json
 {
   "topic": "/sensor_manager_state",
-  "power_state": "awake" // 见 PowerState
+  "power_state": "awake" // see PowerState
 }
 ```
 
-## 附近的机器人
+## Nearby Robots
+
+It requires a dedicated hardware (optional installation).
 
 ```json
 {
@@ -356,9 +357,9 @@ type PowerState =
 }
 ```
 
-## Odom 状态
+## Odom State
 
-一个 Debug 用的频道，用于观察激光里程计的斜方差。
+A debug topic, to visualize covariance of lidar odom。
 
 ```json
 {
@@ -373,24 +374,25 @@ type PowerState =
 }
 ```
 
-## 外部接入 RGB 相机数据
+## External RGB Camera Data
 
-如果底盘没有安装摄像头，可以从外部接入 RGB 相机数据，从而实现图像识别，监控。
+If the robot isn't shipped with RGB cameras. One can install external cameras and feed the data back to the robot.
+So monitoring and vision based functions can still work.
 
-**控制频道**
+**Control Channel**
 
-头壳接收这个 websocket 消息，做如下工作：
+When receiving this topic, the peripheral device should:
 
-- 启动对应的设备
-- 设置对应的分辨率、FPS
-- 把数据按照指定的频道回传
+1. Open the corresponding cameras
+2. Set required resolution, fps
+3. Send data back through the data channel
 
 ```json
 {
   "topic": "/external_rgb_camera_control",
   "enabled_devices": [
     {
-      "name": "前视",
+      "name": "Front Camera",
       "width": 320,
       "height": 240,
       "fps": 5,
@@ -400,15 +402,15 @@ type PowerState =
 }
 ```
 
-**数据频道**
+**Data Channel**
 
-把摄像头数据，通过 websocket 发给底盘，回传给底盘。
+Use this channel to send RGB data to the robot.
 
 ```json
 {
-  "topic": "/external_rgb_data/front", // 用控制频道指定的名称
-  "format": "jpeg", // 目前只支持 jpeg,
-  "stamp": 1655896161.012, // 图片的 Unix Timestamp
-  "data": "Aasdfwe3424..." // base64编码的 jpeg 图像
+  "topic": "/external_rgb_data/front", // The topic, specified in the control channel's `external_data_topic`
+  "format": "jpeg", // must be jpeg
+  "stamp": 1655896161.012, // The timestamp of the image
+  "data": "Aasdfwe3424..." // base64 encoded JPEG data
 }
 ```

@@ -19,12 +19,14 @@ curl -X POST \
 }
 ```
 
-**参数说明**
+**Paramters**
 
 ```ts
 interface CreateRecordingRequest {
-  filename_suffix?: string; // 文件名后缀，会以 {time}_{filename_suffix}.bag 的作为文件名
-  // 如果不填，则以 {time}.bag 作为文件名
+  // The suffix of the file name.
+  // The actual file name will be {time}_{filename_suffix}.bag
+  // Without suffix, it will be {time}.bag
+  filename_suffix?: string;
 }
 ```
 

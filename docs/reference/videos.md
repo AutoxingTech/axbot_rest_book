@@ -1,9 +1,11 @@
 # Video API
 
-设备可能配有一个或者多个 RGB 摄像头。当运行时，会循环记录视频。视频格式目前为 H264 流。
-通过视频 API，可以下载和管理视频记录。
+The robot may comes with one or more RGB cameras. When operating, it will record video clips.
+Video API allows you to download these video clips.
 
-实时视频，参见 [Websocket](websocket.md#rgb-视频流) 中内容。
+For realtime video stream, see [Websocket](websocket.md#rgb-video-stream).
+
+The video clips are in H264 raw stream format.
 
 ## Video List
 
