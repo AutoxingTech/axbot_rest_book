@@ -47,7 +47,7 @@ module.exports = {
                             '/reference/recordings',
                             '/reference/robot_params',
                             '/reference/websocket',
-                            '/reference/migration'
+                            '/reference/deprecations'
                         ],
                         sidebarDepth: 2
                     }
@@ -83,7 +83,7 @@ module.exports = {
                             '/chs/reference/videos',
                             '/chs/reference/recordings',
                             '/chs/reference/websocket',
-                            '/chs/reference/migration'
+                            '/chs/reference/deprecations'
                         ],
                         sidebarDepth: 2
                     }

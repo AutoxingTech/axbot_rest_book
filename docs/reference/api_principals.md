@@ -89,7 +89,7 @@ curl http://localhost:8000/maps/ | jq
   {
     "id": 1,
     "uid": "620620f9c0fd0ecb0f66d981",
-    "map_name": "5层地图",
+    "map_name": "5th Floor",
     "create_time": 1644568815,
     "map_version": 9,
     "overlays_version": 14,
@@ -100,7 +100,7 @@ curl http://localhost:8000/maps/ | jq
   {
     "id": 2,
     "uid": "61ee4c3ac0fd0ecb0f66d165",
-    "map_name": "前台大厅",
+    "map_name": "Lobby",
     "create_time": 1643007028,
     "map_version": 2,
     "overlays_version": 8,
@@ -111,7 +111,7 @@ curl http://localhost:8000/maps/ | jq
   {
     "id": 3,
     "uid": "61e95264c0fd0ecb0f66c71e",
-    "map_name": "楼道大图",
+    "map_name": "Hallway",
     "create_time": 1642680851,
     "map_version": 1,
     "overlays_version": 3,
