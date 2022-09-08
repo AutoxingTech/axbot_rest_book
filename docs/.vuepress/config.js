@@ -35,6 +35,7 @@ module.exports = {
                         title: 'Reference',
                         collapsable: false,
                         children: [
+                            '/reference/api_principals',
                             '/reference/maps',
                             '/reference/moves',
                             '/reference/current_map_and_pose',
@@ -46,7 +47,6 @@ module.exports = {
                             '/reference/recordings',
                             '/reference/robot_params',
                             '/reference/websocket',
-                            '/reference/api_principals',
                             '/reference/migration'
                         ],
                         sidebarDepth: 2
@@ -72,6 +72,7 @@ module.exports = {
                         title: '参考手册',
                         collapsable: false,
                         children: [
+                            '/chs/reference/api_principals',
                             '/chs/reference/maps',
                             '/chs/reference/moves',
                             '/chs/reference/current_map_and_pose',
@@ -82,7 +83,6 @@ module.exports = {
                             '/chs/reference/videos',
                             '/chs/reference/recordings',
                             '/chs/reference/websocket',
-                            '/chs/reference/api_principals',
                             '/chs/reference/migration'
                         ],
                         sidebarDepth: 2
