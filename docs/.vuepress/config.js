@@ -46,8 +46,8 @@ module.exports = {
                             '/reference/recordings',
                             '/reference/robot_params',
                             '/reference/websocket',
-                            '/overview/api_principals',
-                            '/overview/migration'
+                            '/reference/api_principals',
+                            '/reference/migration'
                         ],
                         sidebarDepth: 2
                     }
@@ -82,8 +82,8 @@ module.exports = {
                             '/chs/reference/videos',
                             '/chs/reference/recordings',
                             '/chs/reference/websocket',
-                            '/chs/overview/api_principals',
-                            '/chs/overview/migration'
+                            '/chs/reference/api_principals',
+                            '/chs/reference/migration'
                         ],
                         sidebarDepth: 2
                     }
