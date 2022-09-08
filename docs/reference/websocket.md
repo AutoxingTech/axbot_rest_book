@@ -324,7 +324,7 @@ Currently topics: (Different devices may differ)
 - `/rgb_cameras/front/compressed`
 - `/rgb_cameras/back/compressed`
 
-## 传感器控制器状态
+## Sensor Manager State
 
 ```ts
 type PowerState =
