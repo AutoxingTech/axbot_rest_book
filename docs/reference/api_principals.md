@@ -8,7 +8,7 @@ Response contains **status** and **data**.
 For example, to delete map 3, we use `DELETE /maps/3`：
 
 - Request: action=`DELETE` target=`/maps/3`
-- Response: status=`204` data=`空`
+- Response: status=`204` data=`{}`(empty json)
 
 The REST API is：
 
