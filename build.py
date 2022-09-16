@@ -57,4 +57,5 @@ if bigl:
     exec("docker build . -f Dockerfile_bigl -t autoxing/biglbot_rest_book")
     exec("rsync -rv docs/.vuepress/dist/* build-pi:/opt/www/biglbot_rest_book/")
 else:
+    exec("docker build . -f Dockerfile -t autoxing/axbot_rest_book")
     exec("rsync -rv docs/.vuepress/dist/* build-pi:/opt/www/axbot_rest_book/")
