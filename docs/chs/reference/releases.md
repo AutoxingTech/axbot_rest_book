@@ -1,5 +1,13 @@
 # Changelog of Releases
 
+### 1.10.0-rc5
+
+- 增加参数 `/slam/local_match_translation_weight`。设为 `stronger` 则可以一定程度防止打滑。
+- [RCSS-1934] 支持通过 `/lidar/max_range` 调节激光测距范围。
+- 支持把 V2X 插在 8-1 口的绑定。（有两台发绥化的机器插到了这个口上）
+- Bug Fix:
+  - 修复了 USB 守护中，reset 连续失败引起的死循环。
+
 ### 1.10.0-rc4
 
 - [RCSS-1884] 增加开关，默认禁用了独享区调度(还不成熟)。
@@ -159,10 +167,18 @@
     - 如果雷达型号检测错误，应该继续启动其它程序。
     - [RCSS-1787] Fix orangepi DNS conflict.
 
-### 1.8.9
+### 1.8.9-rc2
+
+- 增加参数 `/slam/local_match_translation_weight`。设为 `stronger` 则可以一定程度防止打滑。
+- [RCSS-1934] 支持通过 `/lidar/max_range` 调节激光测距范围。
+
+### 1.8.9-rc1
 
 - 解决了部分打滑导致的丢定位问题。当打滑不严重时，不会定位错误。
 - 去掉了对 apt source 的修改。
+- Bug Fix:
+  - [RCSS-1757] 解决了闲置时，内存不断增大，引起进程大量崩溃的问题。
+  - [RCSS-1453] 解决了 `cartographer_occupancy_grid_node` 闲置时内存过大的问题.
 
 ### 1.8.9-rc0
 
