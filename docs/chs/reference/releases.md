@@ -1,5 +1,25 @@
 # Changelog of Releases
 
+### 1.10.0-rc7
+
+- [RCSS-1899] 全局定位，如果匹配特别好，可以不用人工确认。
+- 增加 ESP Now 的测试指令。增加 bottom sensor pack 的 LED 控光服务。
+- [RCSS-1880] Add v2x debugging tool: `bot_top`.
+- REST API `GET /device/info` 中，增加 bottom_sensor_pack 和 depth_camera 的固件版本字段。
+- Bug Fix:
+  - 修复终点被占用，不容易结束任务的问题。距离终点一个车长内停车，则提前结束任务。
+  - 修复视频记录的 bug。多线程导致记录错误。
+  - [RCSS-1962] 修复 cartographer 内存缓慢泄漏
+  - [RCSS-1960] 修复 绥化巴蜀记忆火锅，光流融合，误报被推的问题
+  - [RCSS-1959] 修复了光滑斜坡上误报被推的问题
+  - [RCSS-1957] 修复 sensor_manager_node 尝试打开深度相机时，会卡死主线程
+  - [RCSS-1952] 改进定位时的 uncertainty radius，避免出隧道无法正确匹配的问题
+
+### 1.10.0-rc6
+
+- Bug Fix:
+  - [RCSS-1951] 机器人设备休眠时，必须等唤醒后才能移动。
+
 ### 1.10.0-rc5
 
 - 增加参数 `/slam/local_match_translation_weight`。设为 `stronger` 则可以一定程度防止打滑。
