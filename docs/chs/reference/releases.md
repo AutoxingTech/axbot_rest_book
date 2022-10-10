@@ -2,6 +2,7 @@
 
 ### 1.10.0-rc7
 
+- 可以禁用光流融合，通过更改 `/bottom_sensor_pack/optical_flow/odom_topic_name`。
 - [RCSS-1899] 全局定位，如果匹配特别好，可以不用人工确认。
 - 增加 ESP Now 的测试指令。增加 bottom sensor pack 的 LED 控光服务。
 - [RCSS-1880] Add v2x debugging tool: `bot_top`.
