@@ -217,3 +217,13 @@ curl -X POST http://localhost:8000/services/wake_up_device
 ```
 
 Monitor websocket [Sensor Manager State](./websocket.md#sensor-manager-state) for sleep/awake/awakening state.
+
+## Start Global Positioning
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json"
+  http://localhost:8000/services/start_global_positioning
+```
+
+The feedback can be received from [Global Positioning State](./websocket.md#global-positioning-state).

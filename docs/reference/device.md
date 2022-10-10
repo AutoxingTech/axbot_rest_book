@@ -21,6 +21,12 @@ curl http://localhost:8000/device/info
   "wheel_control": {
     "firmware_version": "amps_20211103" // wheel firmware version
   },
+  "bottom_sensor_pack": {
+    "firmware_version": "1.1.1"
+  },
+  "depth_camera": {
+    "firmware_version": "[/dev/camera:1.2.5-s2-ax-D1]"
+  },
   "robot": {
     "footprint": [],
     "inscribed_radius": 0.248,

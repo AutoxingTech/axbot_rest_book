@@ -414,3 +414,21 @@ Use this channel to send RGB data to the robot.
   "data": "Aasdfwe3424..." // base64 encoded JPEG data
 }
 ```
+
+## Global Positioning State
+
+The feedback of service `POST /services/start_global_positioning`.
+
+```json
+{
+  "topic": "/global_positioning_state",
+  "state": "succeeded",
+  "score": "82.1",
+
+  // If false, the pose is globally unique and can be trusted.
+  // If true, the environment is not a good match
+  // or pose is not globally unique thus should be verified by an human operator.
+  "needs_confirmation": false,
+  "pose": { "pos": [0.32, 0.97], "ori": 0.0 } // 物体的位置和朝向
+}
+```
