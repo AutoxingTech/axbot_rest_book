@@ -8,6 +8,7 @@
 - [RCSS-1880] Add v2x debugging tool: `bot_top`.
 - REST API `GET /device/info` 中，增加 bottom_sensor_pack 和 depth_camera 的固件版本字段。
 - Bug Fix:
+  - [RCSS-1982] 修复任务 cancel 后 `/planning_state` 的 `move_state` 依然是 `moving` 状态导致机器人状态异常。
   - 修复终点被占用，不容易结束任务的问题。距离终点一个车长内停车，则提前结束任务。
   - 修复视频记录的 bug。多线程导致记录错误。
   - [RCSS-1962] 修复 cartographer 内存缓慢泄漏
