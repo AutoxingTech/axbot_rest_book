@@ -1,6 +1,6 @@
 # Changelog of Releases
 
-### 1.10.0-rc7
+### 1.10.0(1.10.0-rc7)
 
 - 可以禁用光流融合，通过更改 `/bottom_sensor_pack/optical_flow/odom_topic_name`。
 - [RCSS-1899] 全局定位，如果匹配特别好，可以不用人工确认。
@@ -189,7 +189,7 @@
     - 如果雷达型号检测错误，应该继续启动其它程序。
     - [RCSS-1787] Fix orangepi DNS conflict.
 
-### 1.8.9-rc2
+### 1.8.9(1.8.9-rc2)
 
 - 增加参数 `/slam/local_match_translation_weight`。设为 `stronger` 则可以一定程度防止打滑。
 - [RCSS-1934] 支持通过 `/lidar/max_range` 调节激光测距范围。
