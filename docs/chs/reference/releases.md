@@ -1,5 +1,22 @@
 # Changelog of Releases
 
+### 1.10.1-rc0
+
+- [RCSS-1980] 支持角速度平滑
+- [RCSS-1907] 支持 bluesea25D 蓝海激光雷达
+- [RCSS-1872] 行车记录仪无需记录在充电桩上的视频
+- [RCSS-1882] 当 /opt/ax-cache/.params.yaml 文件存在，则报警
+- [RCSS-1972] 支持动态设置发送自身运动信息到 `/v2x/outbound` 的频率
+- [RCSS-2007] 开发 `axbag` 包辅助记录工具，便于方便的根据需求种类记录对应的 bag 文件
+- 当 IMU x,y 旋转、抖动，也报警。
+- 上报电池数据，增加电池温度上报
+- Bug Fix:
+  - [RCSS-2024] 给深度相机进程加守护，缓解崩溃的问题
+  - [RCSS-1526] 改用电压条件，判断是否在充电中，解决充电状态震荡的问题 参见参数：`/baseboard/power_supply_condition`
+  - [RCSS-1916] 机器人经过无避障图的残影区域卡住
+  - 解决香橙派 USB 守护失败的问题。
+  - 调整加速度平滑的数值，解决远控加速太慢的问题
+
 ### 1.10.0(1.10.0-rc7)
 
 - 可以禁用光流融合，通过更改 `/bottom_sensor_pack/optical_flow/odom_topic_name`。
