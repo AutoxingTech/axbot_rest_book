@@ -98,7 +98,6 @@ Restart all services.
 ```bash
 curl -X POST \
   -H "Content-Type: application/json"
-  -d '{"enabled": true}'
   http://localhost:8000/services/restart_service
 ```
 
@@ -171,7 +170,7 @@ class PowerOnRequest {
 ```bash
 curl -X POST \
   -H "Content-Type: application/json"
-  -d '{"enabled": true}'
+  -d '{"enable": true}'
   http://localhost:8000/services/depth_camera/enable_cameras
 ```
 
@@ -227,3 +226,27 @@ curl -X POST \
 ```
 
 The feedback can be received from [Global Positioning State](./websocket.md#global-positioning-state).
+
+## Auto-Mapping
+
+:::warning
+Experimental Feature
+:::
+
+When "auto-mapping" is enabled, the robot will explore the environment automatically.
+It's only available in mapping mode.
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json"
+  -d '{"enable": true}'
+  http://localhost:8000/services/enable_auto_mapping
+```
+
+**Parameters**
+
+```ts
+class EnableAutoMappingRequest {
+  enable: boolean;
+}
+```
