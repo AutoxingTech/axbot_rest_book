@@ -116,10 +116,10 @@ module.exports = {
             title: 'Autoxing REST API Book',
             description: "A complete guide to control Autoxing Tech's Robots with REST API",
         },
-        '/chs/': {
-            lang: 'zh-CN',
-            title: 'Autoxing REST API Book',
-            description: '景行慧动机器人 REST API 手册'
-        },
+        // '/chs/': {
+        //     lang: 'zh-CN',
+        //     title: 'Autoxing REST API Book',
+        //     description: '景行慧动机器人 REST API 手册'
+        // },
     }
 }
