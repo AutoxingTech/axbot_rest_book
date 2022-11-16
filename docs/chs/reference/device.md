@@ -2,6 +2,7 @@
 
 ```bash
 curl http://localhost:8000/device/info
+curl http://localhost:8000/device/info/brief # for less information
 ```
 
 ```json
@@ -10,7 +11,7 @@ curl http://localhost:8000/device/info
   "rosdistro": "noetic",
   "axbot_version": "1.9.x", // 软件版本号
   "device": {
-    "model": "hygeia", // 设备型号 hygeia/waiter/hotel/tray
+    "model": "hygeia", // 设备型号 hygeia/waiter/hotel/tray/longtray
     "sn": "71822043000350z", // SN码
     "name": "71822043000350z" // 设备 SN
   },
@@ -18,7 +19,11 @@ curl http://localhost:8000/device/info
     "firmware_version": "22a32218" // 主板固件版本
   },
   "wheel_control": {
+    "device_type": "amps",
     "firmware_version": "amps_20211103" // 轮控固件版本
+  },
+  "lidar": {
+    "model": "ld06"
   },
   "robot": {
     "footprint": [],
@@ -39,6 +44,14 @@ curl http://localhost:8000/device/info
     "supportsWheelStateTopic": true, // 是否支持 /wheel_state WebSocket 频道
     "supportsWsV2": true, // 是否支持 ws://HOST/ws/v2/topics
     "supportsRgbCamera": true // 是否支持 RGB 监控摄像头
+  },
+  "remote_params": {
+    "tags": [
+      "ihawk_crossfire",
+      "RGB_external",
+      "strongest_lidar_match",
+      "mute_baseboard_com_output"
+    ]
   }
 }
 ```

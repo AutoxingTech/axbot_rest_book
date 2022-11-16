@@ -2,7 +2,9 @@
 
 ## 1.10.1
 
-- Add service `/services/enable_auto_mapping`.
+- Add Websocket command to get device info `{"topic": "/get_device_info_brief"}`.
+- Add `GET /device/info/brief`.
+- Add service `POST /services/enable_auto_mapping`.
 
 ## 1.10.0
 

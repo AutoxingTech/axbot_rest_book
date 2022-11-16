@@ -432,3 +432,51 @@ The feedback of service `POST /services/start_global_positioning`.
   "pose": { "pos": [0.32, 0.97], "ori": 0.0 } // 物体的位置和朝向
 }
 ```
+
+## Device Info
+
+Only for those clients which already established a websocket connection but don't want to make REST API requests.
+
+Request:
+
+```json
+{ "topic": "/get_device_info_brief" }
+```
+
+Response:
+
+```json
+{
+  "topic": "/device_info_brief",
+  "rosversion": "1.15.11",
+  "rosdistro": "noetic",
+  "axbot_version": "master-pi64",
+  "device": {
+    "model": "waiter"
+  },
+  "baseboard": {
+    "firmware_version": "22032218"
+  },
+  "wheel_control": {
+    "device_type": "amps",
+    "firmware_version": "amps_20211103"
+  },
+  "lidar": {
+    "model": "ld06"
+  },
+  "bottom_sensor_pack": {
+    "firmware_version": ""
+  },
+  "depth_camera": {
+    "firmware_version": ""
+  },
+  "remote_params": {
+    "tags": [
+      "ihawk_crossfire",
+      "RGB_external",
+      "strongest_lidar_match",
+      "mute_baseboard_com_output"
+    ]
+  }
+}
+```
