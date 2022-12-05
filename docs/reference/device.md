@@ -2,6 +2,7 @@
 
 ```bash
 curl http://localhost:8000/device/info
+curl http://localhost:8000/device/info/brief # for less information
 ```
 
 ```json
@@ -33,7 +34,8 @@ curl http://localhost:8000/device/info
     "height": 1.2,
     "thickness": 0.546,
     "wheel_distance": 0.36,
-    "width": 0.496
+    "width": 0.496,
+    "charge_contact_position": "back" // Position of the charge contact. "back" or "front"
   },
   "caps": {
     "supportsImuRecalibrateService": true, // supports /services/imu/recalibrate
