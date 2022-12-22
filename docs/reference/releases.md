@@ -1,5 +1,33 @@
 # Changelog of Releases
 
+## 1.12.0-rc1
+
+- New Features
+  - [RCSS-2201] 设置初始位姿时，对明显错误的位姿做小幅度自动纠正
+  - [RCSS-2330] 自动防打滑。根据点云，自适应定位前端外推器的权重系数
+  - [RCSS-2223] 开发磁盘清理 REST API 和 极度不足自动清理功能
+  - [RCSS-2302] 如果存在 core dump，则报警 9011
+  - [RCSS-2319] 头壳 ping 不通报警
+  - [RCSS-2339] 如果 IoT 长期离线，则自动重启 4G 网卡
+  - [RCSS-2341] 改善默认参数，深度相机不用每台都在在线平台配置
+  - [RCSS-2346] 改善默认参数，默认所有型号只配一个 RGB 摄像头
+  - [RCSS-2333] 让所有的消杀类机器人，全都自动用上除雾降噪，无需人工配置
+  - [RCSS-2347] 前端定位残差在 Web 监控平台可视化
+- Tasks
+  - [RCSS-2282] ax_carto 判定丢定位时，停车等待
+  - [RCSS-2359] 新增 rosservice `/monitor/recheck` 重新检查一些定时执行的检查
+  - [RCSS-2323] update ceres-solver to 2.1.0
+  - [RCSS-2334] `axbag info` 支持下 size by topic 的显示
+  - [RCSS-2335] 对 `/path` topic 中广播的路线数据做抽稀
+  - [RCSS-2340] 协助自动删除 py_axbot 的陈旧 log 和 video
+  - [RCSS-2338] 对外暴露阿里云在线状态
+- Bug
+  - [RCSS-2280] 底盘报旋转超时报错
+  - [RCSS-2305] 4G 网络掉线，没有成功守护 - 辽源市政府机器
+  - [RCSS-2316] 乐动雷达在立柱处有噪点
+  - [RCSS-2342] 运行过程中，删除 video，会导致 video_record 大量报错
+  - [RCSS-2336] 1.10.1.2 重启时，monitor_watcher 会瞬间误报心跳错误
+
 ## 1.11.0-rc5
 
 - Task
