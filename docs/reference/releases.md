@@ -1,5 +1,43 @@
 # Changelog of Releases
 
+# 2.0.0-rc6
+
+- New Features
+  - [RCSS-2017] iHawk 摄像头自动校准工具
+  - [RCSS-2223] 开发磁盘清理 REST API 和 极度不足自动清理功能
+  - [RCSS-2319] 头壳 ping 不通报警
+  - [RCSS-2330] 自动防打滑。根据点云，自适应定位前端外推器的权重系数
+  - [RCSS-2339] 如果 IoT 长期离线，则自动重启 4G 网卡
+  - [RCSS-2347] 前端定位残差在 Web 监控平台可视化
+- Task
+  - [RCSS-2084] occupancy_grid_server 增加 voxel grid 中体素的向下清除逻辑
+  - [RCSS-2323] update ceres-solver to 2.1.0
+  - [RCSS-2331] Caracal 需要适配 RGB 摄像头
+  - [RCSS-2333] 让所有的消杀类机器人，全都自动用上除雾降噪，无需人工配置
+  - [RCSS-2334] `axbag info` 支持下 size by topic 的显示
+  - [RCSS-2335] 对 `/path` topic 中广播的路线数据做抽稀
+  - [RCSS-2337] 深度相机地面检测没有识别出近处的矿泉水瓶
+  - [RCSS-2338] 对外暴露阿里云在线状态
+  - [RCSS-2340] 协助自动删除 py_axbot 的陈旧 log 和 video
+  - [RCSS-2346] 默认所有型号只配一个 RGB 摄像头
+  - [RCSS-2352] occupancy_grid_server 5cm 避障图关闭深度相机记忆时，不再更新 voxel grid
+  - [RCSS-2353] 增加 /monitor/recheck 服务
+  - [RCSS-2354] occupancy_grid_server 移除不再使用的 publisher
+  - [RCSS-2355] occupancy_grid_server 改善 depthTopics 参数的宽容度
+  - [RCSS-2356] occupancy_grid_server 改善 publish_matched_points 参数的宽容度
+- Bug
+  - [RCSS-1805] 碰撞脱困需要考虑脱困的路线的持续可通行性
+  - [RCSS-2181] 加拿大机器人休眠异常
+  - [RCSS-2252] 把终点设置到地图外，planning 会崩溃
+  - [RCSS-2277] 底盘蓝牙节点异常停止
+  - [RCSS-2305] 4G 网络掉线，没有成功守护 - 辽源市政府机器
+  - [RCSS-2316] 乐动雷达在立柱处有噪点
+  - [RCSS-2332] ax_navi_ros 中的 NavFn 在某些情况下结果不是最优路线
+  - [RCSS-2336] 1.10.1.2 重启时，monitor_watcher 会瞬间误报心跳错误
+  - [RCSS-2342] 运行过程中，删除 video，会导致 video_record 大量报错
+  - [RCSS-2344] master 版本，遇到 baseboard_node 崩溃
+  - [RCSS-2357] 被障碍物挡住后，撤离障碍物，机器人停止
+
 ## 1.12.0-rc1
 
 - New Features
@@ -66,7 +104,7 @@
 - Tasks
   - [RCSS-1526] 改用电压条件，判断是否在充电中
   - [RCSS-1872] 1.8.8 版本以后的行车记录仪无需记录在充电桩上的视频
-  - [RCSS-1972] 支持动态设置发送自身运动信息到 \`/v2x/outbound\` 的频率
+  - [RCSS-1972] 支持动态设置发送自身运动信息到 `/v2x/outbound` 的频率
   - [RCSS-2008] 泡泡龙电池电量估算
   - [RCSS-2011] 美化 Wifi 设置界面
   - [RCSS-2024] 给深度相机进程加守护，缓解崩溃的问题
