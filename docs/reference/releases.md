@@ -1,5 +1,15 @@
 # Changelog of Releases
 
+## 1.12.0-rc5
+
+- Task
+  - [RCSS-2365] 优化 RealTimeCorrelativeScanMatcher2D
+- Bug
+  - [RCSS-2457] 1.12.0-rc1，引入了参数 bug，导致雷神、蓝海雷达都无法工作
+  - [RCSS-2414] 南非五合一机器人上有 planning 的 core-dump
+  - [RCSS-2420] 2022 年 12 月 31 日 caracal_1000 上的 planning 崩溃
+  - [RCSS-2453] 71822054002433V 深圳宝安区人民政府消杀 1 上的 planning 崩溃上的 planning 崩溃
+
 ## 2.0.0-rc9
 
 - New Features
