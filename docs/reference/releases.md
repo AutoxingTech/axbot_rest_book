@@ -1,5 +1,41 @@
 # Changelog of Releases
 
+## 2.0.0-rc9
+
+- New Features
+  - [RCSS-2319] 头壳 ping 不通报警
+  - [RCSS-2365] 优化 RealTimeCorrelativeScanMatcher2D
+  - [RCSS-2380] 出长隧道时，如果定位位置错误，自动做校正
+  - [RCSS-2423] 当深度相机没有校正时，报 warning: 11501 深度相机没有校正
+  - [RCSS-2430] 关键系统文件错误 增加报警码
+  - [RCSS-2451] 默认支持带有 ihawk 的 waiter, tray, longtray 等机型，无需在线配置参数
+- Task
+  - [RCSS-2421] 雷神 lsn10 的激光雷达，一律禁用休眠
+  - [RCSS-2306] 保护 odom_error_detect 节点
+  - [RCSS-2425] 纠正位姿时，支持设置 window_size
+  - [RCSS-2432] 关机时，尽快解锁轮子
+  - [RCSS-2435] 当检测到光流硬件，但是没有配置时，报警
+  - [RCSS-2448] 当深度图信息全是 0 值时应增加报警
+  - [RCSS-2452] 微调深度相机外参矫正参数，提高通过率
+  - [RCSS-2456] 除了消杀之外的机型，禁用 vision_based_detector，节约 CPU
+- Bug
+  - [RCSS-2454] tray 机型摄像头外参错了 6 cm
+  - [RCSS-2415] lidar_node 有 5005 Lidar bluesea25d is irresponsive to commands 误报
+  - [RCSS-2414] 南非五合一机器人上有 planning 的 core-dump
+  - [RCSS-2386] 底盘误报 Connection broken 200
+  - [RCSS-2404] 当 ihawk node 启动的时候如果当前没有设备应该不断尝试而不是退出
+  - [RCSS-2420] 2022 年 12 月 31 日 caracal_1000 上的 planning 崩溃
+  - [RCSS-2436] 避障图中，完全进入车体内部的碰撞虚拟障碍物像素未被擦除
+  - [RCSS-2438] 工厂环境有台机器地面有噪点
+  - [RCSS-2439] depth_camera_proc info log 太多 刷屏
+  - [RCSS-2453] 71822054002433V 上的 planning 崩溃
+
+## 2.0.0-rc8
+
+- Bug
+  - [RCSS-2406] bottom_sensor_pack_node 中存在的内存泄露
+  - [RCSS-2409] 到达终点未旋转
+
 ## 2.0.0-rc7
 
 - New Features
