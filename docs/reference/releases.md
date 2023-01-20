@@ -3,18 +3,18 @@
 ## 2.1.0-rc0
 
 - New Features
-  - [RCSS-2392](https://autoxing.atlassian.net/browse/RCSS-2392) 使用 beam model 输出实时点云匹配度
-  - [RCSS-2485](https://autoxing.atlassian.net/browse/RCSS-2485) 新增点云匹配度热力图
-  - [RCSS-2503](https://autoxing.atlassian.net/browse/RCSS-2503) 新增环境对称性热力图
+  - [RCSS-2392] 使用 beam model 输出实时点云匹配度
+  - [RCSS-2485] 新增点云匹配度热力图
+  - [RCSS-2503] 新增环境对称性热力图
 
 ## 2.0.0
 
 - Task
-  - [RCSS-2281](https://autoxing.atlassian.net/browse/RCSS-2281) 支持查看未过滤的原始点云
+  - [RCSS-2281] 支持查看未过滤的原始点云
 - Bug
-  - [RCSS-2494](https://autoxing.atlassian.net/browse/RCSS-2494) monitor 自身内存过高，引起系统崩溃，应该允许自杀
-  - [RCSS-2498](https://autoxing.atlassian.net/browse/RCSS-2498) 出隧道纠正时，车依然运动，导致纠正后位姿错误，丢定位
-  - [RCSS-2497](https://autoxing.atlassian.net/browse/RCSS-2497) depth_camera_tools 检测到参数错误，拒绝启动，但是 exit code 是 1
+  - [RCSS-2494] monitor 自身内存过高，引起系统崩溃，应该允许自杀
+  - [RCSS-2498] 出隧道纠正时，车依然运动，导致纠正后位姿错误，丢定位
+  - [RCSS-2497] depth_camera_tools 检测到参数错误，拒绝启动，但是 exit code 是 1
 
 # 1.12.0
 
