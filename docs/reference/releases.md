@@ -1,5 +1,17 @@
 # Changelog of Releases
 
+## 2.1.0
+
+- Bug
+  - [RCSS-2490] 长走廊中，车速不稳 - 避障图中的 unknown 区域导致
+  - [RCSS-2502] `platform/lib/berxelLog.ini` 不应该在 log 目录下
+  - [RCSS-2506] 如果已经静默了 baseboard，则不能再等待版本上报
+  - [RCSS-2508] 还是会获取旧版版本号，没有做到真正的静默
+  - [RCSS-2509] imu 禁用俯仰后，零偏校正依然会使用 roll pitch，导致自动零偏校正无效
+  - [RCSS-2510] ihawk USB 断开无法自恢复 - usb 地址匹配有问题
+  - [RCSS-2511] 阳光工厂，切换到 auto 后，走了几步后卡死
+  - [RCSS-2514] systemctl stop 特别的慢 - ax_run 守护导致
+
 ## 2.1.0-rc0
 
 - New Features
