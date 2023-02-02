@@ -1,4 +1,4 @@
-# Device
+# Device Information API
 
 ## Device Information
 
