@@ -487,7 +487,7 @@ This map reflects how the point clouds matches the existing map.
 
 Red indicates the environment has changed. If there is too much red, the map should be rebuilt.
 
-![](2023-02-02-16-32-47.png)
+![](./2023-02-02-16-32-47.png)
 
 Request:
 
@@ -514,7 +514,7 @@ This map reflects the degree of symmetry of point cloud against current environm
 
 Red indicates a featureless environment, like tunnel or spacious lobby.
 
-![](2023-02-02-16-33-45.png)
+![](./2023-02-02-16-33-45.png)
 
 Request:
 

@@ -266,7 +266,7 @@ Before calling this service, make sure:
 - The robot is on flat ground.
 - The robot is facing a corner of wall or big box.
 
-![](2023-02-02-16-44-19.png)
+![](./2023-02-02-16-44-19.png)
 
 ```
 POST /services/calibrate_depth_cameras
