@@ -250,3 +250,24 @@ class EnableAutoMappingRequest {
   enable: boolean;
 }
 ```
+
+## Recheck Error
+
+```
+POST /services/monitor_recheck_errors
+```
+
+## Calibrate Depth Cameras
+
+This service aligns the point clouds of depth cameras with the point cloud of horizontal lidar.
+
+Before calling this service, make sure:
+
+- The robot is on flat ground.
+- The robot is facing a corner of wall or big box.
+
+![](2023-02-02-16-44-19.png)
+
+```
+POST /services/calibrate_depth_cameras
+```

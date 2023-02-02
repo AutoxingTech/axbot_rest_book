@@ -480,3 +480,57 @@ Response:
   }
 }
 ```
+
+## Environment Match Map
+
+This map reflects how the point clouds matches the existing map.
+
+Red indicates the environment has changed. If there is too much red, the map should be rebuilt.
+
+![](2023-02-02-16-32-47.png)
+
+Request:
+
+```json
+{ "enable_topic": "/env_match_map" }
+```
+
+Response:
+
+```json
+{
+  "topic": "/env_match_map",
+  "stamp": 1675326661.915,
+  "resolution": 0.10000000149011612,
+  "size": [579, 614],
+  "origin": [-9.35, -34.75],
+  "data": "iVBORw0KGgoAAAANSUhEUgAAAkMAA..."
+}
+```
+
+## Environment Symmetry Map
+
+This map reflects the degree of symmetry of point cloud against current environment.
+
+Red indicates a featureless environment, like tunnel or spacious lobby.
+
+![](2023-02-02-16-33-45.png)
+
+Request:
+
+```json
+{ "enable_topic": "/env_symmetry_map" }
+```
+
+Response:
+
+```json
+{
+  "topic": "/env_symmetry_map",
+  "stamp": 1674993781.916,
+  "resolution": 0.10000000149011612,
+  "size": [579, 614],
+  "origin": [-9.35, -34.75],
+  "data": "iVBORw0KGgoAAAANSUhEUgAAAkMAAAJmCAAAAAB..."
+}
+```

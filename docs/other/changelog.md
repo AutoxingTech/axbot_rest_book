@@ -1,5 +1,21 @@
 # Changelog
 
+## 2.2.0
+
+- Supports `GET /device/available_wifis`
+- Supports `GET /device/wifi_info`
+- Improve HTML page `/setup_wifi`
+
+## 2.1.0
+
+- Websocket supports `/env_symmetry_map`.
+- Websocket supports `/env_match_map`.
+
+## 2.0.0
+
+- Support `POST /services/monitor_recheck_errors`
+- Support `POST /services/calibrate_depth_cameras`
+
 ## 1.10.1
 
 - Add Websocket command to get device info `{"topic": "/get_device_info_brief"}`.

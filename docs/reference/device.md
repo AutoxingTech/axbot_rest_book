@@ -1,8 +1,9 @@
-# Device Information API
+# Device
+
+## Device Information
 
 ```bash
 curl http://localhost:8000/device/info
-curl http://localhost:8000/device/info/brief # for less information
 ```
 
 ```json
@@ -50,4 +51,48 @@ curl http://localhost:8000/device/info/brief # for less information
     "supportsRgbCamera": true // supports RGB related topics
   }
 }
+```
+
+## Short Device Information
+
+```bash
+curl http://localhost:8000/device/info/brief # for less information
+```
+
+## Wifi List
+
+```bash
+curl http://localhost:8000/device/avaliable_wifis
+```
+
+```json
+[
+  { "ssid": "AutoXing", "bss": "a4:fa:76:33:d3:62", "rssi": -45 },
+  { "ssid": "AutoXing-guest", "bss": "a4:fa:76:33:d3:72", "rssi": -33 }
+]
+```
+
+## Wifi Information
+
+```bash
+curl http://localhost:8000/device/wifi_info
+```
+
+Station mode response:
+
+```json
+{
+  "mode": "station",
+  "ip": "10.10.40.83",
+  "mac": "ee:94:de:b8:40:6e",
+  "dev": "wlan0",
+  "via": "10.10.40.1",
+  "ssid": "AutoXing"
+}
+```
+
+AP mode response:
+
+```json
+{ "mode": "ap" }
 ```
