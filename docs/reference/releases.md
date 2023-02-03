@@ -1,5 +1,21 @@
 # Changelog of Releases
 
+## 2.2.0-rc0
+
+- New Feature
+  - [RCSS-2033] 增加 WIFI 扫描接口和状态查询接口
+  - [RCSS-2271] 缓行区域支持速度设定
+  - [RCSS-2499] 默认打开初始定位矫正
+  - [RCSS-2517] 把 exit code 和 date 写入 core-dump 文件
+- Task
+  - [RCSS-2522] 全局算路完成后及时释放内存，减少 planning 进程的内存占用量
+- Bug
+  - [RCSS-2512] 三星工厂报 1008 卡住
+  - [RCSS-2518] 遇到一次 planning 崩溃 `ax::PushMonitor::_timerDetected(ros::WallTimerEvent)`
+  - [RCSS-2519] 9008 ax_platform_monitor is dead 没有正确上报
+  - [RCSS-2525] 7002 丢定位 报的比之前晚了很多
+  - [RCSS-2527] 湖北国药东风总医院消杀下坡卡死
+
 ## 2.1.0
 
 - Bug
