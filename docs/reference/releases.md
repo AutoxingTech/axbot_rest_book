@@ -1,15 +1,21 @@
 # Changelog of Releases
 
-## 2.2.0-rc0
+# 2.2.0
 
 - New Feature
   - [RCSS-2033] 增加 WIFI 扫描接口和状态查询接口
   - [RCSS-2271] 缓行区域支持速度设定
   - [RCSS-2499] 默认打开初始定位矫正
+  - [RCSS-2542] 开启全局定位的二次验证，并且把初始位姿的验证改为前置验证
+- Improvements
   - [RCSS-2517] 把 exit code 和 date 写入 core-dump 文件
-- Task
   - [RCSS-2522] 全局算路完成后及时释放内存，减少 planning 进程的内存占用量
 - Bug
+  - [RCSS-2469] imu_6050 反复插拔，出现崩溃
+  - [RCSS-2516] imu 崩溃
+  - [RCSS-2538] 快速连续两次发起 relocate，第二次显示 Failed to set pose: service is running
+  - [RCSS-2540] 机器人上桩充电时 ihawk_node 崩溃(偶现)
+  - [RCSS-2556] Mars 机器人 IMU 方向错误
   - [RCSS-2512] 三星工厂报 1008 卡住
   - [RCSS-2518] 遇到一次 planning 崩溃 `ax::PushMonitor::_timerDetected(ros::WallTimerEvent)`
   - [RCSS-2519] 9008 ax_platform_monitor is dead 没有正确上报
