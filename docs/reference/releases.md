@@ -1,5 +1,44 @@
 # Changelog of Releases
 
+# 2.3.0-rc0
+
+- New Features
+  - RCSS-2082 改进 DWA 规划，引入加速度
+  - RCSS-1781 用强化对向运动机器人左侧障碍物地势的方法实现机器人相遇时靠右错车
+  - RCSS-2557 支持一款新的安普斯轮子，代号：amps_bsl3
+  - RCSS-1984 iHawk 相机支持休眠
+  - RCSS-2287 planning_state 报出精准的卡死原因
+  - RCSS-2177 机器人误入虚拟墙报警
+  - RCSS-2328 planning 如果崩溃，由 bot_control 自动恢复最后一个 move action
+  - RCSS-2458 监控每小时磁盘写入量，如果 IO 过多则报警
+  - RCSS-2486 监控平台显示超声波传感器好坏
+- Tasks
+  - RCSS-2496 避障图中的缺省像素由 unknown 修改为 freeSpace
+  - RCSS-2529 减少 NavFn 中像素算路地势梯度的内存使用
+  - RCSS-2362 使用 'TwistWithAcc.msg' 控车
+  - RCSS-2545 内存报警，改为单门限
+  - RCSS-2553 planning 内存优化，只保留一份静态地图的 Costmap2D 实例
+  - RCSS-2555 区分紧急减速和非紧急减速，设置两种减速度
+  - RCSS-2560 新增世界坐标系下的超声点云，用于 debug 显示
+  - RCSS-2564 上报轮控启动错误
+  - RCSS-2569 platform-monitor 改为根据 PlanningState.progress_stuck_reason 发出 1008 报警码
+  - RCSS-2571 忽略 Depth camera may be covered 报警码
+  - RCSS-2575 axrun 加限制：连续多次崩溃，则停止守护
+  - RCSS-2593 USB 防止过度守护，仅 reset 3 次，并支持在线禁用 USB 守护
+  - RCSS-2594 保存不同的 bag 包，使用不同的时长
+- Bug
+  - RCSS-2487 光流检测打滑误报，修正参数
+  - RCSS-2235 充电桩 POI 打的靠前一点儿，会导致识别失败
+  - RCSS-2278 IMU 频率异常，未恢复
+  - RCSS-2418 二级算路，不希望走静态地图中的 unknown 区域
+  - RCSS-2521 小圆底盘，在充电桩上无法识别出充电桩，点云不完整
+  - RCSS-2532 baseboard 启动的时候当设备不存在会正常退出
+  - RCSS-2546 终点处卡死，应该能让任务终止，并报错无法旋转
+  - RCSS-2563 当频繁调用 usbreset hub 的时候，ihawk_node 有可能打不开设备
+  - RCSS-2580 超声数据中，第一个超声出现异常读数
+  - RCSS-2581 向机器人后方发起任务时会绕着圈走
+  - RCSS-2586 二级路算路失败或者不可行(安全距离)超过 3s 要清除 5cm 避障图
+
 # 2.2.0
 
 - New Feature
