@@ -54,6 +54,8 @@ $ wscat -c ws://localhost:8000/ws/v2/topics
 
 ## Set Pose
 
+Set the pose (position/orientation) of the robot on current map.
+
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
@@ -67,8 +69,27 @@ curl -X POST \
 class SetPoseRequest {
   position: [number, number, number]; // coordinates x, y, z. z is always 0。
   ori: number; // heading of the robot, in radian, counter-clockwise. 0 means x-positive.
+
+  // [Optional]
+  // If True, we will try to correct initial position error within a small area.
+  // If False, we will not attempt to do it.
+  // If not provided, the behavior is undefined. It may differ
+  // with software version, environment and some global settings.
+  adjust_position?: boolean;
 }
 ```
+
+If `adjust_position = true`, we will detect and correct initial position error, based on lidar observation.
+For example, if the heading of the robot is wrongly assigned, we will make best effort to correct it.
+
+| Before Correction            | After Correction            |
+| ---------------------------- | --------------------------- |
+| ![](./correction-before.png) | ![](./correction-after.png) |
+
+:::warning
+Inevitably, the correction algorithm may be misguided by changed environment.
+So if you can be sure the initial pose is correct, specially when there are some misguiding patterns, make sure `adjust_position=false`
+:::
 
 ## Pose Feedback
 

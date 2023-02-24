@@ -8,6 +8,7 @@
 
 ## 2.1.0
 
+- Support automatically initial position correction. See `adjust_position` in `/chassis/pose`.
 - Websocket supports `/env_symmetry_map`.
 - Websocket supports `/env_match_map`.
 
