@@ -56,7 +56,26 @@ Only for debugging.
 {
   "topic": "/slam/state",
   "state": "positioning", // 'inactive/slam/positioning' 闲置/建图/定位
+
+  // The quality of positioning
+  //
+  // Only valid in positioning state.
+  // since 2.3.0.
+  //  0 - unknown
+  //  1 - lost
+  //  3 - poor
+  //  8 - good
+  // 10 - excellent
+  "position_quality": 10,
+
+  // Deprecated since 2.3.0
   "reliable": true,
+
+  // Whether the lidar observation matches current map
+  //
+  // This is only for debug.
+  // If position is lost, or the environment changed too much, it will return false.
+  "lidar_matched": true,
   "inter_constraint_count": 20,
   "good_constraint_count": 20
 }

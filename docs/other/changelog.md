@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.0
+
+- Add `position_quality` and `lidar_matched` in Websocket `/slam/state`.
+
 ## 2.2.0
 
 - Supports `GET /device/available_wifis`
