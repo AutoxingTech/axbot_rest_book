@@ -1,5 +1,24 @@
 # Changelog of Releases
 
+# 2.3.0-rc1
+
+- New Feature
+  - [RCSS-2476] 支持关闭自动驻车 auto-hold
+  - [RCSS-2552] 头壳供网底盘供网 REST API 可以查询和配置
+  - [RCSS-2484] 新增颠簸程度热力图
+  - [RCSS-2544] 新增 IMU 没有校准的 warning
+  - [RCSS-2617] 根据实时颠簸程度，自动加减速
+  - [RCSS-2600] 新增 Position Quality 和 Lidar Matched, 监控平台显示, REST API 支持
+- Task
+  - [RCSS-2565] 根据瞬时颠簸程度，给出减速建议
+  - [RCSS-2588] 位姿纠正，自动采集案例
+  - [RCSS-2606] 修改用于遇对向机器人靠右错车的虚拟障碍物地势的生成规则
+  - [RCSS-2611] 二级选路增加“危险地势”的检测
+- Bug
+  - [RCSS-2595] 6506 时间错误，即使 chrony 已经纠正，也不会自动恢复
+  - [RCSS-2601] 二级路始终选新路导致行驶轨迹不合理
+  - [RCSS-2609] 深度相机休眠后没有为 ·device_hw_state· topic 中 power_state 字段正确赋值
+
 # 2.3.0-rc0
 
 - New Features
