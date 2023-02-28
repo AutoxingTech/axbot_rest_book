@@ -2,9 +2,9 @@
 
 ## 2.3.0
 
-- Add `position_quality` and `lidar_matched` in Websocket `/slam/state`.
-- Add `open` in /device/available_wifis.
-- Add `/planning/auto_hold` in `/robot-params`.
+- Add `position_quality` and `lidar_matched` in Websocket `/slam/state`. See [Positioning State](../reference/websocket.md#positioning-state)
+- Add `open` in /device/available_wifis. See [Available WIFIs](../reference/device.md#wifi-list)
+- Add `/planning/auto_hold` in `/robot-params`. See [Robot Params](../reference/robot_params.md)
 
 ## 2.2.0
 
