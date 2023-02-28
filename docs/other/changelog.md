@@ -3,6 +3,7 @@
 ## 2.3.0
 
 - Add `position_quality` and `lidar_matched` in Websocket `/slam/state`.
+- Add `open` in /device/available_wifis.
 
 ## 2.2.0
 

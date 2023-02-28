@@ -62,13 +62,23 @@ curl http://localhost:8000/device/info/brief # for less information
 ## Wifi List
 
 ```bash
-curl http://localhost:8000/device/avaliable_wifis
+curl http://localhost:8000/device/available_wifis
 ```
 
 ```json
 [
-  { "ssid": "AutoXing", "bss": "a4:fa:76:33:d3:62", "rssi": -45 },
-  { "ssid": "AutoXing-guest", "bss": "a4:fa:76:33:d3:72", "rssi": -33 }
+  {
+    "ssid": "AutoXing",
+    "bss": "a4:fa:76:33:d3:62",
+    "rssi": -45,
+    "open": false // since 2.3.0
+  },
+  {
+    "ssid": "AutoXing-guest",
+    "bss": "a4:fa:76:33:d3:72",
+    "rssi": -33,
+    "open": false // since 2.3.0
+  }
 ]
 ```
 
