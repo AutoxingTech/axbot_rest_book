@@ -82,7 +82,7 @@ curl http://localhost:8000/device/available_wifis
 ]
 ```
 
-## Wifi Information
+## Network Information
 
 ```bash
 curl http://localhost:8000/device/wifi_info
@@ -92,12 +92,17 @@ Station mode response:
 
 ```json
 {
-  "mode": "station",
-  "ip": "10.10.40.83",
-  "mac": "ee:94:de:b8:40:6e",
-  "dev": "wlan0",
-  "via": "10.10.40.1",
-  "ssid": "AutoXing"
+  "wifi_mode": "station",
+  "route_mode": "eth0_first",
+  "wifi_ip": "10.10.40.212",
+  "wifi_mac": "e4:5f:01:60:3b:0b",
+  "ssid": "AutoXing",
+  "debug_message": "info: Connected to AutoXing",
+  "routes": [
+    "default via 192.168.25.2 dev eth0 src 192.168.25.25 metric 202 ",
+    "169.254.0.0/16 dev wlan0 scope link src 169.254.81.127 metric 303 ",
+    "192.168.25.0/24 dev eth0 proto dhcp scope link src 192.168.25.25 metric 202 "
+  ]
 }
 ```
 

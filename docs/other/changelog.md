@@ -5,18 +5,20 @@
 - Add `position_quality` and `lidar_matched` in Websocket `/slam/state`. See [Positioning State](../reference/websocket.md#positioning-state)
 - Add `open` in /device/available_wifis. See [Available WIFIs](../reference/device.md#wifi-list)
 - Add `/planning/auto_hold` in `/robot-params`. See [Robot Params](../reference/robot_params.md)
+- Add `route_mode` in [Network Setup](../reference/services.md#setup-network) and [Network Info](../reference/device.md#network-information)
 
 ## 2.2.0
 
 - Supports `GET /device/available_wifis`
 - Supports `GET /device/wifi_info`
-- Improve HTML page `/setup_wifi`
+- Improve HTML page `/wifi_setup`
 
 ## 2.1.0
 
 - Support automatically initial position correction. See `adjust_position` in `/chassis/pose`.
 - Websocket supports `/env_symmetry_map`.
 - Websocket supports `/env_match_map`.
+- Support service `POST /services/setup_wifi`
 
 ## 2.0.0
 

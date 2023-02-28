@@ -182,7 +182,7 @@ class EnableDepthCameraRequest {
 }
 ```
 
-## Setup Wifi
+## Setup Network
 
 Switch WIFI to Access-Point or Station mode.
 
@@ -196,16 +196,30 @@ curl -X POST \
 **Parameters**
 
 ```ts
-class SetupWifiRequest {
+interface SetupWifiRequest {
   mode: 'ap' | 'station';
   ssid?: string; // SSID, required for station mode
   psk?: string; // Wi-Fi Protected Access Pre-Shared Key, required for station mode
+
+  route_mode?:
+    | 'eth0_first'
+    | 'wlan0_first'
+    | 'usb0_first'
+    | 'wlan0_usb0_auto_first';
 }
 ```
 
+`route_mode`: Set the priority of the route table
+
+- `eth0_first`: Put eth0 as the default route, if available
+- `wlan0_first`: Put wlan0 as the default route, if available
+- `usb0_first`: Put usb0 as the default route, if available.
+  Based on `ping` result. If wlan0 connects to Internet,
+  use it as the default route. Or else, use wlan0.
+
 A static HTML page is also provided and can be accessed from local network. http://localhost:8000/wifi_setup
 
-![](./wifi_setup.png)
+![](./network_setup.png)
 
 ## Wake Up Device
 
