@@ -4,6 +4,7 @@
 
 - Add `position_quality` and `lidar_matched` in Websocket `/slam/state`.
 - Add `open` in /device/available_wifis.
+- Add `/planning/auto_hold` in `/robot-params`.
 
 ## 2.2.0
 
