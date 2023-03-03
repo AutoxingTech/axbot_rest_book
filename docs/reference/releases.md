@@ -3,7 +3,7 @@
 # 2.3.0-rc2
 
 - New Features
-  - [RCSS-2507] 根据自学习的颠簸程度热力图，实现预减速
+  - [RCSS-2507] 根据自学习的建议速度热力图，实现预减速
   - [RCSS-2589] wifi 需要显示是否是开放网络
   - [RCSS-2603] REST API 增加 设置 auto-hold 的接口
 - Task
