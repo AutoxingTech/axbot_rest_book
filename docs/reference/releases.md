@@ -1,5 +1,26 @@
 # Changelog of Releases
 
+# 2.3.0-rc2
+
+- New Features
+  - [RCSS-2507] 根据自学习的颠簸程度热力图，实现预减速
+  - [RCSS-2589] wifi 需要显示是否是开放网络
+  - [RCSS-2603] REST API 增加 设置 auto-hold 的接口
+- Task
+  - [RCSS-2614] /planning_state 中增加是否在电梯中和地图 uid 两个字段
+  - [RCSS-2632] 热力图，换用 intensity with alpha 格式
+  - [RCSS-2637] /planning_state 增加 viewport_blocked 表示当前视野路线是否被阻挡
+  - [RCSS-2624] 把统计到的磁盘写入量，写入 /tmp/disk_usage.txt 中
+- Bug
+  - [RCSS-2587] 出现 0 字节的 core-dump
+  - [RCSS-2605] ax_carto 中崩溃
+  - [RCSS-2620] planning 崩溃 work_update throw_out_of_range
+  - [RCSS-2629] 摄像头报错，反复震荡
+  - [RCSS-2631] 一些 ROS 通讯中断
+  - [RCSS-2635] 进度卡死报警码 1008 的主因发生振荡
+  - [RCSS-2639] planning 中 ax::PoseBasedCostmapResetter 对 m_poseQueue 的访问未作互斥
+  - [RCSS-2641] 机器人电梯楼层切换时，错误的重定位导致机器人异常
+
 # 2.3.0-rc1
 
 - New Feature
