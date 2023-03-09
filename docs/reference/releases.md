@@ -8,6 +8,52 @@
   - [RCSS-2661] 部分机器升级到 2.3.0 版本时，发生断网问题
   - [RCSS-2656] hotel_1019 上 planning 退出时的崩溃
 
+## 2.3.0 (Summary)
+
+- Important New Features
+  - [RCSS-2082] 改进 DWA 规划，引入加速度、运动更平顺
+  - [RCSS-1781] 用强化对向运动机器人左侧障碍物地势的方法实现机器人相遇时靠右错车
+  - [RCSS-2557] 支持一款新的安普斯轮子，代号：amps_bsl3
+  - [RCSS-2617] 根据实时颠簸程度，自动加减速
+  - [RCSS-2507] 根据自学习的建议速度热力图，实现预减速
+  - [RCSS-2476] 支持开关自动驻车 auto-hold
+  - [RCSS-2552] 头壳供网底盘供网 REST API 可以查询和配置
+  - [RCSS-2287] planning_state 报出精准的卡死原因
+  - [RCSS-2484] 新增建议速度程度热力图
+  - [RCSS-2600] 新增 Position Quality 和 Lidar Matched, 监控平台显示, REST API 支持
+- Other New Features
+  - [RCSS-2458] 监控每小时磁盘写入量，如果 IO 过多则报警
+  - [RCSS-2555] 区分紧急减速和非紧急减速，设置两种减速度
+  - [RCSS-2486] 监控平台显示超声波传感器好坏
+  - [RCSS-2589] wifi 显示是否是开放网络
+  - [RCSS-2177] 机器人误入虚拟墙报警
+  - [RCSS-1984] iHawk 相机支持休眠
+  - [RCSS-2544] 新增 IMU 没有校准的 warning
+  - [RCSS-2328] planning 如果崩溃，由 bot_control 自动恢复最后一个 move action
+  - [RCSS-2588] 位姿纠正，自动采集案例
+- Improvements & Tasks
+  - 减少内存占用 [RCSS-2529], [RCSS-2553]
+  - [RCSS-2632] 改进热力图显示效果
+  - [RCSS-2545] 内存报警，改为单门限
+  - [RCSS-2564] 上报轮控启动错误
+  - [RCSS-2575] axrun 加限制：连续多次崩溃，则停止守护
+  - [RCSS-2593] USB 防止过度守护，仅 reset 3 次，并支持在线禁用 USB 守护
+  - [RCSS-2624] 把统计到的磁盘写入量，写入 /tmp/disk_usage.txt 中
+- Bug
+  - 解决了一些崩溃 [RCSS-2587]、[RCSS-2605]、[RCSS-2620]、[RCSS-2639]
+  - [RCSS-2629] 摄像头报错，反复震荡
+  - [RCSS-2631] 一些 ROS 通讯中断
+  - [RCSS-2595] 6506 时间错误，即使 chrony 已经纠正，也不会自动恢复
+  - [RCSS-2601] 二级路始终选新路导致行驶轨迹不合理
+  - [RCSS-2235] 充电桩 POI 打的靠前一点儿，会导致识别失败
+  - [RCSS-2278] IMU 频率异常，未恢复
+  - [RCSS-2418] 二级算路，不希望走静态地图中的 unknown 区域
+  - [RCSS-2521] 小圆底盘，在充电桩上无法识别出充电桩，点云不完整
+  - [RCSS-2532] baseboard 启动的时候当设备不存在会正常退出
+  - [RCSS-2546] 终点处卡死，应该能让任务终止，并报错无法旋转
+  - [RCSS-2563] 当频繁调用 usbreset hub 的时候，ihawk_node 有可能打不开设备
+  - [RCSS-2581] 向机器人后方发起任务时会绕着圈走
+
 ## 2.3.0
 
 - Bug
