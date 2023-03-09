@@ -81,7 +81,7 @@
   - [RCSS-2639] planning 中 ax::PoseBasedCostmapResetter 对 m_poseQueue 的访问未作互斥
   - [RCSS-2641] 机器人电梯楼层切换时，错误的重定位导致机器人异常
 
-# 2.3.0-rc1
+## 2.3.0-rc1
 
 - New Feature
   - [RCSS-2476] 支持关闭自动驻车 auto-hold
@@ -100,7 +100,7 @@
   - [RCSS-2601] 二级路始终选新路导致行驶轨迹不合理
   - [RCSS-2609] 深度相机休眠后没有为 ·device_hw_state· topic 中 power_state 字段正确赋值
 
-# 2.3.0-rc0
+## 2.3.0-rc0
 
 - New Features
   - [RCSS-2082] 改进 DWA 规划，引入加速度
@@ -139,7 +139,7 @@
   - [RCSS-2581] 向机器人后方发起任务时会绕着圈走
   - [RCSS-2586] 二级路算路失败或者不可行(安全距离)超过 3s 要清除 5cm 避障图
 
-# 2.2.0
+## 2.2.0
 
 - New Feature
   - [RCSS-2033] 增加 WIFI 扫描接口和状态查询接口
