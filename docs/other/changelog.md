@@ -1,11 +1,15 @@
 # Changelog
 
+## 2.4.0
+
+- Add `/control/bump_tolerance` in `/robot-params`. See [Robot Params](../reference/robot_params.md)
+
 ## 2.3.0
 
 - Add `position_quality` and `lidar_matched` in Websocket `/slam/state`. See [Positioning State](../reference/websocket.md#positioning-state)
 - Add `open` in /device/available_wifis. See [Available WIFIs](../reference/device.md#wifi-list)
 - Add `/planning/auto_hold` in `/robot-params`. See [Robot Params](../reference/robot_params.md)
-- Add `route_mode` in [Network Setup](../reference/services.md#setup-network) and [Network Info](../reference/device.md#network-information)
+- Add `/services/set_route_mode` in [Network Setup](../reference/services.md#set-route-mode) and [Network Info](../reference/device.md#network-information)
 
 ## 2.2.0
 

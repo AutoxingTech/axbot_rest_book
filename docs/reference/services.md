@@ -182,7 +182,7 @@ class EnableDepthCameraRequest {
 }
 ```
 
-## Setup Network
+## Setup Wifi
 
 Switch WIFI to Access-Point or Station mode.
 
@@ -206,6 +206,25 @@ interface SetupWifiRequest {
     | 'wlan0_first'
     | 'usb0_first'
     | 'wlan0_usb0_auto_first';
+}
+```
+
+## Set Route Mode
+
+Set the route table rules of the chassis.
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json"
+  -d '{"mode": "xxx"}'
+  http://localhost:8000/services/set_route_mode
+```
+
+**Parameters**
+
+```ts
+interface RouteModeRequest {
+  mode: 'eth0_first' | 'wlan0_first' | 'usb0_first' | 'wlan0_usb0_auto_first';
 }
 ```
 
