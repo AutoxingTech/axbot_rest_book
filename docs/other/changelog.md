@@ -3,6 +3,7 @@
 ## 2.4.0
 
 - Add `/control/bump_tolerance` in `/robot-params`. See [Robot Params](../reference/robot_params.md)
+- Combine IMU bias calibration with pose calibration. Add capability flag `combineImuBiasAndPoseCalibration`.
 
 ## 2.3.0
 

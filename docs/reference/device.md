@@ -48,7 +48,8 @@ curl http://localhost:8000/device/info
     "supportsSetEmergencyStopService": true, // supports /services/wheel_control/set_emergency_stop
     "supportsWheelStateTopic": true, // supports /wheel_state WebSocket topic
     "supportsWsV2": true, // supports ws://HOST/ws/v2/topics
-    "supportsRgbCamera": true // supports RGB related topics
+    "supportsRgbCamera": true, // supports RGB related topics
+    "combineImuBiasAndPoseCalibration": true // Since 2.4.0. Combine bias and pose calibration.
   }
 }
 ```
