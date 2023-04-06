@@ -1,5 +1,77 @@
 # Changelog of Releases
 
+## 2.4.0 (Summary)
+
+- New Feature
+  - [RCSS-2650] 支持双激光雷达，一起定位
+- Improvement
+  - [RCSS-2712] 改进 imu 零偏校正 - 考虑温漂、合并内外参校准
+  - [RCSS-2701] 底盘对于 /alert 严重报错先停车等待，超时后再将任务失败
+- Task
+  - [RCSS-2721] 删除 /horizontal_laser_2d/scan_rate 频道，改为 /device_hw_state 报转速错误
+  - [RCSS-2722] 让 .device.yaml 中的 /device/model 优先于在线配置
+  - [RCSS-2726] monitor，改用 /device_hw_state 上报转速错误
+  - [RCSS-2727] 全面采用 iptables masquerade 转发
+  - [RCSS-2739] 调查唤醒时点云乱的原因，等待转速稳定后，再发点云
+  - [RCSS-2747] 增加 5006，lidar_node 心跳异常
+  - [RCSS-2768] 录 Bag 的功能，需要为每个 code 增加最小间隔，防止大量录像
+- Bug
+  - [RCSS-2598] 空旷处没有回波，雷达残影导致堵死
+  - [RCSS-2756] 刚启动，热力图会误报心跳停止
+  - [RCSS-2764] IMU 禁用时，颠簸检测建议速度始终为 0.1
+  - [RCSS-2767] 机器人在充电区域外回桩时，一直倒车运动到挂节点
+  - [RCSS-2730] lidar_node 发布的数据有时间倒流现象
+  - [RCSS-2737] 机器人靠墙掉头有概率会卡死
+  - [RCSS-2745] 激光雷达没有数据，没有正常报警
+  - [RCSS-2754] 上一个任务失败，下一个任务也失败时无法正常结束
+  - [RCSS-2278] IMU 频率异常，未恢复
+  - [RCSS-2699] 建图时 uid 不应该为空
+  - [RCSS-2723] 香橙派底盘供网无法切换成头壳上网
+
+## 2.4.0
+
+- Improvement
+  - [RCSS-2770] Bias-temperature 曲线精度提升到 0.1 度
+- Task
+  - [RCSS-2768] 录 Bag 的功能，需要为每个 code 增加最小间隔，防止大量录像
+- Bug
+  - [RCSS-2598] 空旷处没有回波，雷达残影导致堵死
+  - [RCSS-2756] 刚启动，热力图会误报心跳停止
+  - [RCSS-2759] 纺织厂，容易误触发 7005 position lost
+  - [RCSS-2764] IMU 禁用时，颠簸检测建议速度始终为 0.1
+  - [RCSS-2767] 机器人在充电区域外回桩时，一直倒车运动到挂节点
+
+## 2.4.0-rc2
+
+- Task
+  - [RCSS-2747] 增加 5006，lidar_node 心跳异常
+- Bug
+  - [RCSS-2730] lidar_node 发布的数据有时间倒流现象
+  - [RCSS-2737] 机器人靠墙掉头有概率会卡死
+  - [RCSS-2745] 激光雷达没有数据，没有正常报警
+  - [RCSS-2754] 上一个任务失败，下一个任务也失败时无法正常结束
+
+## 2.4.0-rc1
+
+- New Feature
+  - [RCSS-2650] 支持双激光雷达，一起定位
+- Improvement
+  - [RCSS-2712] 改进 imu 零偏校正 - 考虑温漂、合并内外参校准
+  - [RCSS-2701] 底盘对于 /alert 严重报错先停车等待，超时后再将任务失败
+- Task
+  - [RCSS-2721] 删除 /horizontal_laser_2d/scan_rate 频道，改为 /device_hw_state 报转速错误
+  - [RCSS-2722] 让 .device.yaml 中的 /device/model 优先于在线配置
+  - [RCSS-2726] monitor，改用 /device_hw_state 上报转速错误
+  - [RCSS-2727] 全面采用 iptables masquerade 转发
+  - [RCSS-2739] 调查唤醒时点云乱的原因，等待转速稳定后，再发点云
+- Bug
+  - [RCSS-2278] IMU 频率异常，未恢复
+  - [RCSS-2672] 时间倒流，不做 CHECK，不崩溃
+  - [RCSS-2699] 建图时 uid 不应该为空
+  - [RCSS-2723] 香橙派底盘供网无法切换成头壳上网
+  - [RCSS-2728] 休眠或唤醒时，点云匹配很好，lidar_matched 为 false
+  - [RCSS-2737] 机器人靠墙掉头有概率会卡死
+
 ## 2.3.1
 
 - Bug
