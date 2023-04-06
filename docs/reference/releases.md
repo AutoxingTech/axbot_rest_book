@@ -4,29 +4,38 @@
 
 - New Feature
   - [RCSS-2650] 支持双激光雷达，一起定位
+  - [RCSS-2696] 增加 REST API，支持调节颠簸容忍度
+  - [RCSS-2706] 增加报警码 7501: warning: Lidar and map mismatch
+  - [RCSS-2707] 新增丢定位报警码 7005 error: Position is lost
 - Improvement
   - [RCSS-2712] 改进 imu 零偏校正 - 考虑温漂、合并内外参校准
   - [RCSS-2701] 底盘对于 /alert 严重报错先停车等待，超时后再将任务失败
 - Task
+  - [RCSS-2727] 全面采用 iptables masquerade 转发
+  - [RCSS-2739] 调查唤醒时点云乱的原因，等待转速稳定后，再发点云
   - [RCSS-2721] 删除 /horizontal_laser_2d/scan_rate 频道，改为 /device_hw_state 报转速错误
   - [RCSS-2722] 让 .device.yaml 中的 /device/model 优先于在线配置
   - [RCSS-2726] monitor，改用 /device_hw_state 上报转速错误
-  - [RCSS-2727] 全面采用 iptables masquerade 转发
-  - [RCSS-2739] 调查唤醒时点云乱的原因，等待转速稳定后，再发点云
   - [RCSS-2747] 增加 5006，lidar_node 心跳异常
   - [RCSS-2768] 录 Bag 的功能，需要为每个 code 增加最小间隔，防止大量录像
+  - [RCSS-2693] 禁止 carto 向 /tmp 写入 log 文件
+  - [RCSS-2708] 树莓派，写死 DNS，停用 dnsmasq 服务
 - Bug
   - [RCSS-2598] 空旷处没有回波，雷达残影导致堵死
-  - [RCSS-2756] 刚启动，热力图会误报心跳停止
-  - [RCSS-2764] IMU 禁用时，颠簸检测建议速度始终为 0.1
-  - [RCSS-2767] 机器人在充电区域外回桩时，一直倒车运动到挂节点
-  - [RCSS-2730] lidar_node 发布的数据有时间倒流现象
+  - [RCSS-2704] 机器人休眠后，机器缓慢旋转
   - [RCSS-2737] 机器人靠墙掉头有概率会卡死
-  - [RCSS-2745] 激光雷达没有数据，没有正常报警
-  - [RCSS-2754] 上一个任务失败，下一个任务也失败时无法正常结束
-  - [RCSS-2278] IMU 频率异常，未恢复
   - [RCSS-2699] 建图时 uid 不应该为空
+  - [RCSS-2756] 刚启动，热力图会误报心跳停止
+  - [RCSS-2767] 机器人在充电区域外回桩时，一直倒车运动到挂节点
+  - [RCSS-2754] 上一个任务失败，下一个任务也失败时无法正常结束
+  - [RCSS-2730] lidar_node 发布的数据有时间倒流现象
+  - [RCSS-2278] IMU 频率异常，未恢复
   - [RCSS-2723] 香橙派底盘供网无法切换成头壳上网
+  - [RCSS-2636] 树莓派 DNS 服务（dnsmasq）异常原因
+  - [RCSS-2684] 云南大学附属医院\_亚重症一病区消杀 1 上的 imu 崩溃
+  - [RCSS-2690] 树莓派的 EMI 没有上报
+  - [RCSS-2692] 树莓派镜像，/tmp 不是纯内存，会影响磁盘寿命
+  - [RCSS-2764] IMU 禁用时，颠簸检测建议速度始终为 0.1
 
 ## 2.4.0
 
@@ -71,6 +80,26 @@
   - [RCSS-2723] 香橙派底盘供网无法切换成头壳上网
   - [RCSS-2728] 休眠或唤醒时，点云匹配很好，lidar_matched 为 false
   - [RCSS-2737] 机器人靠墙掉头有概率会卡死
+
+# 2.4.0-rc0
+
+- New Feature
+  - [RCSS-2696] 增加 REST API，支持调节颠簸容忍度
+  - [RCSS-2706] 增加报警码 7501: warning: Lidar and map mismatch
+  - [RCSS-2707] 新增丢定位报警码 7005 error: Position is lost
+- Improvement
+  - [RCSS-1975] 优化 imu 零偏静止自动校准逻辑
+- Task
+  - [RCSS-2693] 禁止 carto 向 /tmp 写入 log 文件
+  - [RCSS-2708] 树莓派，写死 DNS，停用 dnsmasq 服务
+  - [RCSS-2710] 适配新车型 “昆山锦茂烧烤机器人”
+- Bug
+  - [RCSS-2636] 树莓派 DNS 服务（dnsmasq）异常原因
+  - [RCSS-2681] imu 出现周期性抖动，3 秒一次
+  - [RCSS-2684] 云南大学附属医院\_\_\_亚重症一病区消杀 1 上的 imu 崩溃
+  - [RCSS-2690] 树莓派的 EMI 没有上报
+  - [RCSS-2692] 树莓派镜像，/tmp 不是纯内存，会影响磁盘寿命
+  - [RCSS-2704] 机器人休眠后，imu 轻微旋转
 
 ## 2.3.1
 
