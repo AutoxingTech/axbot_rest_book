@@ -11,7 +11,8 @@
   "scripts": {
     "docs:dev": "vuepress dev docs --temp .temp",
     "docs:build": "vuepress build docs",
-    "docker:build": "docker build . -t autoxing/axbot_rest_book"
+    "docker:build": "vuepress build docs && docker build . -t autoxing/axbot_rest_book",
+    "docker:push": "docker push autoxing/axbot_rest_book"
   },
   "dependencies": {
     "markdown-it-imsize": "^2.0.1"
