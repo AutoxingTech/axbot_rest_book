@@ -7,39 +7,40 @@ Calibrate IMU. The robot must be set still on hard and flat surface.
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
-  -d '{"calibrate_pose": false}' \
   http://localhost:8000/services/imu/recalibrate
 ```
 
-**Parameters**
+This service call only initiates the calibration. The actual process usually takes 10-20 seconds.
 
-```ts
-interface CalibrateImuRequest {
-  calibrate_pose?: boolean; // Experimental Feature. default to false.
+When calibration finished. An action will be received in websocket:
+
+Sample success output:
+
+```json
+{
+  "topic": "/action",
+  "timestamp": 1681733608.653,
+  "email": "",
+  "username": "",
+  "deviceName": "718220110000909",
+  "action": "recalibrate_imu",
+  "message": "IMU calibration succeeded"
 }
 ```
 
-This service call only initiates the calibration. The actual process usually takes 10 seconds.
+Sample failure output:
 
-So one should use Websocket `/imu_state` to monitor the progress and result. When calibration finished, stop listen to `/imu_state`.
-
-```bash
-$ wscat -c ws://localhost:8000/ws/v2/topics
-connected (press CTRL+C to quit)
-> {"enable_topic": "/imu_state"}
-< {"topic": "/imu_state", "calibrate_state": 1, "calibrate_fail_reason": 0, ...}
-< {"topic": "/imu_state", "calibrate_state": 1, "calibrate_fail_reason": 0, ...}
-< {"topic": "/imu_state", "calibrate_state": 1, "calibrate_fail_reason": 0, ...}
-< {"topic": "/imu_state", "calibrate_state": 2, "calibrate_fail_reason": 0, ...}
-> {"disable_topic": "/imu_state"}
+```json
+{
+  "topic": "/action",
+  "timestamp": 1681733580.702,
+  "email": "",
+  "username": "",
+  "deviceName": "718220110000909",
+  "action": "recalibrate_imu",
+  "message": "error: IMU calibration failed. Failed to rotate to right"
+}
 ```
-
-**Fields**
-
-| Field                 | Description                                    |
-| --------------------- | ---------------------------------------------- |
-| calibrate_state       | 1 calibrating 2 succ 3 failed                  |
-| calibrate_fail_reason | 0 none 1 there is vibration during calibration |
 
 ## Set Control Mode
 
@@ -303,4 +304,46 @@ Before calling this service, make sure:
 
 ```
 POST /services/calibrate_depth_cameras
+```
+
+## Calibrate Gyroscope Scale
+
+Calibrate IMU. The robot must be set still on hard and flat surface.
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  http://localhost:8000/services/imu/calibrate_gyro_scale
+```
+
+This service call only initiates the calibration. The actual process usually takes 20 seconds.
+
+When calibration finished. An action will be received in websocket:
+
+Sample success output:
+
+```json
+{
+  "topic": "/action",
+  "timestamp": 1681733608.653,
+  "email": "",
+  "username": "",
+  "deviceName": "718220110000909",
+  "action": "calibrate_gyro_scale",
+  "message": "Gyroscope scale calibration succeeded"
+}
+```
+
+Sample failure output:
+
+```json
+{
+  "topic": "/action",
+  "timestamp": 1681733580.702,
+  "email": "",
+  "username": "",
+  "deviceName": "718220110000909",
+  "action": "calibrate_gyro_scale",
+  "message": "error: Gyroscope scale calibration failed. Please remove nearby obstacles."
+}
 ```

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.5.0
+
+- Add `/services/calibrate_gyro_scale` in [Calibrate Gyroscope Scale](../reference/services.md#calibrate-gyroscope-scale)
+
 ## 2.4.0
 
 - Add `/control/bump_tolerance` in `/robot-params`. See [Robot Params](../reference/robot_params.md)
