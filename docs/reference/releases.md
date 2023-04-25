@@ -1,5 +1,40 @@
 # Changelog of Releases
 
+## 2.5.0-rc0
+
+- New Feature
+  - [RCSS-2604] 两台机器人在狭窄区域相逢堵死，其中一台能够自动后退让行
+  - [RCSS-2799] 支持通过 REST API 调整轮廓线
+  - [RCSS-2818] 增加 IMU scale 校准功能
+  - [RCSS-2829] 支持单台机器特配参数，并能在平台上查看、编辑
+  - [RCSS-2830] 支持显示 temperature 和 imu bias 关系曲线
+  - [RCSS-2844] 增加 "需要重启软件" 和 "需要重启系统" 两个报警码
+  - [RCSS-2802] 支持新机型：caracal_v2，使用树莓派
+- Improvement
+  - [RCSS-2816] 建图回环能力提升
+- Task
+  - [RCSS-2463] ihawk 固件版本号上报
+  - [RCSS-2761] occupancy_grid_server 世界坐标系点云广播的频率改为可修改
+  - [RCSS-2766] 新增消息 ax_msgs::Path2D
+  - [RCSS-2775] ax::CollisionDetector 中添加接口计算轮廓线在指定位姿下到障碍物像素的距离
+  - [RCSS-2788] monitor，使用 /fused_sensor_state.is_still 判断静止，再报 imu 报警
+  - [RCSS-2789] 任务中 15s 不动的报警码从 1007 改为 1501，变为 warning
+  - [RCSS-2817] 输出 imu 原始数据的 10s 均值
+  - [RCSS-2840] 关闭树莓派 swap 分区
+  - [RCSS-2843] Event 上报时 stamp 字段改为 float
+  - [RCSS-2845] 所有 Amps 轮子命令都加延迟
+  - [RCSS-2751] planning 发布一级路线 /primary_path
+- Bug
+  - [RCSS-2653] /path 有时会不发布路线
+  - [RCSS-2705] AdjustPosition 不能很好纠正充电桩反 180 度的情况
+  - [RCSS-2720] 低速行驶，机器人摇头明显
+  - [RCSS-2776] 雷神雷达在使用 2.x.x 版本的时候 lidar_node 的 CPU 占用率过高
+  - [RCSS-2800] 没有网络时，会启动失败
+  - [RCSS-2815] /rgb_camera_state 没有消息
+  - [RCSS-2825] 远控的角速度被非远控的角速度限制了
+  - [RCSS-2827] vision_based_detector 崩溃 log 的调用栈中不显示函数名称
+  - [RCSS-2836] ax_networks 不断死，不断重启
+
 ## 2.4.0 (Summary)
 
 - New Feature

@@ -46,6 +46,7 @@ module.exports = {
                             '/reference/videos',
                             '/reference/recordings',
                             '/reference/robot_params',
+                            '/reference/app_store',
                             '/reference/websocket'
                         ],
                         sidebarDepth: 2

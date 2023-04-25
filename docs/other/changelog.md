@@ -3,6 +3,7 @@
 ## 2.5.0
 
 - Add `/services/calibrate_gyro_scale` in [Calibrate Gyroscope Scale](../reference/services.md#calibrate-gyroscope-scale)
+- Add [App Store APIs](../reference/app_store.md)
 
 ## 2.4.0
 

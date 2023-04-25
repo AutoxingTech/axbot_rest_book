@@ -6,6 +6,8 @@
     "words": [
         "odometry"
     ],
-    "ignoreWords": [],
+    "ignoreWords": [
+        "axbot"
+    ],
     "import": []
 }
