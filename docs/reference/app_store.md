@@ -64,8 +64,8 @@ interface Package {
   latest_version: string;
   current_version: string;
   status: PackageStatus;
-  download_action_id?: number;
-  install_action_id?: number;
+  download_job_id?: number;
+  install_job_id?: number;
 }
 ```
 
@@ -75,8 +75,8 @@ Before installation, packages must be downloaded first.
 
 ```bash
 curl -X POST \
-  -H "Content-Type: application/json"
-  -d '{"packages": ["ax", "py_axbot"]}'
+  -H "Content-Type: application/json" \
+  -d '{"packages": ["ax", "py_axbot"]}' \
   http://localhost:8000/app_store/services/download_packages
 ```
 
@@ -101,8 +101,8 @@ If succeeded, status code 201:
 
 ```bash
 curl -X POST \
-  -H "Content-Type: application/json"
-  -d '{"packages": ["ax", "py_axbot"]}'
+  -H "Content-Type: application/json" \
+  -d '{"packages": ["ax", "py_axbot"]}' \
   http://localhost:8000/app_store/services/install_packages
 ```
 
@@ -125,15 +125,14 @@ If succeeded, status code 201:
 
 ## View Download/Installation Tasks
 
-When downloading packages, there are associated "download tasks".
+When downloading/installing packages, there are associated "download/install tasks".
 One can view logs of these tasks.
 
-```
+````
 # for download tasks
 curl http://tunnel.autoxing.com:10144/app_store/jobs/download/tasks
 # for installation tasks
 curl http://tunnel.autoxing.com:10144/app_store/jobs/install/tasks
-```
 
 ```json
 [
@@ -158,16 +157,36 @@ curl http://tunnel.autoxing.com:10144/app_store/jobs/install/tasks
     "url": "http://localhost:8000/app_store/jobs/download/tasks/3/log"
   }
 ]
-```
+````
 
 For a task, the logs of the task can be requested.
 
 ```bash
-curl http://localhost:8000/app_store/jobs/download/tasks/4/log
+curl "http://localhost:8000/app_store/jobs/download/tasks/4/log"
 ```
 
-Or with `RANGE` header, a log can be downloaded progressively, allowing for realtime display.
+But if the task is still in progress, the log will be incomplete.
+
+With `POST` request, the log can be downloaded progressively, which is more suitable for realtime display.
 
 ```bash
-curl -H "Range: 4096-8192" http://localhost:8000/app_store/jobs/download/tasks/4/log
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"start": 0, "end": 1024}' \
+  http://localhost:8000/app_store/jobs/download/tasks/4/log
 ```
+
+```ts
+interface TaskLogRequest {
+  // start character
+  // If both start and end are missing, the whole file will be returned
+  start?: number;
+
+  end?: number; // end character, exclusive
+}
+```
+
+The server will return additional response headers:
+
+- **`x-more-data`** - `true` means the log is incomplete, `false` otherwise.
+- **`x-text-size`** - Currently available characters of the whole file
