@@ -54,6 +54,20 @@
   - [RCSS-2827] vision_based_detector 崩溃 log 的调用栈中不显示函数名称
   - [RCSS-2836] ax_networks 不断死，不断重启
 
+## 2.4.3
+
+- Bug
+  - [RCSS-2820] 没有网的情况下，ax-startup 启动慢，导致整体启动时间太长
+
+## 2.4.2
+
+- Improvement
+  - [RCSS-2860] 进入电梯时终点可提前结束任务的容许误差默认为 0.2
+- Bug
+  - [RCSS-2776] 雷神雷达在使用 2.x.x 版本的时候 lidar_node 的 CPU 占用率过高
+  - [RCSS-2800] 没有网络时，会启动失败
+  - [RCSS-2861] 机器人补桩时有可能旋转失败
+
 ## 2.4.0 (Summary)
 
 - New Feature
