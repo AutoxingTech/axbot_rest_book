@@ -1,5 +1,24 @@
 # Changelog of Releases
 
+## 2.5.0-rc2
+
+- New Feature
+  - [RCSS-2288] 增加 软件商店 相关 REST API
+  - [RCSS-2862] 支持新 IMU - lsm6dsm
+- Task
+  - [RCSS-2466] .params.yaml 警告，提供更详细的配置原因
+  - [RCSS-2488] 云南大学附属医院机器 IMU Gyro 读数超过正常值
+  - [RCSS-2777] 使用 VoxelFilter，提高 lidar_matched 判断精度
+  - [RCSS-2787] 彻底调查 imu 抖是器件的原因，还是机器的原因
+  - [RCSS-2852] daemon.log 和 syslog 内容重复，关闭 daemon.log
+  - [RCSS-2854] 为乐动和雷神雷达增加 check sum failed 的日志
+- Improvement
+  - [RCSS-2834] 重构 DWA 原地旋转功能
+  - [RCSS-2860] 进入电梯时终点可提前结束任务的容许误差默认为 0.2
+- Bug
+  - [RCSS-2820] 没有网的情况下，ax-startup 启动慢，导致整体启动时间太长
+  - [RCSS-2861] 机器人补桩时有可能旋转失败
+
 ## 2.5.0-rc0
 
 - New Feature
