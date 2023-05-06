@@ -64,8 +64,8 @@ interface Package {
   latest_version: string;
   current_version: string;
   status: PackageStatus;
-  download_job_id?: number;
-  install_job_id?: number;
+  download_task_id?: number;
+  install_task_id?: number;
 }
 ```
 
