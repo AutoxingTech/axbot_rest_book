@@ -357,6 +357,6 @@ Resetting USB hub may help recover malfunctioned hardwares.
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
-  -d '{"reset_devices": ["1/3", "8/1"]}'
+  -d '{"devices_to_reset": ["1/3", "8/1"]}'
   http://localhost:8000/services/reset_usb_devices
 ```
