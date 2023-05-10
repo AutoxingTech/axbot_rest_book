@@ -226,16 +226,3 @@ Clear saved list:
 ```bash
 curl -X DELETE http://localhost:8000/device/usb_devices/saved
 ```
-
-## Reset Usb Devices
-
-Reset USB hub may help recover malfunctioned hardwares.
-
-"1/3" means
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '["1/3", "8/1"]'
-  http://localhost:8000/services/reset_usb_devices
-```
