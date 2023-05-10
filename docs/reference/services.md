@@ -350,13 +350,13 @@ Sample failure output:
 
 ## Reset Usb Devices
 
-Reset USB hub may help recover malfunctioned hardwares.
+Resetting USB hub may help recover malfunctioned hardwares.
 
-"1/3" means the ports in a device tree. See [List Usb Devices](./device.md#list-usb-devices)
+"1/3" means the `bus_id/dev_id` in a device tree. See [List Usb Devices](./device.md#list-usb-devices)
 
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
-  -d '["1/3", "8/1"]'
+  -d '{"reset_devices": ["1/3", "8/1"]}'
   http://localhost:8000/services/reset_usb_devices
 ```
