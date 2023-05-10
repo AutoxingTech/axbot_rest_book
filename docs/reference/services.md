@@ -71,8 +71,8 @@ $ wscat -c ws://localhost:8000/ws/v2/topics
 
 ```bash
 curl -X POST \
-  -H "Content-Type: application/json"
-  -d '{"enable": true}'
+  -H "Content-Type: application/json" \
+  -d '{"enable": true}' \
   http://localhost:8000/services/wheel_control/set_emergency_stop
 ```
 
@@ -153,8 +153,8 @@ curl -X POST http://localhost:8000/services/monitor/clear_slipping_error
 
 ```bash
 curl -X POST \
-  -H "Content-Type: application/json"
-  -d '{"action": "power_on"}'
+  -H "Content-Type: application/json" \
+  -d '{"action": "power_on"}' \
   http://localhost:8000/services/baseboard/power_on_lidar
 ```
 
@@ -170,8 +170,8 @@ class PowerOnRequest {
 
 ```bash
 curl -X POST \
-  -H "Content-Type: application/json"
-  -d '{"enable": true}'
+  -H "Content-Type: application/json" \
+  -d '{"enable": true}' \
   http://localhost:8000/services/depth_camera/enable_cameras
 ```
 
@@ -189,8 +189,8 @@ Switch WIFI to Access-Point or Station mode.
 
 ```bash
 curl -X POST \
-  -H "Content-Type: application/json"
-  -d '{"mode": "station", "ssid":"xxxxxxxxx", "psk": "xxxxx"}'
+  -H "Content-Type: application/json" \
+  -d '{"mode": "station", "ssid":"xxxxxxxxx", "psk": "xxxxx"}' \
   http://localhost:8000/services/setup_wifi
 ```
 
@@ -216,8 +216,8 @@ Set the route table rules of the chassis.
 
 ```bash
 curl -X POST \
-  -H "Content-Type: application/json"
-  -d '{"mode": "xxx"}'
+  -H "Content-Type: application/json" \
+  -d '{"mode": "xxx"}' \
   http://localhost:8000/services/set_route_mode
 ```
 
@@ -272,8 +272,8 @@ It's only available in mapping mode.
 
 ```bash
 curl -X POST \
-  -H "Content-Type: application/json"
-  -d '{"enable": true}'
+  -H "Content-Type: application/json" \
+  -d '{"enable": true}' \
   http://localhost:8000/services/enable_auto_mapping
 ```
 
@@ -346,4 +346,17 @@ Sample failure output:
   "action": "calibrate_gyro_scale",
   "message": "error: Gyroscope scale calibration failed. Please remove nearby obstacles."
 }
+```
+
+## Reset Usb Devices
+
+Reset USB hub may help recover malfunctioned hardwares.
+
+"1/3" means the ports in a device tree. See [List Usb Devices](./device.md#list-usb-devices)
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '["1/3", "8/1"]'
+  http://localhost:8000/services/reset_usb_devices
 ```

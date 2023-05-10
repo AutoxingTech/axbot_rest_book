@@ -4,6 +4,12 @@
 
 - Add `/services/calibrate_gyro_scale` in [Calibrate Gyroscope Scale](../reference/services.md#calibrate-gyroscope-scale)
 - Add [App Store APIs](../reference/app_store.md)
+- Add USB Device APIs
+  - [List USB Devices](../reference/device.md#list-usb-devices)
+  - [Save USB Devices](../reference/device.md#saved-usb-devices)
+  - [Reset USB Devices](../reference/services.md#reset-usb-devices)
+- Support adjusting robot footprint in `/robot-params`. A restart is required for it to take effect.
+- Add new caps: `supportsGyroscopeScaleCalibration`, `supportsParamFiles`, `supportsAppStore`, `supportsUsbDevices`
 
 ## 2.4.0
 

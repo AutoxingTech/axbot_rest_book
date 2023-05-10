@@ -112,3 +112,130 @@ AP mode response:
 ```json
 { "mode": "ap" }
 ```
+
+## List Usb Devices
+
+Usb devices are organized as a tree.
+
+```
+008/001 1d6b:0001 8 [fe3a0000.usb] USB 1.1 root hub
+004/001 1d6b:0001 4 [fe3e0000.usb] USB 1.1 root hub
+007/001 1d6b:0002 7 [fe380000.usb] USB 2.0 root hub
+    007/002 1a40:0101 7-1 [] USB 2.0 hub
+        007/033 0603:000a 7-1.3 [HK100QB2A26D1143] iHawk_100Q
+        007/035 0603:000a 7-1.4 [HK100QB2A26D1346] iHawk_100Q
+```
+
+```
+curl http://localhost:8000/device/usb_devices
+```
+
+This request list all usb devices on a robot:
+
+```
+[
+    {
+        "vendor_product": "1d6b:0001",
+        "sn": "fe3a0000.usb",
+        "alias": "USB 1.1 root hub",
+        "description": "Linux Foundation 1.1 root hub",
+        "bind": "",
+        "bus_id": 8,
+        "dev_id": 1,
+        "port": 1,
+        "full_port": "8",
+        "level": 0,
+        "devices": [],
+    },
+    {
+        "vendor_product": "1d6b:0002",
+        "sn": "fe380000.usb",
+        "alias": "USB 2.0 root hub",
+        "description": "Linux Foundation 2.0 root hub",
+        "bind": "",
+        "bus_id": 7,
+        "dev_id": 1,
+        "port": 1,
+        "full_port": "7",
+        "level": 0,
+        "devices": [
+            {
+                "vendor_product": "1a40:0101",
+                "sn": "",
+                "alias": "USB 2.0 hub",
+                "description": "Terminus Technology Inc. Hub",
+                "bind": "",
+                "bus_id": 7,
+                "dev_id": 2,
+                "port": 1,
+                "full_port": "7-1",
+                "level": 4,
+                "devices": [
+                    {
+                        "vendor_product": "0603:000a",
+                        "sn": "HK100QB2A26D1143",
+                        "alias": "iHawk_100Q",
+                        "description": "Novatek Microelectronics Corp. ",
+                        "bind": "",
+                        "bus_id": 7,
+                        "dev_id": 33,
+                        "port": 3,
+                        "full_port": "7-1.3",
+                        "level": 8,
+                        "devices": [],
+                    },
+                    {
+                        "vendor_product": "0603:000a",
+                        "sn": "HK100QB2A26D1346",
+                        "alias": "iHawk_100Q",
+                        "description": "Novatek Microelectronics Corp. ",
+                        "bind": "",
+                        "bus_id": 7,
+                        "dev_id": 35,
+                        "port": 4,
+                        "full_port": "7-1.4",
+                        "level": 8,
+                        "devices": [],
+                    },
+                ],
+            }
+        ],
+    },
+]
+```
+
+## Saved USB Devices
+
+Because USB devices may disconnect after shipping. This API allows to make a backup of the USB device list. It can be used to identify lost devices latter.
+
+```bash
+curl -X PUT \
+  -H "Content-Type: application/json" \
+  -d '[...]' \
+  http://localhost:8000/device/usb_devices/saved
+```
+
+Get saved list:
+
+```bash
+curl http://localhost:8000/device/usb_devices/saved
+```
+
+Clear saved list:
+
+```bash
+curl -X DELETE http://localhost:8000/device/usb_devices/saved
+```
+
+## Reset Usb Devices
+
+Reset USB hub may help recover malfunctioned hardwares.
+
+"1/3" means
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '["1/3", "8/1"]'
+  http://localhost:8000/services/reset_usb_devices
+```
