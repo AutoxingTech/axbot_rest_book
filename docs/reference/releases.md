@@ -2,6 +2,73 @@
 
 ## 2.5 (Summary)
 
+- New Feature
+  - [RCSS-2816] 建图回环能力提升
+  - [RCSS-2862] 支持新 IMU - lsm6dsm
+  - [RCSS-2592] 新一代设备守护 device_guard_v2
+  - [RCSS-2604] 两台机器人在狭窄区域相逢堵死，其中一台能够自动后退让行
+  - [RCSS-2799] 支持通过 REST API 调整轮廓线
+  - [RCSS-2818] 增加 IMU scale 校准功能
+  - [RCSS-2829] 支持单台机器特配参数，并能在平台上查看、编辑
+  - [RCSS-2830] 支持显示 temperature 和 imu bias 关系曲线
+  - [RCSS-2802] 支持新机型：caracal_v2，使用树莓派
+  - [RCSS-2898] 避障图支持双激光雷达点云
+  - [RCSS-2547] 开发 axapt 命令，支持软件的查询、下载、安装
+  - [RCSS-2752] 利用深度点云校正沿直线轨道行驶时机器人的偏差
+  - [RCSS-2753] planning 支持沿识别中线行驶
+  - [RCSS-2288] 增加 REST API: 软件商店
+  - [RCSS-2891] 增加 REST API: /services/clear_system_down_unexpectedly
+  - [RCSS-2863] 提供 REST API: 列举/确认/清除 USB 设备列表
+  - [RCSS-2763] 新增报警：5007 雷达数据全部为空
+  - [RCSS-2859] 新增报警：6511 没有保存 usb 设备列表
+  - [RCSS-2888] 新增报警：6010 意外关机
+  - [RCSS-2944] 新增报警：USB 设备发生变化
+  - [RCSS-2844] 新增报警："需要重启软件" 和 "需要重启系统"
+  - [RCSS-2463] ihawk 固件版本号上报
+- Improvements
+  - [RCSS-2733] 电梯门关闭后，延迟 3 秒再让任务失败
+  - [RCSS-2748] 充电桩自动复位，不再要求整栋大楼只有一个桩，只要当前地图有桩就复位
+  - [RCSS-2834] 重构 DWA 原地旋转功能
+  - [RCSS-2860] 进入电梯时终点可提前结束任务的容许误差默认为 0.2
+- Task
+  - [RCSS-2937] 移除 CollisionDetector 中的 mutex
+  - [RCSS-2668] 新增 /fused_sensor_state 替换 /odom_state
+  - [RCSS-2848] 支持通过 xmlrpc 上报 alert
+  - [RCSS-2892] 用 footprint 位姿预算的方法优化 CollisionDetector 的执行性能
+  - [RCSS-2466] .params.yaml 警告，提供更详细的配置原因
+  - [RCSS-2777] 使用 VoxelFilter，提高 lidar_matched 判断精度
+  - [RCSS-2787] 彻底调查 imu 抖是器件的原因，还是机器的原因
+  - [RCSS-2761] occupancy_grid_server 世界坐标系点云广播的频率改为可修改
+  - [RCSS-2775] ax::CollisionDetector 中添加接口计算轮廓线在指定位姿下到障碍物像素的距离
+  - [RCSS-2788] monitor，使用 /fused_sensor_state.is_still 判断静止，再报 imu 报警
+  - [RCSS-2840] 关闭树莓派 swap 分区
+  - [RCSS-2901] 改进 4G 守护逻辑
+- Bug
+  - 规控相关
+    - [RCSS-2720] 低速行驶，机器人摇头明显
+    - [RCSS-2927] 非严格沿轨道行驶时允许适当内切，低速时不晃动
+    - [RCSS-2923] 机器人很容易发生旋转无法完成，即使在空旷的场地
+    - [RCSS-2956] 充电桩自动复位，线充时，会导致定位错误
+    - [RCSS-2962] 全局重算路后不应该要求进行视野外算路，导致卡死
+    - [RCSS-2861] 机器人补桩时有可能旋转失败
+  - 设备相关
+    - [RCSS-2935] IMU 外参校准，一次无法完全成功，至少需要 2 次
+    - [RCSS-2868] 国外 4G 守护存在异常守护问题
+    - [RCSS-2953] 4G 卡松动守护，和 USB 设备守护打架，导致激光雷达丢失
+    - [RCSS-2917] 树莓派\+蓝海雷达刚启动的时候有概率出现无数据的情况
+    - [RCSS-2882] 自己计算电量的那批机器，无法上报充电满的 action
+    - [RCSS-2776] 雷神雷达在使用 2.x.x 版本的时候 lidar_node 的 CPU 占用率过高
+    - [RCSS-2836] ax_networks 不断死，不断重启
+  - 其它
+    - [RCSS-2957] 切换地图后，监控平台有可能残留旧地图周边机器人的显示
+    - [RCSS-2886] 越南五合一 planning 的崩溃
+    - [RCSS-2934] 每次业务周期开始时更新 CollisionDetector 的避障图
+    - [RCSS-2880] axrosbag 写文件使用 duration 参数时结果中的 latched 消息有误
+    - [RCSS-2653] /path 有时会不发布路线
+    - [RCSS-2705] AdjustPosition 不能很好纠正充电桩反 180 度的情况
+    - [RCSS-2815] /rgb_camera_state 没有消息
+    - [RCSS-2825] 远控的角速度被非远控的角速度限制了
+
 ### 2.5.0-rc5
 
 - New Feature
