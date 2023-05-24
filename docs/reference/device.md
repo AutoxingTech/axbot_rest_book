@@ -206,7 +206,9 @@ This request list all usb devices on a robot:
 
 ## Saved USB Devices
 
-Because USB devices may disconnect after shipping. This API allows to make a backup of the USB device list. It can be used to identify lost devices latter.
+Because USB devices may disconnect after shipping, this API allows to make a backup of the USB device list. It can be used to identify lost devices later.
+
+Save devices:
 
 ```bash
 curl -X PUT \
@@ -215,13 +217,13 @@ curl -X PUT \
   http://localhost:8000/device/usb_devices/saved
 ```
 
-Get saved list:
+Get saved devices:
 
 ```bash
 curl http://localhost:8000/device/usb_devices/saved
 ```
 
-Clear saved list:
+Clear saved devices:
 
 ```bash
 curl -X DELETE http://localhost:8000/device/usb_devices/saved
