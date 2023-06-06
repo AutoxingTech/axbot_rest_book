@@ -27,12 +27,28 @@ interface MoveActionCreate {
     | 'charge' // to to charger and docker with it
     | 'return_to_elevator_waiting_point'
     | 'enter_elevator'
-    | 'leave_elevator';
+    | 'leave_elevator'
+    | 'along_given_route'; // Follow a given path.
   target_x?: number;
   target_y?: number;
   target_z?: number;
   target_ori?: number;
   target_accuracy?: number; // in meters. optional.
+
+  // A path to follow.
+  //
+  // Only valid with type `along_given_route`.
+  // It's a list of coordinates, as comma separated string,
+  // in the format of "x1, y1, x2, y2"
+  route_coordinates?: string;
+
+  // Allowed detour distance when go around an obstacle,
+  // while following a given path.
+  //
+  // Only valid with type `along_given_route`.
+  // When 0 is given, it will always stop and wait before an obstacle,
+  // instead of trying to go around it.
+  detour_tolerance?: number;
 
   // if true, action will succeed right away
   // when within radius of `target_accuracy`
