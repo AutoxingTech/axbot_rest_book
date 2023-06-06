@@ -131,9 +131,11 @@
   - [RCSS-2890] 2.5.0-RC2，容易误报 imu twitch
   - [RCSS-2895] 当有障碍物像素完全在 footprint 内部时，CollisionDetector::outlineToObstacleDistance\(\) 必须返回 0
 
+::: warning
 2.5 is still under testing.
+:::
 
-### Release notes - Robot Chassis Software System - 2.5.0-rc3
+### 2.5.0-rc3
 
 - New Feature
   - [RCSS-2752] 利用深度点云校正沿直线轨道行驶时机器人的偏差
