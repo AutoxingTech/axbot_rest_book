@@ -131,6 +131,40 @@
   - [RCSS-2890] 2.5.0-RC2，容易误报 imu twitch
   - [RCSS-2895] 当有障碍物像素完全在 footprint 内部时，CollisionDetector::outlineToObstacleDistance\(\) 必须返回 0
 
+2.5 is still under testing.
+
+### Release notes - Robot Chassis Software System - 2.5.0-rc3
+
+- New Feature
+  - [RCSS-2752] 利用深度点云校正沿直线轨道行驶时机器人的偏差
+  - [RCSS-2753] planning 支持沿识别中线行驶
+  - [RCSS-2763] 新增报警：5007 雷达数据全部为空
+  - [RCSS-2859] 如果 axdevice 保存的 usb 设备列表不存在，则报警
+  - [RCSS-2863] 提供 REST API，列举/确认/清除 USB 设备列表
+  - [RCSS-2888] 新增报警：6010 意外关机
+  - [RCSS-2891] 增加 REST API /services/clear_system_shutdown_unexpectedly
+  - [RCSS-2547] 开发 axapt 命令，支持软件的查询、下载、安装
+  - [RCSS-2592] 守护多个 USB hub
+- Improvement
+  - [RCSS-2748] 充电桩自动复位，不再要求整栋大楼只有一个桩，只要当前地图有桩就复位
+  - [RCSS-2733] 电梯门关闭后，延迟 3 秒再让任务失败
+  - [RCSS-2848] 支持通过 xmlrpc 上报 alert
+- Bug
+  - [RCSS-2850] 在狭窄处卡死，无法后退
+  - [RCSS-2868] 国外 4G 守护存在异常守护问题
+  - [RCSS-2880] axrosbag 写文件使用 duration 参数时结果中的 latched 消息有误
+  - [RCSS-2882] 自己计算电量的那批机器，无法上报充电满的 action
+  - [RCSS-2889] 灵动底盘 ForwardX 左前角附近激光雷达在避障图中不成像
+  - [RCSS-2890] 2.5.0-RC2，容易误报 imu twitch
+  - [RCSS-2895] 必须返回 0
+- Task
+  - [RCSS-2668] 新增 /fused_sensor_state 替换 /odom_state
+  - [RCSS-2871] 删除 RCSS-1914 extra_obstacle_radius 对应的代码
+  - [RCSS-2872] 删除 strictly_follow_given_route 对应的代码
+  - [RCSS-2873] DWA 模拟时，靠近终点，车头加长 3cm，避免撞墙
+  - [RCSS-2881] 废弃 1501，改回 1007，只把类型改为 warning，不换码
+  - [RCSS-2892] 用 footprint 位姿预算的方法优化 CollisionDetector 的执行性能
+
 ### 2.5.0-rc2
 
 - New Feature
