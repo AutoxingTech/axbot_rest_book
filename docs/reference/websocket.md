@@ -242,6 +242,11 @@ Current route.
 
 Realtime trajectory during mapping.
 
+:::warning
+For 2.5.0 or below, this enable message is wrongly named as `/trajectory_node_list`.
+To play safe, enable both `/trajectory` and `/trajectory_node_list`.
+:::
+
 ```json
 {
   "topic": "/trajectory",
