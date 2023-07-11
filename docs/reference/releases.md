@@ -1,5 +1,30 @@
 # Changelog of Releases <!-- omit in toc -->
 
+## 2.5.2
+
+- New Feature
+  - [RCSS-3058] 提升重复环境下的建图成功率 - 动态搜索窗口
+- Improvement
+  - [RCSS-3145] 改进轮控的平滑性、缩小延迟
+  - [RCSS-2960] 减少 axrosbag 的内存占用，支持保存多种类型的 bag，包括点云数据
+  - [RCSS-3144] 减少 axrosbag 中记录的 constraint 的数据量
+  - [RCSS-3062] 显示上次 WIFI 连接失败原因
+  - [RCSS-3076] 由于主机蓝牙会被打死，支持外插 USB 蓝牙，虽然它也会死，加守护
+  - [RCSS-3126] 出现 5007 错误后不再自动恢复了，必须人工确认清除
+- Task
+  - [RCSS-3064] occupancy_grid_server 深度相机 VoxelGrid 相关参数改为可动态修改
+  - [RCSS-3088] occupancy_grid_server 新增参数单独设置 VoxelGrid z 方向的范围
+  - [RCSS-3103] occupancy_grid_server 避障图的大小参数改为可动态修改
+  - [RCSS-3092] occupancy_grid_server reset 时可以指定只清除 voxel_layer
+  - [RCSS-3125] 更换为用 i2c 来判断 IMU 硬件版本
+  - [RCSS-3143] 关闭避障图中根据碰撞标记虚拟障碍物的功能
+- Bug
+  - [RCSS-3065] NavFn 全局算路器某些情况下结果起点附近有不必要的曲折
+  - [RCSS-3114] 任务容易触发终点旋转超时失败
+  - [RCSS-3121] 电梯缝，会被误识别为悬崖，过不去
+  - [RCSS-3142] 树莓派底盘连接没密码的 wifi 失败
+  - [RCSS-3105] A60 2023 年 6 月 29 日晚 避障图中的深度相机障碍物残影
+
 ## 2.5 (Summary)
 
 - New Feature
