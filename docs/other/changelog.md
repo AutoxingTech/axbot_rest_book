@@ -10,6 +10,7 @@
   - [Reset USB Devices](../reference/services.md#reset-usb-devices)
 - Support adjusting robot footprint in `/robot-params`. A restart is required for it to take effect.
 - Add new caps: `supportsGyroscopeScaleCalibration`, `supportsParamFiles`, `supportsAppStore`, `supportsUsbDevices`
+- Support service [`POST /services/clear_system_down_unexpectedly`](../reference/services.md#clear-alert-system-down-unexpectedly)
 
 ## 2.4.0
 

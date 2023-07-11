@@ -360,3 +360,13 @@ curl -X POST \
   -d '{"devices_to_reset": ["1/3", "8/1"]}'
   http://localhost:8000/services/reset_usb_devices
 ```
+
+## Clear Alert System-Down-Unexpectedly
+
+![](./system-down-alert.png)
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  http://localhost:8000/services/clear_system_down_unexpectedly
+```
