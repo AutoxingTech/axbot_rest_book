@@ -156,48 +156,67 @@ Current pose in world frame.
 Return the execution state of the latest move action.
 
 ```ts
-enum ActionType
-{
+enum ActionType {
   none,
   standard,
-  charge
+  charge,
   along_given_route, // move along a given track
   return_to_elevator_waiting_point, // used when failed to enter elevator
-  pull_over // pull over to make space (for other robots to pass)
+  enter_elevator,
+  leave_elevator,
+  pull_over, // (DON'T USE) pull over to make space (for other robots to pass)
+  align_with_rack, // (DON'T USE)
 }
 
-enum MoveState
-{
+enum MoveState {
   none,
   idle,
   moving,
   succeeded,
   failed,
-  cancelled
+  cancelled,
+}
+
+enum StuckState {
+  move_stuck,
+  target_spin_stuck,
 }
 ```
 
 ```json
 {
   "topic": "/planning_state",
-  "action_id": 561,
-  "action_type": "standard", // see ActionType
+
+  "map_uid": "xxxxxx", // the uid of current map
+
+  // action
+  "action_id": 3354,
+  "action_type": "enter_elevator", // See ActionType, since 2.5.2
   "move_state": "moving", // see MoveState
+  "fail_reason": 0, // valid when move_state == failed
+  "fail_reason_str": "none", // valid when move_state == failed
+  "remaining_distance": 2.8750057220458984, // in meters
+
+  // target related
   "target_poses": [
     {
       "pos": [4.08, 2.99],
       "ori": 0
     }
   ],
-  "fail_reason": 0, // valid when move_state == failed
-  "fail_reason_str": "none", // valid when move_state == failed
-  "remaining_distance": 2.8750057220458984, // in meters
 
-  // The pose of the current target
+  // intent related
+  "move_intent": "", // deprecated by `action_type`
   "intent_target_pose": {
+    // The pose of the current target
     "pos": [0, 0],
     "ori": 0
-  }
+  },
+
+  // stuck state
+  "stuck_state": "move_stuck", // See StuckState, since 2.5.2
+  "in_elevator": true, // optional, since 2.5.2
+  "viewport_blocked": true // optional, since 2.5.2
 }
 ```
 
