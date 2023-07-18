@@ -178,8 +178,8 @@ enum MoveState {
 }
 
 enum StuckState {
-  move_stuck,
-  target_spin_stuck,
+  move_stucked,
+  target_spin_stucked,
 }
 ```
 
@@ -214,7 +214,7 @@ enum StuckState {
   },
 
   // stuck state
-  "stuck_state": "move_stuck", // See StuckState, since 2.5.2
+  "stuck_state": "move_stucked", // See StuckState, since 2.5.2
   "in_elevator": true, // optional, since 2.5.2
   "viewport_blocked": true // optional, since 2.5.2
 }
