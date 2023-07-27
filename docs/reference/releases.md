@@ -1,32 +1,81 @@
 # Changelog of Releases <!-- omit in toc -->
 
+## 2.5.4
+
+- Bug
+  - [RCSS-3169] 长距离路线 正常行驶时误报 1008 进度卡死
+  - [RCSS-3220] 香橙派，雷达被静电打死的情况下，5007 All lidar points are zero 存在误报
+- Task
+  - [RCSS-3229] 支持动态调节建图回显分辨率
+
+## 2.5.3
+
+- Bug
+  - [RCSS-3213] 发现底盘 WIFI 无法搜索到列表
+  - [RCSS-3226] 香橙派，USB 雷达掉线没有正确报警，引发继续盲跑撞物体
+- Improvement
+  - [RCSS-2351] 提升避障敏捷性 occupancy_grid_server 支持用不做记忆的深度相机擦除 voxel grid
+
 ## 2.5.2
 
-- New Feature
-  - [RCSS-3058] 提升重复环境下的建图成功率 - 动态搜索窗口
-  - [RCSS-3153] 增加报警 4502： imu scale 未校准
-- Improvement
-  - [RCSS-3145] 改进轮控的平滑性、缩小延迟
-  - [RCSS-2960] 减少 axrosbag 的内存占用，支持保存多种类型的 bag，包括点云数据
-  - [RCSS-3144] 减少 axrosbag 中记录的 constraint 的数据量
-  - [RCSS-3076] 由于主机蓝牙会被打死，支持外插 USB 蓝牙，虽然它也会死，加守护
-  - [RCSS-3126] 出现 5007 错误后不再自动恢复了，必须人工确认清除
-- Task
-  - [RCSS-3064] occupancy_grid_server 深度相机 VoxelGrid 相关参数改为可动态修改
-  - [RCSS-3088] occupancy_grid_server 新增参数单独设置 VoxelGrid z 方向的范围
-  - [RCSS-3103] occupancy_grid_server 避障图的大小参数改为可动态修改
-  - [RCSS-3092] occupancy_grid_server reset 时可以指定只清除 voxel_layer
-  - [RCSS-3125] 更换为用 i2c 来判断 IMU 硬件版本
-  - [RCSS-3143] 关闭避障图中根据碰撞标记虚拟障碍物的功能
 - Bug
   - [RCSS-3065] NavFn 全局算路器某些情况下结果起点附近有不必要的曲折
-  - [RCSS-3105] A60 2023 年 6 月 29 日晚 避障图中的深度相机障碍物残影
   - [RCSS-3114] 任务容易触发终点旋转超时失败
   - [RCSS-3121] 电梯缝，会被误识别为悬崖，过不去
   - [RCSS-3142] 树莓派底盘连接没密码的 wifi 失败
   - [RCSS-3155] 深圳寻迹反馈机器人在电梯旋转时与电梯间的扶手发生了碰撞
+  - [RCSS-3127] 树莓派机器底盘连接 WIFI 偶现获取不到 IP 的情况
+- New Feature
+  - [RCSS-3058] 提升重复环境下的建图成功率 - 动态搜索窗口
+  - [RCSS-3195] 除了已经确认不好的 imu，全面打开 trust_imu，大幅提升建图成功率
+  - [RCSS-3153] 增加报警 4502： imu scale 未校准
+  - [RCSS-3156] 新增报警 4010: IMU 温度异常 和 4011: IMU 温度波动过大
+  - [RCSS-3157] 增加报警 4009：IMU 数据读取异常
+  - [RCSS-3170] 支持新的 bottom sensor pack btms-2，只包含 ESP-NOW
+- Improvement
+  - [RCSS-3100] 要能流畅通过窄通道 - 左右余量 8cm
+  - [RCSS-3145] 改进轮控的平滑性、缩小延迟
+  - [RCSS-3172] REST API: /planning_state 新增字段 action_type, in_elevator, viewport_blocked
+  - [RCSS-3171] REST API: 支持用 map_uid 设置当前地图
+  - [RCSS-2960] 减少 axrosbag 的内存占用，支持保存多种类型的 bag，包括点云数据
+  - [RCSS-3144] 减少 axrosbag 中记录的 constraint 的数据量
+- Task
+  - [RCSS-3064] occupancy_grid_server 深度相机 VoxelGrid 相关参数改为可动态修改
+  - [RCSS-3088] occupancy_grid_server 新增参数单独设置 VoxelGrid z 方向的范围
+  - [RCSS-3092] occupancy_grid_server reset 时可以指定只清除 voxel_layer
+  - [RCSS-3103] occupancy_grid_server 避障图的大小参数改为可动态修改
+  - [RCSS-3126] 出现 5007(激光数据全为 0) 错误后不再自动恢复了，必须人工确认清除
+  - [RCSS-3125] 更换为用 i2c 来判断 IMU 硬件版本
+  - [RCSS-3143] 关闭避障图中根据碰撞标记虚拟障碍物的功能
+  - [RCSS-3193] Mars 机型，触发后退的安全距离，从 0 米改为 0.1 米
+  - [RCSS-3194] 将记忆的时间从 10s 改为 3 秒，视野外算路的时间 3 秒改为 2 秒
 
-## 2.5 (Summary)
+## 2.5.1
+
+- Bug
+  - [RCSS-2973] 武汉德康医院消杀 1 被深度相机的障碍物卡死
+  - [RCSS-2974] 软件商店，无法从 2.5.0-rc5 更新到 2.5.0
+  - [RCSS-2982] 正常关机，也会触发系统异常关机
+  - [RCSS-2989] waiter_1013 2023 年 5 月 29 日的 planning 崩溃
+  - [RCSS-3015] 新正源河北医科大学长底盘倒车出梯设置倒车速度未生效，默认速度太低容易卡住
+  - [RCSS-3016] 新正源河北医科大学机器人到达终点前卡住
+  - [RCSS-3019] USB 设备变化的时候有误报
+  - [RCSS-3054] 上桩自动复位，引起大量定位错误
+- New Feature
+  - [RCSS-2879] 新增报警 8008：eth0 连接不稳定
+  - [RCSS-3055] 新增报警 9014: 蓝牙设备丢失 - 只发现香橙派
+  - [RCSS-2930] 自动识别 IMU 和 RTC 的型号，并自动绑定
+  - [RCSS-2931] 为树莓派，研发新的 IMU 和 RTC 合并模块
+- Improvement
+  - [RCSS-3057] 调高乐动雷达的降噪参数，抗空旷走廊中的噪点
+- Task
+  - [RCSS-2984] planning 中增加开关，关闭进出电梯时禁用视觉的历史补丁
+  - [RCSS-2985] 进一步放宽矩佑相机的地面拟合参数改为 ground_remover/fit_threshold 为 0.08
+  - [RCSS-3024] 适配新的 IMU RTK 的 icm42688
+  - [RCSS-3053] 临时新增 `/slam/delay_position_lost_ratio`，可以调节丢定位的敏感度
+  - [RCSS-3056] 暂时禁用 wlan0_usb0_auto 路由模式
+
+## 2.5.0 (Summary)
 
 - New Feature
   - [RCSS-2816] 建图回环能力提升
@@ -70,6 +119,7 @@
   - [RCSS-2840] 关闭树莓派 swap 分区
   - [RCSS-2901] 改进 4G 守护逻辑
 - Bug
+
   - 规控相关
     - [RCSS-2720] 低速行驶，机器人摇头明显
     - [RCSS-2927] 非严格沿轨道行驶时允许适当内切，低速时不晃动
@@ -95,7 +145,7 @@
     - [RCSS-2815] /rgb_camera_state 没有消息
     - [RCSS-2825] 远控的角速度被非远控的角速度限制了
 
-### 2.5.0-rc5
+- 2.5.0-rc5
 
 - New Feature
   - [RCSS-2898] 避障图需要支持双激光雷达点云
@@ -103,6 +153,7 @@
   - [RCSS-2954] save 设备列表后，需要能立刻重新比较
   - [RCSS-2966] 震动减速相关开关，去掉 experimental 前缀
 - Bug
+
   - [RCSS-2953] 4G 卡松动守护，和 USB 设备守护打架，导致激光雷达丢失
   - [RCSS-2955] 比较设备列表，应该只显示叶节点，不管 hub 的增减
   - [RCSS-2956] 充电桩自动复位，线充时，会导致定位错误
@@ -110,7 +161,7 @@
   - [RCSS-2959] 狭窄通道内，如果前方有障碍物，不会后退，卡死
   - [RCSS-2962] 全局重算路后不应该要求进行视野外算路
 
-### 2.5.0-rc4
+- 2.5.0-rc4
 
 - New Feature
   - [RCSS-2943] 默认开启新的 device_guard_v2
@@ -118,6 +169,7 @@
 - Task
   - [RCSS-2937] 移除 CollisionDetector 中的 mutex
 - Bug
+
   - [RCSS-2886] 越南五合一 planning 的崩溃
   - [RCSS-2901] 改进 4G 守护逻辑
   - [RCSS-2917] 树莓派\+蓝海雷达刚启动的时候有概率出现无数据的情况
@@ -126,7 +178,7 @@
   - [RCSS-2934] 每次业务周期开始时更新 CollisionDetector 的避障图
   - [RCSS-2935] IMU 外参校准，一次无法完全成功，至少需要 2 次
 
-### 2.5.0-rc3
+- 2.5.0-rc3
 
 - New Feature
   - [RCSS-2547] 开发 axapt 命令，支持软件的查询、下载、安装
@@ -149,6 +201,7 @@
   - [RCSS-2881] 废弃 1501，改回 1007，只把类型改为 warning，不换码
   - [RCSS-2892] 用 footprint 位姿预算的方法优化 CollisionDetector 的执行性能
 - Bug
+
   - [RCSS-2850] 在狭窄处卡死，无法后退
   - [RCSS-2868] 国外 4G 守护存在异常守护问题
   - [RCSS-2880] axrosbag 写文件使用 duration 参数时结果中的 latched 消息有误
@@ -157,7 +210,7 @@
   - [RCSS-2890] 2.5.0-RC2，容易误报 imu twitch
   - [RCSS-2895] 当有障碍物像素完全在 footprint 内部时，CollisionDetector::outlineToObstacleDistance\(\) 必须返回 0
 
-### 2.5.0-rc2
+- 2.5.0-rc2
 
 - New Feature
   - [RCSS-2288] 增加 软件商店 相关 REST API
@@ -173,10 +226,11 @@
   - [RCSS-2834] 重构 DWA 原地旋转功能
   - [RCSS-2860] 进入电梯时终点可提前结束任务的容许误差默认为 0.2
 - Bug
+
   - [RCSS-2820] 没有网的情况下，ax-startup 启动慢，导致整体启动时间太长
   - [RCSS-2861] 机器人补桩时有可能旋转失败
 
-### 2.5.0-rc0
+- 2.5.0-rc0
 
 - New Feature
   - [RCSS-2604] 两台机器人在狭窄区域相逢堵死，其中一台能够自动后退让行
@@ -233,6 +287,7 @@
   - [RCSS-2693] 禁止 carto 向 /tmp 写入 log 文件
   - [RCSS-2708] 树莓派，写死 DNS，停用 dnsmasq 服务
 - Bug
+
   - [RCSS-2598] 空旷处没有回波，雷达残影导致堵死
   - [RCSS-2704] 机器人休眠后，机器缓慢旋转
   - [RCSS-2737] 机器人靠墙掉头有概率会卡死
@@ -251,44 +306,48 @@
   - [RCSS-2800] 没有网络时，会启动失败
   - [RCSS-2820] 没有网的情况下，ax-startup 启动慢，导致整体启动时间太长
 
-### 2.4.3
+- 2.4.3
 
 - Bug
+
   - [RCSS-2820] 没有网的情况下，ax-startup 启动慢，导致整体启动时间太长
 
-### 2.4.2
+- 2.4.2
 
 - Improvement
   - [RCSS-2860] 进入电梯时终点可提前结束任务的容许误差默认为 0.2
 - Bug
+
   - [RCSS-2776] 雷神雷达在使用 2.x.x 版本的时候 lidar_node 的 CPU 占用率过高
   - [RCSS-2800] 没有网络时，会启动失败
   - [RCSS-2861] 机器人补桩时有可能旋转失败
 
-### 2.4.0
+- 2.4.0
 
 - Improvement
   - [RCSS-2770] Bias-temperature 曲线精度提升到 0.1 度
 - Task
   - [RCSS-2768] 录 Bag 的功能，需要为每个 code 增加最小间隔，防止大量录像
 - Bug
+
   - [RCSS-2598] 空旷处没有回波，雷达残影导致堵死
   - [RCSS-2756] 刚启动，热力图会误报心跳停止
   - [RCSS-2759] 纺织厂，容易误触发 7005 position lost
   - [RCSS-2764] IMU 禁用时，颠簸检测建议速度始终为 0.1
   - [RCSS-2767] 机器人在充电区域外回桩时，一直倒车运动到挂节点
 
-### 2.4.0-rc2
+- 2.4.0-rc2
 
 - Task
   - [RCSS-2747] 增加 5006，lidar_node 心跳异常
 - Bug
+
   - [RCSS-2730] lidar_node 发布的数据有时间倒流现象
   - [RCSS-2737] 机器人靠墙掉头有概率会卡死
   - [RCSS-2745] 激光雷达没有数据，没有正常报警
   - [RCSS-2754] 上一个任务失败，下一个任务也失败时无法正常结束
 
-### 2.4.0-rc1
+- 2.4.0-rc1
 
 - New Feature
   - [RCSS-2650] 支持双激光雷达，一起定位
@@ -302,6 +361,7 @@
   - [RCSS-2727] 全面采用 iptables masquerade 转发
   - [RCSS-2739] 调查唤醒时点云乱的原因，等待转速稳定后，再发点云
 - Bug
+
   - [RCSS-2278] IMU 频率异常，未恢复
   - [RCSS-2672] 时间倒流，不做 CHECK，不崩溃
   - [RCSS-2699] 建图时 uid 不应该为空
@@ -309,7 +369,7 @@
   - [RCSS-2728] 休眠或唤醒时，点云匹配很好，lidar_matched 为 false
   - [RCSS-2737] 机器人靠墙掉头有概率会卡死
 
-### 2.4.0-rc0
+- 2.4.0-rc0
 
 - New Feature
   - [RCSS-2696] 增加 REST API，支持调节颠簸容忍度
@@ -361,6 +421,7 @@
   - [RCSS-2593] USB 防止过度守护，仅 reset 3 次，并支持在线禁用 USB 守护
   - [RCSS-2624] 把统计到的磁盘写入量，写入 /tmp/disk_usage.txt 中
 - Bug
+
   - 解决了一些崩溃 [RCSS-2587]、[RCSS-2605]、[RCSS-2620]、[RCSS-2639]
   - [RCSS-2629] 摄像头报错，反复震荡
   - [RCSS-2631] 一些 ROS 通讯中断
@@ -375,21 +436,23 @@
   - [RCSS-2563] 当频繁调用 usbreset hub 的时候，ihawk_node 有可能打不开设备
   - [RCSS-2581] 向机器人后方发起任务时会绕着圈走
 
-### 2.3.1
+- 2.3.1
 
 - Bug
+
   - [RCSS-2621] 东阳光工厂丢定位-网络中断，ROS 通讯终止引发
   - [RCSS-2658] auto-robot 服务停止的时候，部分进程没有及时退出，引起服务整体退出时间过长
   - [RCSS-2661] 部分机器升级到 2.3.0 版本时，发生断网问题
   - [RCSS-2656] hotel_1019 上 planning 退出时的崩溃
 
-### 2.3.0
+- 2.3.0
 
 - Bug
+
   - [RCSS-2646] 绥化，上菜口，靠右错车引起副作用
   - [RCSS-2652] 非 planning 控车时，应该忽略震动，不更新建议速度
 
-### 2.3.0-rc2
+- 2.3.0-rc2
 
 - New Features
   - [RCSS-2507] 根据自学习的建议速度热力图，实现预减速
@@ -401,6 +464,7 @@
   - [RCSS-2637] /planning_state 增加 viewport_blocked 表示当前视野路线是否被阻挡
   - [RCSS-2624] 把统计到的磁盘写入量，写入 /tmp/disk_usage.txt 中
 - Bug
+
   - [RCSS-2587] 出现 0 字节的 core-dump
   - [RCSS-2605] ax_carto 中崩溃
   - [RCSS-2620] planning 崩溃 work_update throw_out_of_range
@@ -410,7 +474,7 @@
   - [RCSS-2639] planning 中 ax::PoseBasedCostmapResetter 对 m_poseQueue 的访问未作互斥
   - [RCSS-2641] 机器人电梯楼层切换时，错误的重定位导致机器人异常
 
-### 2.3.0-rc1
+- 2.3.0-rc1
 
 - New Feature
   - [RCSS-2476] 支持关闭自动驻车 auto-hold
@@ -425,11 +489,12 @@
   - [RCSS-2606] 修改用于遇对向机器人靠右错车的虚拟障碍物地势的生成规则
   - [RCSS-2611] 二级选路增加“危险地势”的检测
 - Bug
+
   - [RCSS-2595] 6506 时间错误，即使 chrony 已经纠正，也不会自动恢复
   - [RCSS-2601] 二级路始终选新路导致行驶轨迹不合理
   - [RCSS-2609] 深度相机休眠后没有为 ·device_hw_state· topic 中 power_state 字段正确赋值
 
-### 2.3.0-rc0
+- 2.3.0-rc0
 
 - New Features
   - [RCSS-2082] 改进 DWA 规划，引入加速度
@@ -493,6 +558,7 @@
 ## 2.1.0
 
 - Bug
+
   - [RCSS-2490] 长走廊中，车速不稳 - 避障图中的 unknown 区域导致
   - [RCSS-2502] `platform/lib/berxelLog.ini` 不应该在 log 目录下
   - [RCSS-2506] 如果已经静默了 baseboard，则不能再等待版本上报
@@ -502,7 +568,7 @@
   - [RCSS-2511] 阳光工厂，切换到 auto 后，走了几步后卡死
   - [RCSS-2514] systemctl stop 特别的慢 - ax_run 守护导致
 
-### 2.1.0-rc0
+- 2.1.0-rc0
 
 - New Features
   - [RCSS-2392] 使用 beam model 输出实时点云匹配度
@@ -514,11 +580,12 @@
 - Task
   - [RCSS-2281] 支持查看未过滤的原始点云
 - Bug
+
   - [RCSS-2494] monitor 自身内存过高，引起系统崩溃，应该允许自杀
   - [RCSS-2498] 出隧道纠正时，车依然运动，导致纠正后位姿错误，丢定位
   - [RCSS-2497] depth_camera_tools 检测到参数错误，拒绝启动，但是 exit code 是 1
 
-### 2.0.0-rc10
+- 2.0.0-rc10
 
 - Task
   - [RCSS-2158] 增加开关，禁用 baseboard 串口通讯
@@ -529,6 +596,7 @@
   - [RCSS-2473] 支持 longbase 新机型
   - [RCSS-2482] 添加内部参数，增大一级算路的耗时，用于测试
 - Bug
+
   - [RCSS-2411] 西站 1 号，深度摄像头不工作，也没有报警
   - [RCSS-2464] bottom sensor pack 的固件版本号没有正确返回
   - [RCSS-2465] 上报启动过程中的 RosWaiter 错误，提高启动速度
@@ -537,7 +605,7 @@
   - [RCSS-2478] 把终点设置到地图外不太远处，planning 中会访问未初始化的变量
   - [RCSS-2483] 没有安装激光雷达，也没有指定 model，服务无法启动
 
-### 2.0.0-rc9
+- 2.0.0-rc9
 
 - New Features
   - [RCSS-2319] 头壳 ping 不通报警
@@ -556,6 +624,7 @@
   - [RCSS-2452] 微调深度相机外参矫正参数，提高通过率
   - [RCSS-2456] 除了消杀之外的机型，禁用 vision_based_detector，节约 CPU
 - Bug
+
   - [RCSS-2454] tray 机型摄像头外参错了 6 cm
   - [RCSS-2415] lidar_node 有 5005 Lidar bluesea25d is irresponsive to commands 误报
   - [RCSS-2414] 南非五合一机器人上有 planning 的 core-dump
@@ -567,13 +636,14 @@
   - [RCSS-2439] depth_camera_proc info log 太多 刷屏
   - [RCSS-2453] 71822054002433V 上的 planning 崩溃
 
-### 2.0.0-rc8
+- 2.0.0-rc8
 
 - Bug
+
   - [RCSS-2406] bottom_sensor_pack_node 中存在的内存泄露
   - [RCSS-2409] 到达终点未旋转
 
-### 2.0.0-rc7
+- 2.0.0-rc7
 
 - New Features
   - [RCSS-2382] 新增激光发送指令异常和光流频率异常报警码
@@ -584,6 +654,7 @@
   - [RCSS-2239] 上报激光通信状态
   - [RCSS-2399] 升级 ihawk SDK 到 2.0.88，解决部分死机问题
 - Bug
+
   - [RCSS-2371] 乐动雷达在大立柱处有噪点
   - [RCSS-2308] 机器人在运行半路卡死不动（疑似视觉卡死）
   - [RCSS-2314] 双 ihawk 在 caracal_1000 上更加不稳定了
@@ -594,7 +665,7 @@
   - [RCSS-2383] 建图开始时，move 误报 7002 造成 action 失败
   - [RCSS-2397] 加拿大 imu 损坏的机器，充电桩复位后定位质量不可靠
 
-### 2.0.0-rc6
+- 2.0.0-rc6
 
 - New Features
   - [RCSS-2017] iHawk 摄像头自动校准工具
@@ -637,20 +708,22 @@
 - Task
   - [RCSS-2158] 增加开关，禁用 baseboard 串口通讯
 - Bug
+
   - [RCSS-2411] 西站 1 号，深度摄像头不工作，也没有报警
   - [RCSS-2478] 把终点设置到地图外不太远处，planning 中会访问未初始化的变量
 
-### 1.12.0-rc5
+- 1.12.0-rc5
 
 - Task
   - [RCSS-2365] 优化 RealTimeCorrelativeScanMatcher2D
 - Bug
+
   - [RCSS-2457] 1.12.0-rc1，引入了参数 bug，导致雷神、蓝海雷达都无法工作
   - [RCSS-2414] 南非五合一机器人上有 planning 的 core-dump
   - [RCSS-2420] 2022 年 12 月 31 日 caracal_1000 上的 planning 崩溃
   - [RCSS-2453] 71822054002433V 深圳宝安区人民政府消杀 1 上的 planning 崩溃上的 planning 崩溃
 
-### 1.12.0-rc1
+- 1.12.0-rc1
 
 - New Features
   - [RCSS-2201] 设置初始位姿时，对明显错误的位姿做小幅度自动纠正
@@ -672,13 +745,14 @@
   - [RCSS-2340] 协助自动删除 py_axbot 的陈旧 log 和 video
   - [RCSS-2338] 对外暴露阿里云在线状态
 - Bug
+
   - [RCSS-2280] 底盘报旋转超时报错
   - [RCSS-2305] 4G 网络掉线，没有成功守护 - 辽源市政府机器
   - [RCSS-2316] 乐动雷达在立柱处有噪点
   - [RCSS-2342] 运行过程中，删除 video，会导致 video_record 大量报错
   - [RCSS-2336] 1.10.1.2 重启时，monitor_watcher 会瞬间误报心跳错误
 
-### 1.11.0-rc5
+- 1.11.0-rc5
 
 - Task
   - [RCSS-1994] 改进 sensor_manager 更好的控制多设备的开关
@@ -738,6 +812,7 @@
   - [RCSS-2206] 雷神，调整滤波参数
   - [RCSS-2217] 废弃对主计算板的控电功能
 - Bug Fixes
+
   - [RCSS-2047] 雷神 lsn 激光雷达在立柱处有噪点
   - [RCSS-2034] 蓝海激光立柱拖尾问题
   - [RCSS-1900] 电池充电状态判断高频震荡
@@ -770,7 +845,7 @@
   - [RCSS-2213] 香橙派机器人 4G 守护触发（关机）
   - [RCSS-2214] AP 消失后按三下电源按键无法重置。让 AP 恢复
 
-### 1.10.0
+- 1.10.0
 
 - 可以禁用光流融合，通过更改 `/bottom_sensor_pack/optical_flow/odom_topic_name`。
 - [RCSS-1899] 全局定位，如果匹配特别好，可以不用人工确认。
@@ -778,6 +853,7 @@
 - [RCSS-1880] Add v2x debugging tool: `bot_top`.
 - REST API `GET /device/info` 中，增加 bottom_sensor_pack 和 depth_camera 的固件版本字段。
 - Bug Fix:
+
   - [RCSS-1982] 修复任务 cancel 后 `/planning_state` 的 `move_state` 依然是 `moving` 状态导致机器人状态异常。
   - 修复终点被占用，不容易结束任务的问题。距离终点一个车长内停车，则提前结束任务。
   - 修复视频记录的 bug。多线程导致记录错误。
@@ -787,36 +863,40 @@
   - [RCSS-1957] 修复 sensor_manager_node 尝试打开深度相机时，会卡死主线程
   - [RCSS-1952] 改进定位时的 uncertainty radius，避免出隧道无法正确匹配的问题
 
-### 1.10.0-rc6
+- 1.10.0-rc6
 
 - Bug Fix:
+
   - [RCSS-1951] 机器人设备休眠时，必须等唤醒后才能移动。
 
-### 1.10.0-rc5
+- 1.10.0-rc5
 
 - 增加参数 `/slam/local_match_translation_weight`。设为 `stronger` 则可以一定程度防止打滑。
 - [RCSS-1934] 支持通过 `/lidar/max_range` 调节激光测距范围。
 - 支持把 V2X 插在 8-1 口的绑定。（有两台发绥化的机器插到了这个口上）
 - Bug Fix:
+
   - 修复了 USB 守护中，reset 连续失败引起的死循环。
 
-### 1.10.0-rc4
+- 1.10.0-rc4
 
 - [RCSS-1884] 增加开关，默认禁用了独享区调度(还不成熟)。
 - [RCSS-1821] 新增对 USB-hub 的守护。如果被静电打死了，自动重启。
 - [RCSS-1772] 让加(减)速度和速度差相关，从而避免急加速、急减速
 - 禁用了打滑报警(误报太多)
 - 人体检测
+
   - [RCSS-1873] 支持建图时，自用禁用检测功能，建图结束后，自动恢复
   - 同步 master 微调过的 coco head 模型，改善近距离人的识别效果
 
-### 1.10.0-rc3
+- 1.10.0-rc3
 
 - Bug Fixes:
+
   - 改正了启动时深度相机恰巧接触不良，后续又连上还不工作的 bug
   - 改成了 IMU 外参校准的 bug
 
-### 1.10.0-rc2
+- 1.10.0-rc2
 
 - 支持 LC303 光流
 - [RCSS-1824] 加长底盘支持后退出电梯
@@ -834,6 +914,7 @@
   - [RCSS-1847] Add `/occupancy_grid_server/depth_simple_marking_keep_time`.
   - [RCSS-1832] 修改配置文件，餐厅与酒店机器人的下视深度相机配置为近处带记忆远处不带记忆
 - Bug Fixes
+
   - [RCSS-1865] 支持配置乘梯点不同状态时的超时时间。
   - [RCSS-1866] 任务开始一级路线有障碍物，选路时直接切换新路线（不 hold 2s）。(**planning**)
   - [RCSS-1841] 修复回桩充电卡死问题。(**planning**)
@@ -847,7 +928,7 @@
   - 修复靠近终点旋转时的左右震荡。 (**planning**)
   - [RCSS-1833] 修复近距离情况下机器人不能到达终点的 BUG。 (**planning**)
 
-### 1.10.0-rc1
+- 1.10.0-rc1
 
 - 支持 bottom sensor pack 元器件。（包括光流、ESP Now 通讯）
   - 支持被推动、自动释放轮子
@@ -863,6 +944,7 @@
   - 乘梯点是 occupied 状态时，车先停 3s 再运动，超过 3s 还是 occupied 状态播报让一让.
   - 运动过程中，超过 3s 进度没有更新播报让一让，超过 10s 进度没有更新任务失败.
 - Bug Fix:
+
   - 避免频繁报雷达转速错误。Add `scan_rate_error_delay`
   - [RCSS-1823] 解决了 USB 绑定的 bug
   - 靠边停车，去掉了卡死误报警
@@ -871,7 +953,7 @@
   - 任务刚发起后二级路算路失败，此时应该沿着一级路线行驶。
   - 修复机器人在桩上充电后自动复位。
 
-### 1.10.0-rc0
+- 1.10.0-rc0
 
 - REST API
   - 支持 `/services/setup_wifi`。设置 wifi 为 station 或者 AP 模式。
@@ -949,15 +1031,16 @@
 - 增加参数 `/slam/local_match_translation_weight`。设为 `stronger` 则可以一定程度防止打滑。
 - [RCSS-1934] 支持通过 `/lidar/max_range` 调节激光测距范围。
 
-### 1.8.9-rc1
+- 1.8.9-rc1
 
 - 解决了部分打滑导致的丢定位问题。当打滑不严重时，不会定位错误。
 - 去掉了对 apt source 的修改。
 - Bug Fix:
+
   - [RCSS-1757] 解决了闲置时，内存不断增大，引起进程大量崩溃的问题。
   - [RCSS-1453] 解决了 `cartographer_occupancy_grid_node` 闲置时内存过大的问题.
 
-### 1.8.9-rc0
+- 1.8.9-rc0
 
 - Fix bug:
   - 任务被取消或者任务失败时，清除 v2x 发布的路线.
@@ -971,46 +1054,50 @@
 ## 1.8.8
 
 - Fix bug:
+
   - Restore content of network configuration file, which might be messed by other releases.
 
-### 1.8.8-rc4
+- 1.8.8-rc4
 
 - 增加 imu 外参矫正脚本 `/opt/ax/bin/calibrate_imu.py`
 - 缓存远程配置，如果启动时网络不可用，则使用缓存的配置。
 - [RCSS-1587] 增加 Debug 用的深度点云查看功能。
 - Fix bug
+
   - Fix ROS service exception when setting map or start/stop slamming.
   - Fix bug: `/slam/state` is not send when websocket is connected for the first time.
 
-### 1.8.8-rc3
+- 1.8.8-rc3
 
 - [RCSS-858] 支持远程调参。
 - 支持 50x50 的深度摄像头。增量了阳光降噪能力（部分牺牲了小物体的识别能力）。
 - 暂时禁用了休眠功能。
 - [RCSS-1706] 对于失败的 API Call，也记录并上传到 Action Log。
 - Bug Fixes:
+
   - 修复了未知心跳引起的误报警。
   - [RCSS-1711] Fix false heartbeat alarm of `rgb_camera_node`
   - [RCSS-1708] 修复上桩过程中 `/planning_state` 发布卡住状态.
   - 修复了重启时，还没有定位，就报(0,0)坐标的问题。
   - [RCSS-1704] 修复了充电桩识别模块 log 过多的问题。
 
-### 1.8.8-rc2
+- 1.8.8-rc2
 
 - 启用了 vision-based-detector
   - Add websocket topic `/vision_detected_objects`.
   - REST caps 增加 `supportsVisionBasedDetector`。说明支持基于 RGB 的视觉识别。
 - REST caps 增加 `supportsExternalRgbCamera`。说明支持从外接摄像头回传 RGB 数据。
 
-### 1.8.8-rc1
+- 1.8.8-rc1
 
 - [RCSS-1575] 修复了静止时(往往在充电)，定位飞的问题
 - [RCSS-1615] 支持屁股对桩
 - [RCSS-1701] 支持屁股对桩车型，当充电时定位不在充电桩上，则自动复位(必须全机器只有唯一充电桩)
 - Bug Fix:
+
   - [RCSS-1700] 修复急停状态时 v2x 不发送自车位置
 
-### 1.8.8-rc0
+- 1.8.8-rc0
 
 - 平台
   - 支持新机型 Tray (开放架子)
@@ -1107,16 +1194,17 @@
 
 - 支持使用 CP210x 和 pl2303 两款 UART-to-USB 转接芯片的 V2X 芯片的绑定。
 
-### 1.8.7-rc1
+- 1.8.7-rc1
 
 - 新增报警 6506(时间不同步) 。当系统时间和 NTP 时间相差 1 分钟以上，则报警。
 - Bug fix:
+
   - 修复了已经在充电桩上，还自动复位的问题
   - 修复了充电桩复位的内存泄漏
   - 修复了统计信息中的错误
   - lidar_odom covariance 修正为 2x2 矩阵
 
-### 1.8.7-rc0
+- 1.8.7-rc0
 
 - [RCSS-1609] 支持机器人在桩上充电后自动复位。 (**planning**)
 - [RCSS-1592] 加动态开关，能开关融合 odom。默认关闭。`/odom_error_detector/fuse_lidar_odom` (**odom_error_detect**)
@@ -1152,7 +1240,7 @@
 - 支持参数 /occupancy_grid_server/use_depth_cameras。在避障图中禁用深度相机。可以动态修改。
 - 2008(严重打滑) 自动录制 bag 包。
 
-### 1.8.6-rc1
+- 1.8.6-rc1
 
 - 增加 v2x 守护服务。 `systemctl cat v2x_guard.service`
 - 错误码 2008，重新定义为严重打滑。
@@ -1161,9 +1249,10 @@
 - 增加定期清理 log 和 bag 的后台服务。自动删除 7 天以上的文件。
 - 减少 log 文件的写入，去掉 rosout.log。
 - Bug fix:
+
   - 解决了 journalctl -f 查看 log 不及时的问题。
 
-### 1.8.6-rc0
+- 1.8.6-rc0
 
 - [RCSS-1477] **电梯门识别结果** 和 **电梯占用状态** 中，将设备 ID 作为名称 (**feature_detectors**)
 - [RCSS-1476] 使用 `v2x_node` 获取周围机器人的信息。
@@ -1174,29 +1263,33 @@
 ## 1.8.5
 
 - Bug Fix:
+
   - rc1 新增的打滑报警忘了开了。
 
-### 1.8.5-rc1
+- 1.8.5-rc1
 
 - 新增打滑检测、报警
 - 新增 systemCpuUsageVeryHigh 报警
 - 启动时，配置树莓派默认声卡。
 - Bug Fix:
+
   - 修复树莓派深度相机 USB 绑定错误。
 
-### 1.8.5-rc0
+- 1.8.5-rc0
 
 - Bug Fix:
+
   - [RCSS-1441] 补桩逻辑不全，机器人任然偶现有充不上电的情况
   - [RCSS-1416] 4g 模块异常守护
 
-### 1.8.4-rc1
+- 1.8.4-rc1
 
 - Bug Fix:
+
   - [RCSS-1508] 解决绍兴几个地铁站，长隧道误报 7002 丢定位的问题。
   - 7002(丢定位)，加入停止运动的白名单中。
 
-### 1.8.4-rc0
+- 1.8.4-rc0
 
 - Bug Fix:
   - 解决切换地图时 1005(超过 1s 没有避障图 /maps/5cm 消息) 误报。
@@ -1227,20 +1320,22 @@
 
 - 修改了 ax_first_time_init，使用新的 frpc 配置，增加连接稳定性。（只对母盘有影响）
 
-### 1.8.1-rc2 2022/03/23
+- 1.8.1-rc2 2022/03/23
 
 - Bug Fix:
+
   - 解决了开机时，如果 imu 矫正失败，导致 IMU 永远无数据的问题。
 
-### 1.8.1-rc1 2022/03/17
+- 1.8.1-rc1 2022/03/17
 
 - [RCSS-1344] planning 增加开关，可以禁用动态充电桩。 (**planning**)
 - Bug Fix:
+
   - 充电桩区域支持建图平台画的任意四边形。 (**planning**)
   - 解决了 `POWER_SUPPLY_STATUS_FULL` 电池满状态不可靠的问题。改用充电电流判断。 (**sensor-drivers**)
   - [RCSS-1297] 解决了电梯区域有重复点，导致电梯开关门状态识别错误的问题。(**feature_detectors**)
 
-### 1.8.1-rc0 2022/03/11
+- 1.8.1-rc0 2022/03/11
 
 - Bug Fix:
   - [RCSS-1310] Fix a bug in clustering of charger detection result. (**feature_detectors**)
@@ -1251,18 +1346,20 @@
 
 - 新增报警 10003，充电簧片有信号，但是没有充电电流
 
-### 1.8.0-rc7 2022/03/07
+- 1.8.0-rc7 2022/03/07
 
 - Bug Fix:
+
   - [RCSS-1290] 发起回桩充电时，如果恰好已经在观察点，则不会使用识别结果，可能导致直接撞墙 (**planning**)
   - [RCSS-1228] 新增对桩 `Touch` 后长时间没收到电流时进行补桩。 (**planning**)
 
-### 1.8.0-rc6 2022/03/02
+- 1.8.0-rc6 2022/03/02
 
 - Bug Fix:
+
   - 消杀机器本来就没有深度摄像头，误报 11006(未找到深度摄像头设备)
 
-### 1.8.0-rc5 2022/03/01
+- 1.8.0-rc5 2022/03/01
 
 - 新增错误 11006 未找到深度摄像头设备
 - 监控平台，支持显示都谁在看某个机器人
@@ -1275,7 +1372,7 @@
   - 修改 map2wolrd 时坐标移到像素中心。
   - [RCSS-1238] 到观测点时至少停留 1s 等待动态识别的充电桩结果，没有结果时再进行搜索。
 
-### 1.8.0-rc4
+- 1.8.0-rc4
 
 - 新增 更新/删除/覆盖 地图的 Action Log 显示。
 - Websocket 新增 `/device_info`. 使用 `{"topic": "/get_device_info"}` 发起请求。
@@ -1288,6 +1385,7 @@
   - Record `/detected_features` in axrosbag. (**platform-build**)
   - [RCSS-1208] add uid in map info (**ax-platform-control**)
 - Bug Fix:
+
   - 修复充电时搜索路线转向 BUG。
   - 修复转弯超调。
   - Fix bug: failed to set wheel current limit. (**wheel_control**)
@@ -1296,10 +1394,11 @@
   - [RCSS-1201] Use Asia/Shanghai timezone for file name. (**ax-platform-control**)
   - [RCSS-1149] 修复对桩旋转不到位，导致歪斜（修改挂节点距离为 0.6m）。 (**planning**)
 
-### 1.8.0-rc3
+- 1.8.0-rc3
 
 - [RCSS-1208] Websocket /map_info 中 增加 uid (**ax-platform-control**)
 - Bug Fix:
+
   - [RCSS-1201] Use Asia/Shanghai timezone for file name. (**ax-platform-control**)
   - [RCSS-1199] 修复机器人退桩时有人走过，会导致机器人卡住不动。 (**planning**)
   - [RCSS-1198] 修复退桩距离太短造成旋转时剐蹭充电片。 (**planning**)
@@ -1309,16 +1408,17 @@
   - [RCSS-1169] 修复机器人回桩未充上电，也没有补桩。 (**planning**)
   - [RCSS-1159] 修复在电梯门口退回待梯点时卡住的问题。 (**planning**)
 
-### 1.8.0-rc2
+- 1.8.0-rc2
 
 - 监控平台，支持 Action Log。
 - [RCSS-1089] 提高地图载入性能。支持 `/slam/set_map` 直接加载地图。 (**cartographer_ros**)
 - Bug Fix:
+
   - [RCSS-1136] 修复轮子使能/释放状态错误的 bug (**wheel_control**)
   - [RCSS-1119] 为轮动打补丁，如果删除非常高的速度，则不相信 (**wheel_control**)
   - [RCSS-1110] 修复启动时报 BUS_UNLINK_ERROR. (**wheel_control**)
 
-### 1.8.0-rc1
+- 1.8.0-rc1
 
 - [RCSS-490] 支持增量更新地图
 - [RCSS-1051] 当电梯满时，快速放弃乘梯
