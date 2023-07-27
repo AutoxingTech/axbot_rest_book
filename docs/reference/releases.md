@@ -4,7 +4,7 @@
 
 - Bug
   - [RCSS-3169] 长距离路线 正常行驶时误报 1008 进度卡死
-  - [RCSS-3220] 香橙派，雷达被静电打死的情况下，5007 All lidar points are zero 存在误报
+  - [RCSS-3220] 雷达被静电打死的情况下，5007 All lidar points are zero 存在误报 - 香橙派
 - Task
   - [RCSS-3229] 支持动态调节建图回显分辨率
 
@@ -12,7 +12,7 @@
 
 - Bug
   - [RCSS-3213] 发现底盘 WIFI 无法搜索到列表
-  - [RCSS-3226] 香橙派，USB 雷达掉线没有正确报警，引发继续盲跑撞物体
+  - [RCSS-3226] USB 雷达掉线没有正确报警，引发继续盲跑撞物体 - 香橙派
 - Improvement
   - [RCSS-2351] 提升避障敏捷性 occupancy_grid_server 支持用不做记忆的深度相机擦除 voxel grid
 
@@ -63,7 +63,7 @@
   - [RCSS-3054] 上桩自动复位，引起大量定位错误
 - New Feature
   - [RCSS-2879] 新增报警 8008：eth0 连接不稳定
-  - [RCSS-3055] 新增报警 9014: 蓝牙设备丢失 - 只发现香橙派
+  - [RCSS-3055] 新增报警 9014: 蓝牙设备丢失 - 香橙派
   - [RCSS-2930] 自动识别 IMU 和 RTC 的型号，并自动绑定
   - [RCSS-2931] 为树莓派，研发新的 IMU 和 RTC 合并模块
 - Improvement
