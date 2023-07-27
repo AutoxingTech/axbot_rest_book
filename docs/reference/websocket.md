@@ -151,7 +151,7 @@ Current pose in world frame.
 }
 ```
 
-## Move Action State
+## Planning State
 
 Return the execution state of the latest move action.
 

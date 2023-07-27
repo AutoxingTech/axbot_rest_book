@@ -104,7 +104,7 @@ curl -X POST \
 }
 ```
 
-## Move Action State
+## Planning State
 
 Use `GET /chassis/moves/:id` to see the state of a move action.
 

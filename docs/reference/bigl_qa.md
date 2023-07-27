@@ -319,7 +319,7 @@ serial_number: "unknown"
 > 以周期性流 (~1Hz)，反映导航系统特定任务状态（字符串 strings 或状态代码
 > status code， 包括错误代码 error code 等）
 
-- Websocket. See [Move Action State](./websocket.md#move-action-state)
+- Websocket. See [Planning State](./websocket.md#planning-state)
 - ROS topic. `/planning_state`
 
 ```

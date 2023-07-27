@@ -13,7 +13,11 @@ curl -X POST \
 
 ```ts
 class SetCurrentMapRequest {
-  map_id: number;
+  map_id?: number; // Either 'map_id' or 'map_uid' must be provided.
+
+  // Since 2.5.2. Map can be set with "uid".
+  // Before that, only 'map_id' is supported.
+  map_uid?: string;
 }
 ```
 

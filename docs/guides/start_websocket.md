@@ -6,7 +6,7 @@ Unlike REST API's request/response behavior, Websocket allows constantly two-way
 This is especially useful when the robot needs to report back fast changing information, such as:
 
 - The pose of the robot
-- Move action state
+- Planning state
 - Current map
 - Current target
 - ...

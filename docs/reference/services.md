@@ -370,3 +370,15 @@ curl -X POST \
   -H "Content-Type: application/json" \
   http://localhost:8000/services/clear_system_down_unexpectedly
 ```
+
+## Clear Range Data All Zero Error
+
+When all Lidar points have 0 values, it indicates the Lidar device is already broken(or will broke).
+
+This service temporarily clear this error message.
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  http://localhost:8000/services/clear_range_data_all_zero_error
+```

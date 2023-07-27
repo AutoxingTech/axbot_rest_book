@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.5.2
+
+- `map_uid` can be used to [set current map](../reference/current_map_and_pose.md#set-current-map).
+- In Websocket `/planning_state`, add `action_type`, `in_elevator`, `viewport_blocked`. See [Planning State](../reference/websocket.md#planning-state).
+- Support [`POST /services/clear_range_data_all_zero_error`](../reference/services.md#clear-range-data-all-zero-error).
+
 ## 2.5.0
 
 - Add `/services/calibrate_gyro_scale` in [Calibrate Gyroscope Scale](../reference/services.md#calibrate-gyroscope-scale)
