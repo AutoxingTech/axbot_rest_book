@@ -58,6 +58,14 @@ interface MoveActionCreate {
 }
 ```
 
+### Follow Given Route Strictly
+
+When `route_coordinates` is given and `detour_tolerance=0`, the robot will follow the route as closely as possible and will not try to evade obstacles(only stop ahead).
+
+This is often used in stock inspection.
+
+![](./follow_given_route.png)
+
 ## Get Move Action Detail
 
 ```bash

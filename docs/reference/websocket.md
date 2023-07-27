@@ -2,32 +2,40 @@
 
 ## Map
 
-Currently used map.
+In pure-location mode, the `/map` topic contains the currently used map. Any only update once.
+
+In mapping mode, the map is constantly updated at a small interval.
 
 ![](./map.png)
 
 ```json
 {
   "topic": "/map",
-  "stamp": 1660896129737,
-  "resolution": 0.10000000149011612,
-  "size": [182, 59],
-  "origin": [-8.1, -4.8],
+  "resolution": 0.1, // the width/height of a single pixel, in meter
+  "size": [182, 59], // the size of the image, in pixel
+  "origin": [-8.1, -4.8], // The world coordinate of the lower left pixel
   "data": "iVBORw0KGgoAAAANSUhEUgAAALYAAAA7BAAAAA..." // Base64 encoded PNG file
 }
 ```
 
 ## Obstacle Map
 
-Only for debugging.
+It shows the sensed obstacles around the robot, including data from all sensors and virtual-walls.
 
-![](./obstacle_map.png)
+It's only for debugging, seeing through the eyes of the robots.
+
+The **dark-red** pixels are the entity of the obstacles, while the **light-red** pixels are extruded with the inscribe-radius of the robot. The center of the robot may never enter the red area, or the robot must have collide with something.
+
+| Low Res. Costmap           | High Res. Costmap            |
+| -------------------------- | ---------------------------- |
+| /maps/5cm/1hz              | /maps/1cm/1hz                |
+| Used for path planning     | Used for collision detection |
+| ![](./low_res_costmap.png) | ![](./high_res_costmap.png)  |
 
 ```
 {
-  "topic": "/maps/5cm/1hz",
-  "stamp": 1660896742341,
-  "resolution": 0.05000000074505806,
+  "topic": "/maps/5cm/1hz", // or '/maps/1cm/1hz'
+  "resolution": 0.05,
   "size": [
     200,
     200
@@ -52,12 +60,18 @@ Only for debugging.
 
 ## Positioning State
 
+::: note
+For debugging only.
+:::
+
 ```json
 {
   "topic": "/slam/state",
   "state": "positioning", // 'inactive/slam/positioning' 闲置/建图/定位
 
-  // The quality of positioning
+  "reliable": true,
+
+  // The quality of positioning(Experimental)
   //
   // Only valid in positioning state.
   // since 2.3.0.
@@ -67,9 +81,6 @@ Only for debugging.
   //  8 - good
   // 10 - excellent
   "position_quality": 10,
-
-  // Deprecated since 2.3.0
-  "reliable": true,
 
   // Whether the lidar observation matches current map
   //
@@ -257,9 +268,14 @@ Current route.
 }
 ```
 
-## Mapping Trajectory
+## Trajectory
 
-Realtime trajectory during mapping.
+The trail of the robot.
+
+- In mapping mode, the trajectory is the full trajectory of the whole mapping process.
+- In pure location mode, the trajectory is trimmed once a while.
+
+![](./trajectory.png)
 
 :::warning
 For 2.5.0 or below, this enable message is wrongly named as `/trajectory_node_list`.
@@ -385,16 +401,28 @@ type PowerState =
 
 ## Nearby Robots
 
-It requires a dedicated hardware (optional installation).
+With a dedicated hardware (optional installation), the robot can sense the whereabouts and the path of other robots.
+
+This information can be used to avoid collision between robots or move in formation.
+
+![](./nearby_robots.png)
 
 ```json
 {
   "topic": "/nearby_robots",
   "robots": [
     {
-      "uid": "xx",
-      "trend": "",
-      ""
+      "uid": "21922076002353N",
+      "pose": { "pos": [1.05, 0.08], "ori": 1.69 },
+      "trend": []
+    },
+    {
+      "uid": "21922076002413T",
+      "pose": { "pos": [0.19, 0.01], "ori": 1.6 },
+      "trend": [
+        [0.19, 0.01],
+        [0.12, -0.02]
+      ]
     }
   ]
 }
