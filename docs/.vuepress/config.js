@@ -29,6 +29,7 @@ module.exports = {
                             '/overview/getting_start',
                             '/guides/first_move',
                             '/guides/start_websocket',
+                            '/guides/robot_admin',
                         ]
                     },
                     {
