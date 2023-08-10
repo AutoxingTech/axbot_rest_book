@@ -605,3 +605,19 @@ Response:
   "data": "iVBORw0KGgoAAAANSUhEUgAAAkMAAAJmCAAAAAB..."
 }
 ```
+
+## Local Path
+
+This topic is used for debugging.
+
+```json
+{
+  "topic": "/local_path",
+  "width": 1.1,
+  "color": "##FFEACD50", // RRGGBBAA
+  "poses": [
+    [1, 2, 3], // x, y, ori
+    [3, 4, 3] // x, y, ori
+  ]
+}
+```
