@@ -1,11 +1,11 @@
-# Robot Admin Website
+# Robot Admin (Standalone Version)
 
-Robot admin is a pure frontend website(HTML+Javascript), served directly from the robot.
+Robot admin (standalone) is a pure frontend website(HTML+Javascript), served directly from the robot.
 
 It calls the REST APIs of the robot.
 By observing how it works, you can quickly learn how to use the APIs.
 
-It's a standalone optional package. When installed, you can access it from `http://ROBOT_IP:8090/rb-admin/`.
+It's an optional package. When installed, you can access it from `http://ROBOT_IP:8090/rb-admin/`.
 
 ![](./rb_admin_login.png)
 

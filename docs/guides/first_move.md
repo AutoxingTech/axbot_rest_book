@@ -7,7 +7,7 @@ To move the robot, two prerequisites are required:
 
 ## Setting a Map
 
-One can use `RobotAdmin` platform to set a map on which the robot resides.
+One can use [RobotAdmin](./robot_admin.md) website to set a map on which the robot resides.
 
 ![](./2022-03-17-17-21-44.png)
 
