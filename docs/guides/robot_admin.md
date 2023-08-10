@@ -1,6 +1,6 @@
-# Robot Admin (Standalone Version)
+# Robot Admin (Standalone)
 
-Robot admin (standalone) is a pure frontend website(HTML+Javascript), served directly from the robot.
+Robot admin (standalone version) is a pure frontend website(HTML+Javascript), served directly from the robot.
 
 It calls the REST APIs of the robot.
 By observing how it works, you can quickly learn how to use the APIs.
