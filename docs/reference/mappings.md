@@ -72,7 +72,7 @@ They can be rendered like this:
 ## Finish/Cancel Mapping
 
 ```bash
-curl -X POST \
+curl -X PATCH \
   -H "Content-Type: application/json" \
   -d '{"state": "finished"}' \
   http://localhost:8000/mappings/current
