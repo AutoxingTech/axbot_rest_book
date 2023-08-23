@@ -1,4 +1,4 @@
-# Changelog of Releases <!-- omit in toc -->
+# Changelog of Releases (FULL) <!-- omit in toc -->
 
 ## 2.6.0-rc0
 

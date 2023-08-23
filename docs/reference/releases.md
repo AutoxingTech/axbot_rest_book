@@ -2,6 +2,27 @@
 
 For detailed notes(including minor releases), see [Full Release Notes](./releases_full.md)
 
+## 2.6.0-rc1
+
+- New Feature
+  - [RCSS-2914] Alerts 增加字段 app_only
+- Improvement
+  - [RCSS-3029] 细分乘梯失败的错误码
+  - [RCSS-2899] 南京世茂滨江希尔顿餐厅场地，两个机器人在狭窄位置的错车不顺利
+- Task
+  - [RCSS-3238] 精确沿轨道行驶，新增 2 个参数 “侧面是否做碰撞检测、侧面碰撞预留距离"
+  - [RCSS-3340] 解决人从侧面剐蹭机器人，造成机器人卡顿时间较长的问题
+  - [RCSS-3354] 增量建图，把废弃的地图做垃圾回收
+  - [RCSS-3358] 重构电梯中是否使用深度相机，删除 enable_depth_cameras，增加 ignore_depth_data_in_elevator
+  - [RCSS-3362] 沿轨道行驶支持到达轨道终点后旋转到指定方向
+  - [RCSS-3364] 对于 rb-admin standalone edition，则隐藏真实操作者
+- Bug
+  - [RCSS-2893] 南京世茂滨江希尔顿餐厅 1 静态让行的让行结束条件需要改进
+  - [RCSS-3353] 2.5.5 遇到 planning 崩溃
+  - [RCSS-3363] WIFI 上网的机器，因为 MAC 随机，导致被屏蔽无法联网
+  - [RCSS-3371] 临停补位逻辑可能导致机器人无法回桩充电
+  - [RCSS-3372] 补桩过程中，把机器人推走，机器人又会自动上桩
+
 ## 2.6.0-rc0
 
 - New Feature
