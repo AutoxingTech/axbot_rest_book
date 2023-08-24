@@ -35,6 +35,19 @@
   - [RCSS-3288] cartographer 中发布的点云中带上 intensity
   - [RCSS-3115] planning 中支持清除不同 layer 层避障图
 
+## 2.5.6
+
+- Task
+  - [RCSS-2970] 监控平台，显示实时 DWA 路线
+  - [RCSS-3332] Path2D，增加 width 和 color 字段
+- Bug
+  - [RCSS-3333] 行走过于激进，容易导致剐蹭 - DWA 选择贪进度导致
+  - [RCSS-3339] 三秒清障，容易误触发
+  - [RCSS-3343] 在下坡的时候，向下打滑，会导致自动松轮
+  - [RCSS-3351] 应用商店安装新模块崩溃
+  - [RCSS-3357] USB 蓝牙守护，引发了某种严重问题，所以把之前加的守护删除
+  - [RCSS-3368] 深度相机掉线后，狂刷日志，把机器 CPU 耗尽，温度报警
+
 ## 2.5.5
 
 - New Feature
