@@ -382,3 +382,19 @@ curl -X POST \
   -H "Content-Type: application/json" \
   http://localhost:8000/services/clear_range_data_all_zero_error
 ```
+
+## Jack Device Up/Down
+
+Raise up or lower down the jack device. The state of the jack device is in Websocket [Jack State](./websocket.md#jack-state).
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  http://localhost:8000/services/jack_up
+```
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  http://localhost:8000/services/jack_down
+```

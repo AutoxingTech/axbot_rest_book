@@ -621,3 +621,16 @@ This topic is used for debugging.
   ]
 }
 ```
+
+## Jack State
+
+The state of the jacking device.
+
+```json
+{
+  "topic": "/jack_state",
+  "state": "hold", // unknown, hold, jacking_up, jacking_down
+  "progress": 0.35, // position of the jacking device, in percentage
+  "self_checking": false
+}
+```
