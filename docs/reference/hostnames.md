@@ -12,7 +12,7 @@ curl http://localhost:8000/hostnames/
 [
   {
     "hostname": "local.autoxing.com",
-    "url": "http://172.24.230.252:8000/hostnames/local.autoxing.com"
+    "url": "http://localhost:8000/hostnames/local.autoxing.com"
   }
 ]
 ```
@@ -28,14 +28,14 @@ curl -X PATCH \
 
 ```json
 {
-  "message": "192.168.20.20 local.autoxing.com added"
+  "message": "192.168.10.12 local.autoxing.com added"
 }
 ```
 
 ```json
 // status = 400
 {
-  "message": "error: local2.autoxing.com is not allowed. It must be one of local.autoxing.com"
+  "message": "error: local2.autoxing.com is not allowed. It must be one of ['local.autoxing.com']"
 }
 ```
 
