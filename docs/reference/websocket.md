@@ -634,3 +634,61 @@ The state of the jacking device.
   "self_checking": false
 }
 ```
+
+## Incremental Map
+
+Incremental mapping is used to enhance positioning in an ever-changing environment.
+This topic shows the freshly incremented map. It can be turn on in `RobotAdmin`'s display panel.
+
+The image is grey-scale image. But in `RobotAdmin`, the colors are transformed.
+Red pixels are new obstacles and light-blue are new clear space.
+
+![](./incremental_map.png)
+
+```json
+{
+  "topic": "/incremental_map",
+  "stamp": 1693570082.777,
+  "resolution": 0.05000000074505806,
+  "size": [638, 881],
+  "origin": [-21.95, -1.25],
+  "data": "iVBORw0KGgoAAAANSUhEUgAAAn4AAANxBAAAAACaa..."
+}
+```
+
+## Cached Topics
+
+To handle very large map, `/map_v2`, `/map/costmap_v2`, `/incremental_map_v2` uses `data_url` instead of `data`.
+
+In this way, the data of websocket is greatly reduced. And the image has `Cache-Control: public, max-age=` and `Etag: xxx` headers, so the browsers and servers can cache the images.
+
+```json
+{
+  "topic": "/map_v2",
+  "stamp": 1693570028.939,
+  "resolution": 0.05000000074505806,
+  "size": [661, 1256],
+  "origin": [-8.25, -36.05],
+  "data_url": "static-files/map-d69c26ec2bdff8dad76fe6e8d3fa65d9b3041fc669ee3c0a96f7b544473fcec0.png"
+}
+```
+
+Use `http:://localhost:8000/static-files/map-d69c26ec2bdff8dad76fe6e8d3fa65d9b3041fc669ee3c0a96f7b544473fcec0.png` to access the image later.
+
+```
+$ curl -I http://localhost:8000/static-files/map-d69c26ec2bdff8dad76fe6e8d3fa65d9b3041fc669ee3c0a96f7b544473fcec0.png
+HTTP/1.1 200 OK
+date: Fri, 01 Sep 2023 12:20:04 GMT
+server: uvicorn
+Content-Type: image/png
+ETag: d69c26ec2bdff8dad76fe6e8d3fa65d9b3041fc669ee3c0a96f7b544473fcec0
+Cache-Control: public, max-age=2592000
+Vary: Accept, Cookie
+Allow: GET, HEAD, OPTIONS
+X-Page-Generation-Duration-ms: 18
+X-Frame-Options: DENY
+Content-Length: 141733
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+```

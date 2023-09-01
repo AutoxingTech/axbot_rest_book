@@ -7,6 +7,18 @@
 ## 2.6.1
 
 - Add APIs `/hostnames`, to add/delete local DNS entries.
+- Support [cached topics](../reference/websocket.md#cached-topics).
+- Add new caps: `supportsCachedTopics`.
+
+## 2.6.0
+
+- Support full-automatic [incremental mapping](../reference/websocket.md#incremental-map).
+- Add new caps: supportsIncrementalMapping
+
+## 2.5.6
+
+- Add websocket `/local_path`
+- Add new cap: supportsLocalPath
 
 ## 2.5.2
 
