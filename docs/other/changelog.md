@@ -4,6 +4,10 @@
 
 - Add jacking device related services and topics. See [Jack Up/Down](../reference/services.md#jack-device-updown)
 
+## 2.6.1
+
+- Add APIs `/hostnames`, to add/delete local DNS entries.
+
 ## 2.5.2
 
 - `map_uid` can be used to [set current map](../reference/current_map_and_pose.md#set-current-map).

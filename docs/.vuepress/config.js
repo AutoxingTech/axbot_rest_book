@@ -48,6 +48,7 @@ module.exports = {
                             '/reference/recordings',
                             '/reference/robot_params',
                             '/reference/app_store',
+                            '/reference/hostnames',
                             '/reference/websocket'
                         ],
                         sidebarDepth: 2
