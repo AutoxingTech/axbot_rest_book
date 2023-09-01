@@ -1,5 +1,16 @@
 # Changelog of Releases (FULL) <!-- omit in toc -->
 
+# 2.6.0-rc3
+
+- Improvement
+  - [RCSS-3381] 减小建图时内存占用和建图结果尺寸，第一期
+- Task
+  - [RCSS-3415] imu 温度报警下限从 60 降低到 55 度
+- Bug
+  - [RCSS-3394] 手动增量建图时崩溃 - 自动增量建图引发
+  - [RCSS-3402] 把机器人脱离充电桩一点时没有补桩
+  - [RCSS-3403] 机器人进梯已到达电梯轿厢内时电梯门与占用状态变为 unknown
+
 ## 2.6.0-rc0
 
 - New Feature
@@ -32,7 +43,6 @@
   - [RCSS-3230] 废弃雷达型号自动检测，只支持人工配置
   - [RCSS-3317] 修改概率图，防止白色被擦黑
   - [RCSS-3330] PlanningState 中添加 in_slope_area 表示当前是否在坡度区
-  - [RCSS-3288] cartographer 中发布的点云中带上 intensity
   - [RCSS-3115] planning 中支持清除不同 layer 层避障图
 
 ## 2.5.6
@@ -61,7 +71,7 @@
   - [RCSS-3241] 满电时电流会偶尔几秒变为非 0，从而导致无法自动校准电量
   - [RCSS-3287] lsusb 执行超时的时候没有重试
   - [RCSS-3293] Power 按钮按 3 次，reset 网络模式，容易误触发
-  - [RCSS-3295] 激光休眠时，carto 内存会缓慢增长
+  - [RCSS-3295] 激光休眠时，内存会缓慢增长
   - [RCSS-3311] battery_state 没消息的时候没报警
 
 ## 2.5.4
@@ -343,7 +353,6 @@
   - [RCSS-2726] monitor，改用 /device_hw_state 上报转速错误
   - [RCSS-2747] 增加 5006，lidar_node 心跳异常
   - [RCSS-2768] 录 Bag 的功能，需要为每个 code 增加最小间隔，防止大量录像
-  - [RCSS-2693] 禁止 carto 向 /tmp 写入 log 文件
   - [RCSS-2708] 树莓派，写死 DNS，停用 dnsmasq 服务
 - Bug
   - [RCSS-2598] 空旷处没有回波，雷达残影导致堵死
@@ -817,7 +826,7 @@
 
 - Features
   - [RCSS-2130] 保留更长的历史，解决特征全变的场景的定位错误
-  - [RCSS-1396] 自定义 cartographer 存盘文件格式
+  - [RCSS-1396] 自定义地图存盘文件格式
   - [RCSS-1980] 支持角速度平滑
   - [RCSS-2156] 改进 occupancy_grid_server 中的雾气过滤功能
   - [RCSS-1754] 识别机器人撞击，立刻把撞击位置标记为障碍物，进行绕障
@@ -874,7 +883,7 @@
   - [RCSS-2106] 23922096000871p 运动起来后，机器人后面有避障图，机器人速度不平稳
   - [RCSS-2118] 基于光流的 collide 报错，刹车时，误报
   - [RCSS-2133] usb-audio.rules 文件路径错误
-  - [RCSS-2161] cartographer 的临时文件，没有在 ROS_HOME 中
+  - [RCSS-2161] 定位的临时文件，没有在 ROS_HOME 中
   - [RCSS-2162] 圆形立柱，有拖尾点没有消除
   - [RCSS-2173] 世纪华天 新版本 存在激光立柱影响机器人行走
   - [RCSS-2182] 轮子电流超标，有两种不同的恢复 message
@@ -894,7 +903,7 @@
   - [RCSS-1982] 修复任务 cancel 后 `/planning_state` 的 `move_state` 依然是 `moving` 状态导致机器人状态异常。
   - 修复终点被占用，不容易结束任务的问题。距离终点一个车长内停车，则提前结束任务。
   - 修复视频记录的 bug。多线程导致记录错误。
-  - [RCSS-1962] 修复 cartographer 内存缓慢泄漏
+  - [RCSS-1962] 修复 定位模块 内存缓慢泄漏
   - [RCSS-1960] 修复 绥化巴蜀记忆火锅，光流融合，误报被推的问题
   - [RCSS-1959] 修复了光滑斜坡上误报被推的问题
   - [RCSS-1957] 修复 sensor_manager_node 尝试打开深度相机时，会卡死主线程
@@ -1020,7 +1029,6 @@
   - 当内存报警时，自动杀死使用内存最多的进程。
 - slam
   - [RCSS-1724] 建图时，广播带有时间戳的轨迹
-  - [RCSS-1453] Reduce memory usage of `cartographer_occupancy_grid_node` when it's idle.
   - Add ROS param `/slam/nearby_grid_size_length` to restrict area of published map.
 - feature_detector
   - [RCSS-1814] 增加电梯检测开关。默认开启。`/detectors/enable_gate_detection`
@@ -1068,7 +1076,6 @@
 - 去掉了对 apt source 的修改。
 - Bug Fix:
   - [RCSS-1757] 解决了闲置时，内存不断增大，引起进程大量崩溃的问题。
-  - [RCSS-1453] 解决了 `cartographer_occupancy_grid_node` 闲置时内存过大的问题.
 
 ### 1.8.9-rc0
 
@@ -1425,7 +1432,7 @@
 ### 1.8.0-rc2
 
 - 监控平台，支持 Action Log。
-- [RCSS-1089] 提高地图载入性能。支持 `/slam/set_map` 直接加载地图。 (**cartographer_ros**)
+- [RCSS-1089] 提高地图载入性能。支持 `/slam/set_map` 直接加载地图。
 - Bug Fix:
   - [RCSS-1136] 修复轮子使能/释放状态错误的 bug (**wheel_control**)
   - [RCSS-1119] 为轮动打补丁，如果删除非常高的速度，则不相信 (**wheel_control**)
