@@ -640,8 +640,8 @@ The state of the jacking device.
 Incremental mapping is used to enhance positioning in an ever-changing environment.
 This topic shows the freshly incremented map. It can be turn on in `RobotAdmin`'s display panel.
 
-The image is grey-scale image. But in `RobotAdmin`, the colors are transformed.
-Red pixels are new obstacles and light-blue are new clear space.
+The image in the topic is grey-scale. But in `RobotAdmin`, the colors are transformed,
+with red pixels represent new obstacles and light-blue represent new clear space.
 
 ![](./incremental_map.png)
 
