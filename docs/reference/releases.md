@@ -2,11 +2,22 @@
 
 For detailed notes(including minor releases), see [Full Release Notes](./releases_full.md)
 
+## 2.6.3
+
+- Bug
+  - [RCSS-3467] 如果安装的是新 imu，并且从来没有校准过，会造成 2.6.2 启动失败
+
+## 2.6.2
+
+- Bug
+  - [RCSS-3436] USB 不稳定，造成整机卡死 - 寻迹发现
+  - [RCSS-3450] 应用商店，存在校验/安装失败被误认为成功的情况
+
 ## 2.6.1
 
 - New Feature
   - [RCSS-3422] 支持为 local.autoxing.com 设置写死的域名解析
-  - [RCSS-3437] REST API，支持 cache topics，提升地图加载速度
+  - [RCSS-3437] REST API，支持 cached topics，提升地图加载速度
 - Task
   - [RCSS-3429] 增加开关，可以禁用 heatmap
   - [RCSS-3430] 增加开关，可以禁用 ax_carto
@@ -15,7 +26,7 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
   - [RCSS-3432] 大质量机器人，校准 imu 会失败
   - [RCSS-3433] imu 损坏的机器，定位会出问题，会缓慢旋转
   - [RCSS-3435] 消除太多的 log
-  - [RCSS-3438] 2023 年 9 月 5 日上午 日本 RobotBank_Mars 配送 5 的 1008 运动进度卡死
+  - [RCSS-3438] 1008 运动卡死 - V2X 引发 - 日本 RobotBank 发现
   - [RCSS-3441] axapt 中 无法正常抛出 module_verify 执行失败的异常
 
 ## 2.6.0(Summary)
