@@ -399,6 +399,40 @@ type PowerState =
 }
 ```
 
+## Robot Model
+
+The footprint of a robot may change dynamically. For example, it will become larger when it loads a rack.
+This topic is used to know the dynamic footprint of the robot.
+
+```json
+{
+  "topic": "/robot_model",
+  "footprint": [
+    [0.13, -0.25],
+    [0.203, -0.228],
+    [0.235, -0.178],
+    [0.245, -0.077],
+    [0.248, 0.029],
+    [0.243, 0.163],
+    [0.235, 0.217],
+    [0.207, 0.26],
+    [0.17, 0.291],
+    [0.122, 0.324],
+    [-0.122, 0.324],
+    [-0.17, 0.291],
+    [-0.207, 0.26],
+    [-0.235, 0.217],
+    [-0.243, 0.163],
+    [-0.248, 0.029],
+    [-0.245, -0.077],
+    [-0.235, -0.178],
+    [-0.203, -0.228],
+    [-0.13, -0.25]
+  ],
+  "width": 0.496
+}
+```
+
 ## Nearby Robots
 
 With a dedicated hardware (optional installation), the robot can sense the whereabouts and the path of other robots.
@@ -414,7 +448,8 @@ This information can be used to avoid collision between robots or move in format
     {
       "uid": "21922076002353N",
       "pose": { "pos": [1.05, 0.08], "ori": 1.69 },
-      "trend": []
+      "trend": [],
+      "footprint_digest": "0150acd9" // since 2.7.0, See /nearby_robot_footprints
     },
     {
       "uid": "21922076002413T",
@@ -422,6 +457,46 @@ This information can be used to avoid collision between robots or move in format
       "trend": [
         [0.19, 0.01],
         [0.12, -0.02]
+      ],
+      "footprint_digest": "7cb254d5"
+    }
+  ]
+}
+```
+
+## Nearby Robot Footprints
+
+This topic contains detailed footprints of nearby robots.
+
+In 2.7.0, the topic `/nearby_robots` adds a property `footprint_digest`.
+It can be used with `/nearby_robot_footprints` to determine the footprint of nearby robots.
+
+```json
+{
+  "topic": "/nearby_robot_footprints",
+  "footprints": [
+    {
+      "digest": "0150acd9",
+      "coordinates": [
+        [0.0, -0.273],
+        [0.14, -0.27],
+        [0.2, -0.25],
+        [0.24, -0.2],
+        [0.25, -0.1],
+        [0.25, 0.13],
+        [0.24, 0.2],
+        [0.18, 0.26],
+        [0.15, 0.265],
+        [0.14, 0.283],
+        [-0.14, 0.283],
+        [-0.15, 0.265],
+        [-0.18, 0.26],
+        [-0.24, 0.2],
+        [-0.25, 0.13],
+        [-0.25, -0.1],
+        [-0.24, -0.2],
+        [-0.2, -0.25],
+        [-0.14, -0.27]
       ]
     }
   ]
