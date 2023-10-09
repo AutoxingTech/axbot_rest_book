@@ -2,6 +2,11 @@
 
 ## Set Current Map
 
+There are two ways to set current map:
+
+- Set current map with `map_id` or `map_uid`.
+- Set current map with data directly. (Since 2.7.0)
+
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
@@ -18,6 +23,19 @@ class SetCurrentMapRequest {
   // Since 2.5.2. Map can be set with "uid".
   // Before that, only 'map_id' is supported.
   map_uid?: string;
+}
+```
+
+Since 2.7.0, we can use the following `POST` request to set current map.
+
+```ts
+class SetCurrentMapWithDataRequest {
+  map_name: string;
+  occupancy_grid: string; // base64 encoded PNG
+  carto_map: string; // binary map data
+  grid_resolution: number; // 0.05
+  grid_origin_x: number; // the X coordinate of lower left corner of PNG map
+  grid_origin_y: number; // the Y coordinate of lower left corner of PNG map
 }
 ```
 
@@ -39,6 +57,7 @@ curl http://localhost:8000/chassis/current-map
 ```
 
 `id` represents a map of [Map List](./maps.md#map-list).
+When current map is set with data directly, `id` will be -1.
 
 Latched topic `/map/info` contains the information of currently used map.
 When current map changes, a new message will be received.

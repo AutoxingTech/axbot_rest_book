@@ -3,6 +3,7 @@
 ## 2.7.0
 
 - Add jacking device related services and topics. See [Jack Up/Down](../reference/services.md#jack-device-updown)
+- Support [setting map with data directly](../reference/current_map_and_pose.md#set-current-map).
 
 ## 2.6.1
 
