@@ -2,6 +2,24 @@
 
 For detailed notes(including minor releases), see [Full Release Notes](./releases_full.md)
 
+## 2.6.4
+
+- New Feature
+  - [RCSS-3505] 或许支持新机型 cross_longtray 没有机器可以测试
+- Improvement
+  - [RCSS-3387] 底盘支持企业级 WIFI 的配置
+- Bug
+  - [RCSS-2942] planning 正在执行 move 任务时退出进程的崩溃
+  - [RCSS-3329] 内存占用过高会连续杀进程
+  - [RCSS-3388] 4009 imu 数据读取错误，过于严格，部分机器无法做到绝对不丢包
+  - [RCSS-3401] 重启 imu_node 后，imu data error 不会消除
+  - [RCSS-3459] 蓝牙连接 REST API，会卡死其它 API
+  - [RCSS-3489] 切换地图后，但是还没有发起定位的前空档期，会误报 7002 - 寻迹反馈
+  - [RCSS-3490] 长隧道中，存在里程计偏短的现象 - 鲁迅故里发现
+  - [RCSS-3509] 香橙派，wifi 一旦掉线就无法自动重连接 - 香港总代泡泡龙反馈
+  - [RCSS-3530] 3 台机器巡游测试时相互卡死
+  - [RCSS-3496] wifi 密码 ssid 含有 \$ 符号存在问题
+
 ## 2.6.3
 
 - Bug
