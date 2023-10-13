@@ -303,7 +303,18 @@ To play safe, enable both `/trajectory` and `/trajectory_node_list`.
 
 ## Alerts
 
-Currently active alerts.
+This topic contains currently active alerts.
+
+The application should monitor alerts and take according actions, like:
+
+1.  Go back to charger when battery is low(8501). Turn off the robot when battery is extremely low(8003).
+2.  Warn users about docking errors(10001, 10002, 10003).
+3.  Warn users about possible robot falls over. (4008).
+4.  Warn users about IMU calibration error(4501, 4502) before creating new map.
+5.  Notify us about application crashes. (1001, 1002, 1003, 1004, 2001, 3001, 4001, 11001, etc)
+6.  Notify us about sensor errors. (4009, 5001, etc)
+
+A full list of alerts is on https://rb-admin.autoxing.com/api/v1/static/error_code_map_full.json.
 
 ![](./alerts.png)
 
