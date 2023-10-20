@@ -2,6 +2,7 @@
 
 ## 2.7.0
 
+- Support [Boot Progress](../reference/device.md#boot-progress)
 - Support [setting map with data directly](../reference/current_map_and_pose.md#set-current-map).
 - Support jacking device:
   - New capability flag: `supportsJack`

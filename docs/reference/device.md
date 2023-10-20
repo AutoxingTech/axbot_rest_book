@@ -228,3 +228,41 @@ Clear saved devices:
 ```bash
 curl -X DELETE http://localhost:8000/device/usb_devices/saved
 ```
+
+## Boot Progress
+
+During boot process, accessing any API will result in 503(Service Unavailable).
+When booting is done, the APIs will back to normal.
+
+But, `GET /device/boot_progress` will always return `200`, even when booting is done.
+
+For example:
+
+```bash
+curl http://localhost:8000/device/info # will return 503 during boot process
+curl http://localhost:8000/device/boot_progress # always return 200
+```
+
+```json
+{
+  "start_time": 1697777324.597,
+  "progress": 0.21,
+  "logs": [
+    {
+      "stamp": 1697777324.597,
+      "progress": 0.0,
+      "msg": "=== AutoXing Axbot Starting Up ==="
+    },
+    {
+      "stamp": 1697777328.597,
+      "progress": 0.2,
+      "msg": "Loading remote params ..."
+    },
+    {
+      "stamp": 1697777330.601,
+      "progress": 0.21,
+      "msg": "Starting lidar_node ..."
+    }
+  ]
+}
+```
