@@ -123,6 +123,24 @@ If succeeded, status code 201:
 {}
 ```
 
+## Install Package from Local File
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"filename": "/tmp/ax.2.6.4.pi64.tar.gz"]}' \
+  http://localhost:8000/app_store/services/install_local_file
+```
+
+**Response**
+
+```json
+{
+  "module_name": "ax",
+  "version": "2.6.4"
+}
+```
+
 ## View Download/Installation Tasks
 
 When downloading/installing packages, there are associated "download/install tasks".
