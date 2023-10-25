@@ -398,3 +398,34 @@ curl -X POST \
   -H "Content-Type: application/json" \
   http://localhost:8000/services/jack_down
 ```
+
+## Step Time
+
+When time is wrong, use this service to correct it.
+
+::: warning
+`GET` is used to detect time error. But don't call it frequently. Please use websocket `/alerts` instead to detect time error.
+:::
+
+```bash
+curl http://localhost:8000/services/step_time
+```
+
+```json
+{
+  "should_step": false, // there is no need to correct time
+  "message": "there is no need to make step: system time is 0.000253560 seconds fast of NTP time"
+}
+```
+
+`POST` is used to correct time.
+
+```bash
+curl -X POST http://localhost:8000/services/step_time
+```
+
+```json
+{
+  "message": "Step time successfully"
+}
+```
