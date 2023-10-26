@@ -13,6 +13,7 @@ curl http://localhost:8000/robot-params/
   "/wheel_control/max_forward_acc": 0.26,
   "/wheel_control/max_forward_decel": -2.0,
   "/wheel_control/max_angular_velocity": 0.78,
+  "/wheel_control/acc_smoother/smooth_level": "normal", // since 2.7.0. "disabled/lower/normal/higher"
   "/planning/auto_hold": true, // since 2.3.0
   "/control/bump_tolerance": 0.5 // since 2.4.0
 }
