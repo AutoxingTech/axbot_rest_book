@@ -2,6 +2,8 @@
 
 ## 2.7.0
 
+- Support [loop recording of bags](../reference/bags.md)
+  - New capability flag: `supportsBags`
 - Add new param [/wheel_control/acc_smoother/smooth_level](../reference/robot_params.md)
 - Support [correcting time error](../reference/services.md#step-time)
 - Support [installing package from local file](../reference/app_store.md#install-package-from-local-file)

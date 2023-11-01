@@ -46,6 +46,7 @@ module.exports = {
                             '/reference/device',
                             '/reference/videos',
                             '/reference/recordings',
+                            '/reference/bags',
                             '/reference/robot_params',
                             '/reference/app_store',
                             '/reference/hostnames',

@@ -1,5 +1,8 @@
 # Recording API
 
+Some alerts(like 7002 - position lost) will trigger automatic recording of bags.
+Or, one can use `POST /recording` to manually record a bag.
+
 ## Create a Recording
 
 ```bash
