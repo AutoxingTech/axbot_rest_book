@@ -2,6 +2,112 @@
 
 For detailed notes(including minor releases), see [Full Release Notes](./releases_full.md)
 
+## 2.7.0(to be released)
+
+- New Feature
+  - [RCSS-3413] 支持对齐货架
+  - [RCSS-3592] 使用 ESP NOW 控制自动门、闸机
+  - [RCSS-3370] 机器人轮廓线，支持动态修改，立即生效
+  - [RCSS-3486] 增加对加速度的平滑，或许对运送饮料有帮助，新增 REST API 参数调节
+  - [RCSS-2219] 碰撞预警: 减少刹车反应时间
+  - [RCSS-3498] REST_API 支持使用数据直接设置地图
+  - [RCSS-3515] axapt 和 REST_API 支持直接从文件安装
+  - [RCSS-3518] 支持新的蓝海雷达 50C 和 E300
+  - [RCSS-3519] 新增激光雷达失效区，用于丘陵或者斜坡区域
+  - [RCSS-3555] 使用结构平面图来更好的去除立柱拖尾
+  - [RCSS-3562] 任务类型增加“去放货点”，并增加放货点能否到达的检测处理
+  - [RCSS-3600] Action List，增加开机的回显
+  - [RCSS-3574] REST API: 支持校正时间
+  - [RCSS-3616] REST API: 支持回显启动进度
+  - [RCSS-3446] 支持 SDK 的定期授权下载更新
+  - [RCSS-859] 手冲，拒绝运动
+  - [RCSS-1913] 监控机器人网络流量
+  - [RCSS-3504] 机器人始终记录所有传感器关键数据，方便排查问题 ，bag 滚动记录
+  - [RCSS-1988] 支持第三方接入更多简单避障传感器
+  - [RCSS-3319] 支持基于 TCP 的 IMU、ODOM、激光接入协议
+  - [RCSS-3521] 监控平台，能正确显示自身轮廓线的动态变化
+  - [RCSS-3522] 监控平台，能正确显示其它机器人的轮廓线
+- Improvement
+  - [RCSS-3525] 临停补位，支持人工设置停车点
+  - [RCSS-3473] 连续发起 move action，机器能持续流畅运动，不降速
+  - [RCSS-3077] 完善补桩逻辑，无论什么情况掉桩都补
+  - [RCSS-3412] 重构充电模块，使用 DWA 追踪 Bezier 曲线
+  - [RCSS-3417] 减小建图时内存占用和建图结果尺寸，第二期
+  - [RCSS-3500] /map/costmap 换成 MapImageMsg 类型，节约内存
+  - [RCSS-3602] 优化了视频记录，按照整 10 分钟切割，不保存空文件
+  - [RCSS-3359] Monitor，防止一个 event 刷屏
+- Task
+  - [RCSS-3485] 根据四条腿，检测货架的位姿
+  - [RCSS-3514] occupancy_grid_server 在顶升状态下要过滤激光雷达看到的货架腿
+  - [RCSS-2001] Costmap2D 保存静态地图数据时，不存储障碍物来源信息
+  - [RCSS-2651] 整理垃圾清理相关功能，和 REST API
+  - [RCSS-3025] ihawk 对射机型，打开上视相机的记忆
+  - [RCSS-3042] 解决速度太快，导致搜索窗口变窄，引起的反复超调的问题
+  - [RCSS-3150] calculation_failed=9 ,算路失败引导性不强，需要细分
+  - [RCSS-3318] 使用 ax_msgs::LaserScan 改造点云驱动
+  - [RCSS-3374] 开发 ax_msgs/AxLaserScan 的 RVIZ 插件
+  - [RCSS-3379] occupancy_grid_server 改用 ax_msgs/AxLaserScan 格式的激光雷达数据
+  - [RCSS-3390] 热力图更换新格式，并且做垃圾回收
+  - [RCSS-3397] v2x 需要支持其他机器人轮廓线的动态变化
+  - [RCSS-3411] 机器人正在执行对接货架时，避障图中的深度相机应当关闭
+  - [RCSS-3425] 删除一些 Footprint 相关的参数，各个程序必须自己计算
+  - [RCSS-3434] wheel_control 下的 velocity_smoother 参数配置到 common_param.yaml 里
+  - [RCSS-3442] 新增 robot_model_node 将机器人轮廓线等信息用 latched topic 广播出来
+  - [RCSS-3445] 二级算路结果中的 startOutOfTunnel 字段需要在所有情况下都正确填写
+  - [RCSS-3452] 重构 planning 中的关于自车位置的代码
+  - [RCSS-3475] 深度点云校准，改用 AxLaserScan
+  - [RCSS-3524] 长按 5 秒进入正常关机流程，取消长按 10 秒强制关机逻辑 - 需要升级固件
+  - [RCSS-3529] REST API 设置动态参数下次启动依然生效
+  - [RCSS-3552] 移除使用 /opt/ax-cache/.footprints.json 的代码
+  - [RCSS-3561] 去货架的 move 任务不执行临停补位逻辑
+  - [RCSS-3587] occupancy_grid_server 以地势方式接入障碍物运动预测结果点云
+  - [RCSS-3588] 使用 dbus 重写蓝牙控制 node
+  - [RCSS-3423] 改用 FIFO 删除增量的 submap
+  - [RCSS-3528] recordings 需要有最大容量限制
+  - [RCSS-3469] 改进避障图中除雾降噪参数的自动配置
+  - [RCSS-3491] bot_control 避免在 v2x 上持续广播的状态为 none 的 RobotIntent
+  - [RCSS-2948] feature_detectors 中整合新充电桩检测
+- Bug
+  - [RCSS-2755] 正在执行任务时，如果机器人突然飞很远，会进入异常状态
+  - [RCSS-2841] bluetooth 节点 gattlib 问题
+  - [RCSS-2993] 沿轨迹行驶，回头路，会被跳过
+  - [RCSS-3335] 时间回流时，雷达节点崩溃，没有报出崩溃的报警
+  - [RCSS-3419] 视野外算路发生震荡
+  - [RCSS-3477] 长隧道，自动增量有误增量的可能 - 鲁迅故里
+  - [RCSS-3497] 激光雷达，点云时间戳准确度不够，建图运动补偿不够理想
+  - [RCSS-3510] 启动过程中，会出现 CPU usage 过高报警，imu 频率不稳报警
+  - 友商反馈
+    - [RCSS-3247] 终点处障碍物被 3s 清除，导致撞车 - 新正源反馈
+    - [RCSS-3256] 终点处障碍物，有撞车 - 新正源反馈
+    - [RCSS-3326] 上下坡时，如果遇到角度逐渐变化的坡，会欺骗点云里程计 - 寻迹反馈
+    - [RCSS-3420] 当轮廓线配置为 width > depth 时，通过狭窄区域容易引发碰撞剐蹭 - 澳门灏峰智能反馈
+    - [RCSS-3482] 硬推打滑，引起错误丢定位和错误增量 - 广东依利安达二厂反馈
+    - [RCSS-3560] 切换地图误报 7001 - 寻迹反馈
+    - [RCSS-3568] 有坡上打滑造成严重事故的风险，强推切急停，之前没有真关闭 - 寻迹反馈
+    - [RCSS-3578] imu 断线重连会死锁 - 奥汀反馈
+    - [RCSS-3584] 传感器数据堆积，同时快速调用 finish/start trajectory，会引发时间倒退 assert - 奥汀反馈
+- 非问题
+  - [RCSS-3395] 车辆行驶至坡道区域不继续爬坡
+  - [RCSS-3428] 关机推行 - 澳门灏峰智能\_加长五合一 3 报 7002
+
+## 2.6.6
+
+- New Feature
+  - [RCSS-3612] 支持新机型 longtray_plus
+  - [RCSS-3564] 做了一个很简单的 WIFI 漫游补丁，不保证能用，特殊机器可以试着打开
+- Improvement
+  - [RCSS-3563] 支持炬佑深度 D3 版 - 新增了一种死机守护
+  - [RCSS-3596] 每次重启服务，自动校准一下时间
+  - [RCSS-3598] Action List 中，将操作者显示为 CS\+客服编号，方便明确追溯操作者
+- Task
+  - [RCSS-3517] RGB Camera 没有正常打开的时候需要增加报警机制 - 寻迹反馈
+  - [RCSS-3556] 距离上报，需要有过滤，太小的距离不报
+  - [RCSS-3575] 矩佑相机，尝试解决死的问题，新增调试 service /reset_opn_cameras
+- Bug
+  - [RCSS-3580] 关机状态下，IMU 耗电太大
+  - [RCSS-3373] 守护 RGB Camera 有打不开的情况 - 寻迹反馈
+  - [RCSS-3568] 有坡上打滑造成严重事故的风险，强推切急停，之前没有真关闭 - 寻迹反馈
+
 ## 2.6.4
 
 - New Feature
