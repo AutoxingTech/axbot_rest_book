@@ -5,6 +5,7 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
 ## 2.7.0(to be released)
 
 - New Feature
+  - [RCSS-3618] 支持以 Docker 形态，赋能需要定位能力的友商
   - [RCSS-3413] 支持顶升机型，钻货架
   - [RCSS-3592] 使用 ESP NOW 控制自动门、闸机
   - [RCSS-3370] 机器人轮廓线，支持动态修改，立即生效
