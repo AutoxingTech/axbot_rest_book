@@ -5,41 +5,42 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
 ## 2.7.0(to be released)
 
 - New Feature
-  - [RCSS-3413] 支持对齐货架
+  - [RCSS-3413] 支持顶升机型，钻货架
   - [RCSS-3592] 使用 ESP NOW 控制自动门、闸机
   - [RCSS-3370] 机器人轮廓线，支持动态修改，立即生效
   - [RCSS-3486] 增加对加速度的平滑，或许对运送饮料有帮助，新增 REST API 参数调节
   - [RCSS-2219] 碰撞预警: 减少刹车反应时间
-  - [RCSS-3498] REST_API 支持使用数据直接设置地图
-  - [RCSS-3515] axapt 和 REST_API 支持直接从文件安装
   - [RCSS-3518] 支持新的蓝海雷达 50C 和 E300
   - [RCSS-3519] 新增激光雷达失效区，用于丘陵或者斜坡区域
   - [RCSS-3555] 使用结构平面图来更好的去除立柱拖尾
   - [RCSS-3562] 任务类型增加“去放货点”，并增加放货点能否到达的检测处理
-  - [RCSS-3600] Action List，增加开机的回显
-  - [RCSS-3574] REST API: 支持校正时间
-  - [RCSS-3616] REST API: 支持回显启动进度
-  - [RCSS-3446] 支持 SDK 的定期授权下载更新
   - [RCSS-859] 手冲，拒绝运动
-  - [RCSS-1913] 监控机器人网络流量
   - [RCSS-3504] 机器人始终记录所有传感器关键数据，方便排查问题 ，bag 滚动记录
+  - [RCSS-1913] 监控机器人网络流量
   - [RCSS-1988] 支持第三方接入更多简单避障传感器
   - [RCSS-3319] 支持基于 TCP 的 IMU、ODOM、激光接入协议
   - [RCSS-3521] 监控平台，能正确显示自身轮廓线的动态变化
   - [RCSS-3522] 监控平台，能正确显示其它机器人的轮廓线
+  - [RCSS-3600] Action List，增加开机的回显
+  - [RCSS-3574] REST API: 支持校正时间
+  - [RCSS-3616] REST API: 支持回显启动进度
+  - [RCSS-3498] REST_API: 支持使用数据直接设置地图
+  - [RCSS-3515] 应用商店，和 REST_API 支持直接从文件安装软件
+  - [RCSS-3446] 支持 SDK 的定期授权下载更新
 - Improvement
-  - [RCSS-3525] 临停补位，支持人工设置停车点
   - [RCSS-3473] 连续发起 move action，机器能持续流畅运动，不降速
   - [RCSS-3077] 完善补桩逻辑，无论什么情况掉桩都补
+  - [RCSS-3525] 临停补位，支持人工设置停车点
   - [RCSS-3412] 重构充电模块，使用 DWA 追踪 Bezier 曲线
-  - [RCSS-3417] 减小建图时内存占用和建图结果尺寸，第二期
-  - [RCSS-3500] /map/costmap 换成 MapImageMsg 类型，节约内存
   - [RCSS-3602] 优化了视频记录，按照整 10 分钟切割，不保存空文件
   - [RCSS-3359] Monitor，防止一个 event 刷屏
+  - 内存优化
+    - [RCSS-3417] 减小建图时内存占用和建图结果尺寸，第二期
+    - [RCSS-2001] Costmap2D 保存静态地图数据时，不存储障碍物来源信息
+    - [RCSS-3500] /map/costmap 换成 MapImageMsg 类型，节约内存
 - Task
   - [RCSS-3485] 根据四条腿，检测货架的位姿
   - [RCSS-3514] occupancy_grid_server 在顶升状态下要过滤激光雷达看到的货架腿
-  - [RCSS-2001] Costmap2D 保存静态地图数据时，不存储障碍物来源信息
   - [RCSS-2651] 整理垃圾清理相关功能，和 REST API
   - [RCSS-3025] ihawk 对射机型，打开上视相机的记忆
   - [RCSS-3042] 解决速度太快，导致搜索窗口变窄，引起的反复超调的问题
