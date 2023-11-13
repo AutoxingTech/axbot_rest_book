@@ -585,8 +585,12 @@ The feedback of service `POST /services/start_global_positioning`.
   // If false, the pose is globally unique and can be trusted.
   // If true, the environment is not a good match
   // or pose is not globally unique thus should be verified by an human operator.
+  // 
+  // If the result is from a successful match of barcode, 
+  // `needs_confirmation` is always true.
   "needs_confirmation": false,
-  "pose": { "pos": [0.32, 0.97], "ori": 0.0 } // 物体的位置和朝向
+  "pose": { "pos": [0.32, 0.97], "ori": 0.0 }, // 物体的位置和朝向
+  "message": "Succeeded with barcode R25B13_7"
 }
 ```
 

@@ -259,7 +259,23 @@ curl -X POST \
   http://localhost:8000/services/start_global_positioning
 ```
 
+**Parameters**
+
+```ts
+interface StartGlobalPositioningRequest {
+  use_barcode?: boolean; // default to true.
+  use_base_map_match?: boolean; // default to true.
+}
+```
+
 The feedback can be received from [Global Positioning State](./websocket.md#global-positioning-state).
+
+### Barcode
+
+Barcode is a marker which is made of interleaved reflective surface and ordinary surface.
+In a given site, each barcode contains a unique ID. So, when a barcode is found, the robot will know its whereabouts unambiguously.
+
+When `use_barcode` is true, it has higher priority over point-cloud-based matching. And when a match is found, it will always be trusted.
 
 ## Auto-Mapping
 
@@ -280,7 +296,7 @@ curl -X POST \
 **Parameters**
 
 ```ts
-class EnableAutoMappingRequest {
+interface EnableAutoMappingRequest {
   enable: boolean;
 }
 ```
