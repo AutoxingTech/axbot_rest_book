@@ -2,9 +2,9 @@
 
 ## 2.7.0
 
-- Support global positioning based on barcode
+- Support [global positioning based on barcode](../reference/services.md#barcode)
   - New capability flag: `supportsBarcodeGp`
-  - Add two params in service [`start_global_positioning`](../reference/services.md#barcode).
+  - Add two params in service `/services/start_global_positioning`.
 - Support [loop recording of bags](../reference/bags.md)
   - New capability flag: `supportsBags`
 - Add new param [/wheel_control/acc_smoother/smooth_level](../reference/robot_params.md)
