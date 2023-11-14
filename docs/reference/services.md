@@ -272,6 +272,8 @@ The feedback can be received from [Global Positioning State](./websocket.md#glob
 
 ### Barcode
 
+![](./barcode.png)
+
 Barcode is a marker which is made of interleaved reflective surface and ordinary surface.
 In a given site, each barcode contains a unique ID. So, when a barcode is found, the robot will know its whereabouts unambiguously.
 
