@@ -5,6 +5,7 @@
 - Support [global positioning based on barcode](../reference/services.md#barcode)
   - New capability flag: `supportsBarcodeGp`
   - Add two params in service `/services/start_global_positioning`.
+  - Add websocket topic `/collected_barcode`. See [collected barcodes](../reference/websocket.md#collected-barcode)
 - Support [loop recording of bags](../reference/bags.md)
   - New capability flag: `supportsBags`
 - Add new param [/wheel_control/acc_smoother/smooth_level](../reference/robot_params.md)

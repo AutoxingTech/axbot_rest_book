@@ -782,3 +782,55 @@ X-Content-Type-Options: nosniff
 Referrer-Policy: same-origin
 Cross-Origin-Opener-Policy: same-origin
 ```
+
+## Collected Barcode
+
+This topic is used to collect barcodes. 
+
+```json
+{
+  "topic": "/collected_barcode",
+  "state": "unknown|ok|no_result|not_unique|too_far|unaligned_with_robot",
+  "barcode": {
+    "id": "D2_57",
+    "pose": { "pos": [0.32, 0.97], "ori": 0.0 },
+  }
+}
+```
+
+The collected barcodes should be added into map info. 
+The barcodes in map info can be used in [global positioning](./services.md#start-global-positioning).
+When added, the format of map info should be like:
+
+```json
+{
+    "topic": "/map/info",
+    "name": "19 floor",
+    "uid": "63c6404f2f32e40c768df884",
+    "map_version": 2,
+    "overlays_version": 214,
+    "overlays": {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "geometry": {
+                    "coordinates": [
+                        -1.052,
+                        -5.485
+                    ],
+                    "type": "Point"
+                },
+                "id": "d43d15cf4e4ad0bd2a24891badd74891",
+                "type": "Feature",
+                "properties": {
+                    "mapOverlay": true,
+                    "name": "Some user defined name",
+                    "barcode_id": "D2_29",
+                    "type": "35",
+                    "yaw": "177.8"
+                }
+            }
+        ]
+    }
+}
+```
