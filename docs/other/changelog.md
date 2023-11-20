@@ -2,6 +2,7 @@
 
 ## 2.7.0
 
+- Support enabling a list of topics. Like `{"enable_topic": ["/actions", "/alerts", "/tracked_pose"]}`
 - Support [global positioning based on barcode](../reference/services.md#barcode)
   - New capability flag: `supportsBarcodeGp`
   - Add two params in service `/services/start_global_positioning`.

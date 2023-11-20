@@ -1,5 +1,20 @@
 # Websocket Reference
 
+Topics are used to receive realtime information from the robot.
+Use the following commands to start/stop listening to some topics.
+
+```
+{"enable_topic": "TOPIC_NAME"}
+{"disable_topic": "TOPIC_NAME"}
+```
+
+Since 2.7.0, multiple topic names are supported. Require cap flag `supportsEnableTopicList`.
+
+```
+{"enable_topic": ["/actions", "/alerts", "/tracked_pose"]} // since 2.7.0
+{"disable_topic": ["/actions", "/alerts", "/tracked_pose"]} // since 2.7.0
+```
+
 ## Map
 
 In pure-location mode, the `/map` topic contains the currently used map. Any only update once.
