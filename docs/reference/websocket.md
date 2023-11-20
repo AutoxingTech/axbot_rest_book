@@ -849,3 +849,37 @@ When added, the format of map info should be like:
     }
 }
 ```
+
+## Detected Rack
+
+```json
+{
+   "topic":"/detected_rack",
+   "rack_detected": true,
+   "frame":"map", // optional, valid when `rack_detected` is true
+   "rack_box": // optional, valid when `rack_detected` is true
+   {
+      "pose":{
+         "pos":[
+            0.0,
+            0.0
+         ],
+         "ori":0.0
+      },
+      "width":64.324,
+      "height":69.234
+   },
+   "rack_box_aligned": // optional, valid when `rack_detected` is true
+   {
+      "pose":{
+         "pos":[
+            0.0,
+            0.0
+         ],
+         "ori":0.0
+      },
+      "width":66.0,
+      "height":70.0
+   }
+}
+```
