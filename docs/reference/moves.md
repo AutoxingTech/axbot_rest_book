@@ -27,8 +27,10 @@ interface MoveActionCreate {
     | 'charge' // to to charger and docker with it
     | 'return_to_elevator_waiting_point'
     | 'enter_elevator'
-    | 'leave_elevator'
-    | 'along_given_route'; // Follow a given path.
+    | 'leave_elevator'    // Deprecated. Don't use it anymore.
+    | 'along_given_route' // Follow a given path.
+    | 'align_with_rack'   // crawl under a rack(to jack it up later)
+    | 'to_unload_point';   // move to a rack unload point(to jack it down later)
   target_x?: number;
   target_y?: number;
   target_z?: number;
@@ -57,6 +59,18 @@ interface MoveActionCreate {
   charge_retry_count?: number; // retry times before `charge` action fails.
 }
 ```
+
+### Jack Device
+
+Since 2.7.0, there is a new model(codename **Longjack**), it can crawl under a rack and jack it up.
+
+Please use `type=align_with_rack` to crawl under the rack. And then call `/services/jack_up`.
+
+Use `type=to_unload_point` to move to the unload point. And then call `/services/jack_down` to unload.
+
+| Robot Admin Screenshot  | Photo                |
+| ----------------------- | -------------------- |
+| ![](./jack_monitor.png) | ![](./jack_real.jpg) |
 
 ### Follow Given Route Strictly
 
