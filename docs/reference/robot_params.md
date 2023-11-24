@@ -3,7 +3,7 @@
 ## Get Motion Metrics
 
 ```bash
-curl http://localhost:8000/robot-params/
+curl http://localhost:8000/robot-params
 ```
 
 ```json
@@ -38,7 +38,7 @@ With a smaller value, the robot moves even slower(before doorsills and bumpy roa
 curl -X POST \
   -H "Content-Type: application/json"
   -d '{"/wheel_control/max_forward_velocity": 1.2}'
-  http://localhost:8000/robot-params/
+  http://localhost:8000/robot-params
 ```
 
 Multiple params can be updated in one call.
