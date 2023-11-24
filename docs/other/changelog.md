@@ -16,6 +16,7 @@
 - Support [setting map with data directly](../reference/current_map_and_pose.md#set-current-map).
 - Support jacking device:
   - New capability flag: `supportsJack`
+  - New move action type: `align_with_rack`, `to_unload_point`. See [Jack Device](../reference/moves.md#jack-device)
   - Add services. See [Jack Up/Down](../reference/services.md#jack-device-updown)
   - Add websocket topic [`/jack_state`](../reference/websocket.md#jack-state)
 - Support dynamic footprint:
