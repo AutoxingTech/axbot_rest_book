@@ -64,13 +64,27 @@ interface MoveActionCreate {
 
 Since 2.7.0, there is a new model(codename **Longjack**), it can crawl under a rack and jack it up.
 
-Please use `type=align_with_rack` to crawl under the rack. And then call `/services/jack_up`.
+The steps are summaries as follow:
 
-Use `type=to_unload_point` to move to the unload point. And then call `/services/jack_down` to unload.
+1. Create a move action, with `type=align_with_rack` to crawl under the rack.
+2. When the move succeeded, call `/services/jack_up`.
+3. The progress of the jack device is reported from [Jack State Topic](../reference/websocket.md#jack-state).
+4. When the jack is fully up, the footprint of the robot will expand to accommodate that of the rack.
+The updated footprint can be received from [Robot Model Topic](../reference/websocket.md#robot-model).
+5. When the jack is fully up, use `type=to_unload_point` to move to the unload point.
+6. Call `/services/jack_down` to unload.
 
 | Robot Admin Screenshot  | Photo                |
 | ----------------------- | -------------------- |
 | ![](./jack_monitor.png) | ![](./jack_real.jpg) |
+
+:::warning
+Some parameters must be configured correctly for safe using:
+
+* `/rack_detector/rack_width|rack_depth` - The size of the rack.
+* `/rack_detector/margin` - Some racks have extruded parts outside of the legs.
+* `/jack/extra_leg_offset` - Some racks have inward extruded legs that can't be seen by lidar.
+:::
 
 ### Follow Given Route Strictly
 
