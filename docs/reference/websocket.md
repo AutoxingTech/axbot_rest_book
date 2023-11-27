@@ -265,9 +265,9 @@ The point cloud in world frame.
 }
 ```
 
-## Route
+## Global Path
 
-Current route.
+Current global path.
 
 ![](./route.png)
 

@@ -1,0 +1,82 @@
+# IoT Devices
+
+The robot is can talk to auto-doors, elevators, gateways in two protocols: 
+[ESP-NOW](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_now.html) or BLE.
+
+It's recommended to use ESP-NOW. Because it allows connection-less communication between dozens of devices
+and the signal strength is higher than that of the BLE.
+
+## Auto Door and Gateway
+
+Auto door and gateway are essentially the same device. The robot can open them automatically when it moves.
+
+A hardware controller must be installed so the door can talk to nearby robots.
+Each controller has a MAC address. In the [`overlay` field](../reference/overlays.md#auto-door) of the map, the MAC address and whereabouts of the door (modeled as a polygon) should be provided.
+
+With this information, here is how the robots talk to a door:
+
+* From the robot side:
+  * The robot check whether it will go through an auto-door very soon, by detecting whether the [global path](../reference/websocket.md#global-path) ahead crosses the polygon of a auto-door.
+  * If a door is on the global path ahead, the robot will broadcast "Open Door {MAC}" at regular interval.
+  * If the door's state is 'open', it will be able to pass it. Otherwise, the polygon of the door become impassable.
+  * When the robot has passed the door, it will stop requesting it.
+* From the door side:
+  * The door broadcasts its status(open/closed/opening/closing) and ETC(estimated time of closeing) at regular interval.
+  * If it recreives any open-door command, it will open the door.
+  * If no open-door command is received for 3 seconds, it will close the door.
+  
+## Bluetooth API
+
+Currently, bluetooth APIs only help establishing a communication channel.
+Then the user and the device will talk in their predefined protocol.
+
+### Connect Bluetooth
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"address": "00:11:22:33:FF:EE"}' \
+  http://localhost:8000/bluetooth/connect
+```
+
+**Parameters**
+
+```ts
+class BluetoothConnectRequest {
+  address: string; // address, in form of "00:11:22:33:FF:EE"
+}
+```
+
+When bluetooth is connected. Use Websocket to communicate with device.
+
+```bash
+$ wscat -c ws://localhost:8000/ws/v2/topics
+> {"enable_topic": "/bluetooth/outbound" }
+> {"enable_topic": "/bluetooth_state" }
+< {"topic": "/bluetooth_state", "stamp": 1644835395.429, "connected_devices": ["00:11:22:33:FF:EE", ... ] }
+> {"topic": "/bluetooth/inbound", "device_address": "00:11:22:33:FF:EE", "data": "..." }
+< {"topic": "/bluetooth/outbound", "device_address": "00:11:22:33:FF:EE", "data": "..." }
+< {"topic": "/bluetooth/outbound", "device_address": "00:11:22:33:FF:EE", "data": "..." }
+< {"topic": "/bluetooth/outbound", "device_address": "00:11:22:33:FF:EE", "data": "..." }
+```
+
+- `/bluetooth_state` The bluetooth connection state
+- `/bluetooth/inbound` For sending data to robot
+- `/bluetooth/outbound` For receiving data from robot
+
+### Disconnect
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"address": "00:11:22:33:FF:EE"}' \
+  http://localhost:8000/bluetooth/disconnect
+```
+
+**Parameters**
+
+```ts
+class BluetoothDisconnectRequest {
+  address: string; // Mac address, in form of "00:11:22:33:FF:EE"
+}
+```

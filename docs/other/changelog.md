@@ -2,6 +2,7 @@
 
 ## 2.7.0
 
+- Support [auto-doors and gateways](../reference/iot_devices.md#auto-door-and-gateway).
 - Support enabling a list of topics. Like `{"enable_topic": ["/actions", "/alerts", "/tracked_pose"]}`
 - Support [global positioning based on barcode](../reference/services.md#barcode)
   - New capability flag: `supportsBarcodeGp`
