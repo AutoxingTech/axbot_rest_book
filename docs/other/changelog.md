@@ -18,6 +18,7 @@
 - Support jacking device:
   - New capability flag: `supportsJack`
   - New move action type: `align_with_rack`, `to_unload_point`. See [Jack Device](../reference/moves.md#jack-device)
+  - New move actin fail reason `rack_moved`.
   - Add services. See [Jack Up/Down](../reference/services.md#jack-device-updown)
   - Add websocket topic [`/jack_state`](../reference/websocket.md#jack-state)
 - Support dynamic footprint:
