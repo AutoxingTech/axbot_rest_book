@@ -74,6 +74,12 @@ Charger are used with move action type `charge`.
 ## Auto Door
 
 Auto doors are defined so the robot can open auto-doors ahead of it.
+The door is expressed as a polygon and must have a `mac` property.
+
+:::warning
+The polygon must cover the entire area where the door moves.
+If it's not large enough, when the door opens, it may collide with the waiting robot.
+:::
 
 ```json
 {
