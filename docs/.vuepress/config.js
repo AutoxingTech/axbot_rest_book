@@ -66,50 +66,50 @@ module.exports = {
                 ],
                 lastUpdated: 'Last Updated'
             },
-            "/chs/": {
-                nav: [
-                ],
-                sidebar: [
-                    {
-                        title: '导引教程',
-                        collapsable: false, // optional, defaults to true
-                        sidebarDepth: 0,    // optional, defaults to 1
-                        children: [
-                            '/chs/overview/getting_start',
-                            '/chs/guides/first_move',
-                            '/chs/guides/start_websocket',
-                        ]
-                    },
-                    {
-                        title: '参考手册',
-                        collapsable: false,
-                        children: [
-                            '/chs/reference/api_principals',
-                            '/chs/reference/maps',
-                            '/chs/reference/moves',
-                            '/chs/reference/current_map_and_pose',
-                            '/chs/reference/mappings',
-                            '/chs/reference/services',
-                            '/chs/reference/bluetooth',
-                            '/chs/reference/device',
-                            '/chs/reference/videos',
-                            '/chs/reference/recordings',
-                            '/chs/reference/websocket'
-                        ],
-                        sidebarDepth: 2
-                    },
-                    {
-                        title: '其它',
-                        collapsable: false,
-                        children: [
-                            '/chs/other/deprecations',
-                            '/chs/other/changelog'
-                        ],
-                        sidebarDepth: 2
-                    }
-                ],
-                lastUpdated: '最后更新'
-            }
+            // "/chs/": {
+            //     nav: [
+            //     ],
+            //     sidebar: [
+            //         {
+            //             title: '导引教程',
+            //             collapsable: false, // optional, defaults to true
+            //             sidebarDepth: 0,    // optional, defaults to 1
+            //             children: [
+            //                 '/chs/overview/getting_start',
+            //                 '/chs/guides/first_move',
+            //                 '/chs/guides/start_websocket',
+            //             ]
+            //         },
+            //         {
+            //             title: '参考手册',
+            //             collapsable: false,
+            //             children: [
+            //                 '/chs/reference/api_principals',
+            //                 '/chs/reference/maps',
+            //                 '/chs/reference/moves',
+            //                 '/chs/reference/current_map_and_pose',
+            //                 '/chs/reference/mappings',
+            //                 '/chs/reference/services',
+            //                 '/chs/reference/bluetooth',
+            //                 '/chs/reference/device',
+            //                 '/chs/reference/videos',
+            //                 '/chs/reference/recordings',
+            //                 '/chs/reference/websocket'
+            //             ],
+            //             sidebarDepth: 2
+            //         },
+            //         {
+            //             title: '其它',
+            //             collapsable: false,
+            //             children: [
+            //                 '/chs/other/deprecations',
+            //                 '/chs/other/changelog'
+            //             ],
+            //             sidebarDepth: 2
+            //         }
+            //     ],
+            //     lastUpdated: '最后更新'
+            // }
         }
     },
     locales: {
