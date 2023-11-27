@@ -8,7 +8,7 @@ and the signal strength is higher than that of the BLE.
 
 ## Auto Door and Gateway
 
-Auto door and gateway are essentially the same device. The robot can open them automatically when it moves.
+Auto door and gateway are essentially the same device. A robot can open them automatically when it moves.
 
 A hardware controller must be installed so the door can talk to nearby robots.
 Each controller has a MAC address. In the [`overlay` field](../reference/overlays.md#auto-door) of the map, the MAC address and whereabouts of the door (modeled as a polygon) should be provided.
@@ -27,7 +27,10 @@ With this information, here is how the robots talk to a door:
   
 ## Bluetooth API
 
-Currently, bluetooth APIs only help establishing a communication channel.
+Currently, unlike ESP-NOW IoT devices, the robot can't operate Bluetooth based IoT devices .
+In other words, it will not open auto-doors when it moves.
+
+The Bluetooth APIs only help establishing a communication channel.
 Then the user and the device will talk in their predefined protocol.
 
 ### Connect Bluetooth
