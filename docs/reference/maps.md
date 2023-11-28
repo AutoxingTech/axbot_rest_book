@@ -137,7 +137,7 @@ Modify the name and overlays
 ```bash
 curl -X PATCH \
     -H "Content-Type: application/json" \
-    -d '{"map_name": "...", "overlays": "..."}'
+    -d '{"map_name": "...", "overlays": "..."}' \
     http://localhost:8000/maps/1 {}
 ```
 

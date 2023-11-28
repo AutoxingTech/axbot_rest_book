@@ -1,6 +1,6 @@
 # Robot Params API
 
-## Get Motion Metrics
+## Get Params
 
 ```bash
 curl http://localhost:8000/robot-params
@@ -32,13 +32,15 @@ It also learns and remember doorsills in a map and slow down in advance.
 With a larger value, the robot is less affected by bumpiness.
 With a smaller value, the robot moves even slower(before doorsills and bumpy road).
 
-## Set Motion Metrics
+## Set Params
+
+Multiple params can be updated at once.
 
 ```bash
 curl -X POST \
-  -H "Content-Type: application/json"
-  -d '{"/wheel_control/max_forward_velocity": 1.2}'
+  -H "Content-Type: application/json" \
+  -d '{"/wheel_control/max_forward_velocity": 1.2, "/control/bump_tolerance": 0.5}' \
   http://localhost:8000/robot-params
 ```
 
-Multiple params can be updated in one call.
+

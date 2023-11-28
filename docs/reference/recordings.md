@@ -7,8 +7,8 @@ Or, one can use `POST /recording` to manually record a bag.
 
 ```bash
 curl -X POST \
-  -H "Content-Type: application/json"
-  -d '{"filename_suffix": "xxx"}'
+  -H "Content-Type: application/json" \
+  -d '{"filename_suffix": "xxx"}' \
   http://localhost:8000/recording/
 ```
 

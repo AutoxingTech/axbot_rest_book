@@ -98,7 +98,7 @@ Restart all services.
 
 ```bash
 curl -X POST \
-  -H "Content-Type: application/json"
+  -H "Content-Type: application/json" \
   http://localhost:8000/services/restart_service
 ```
 
@@ -106,8 +106,8 @@ curl -X POST \
 
 ```bash
 curl -X POST \
-  -H "Content-Type: application/json"
-  -d '{"target": "main_power_supply", reboot: false}'
+  -H "Content-Type: application/json" \
+  -d '{"target": "main_power_supply", reboot: false}' \
   http://localhost:8000/services/baseboard/shutdown
 ```
 
@@ -375,7 +375,7 @@ Resetting USB hub may help recover malfunctioned hardwares.
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
-  -d '{"devices_to_reset": ["1/3", "8/1"]}'
+  -d '{"devices_to_reset": ["1/3", "8/1"]}' \
   http://localhost:8000/services/reset_usb_devices
 ```
 

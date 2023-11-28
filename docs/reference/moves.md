@@ -4,8 +4,8 @@
 
 ```bash
 curl -X POST \
-  -H "Content-Type: application/json"
-  -d '{"creator": "xxx", "type": "standard" ...}'
+  -H "Content-Type: application/json" \
+  -d '{"creator": "xxx", "type": "standard" ...}' \
   http://localhost:8000/chassis/moves
 ```
 
@@ -209,8 +209,8 @@ Use websocket `/planning_state` to get updated of move state.
 
 ```bash
 curl -X PATCH \
-  -H "Content-Type: application/json"
-  -d '{state: "cancelled"}'
+  -H "Content-Type: application/json" \
+  -d '{state: "cancelled"}' \
   http://localhost:8000/chassis/moves/current
 ```
 
