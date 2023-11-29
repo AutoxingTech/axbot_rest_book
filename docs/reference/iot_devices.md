@@ -17,14 +17,18 @@ With this information, here is how the robots talk to a door:
 
 * From the robot side:
   * The robot check whether it will go through an auto-door very soon, by detecting whether the [global path](../reference/websocket.md#global-path) ahead crosses the polygon of a auto-door.
-  * If a door is on the global path ahead, the robot will broadcast "Open Door {MAC}" at regular interval.
+  * If a door is on the global path ahead, the robot will broadcast `Open Door {MAC} for {ROBOT SN}` at regular interval.
   * If the door's state is 'open', it will be able to pass it. Otherwise, the polygon of the door become impassable.
   * When the robot has passed the door, it will stop requesting it.
 * From the door side:
-  * The door broadcasts its status(open/closed/opening/closing) and ETC(estimated time of closeing) at regular interval.
+  * The door broadcasts its status(open/closed/opening/closing) and ETC(estimated time of closeing) at regular interval. Examples are:
+    * `Door {MAC} is closed`
+    * `Door {MAC} is opening`
+    * `Door {MAC} is open, ETC in 3 seconds`    
+    * `Door {MAC} is closing`
   * If it recreives any open-door command, it will open the door.
   * If no open-door command is received for 3 seconds, it will close the door.
-  
+
 ## Bluetooth API
 
 Currently, unlike ESP-NOW IoT devices, the robot can't operate Bluetooth based IoT devices .
