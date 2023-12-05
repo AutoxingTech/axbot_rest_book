@@ -94,16 +94,24 @@ Station mode response:
 ```json
 {
   "wifi_mode": "station",
+  "wpa_state": "completed",
   "route_mode": "eth0_first",
-  "wifi_ip": "10.10.40.212",
-  "wifi_mac": "e4:5f:01:60:3b:0b",
+  "wifi_ip": "10.10.41.43",
+  "wifi_mac": "e4:5f:01:6d:bd:6a",
   "ssid": "AutoXing",
-  "debug_message": "info: Connected to AutoXing",
-  "routes": [
+  "debug_message":"info: Switching to station mode.",
+  "routes":[
     "default via 192.168.25.2 dev eth0 src 192.168.25.25 metric 202 ",
-    "169.254.0.0/16 dev wlan0 scope link src 169.254.81.127 metric 303 ",
+    "default via 10.10.40.1 dev wlan0 proto dhcp metric 600 ",
+    "10.10.40.0/23 dev wlan0 proto kernel scope link src 10.10.41.43 metric 600 ",
     "192.168.25.0/24 dev eth0 proto dhcp scope link src 192.168.25.25 metric 202 "
-  ]
+  ],
+  "active_access_point":{
+    "ssid":"AutoXing",
+    "hw_address":"a4:fa:76:33:d3:70",
+    "strength":100
+  },
+  "last_wifi_connect_result":{}
 }
 ```
 
