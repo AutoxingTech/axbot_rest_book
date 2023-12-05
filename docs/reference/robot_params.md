@@ -15,7 +15,8 @@ curl http://localhost:8000/robot-params
   "/wheel_control/max_angular_velocity": 0.78,
   "/wheel_control/acc_smoother/smooth_level": "normal", // since 2.7.0. "disabled/lower/normal/higher"
   "/planning/auto_hold": true, // since 2.3.0
-  "/control/bump_tolerance": 0.5 // since 2.4.0
+  "/control/bump_tolerance": 0.5, // since 2.4.0
+  "/robot/footprint": [[0.248, 0.108], [0.24, 0.174], "..." , [0.248, -0.108]] // since 2.5.0
 }
 ```
 
@@ -31,6 +32,16 @@ The robot can slow down when bumpiness increase to intolerable level.
 It also learns and remember doorsills in a map and slow down in advance.
 With a larger value, the robot is less affected by bumpiness.
 With a smaller value, the robot moves even slower(before doorsills and bumpy road).
+
+`/robot/footprint` should reflect the top view of the robot. 
+It's used for collision detection and must be configured correctly.
+The data of the footprint is defined as follow:
+
+1. The origin of the footprint should be the rotate center of the robot.
+2. The x axis points to the right of the robot
+3. the y axis points to the front of the robot
+
+![](./footprint.png)
 
 ## Set Params
 
