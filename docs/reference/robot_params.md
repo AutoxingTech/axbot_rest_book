@@ -37,9 +37,10 @@ With a smaller value, the robot moves even slower(before doorsills and bumpy roa
 It's used for collision detection and must be configured correctly.
 The data of the footprint is defined as follow:
 
-1. The origin of the footprint should be the rotate center of the robot.
-2. The x axis points to the right of the robot
-3. the y axis points to the front of the robot
+1. The origin of the footprint should be the rotation center of the robot.
+2. The x axis points to the right of the robot. The y axis points to the front of the robot
+3. The polygon **MUST BE A CONVEX**.
+4. The polygon should not be closed (the first point should not be the same as the last one).
 
 ![](./footprint.png)
 
