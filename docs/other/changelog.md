@@ -21,8 +21,8 @@
   - New move actin fail reason `rack_moved`.
   - Add services. See [Jack Up/Down](../reference/services.md#jack-device-updown)
   - Add websocket topic [`/jack_state`](../reference/websocket.md#jack-state)
-- Support dynamic footprint:
-  - New capability flag: `supportsDynamicFootprints`
+- Support [dynamic footprint](../reference/robot_params.md#robot-footprint):
+  - New capability flag: `supportsDynamicFootprints`.
   - Add new websocket topic [`/nearby_robot_footprints`](../reference/websocket.md#nearby-robot-footprints)
   - Add new websocket topic [`/robot_model`](../reference/websocket.md#robot-model)
   - The [`/nearby_robots`](../reference/websocket.md#nearby-robots) topic has a new property `footprint_digest`.
