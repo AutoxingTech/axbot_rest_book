@@ -33,6 +33,19 @@ It also learns and remember doorsills in a map and slow down in advance.
 With a larger value, the robot is less affected by bumpiness.
 With a smaller value, the robot moves even slower(before doorsills and bumpy road).
 
+## Set Params
+
+Multiple params can be updated at once.
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"/wheel_control/max_forward_velocity": 1.2, "/control/bump_tolerance": 0.5}' \
+  http://localhost:8000/robot-params
+```
+
+## Robot footprint
+
 `/robot/footprint` should reflect the top view of the robot. 
 It's used for collision detection and must be configured correctly.
 The data of the footprint is defined as follow:
@@ -44,15 +57,6 @@ The data of the footprint is defined as follow:
 
 ![](./footprint.png)
 
-## Set Params
-
-Multiple params can be updated at once.
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"/wheel_control/max_forward_velocity": 1.2, "/control/bump_tolerance": 0.5}' \
-  http://localhost:8000/robot-params
-```
+Since 2.7.0, one can use [Robot Model Topic](../reference/websocket.md#robot-model) to monitor the changes of the footprint. Especially when a rack is mounted on the robot, the footprint will be the combined convex hull of the robot's footprint and the rack's footprint.
 
 
