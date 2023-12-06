@@ -10,7 +10,7 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
     - [RCSS-3485] 根据四条腿，检测货架的位姿
     - [RCSS-3671] 支持有突出物的货架。避免碰撞 
     - [RCSS-3677] 新增报警 9015：机器人顶着的货架发生明显滑动
-    - [RCSS-3682] 新增报警：顶升报错
+    - [RCSS-3682] 新增报警 9016：顶升报错
     - [RCSS-3562] 任务类型增加“去放货点”，并增加放货点能否到达的检测处理
   - 规控相关
     - [RCSS-3486] 增加对加速度的平滑，或许对运送饮料有帮助，新增 REST API 参数调节
@@ -22,7 +22,6 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
   - [RCSS-3504] 机器人始终记录所有传感器关键数据，方便排查问题 ，bag 滚动记录
   - [RCSS-1913] 监控机器人网络流量
   - [RCSS-1988] 支持第三方接入更多简单避障传感器
-  - [RCSS-3618] 支持以 Docker 形态，赋能需要定位能力的友商
   - [RCSS-3319] 支持基于 TCP 的 IMU、ODOM、激光接入协议
   - [RCSS-3521] 监控平台，能正确显示自身轮廓线的动态变化
   - [RCSS-3522] 监控平台，能正确显示其它机器人的轮廓线
