@@ -15,7 +15,7 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
   - 规控相关
     - [RCSS-3486] 增加对加速度的平滑，或许对运送饮料有帮助，新增 REST API 参数调节
     - [RCSS-2219] 碰撞预警: 减少刹车反应时间
-  - [RCSS-3592] 使用 ESP NOW 控制自动门、闸机
+  - [RCSS-3592] 机器人可以自动过自动门、闸机 (需要升级门控的固件)
   - [RCSS-3370] 机器人轮廓线，支持动态修改，立即生效
   - [RCSS-3518] 支持新的蓝海雷达 50C 和 E300
   - [RCSS-3519] 新增激光雷达失效区，用于丘陵或者斜坡区域
