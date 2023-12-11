@@ -63,6 +63,7 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
     - [RCSS-3042] 解决速度太快，导致搜索窗口变窄，引起的反复超调的问题
     - [RCSS-3684] 沿轨道行驶的 move 任务一律不执行临停补位逻辑
   - 货架顶升相关
+    - [RCSS-3044] 支持顶升，开发驱动
     - [RCSS-2948] feature_detectors 中整合新充电桩检测
     - [RCSS-3514] occupancy\_grid\_server 在顶升状态下要过滤激光雷达看到的货架腿
     - [RCSS-3561] 如果货架被别的机器人占用，明确报错，不执行临停补位逻辑
