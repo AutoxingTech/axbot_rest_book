@@ -274,3 +274,87 @@ curl http://localhost:8000/device/boot_progress # always return 200
   ]
 }
 ```
+
+## Time Configuration
+
+[Chrony](https://chrony-project.org/) is used to manage time of the robot.
+
+Since 2.7.1, one can control some configurations with the following APIs.
+
+The configuration of Chrony can be seen from:
+
+```
+curl http://localhost:8000/device/chrony/chrony.conf
+```
+
+### Time Sources
+
+Chrony can make use of a list of time sources.
+
+```
+$ curl http://localhost:8000/device/chrony/sources
+```
+
+```json
+[
+  "pool 2.debian.pool.ntp.org iburst",
+  "pool 1.cn.pool.ntp.org iburst",
+  "pool 2.cn.pool.ntp.org iburst",
+  "pool 3.cn.pool.ntp.org iburst",
+  "pool 0.cn.pool.ntp.org iburst",
+  "server ntp1.autoxing.com iburst",
+  "server ntp2.autoxing.com iburst"
+]
+```
+
+The syntax is a subset of [Chrony Time Source](https://manpages.debian.org/experimental/chrony/chrony.conf.5.en.html#Time_sources).
+
+* `server [HOSTNAME] [PORT port] [iburst] [trust]`
+* `pool [NAME] [PORT port] [iburst] [trust]`
+
+It recommended to have at least 4 time sources to prevent one incorrect time source(falseticker).
+See https://access.redhat.com/solutions/58025
+
+Set sources:
+
+```
+curl -X PUT \
+  --data '["pool 2.debian.pool.ntp.org iburst", "pool 0.cn.pool.ntp.org iburst"]' \
+  http://localhost:8000/device/chrony/sources
+```
+
+Restore default time sources:
+
+```
+curl -X DELETE http://localhost:8000/device/chrony/sources
+```
+
+### NTP Server
+
+Chrony can also be configured as a NTP server.
+
+To enable NTP for 192.168.2.*, use the following API:
+
+```
+curl -X PUT \
+  --data '["allow 192.168.2.0/24"]' \
+  http://localhost:8000/device/chrony/allows
+```
+
+The syntax follows [Chrony Time Server](https://manpages.debian.org/experimental/chrony/chrony.conf.5.en.html#NTP_server).
+
+```
+allow [all] [SUBNET]
+```
+
+Get current allow rules:
+
+```
+curl http://localhost:8000/device/chrony/allows
+```
+
+Disable NTP Server
+
+```
+curl -X DELETE http://localhost:8000/device/chrony/allows
+```

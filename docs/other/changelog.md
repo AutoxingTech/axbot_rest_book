@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.7.1
+
+- Support management of [time sources](../reference/device.md#time-sources)
+- Support use the robot as a [NTP Server](../reference/device.md#ntp-server)
+
 ## 2.7.0
 
 - Support [auto-doors and gateways](../reference/iot_devices.md#auto-door-and-gateway).

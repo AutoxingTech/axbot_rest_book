@@ -8,7 +8,8 @@
         "barcodes"
     ],
     "ignoreWords": [
-        "axbot"
+        "axbot",
+        "chrony"
     ],
     "import": []
 }
