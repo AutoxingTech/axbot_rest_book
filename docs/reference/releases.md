@@ -1,7 +1,27 @@
 # Changelog of Releases <!-- omit in toc -->
 
 For detailed notes(including minor releases), see [Full Release Notes](./releases_full.md)
- 
+
+## 2.7.1
+
+- New Feature
+  - [RCSS-2978] 下坡自动减速
+  - [RCSS-3687] REST API 防火墙。特别明显的不合理的频繁调用，则报警，并且不再上报服务器
+  - [RCSS-3667] REST API: 支持设置 Time Sources
+  - [RCSS-3759] REST API: 支持把底盘设置为 NTP Server
+- Task
+  - [RCSS-3647] 在监控平台显示WiFi、4G信号热力图
+  - [RCSS-3708] 重构 lidar 的报错部分代码，把报错逻辑抽到上层
+  - [RCSS-3751] REST API，允许配置白名单，免 SECRET 访问 
+- Bug
+  - [RCSS-3720] 业务刚设置完地图和位姿后发起 move 任务会偶现算路失败
+  - [RCSS-3731] 避障图的网格相对于全局网格存在偏差
+  - [RCSS-3736] 同一个业务下，机器的末次位置可能被保留，导致其他同业务下的机器在执行任务时，提示前方有障碍物
+  - [RCSS-3744] 桩没有电，导致对桩失败，没有报警
+  - [RCSS-3745] 上视摄像头打开记忆后，发现副作用，撤销改动
+  - [RCSS-3746] 对桩的时候，有剐蹭的风险
+  - [RCSS-3747] 25d雷达，建图时，反射率低的墙，墙后擦白太多
+
 ## 2.7.0
 
 - New Feature
