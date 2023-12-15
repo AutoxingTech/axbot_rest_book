@@ -111,7 +111,7 @@ curl -X POST -H "content-type: application/json"
   http://localhost:8000/chassis/moves
 ```
 
-When this action is created, the user should then send target poses with websocket topic `/follow_target`: See [Follow Target](../reference/)
+When this action is created, the user should then send target poses with websocket topic `/follow_target`: See [Follow Target](../reference/websocket.md#follow-target)
 
 ## Get Move Action Detail
 
