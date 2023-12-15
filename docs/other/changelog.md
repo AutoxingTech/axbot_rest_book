@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.x(unreleased)
+
+- Support [following a moving target](../reference/moves.md#follow-target). Add cap `supportsFollowTarget`.
+
 ## 2.7.1
 
 - Support management of [time sources](../reference/device.md#time-sources)

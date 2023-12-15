@@ -27,10 +27,11 @@ interface MoveActionCreate {
     | 'charge' // to to charger and docker with it
     | 'return_to_elevator_waiting_point'
     | 'enter_elevator'
-    | 'leave_elevator'    // Deprecated. Don't use it anymore.
+    | 'leave_elevator' // Deprecated. Don't use it anymore.
     | 'along_given_route' // Follow a given path.
-    | 'align_with_rack'   // crawl under a rack(to jack it up later)
-    | 'to_unload_point';   // move to a rack unload point(to jack it down later)
+    | 'align_with_rack' // crawl under a rack(to jack it up later)
+    | 'to_unload_point' // move to a rack unload point(to jack it down later)
+    | 'follow_target'; // follow a moving target
   target_x?: number;
   target_y?: number;
   target_z?: number;
@@ -70,7 +71,7 @@ The steps are summaries as follow:
 2. When the move succeeded, call `/services/jack_up`.
 3. The progress of the jack device is reported from [Jack State Topic](../reference/websocket.md#jack-state).
 4. When the jack is fully up, the footprint of the robot will expand to accommodate that of the rack.
-The updated footprint can be received from [Robot Model Topic](../reference/websocket.md#robot-model).
+   The updated footprint can be received from [Robot Model Topic](../reference/websocket.md#robot-model).
 5. When the jack is fully up, use `type=to_unload_point` to move to the unload point.
 6. Call `/services/jack_down` to unload.
 
@@ -81,17 +82,16 @@ The updated footprint can be received from [Robot Model Topic](../reference/webs
 :::warning
 Some parameters must be configured correctly for safe using:
 
-* `/rack_detector/rack_width|rack_depth` - The size of the rack.
-* `/rack_detector/margin` - Some racks have extruded parts outside of rectangle formed by the legs.
-* `/jack/extra_leg_offset` - Some racks have inward extruded legs that can't be seen by lidar.
-* `/jack/cargo_to_jack_front_edge_min_distance` - When mounted, the distance between the front edge of the rack to the front edge of the jack panel.
+- `/rack_detector/rack_width|rack_depth` - The size of the rack.
+- `/rack_detector/margin` - Some racks have extruded parts outside of rectangle formed by the legs.
+- `/jack/extra_leg_offset` - Some racks have inward extruded legs that can't be seen by lidar.
+- `/jack/cargo_to_jack_front_edge_min_distance` - When mounted, the distance between the front edge of the rack to the front edge of the jack panel.
+
 :::
 
 ![](./rack_params1.png)
 
 ![](./rack_params2.png)
-
-
 
 ### Follow Given Route Strictly
 
@@ -100,6 +100,18 @@ When `route_coordinates` is given and `detour_tolerance=0`, the robot will follo
 This is often used in stock inspection.
 
 ![](./follow_given_route.png)
+
+### Follow Target
+
+This action is used to tell the robot to follow a moving target.
+
+```
+curl -X POST -H "content-type: application/json"
+  --data '{"type":"follow_target"}' \
+  http://localhost:8000/chassis/moves
+```
+
+When this action is created, the user should then send target poses with websocket topic `/follow_target`: See [Follow Target](../reference/)
 
 ## Get Move Action Detail
 

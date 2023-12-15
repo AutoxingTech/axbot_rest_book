@@ -600,8 +600,8 @@ The feedback of service `POST /services/start_global_positioning`.
   // If false, the pose is globally unique and can be trusted.
   // If true, the environment is not a good match
   // or pose is not globally unique thus should be verified by an human operator.
-  // 
-  // If the result is from a successful match of barcode, 
+  //
+  // If the result is from a successful match of barcode,
   // `needs_confirmation` is always true.
   "needs_confirmation": false,
   "pose": { "pos": [0.32, 0.97], "ori": 0.0 }, // 物体的位置和朝向
@@ -800,7 +800,7 @@ Cross-Origin-Opener-Policy: same-origin
 
 ## Collected Barcode
 
-This topic is used to collect barcodes. 
+This topic is used to collect barcodes.
 
 ```json
 {
@@ -808,45 +808,42 @@ This topic is used to collect barcodes.
   "state": "unknown|ok|no_result|not_unique|too_far|unaligned_with_robot",
   "barcode": {
     "id": "D2_57",
-    "pose": { "pos": [0.32, 0.97], "ori": 0.0 },
+    "pose": { "pos": [0.32, 0.97], "ori": 0.0 }
   }
 }
 ```
 
-The collected barcodes should be added into map info. 
+The collected barcodes should be added into map info.
 The barcodes in map info can be used in [global positioning](./services.md#start-global-positioning).
 When added, the format of map info should be like:
 
 ```json
 {
-    "topic": "/map/info",
-    "name": "19 floor",
-    "uid": "63c6404f2f32e40c768df884",
-    "map_version": 2,
-    "overlays_version": 214,
-    "overlays": {
-        "type": "FeatureCollection",
-        "features": [
-            {
-                "geometry": {
-                    "coordinates": [
-                        -1.052,
-                        -5.485
-                    ],
-                    "type": "Point"
-                },
-                "id": "d43d15cf4e4ad0bd2a24891badd74891",
-                "type": "Feature",
-                "properties": {
-                    "mapOverlay": true,
-                    "name": "Some user defined name",
-                    "barcode_id": "D2_29",
-                    "type": "35",
-                    "yaw": "177.8"
-                }
-            }
-        ]
-    }
+  "topic": "/map/info",
+  "name": "19 floor",
+  "uid": "63c6404f2f32e40c768df884",
+  "map_version": 2,
+  "overlays_version": 214,
+  "overlays": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "geometry": {
+          "coordinates": [-1.052, -5.485],
+          "type": "Point"
+        },
+        "id": "d43d15cf4e4ad0bd2a24891badd74891",
+        "type": "Feature",
+        "properties": {
+          "mapOverlay": true,
+          "name": "Some user defined name",
+          "barcode_id": "D2_29",
+          "type": "35",
+          "yaw": "177.8"
+        }
+      }
+    ]
+  }
 }
 ```
 
@@ -854,32 +851,50 @@ When added, the format of map info should be like:
 
 ```json
 {
-   "topic":"/detected_rack",
-   "rack_detected": true,
-   "frame":"map", // optional, valid when `rack_detected` is true
-   "rack_box": // optional, valid when `rack_detected` is true
-   {
-      "pose":{
-         "pos":[
-            0.0,
-            0.0
-         ],
-         "ori":0.0
-      },
-      "width":64.324,
-      "height":69.234
-   },
-   "rack_box_aligned": // optional, valid when `rack_detected` is true
-   {
-      "pose":{
-         "pos":[
-            0.0,
-            0.0
-         ],
-         "ori":0.0
-      },
-      "width":66.0,
-      "height":70.0
-   }
+  "topic": "/detected_rack",
+  "rack_detected": true,
+  "frame": "map", // optional, valid when `rack_detected` is true
+  // optional, valid when `rack_detected` is true
+  "rack_box": {
+    "pose": {
+      "pos": [0.0, 0.0],
+      "ori": 0.0
+    },
+    "width": 64.324,
+    "height": 69.234
+  },
+  // optional, valid when `rack_detected` is true
+  "rack_box_aligned": {
+    "pose": {
+      "pos": [0.0, 0.0],
+      "ori": 0.0
+    },
+    "width": 66.0,
+    "height": 70.0
+  }
 }
 ```
+
+## Follow Target
+
+This topic is used for [following target](./moves.md#follow-target)
+
+The user should send this message to the robot at a moderate frequency around 2-4hz.
+
+```json
+{
+  "topic": "/follow_target",
+  "follow_state": "follow_pose|pause|fail",
+  "target_pose": {
+    // valid when follow_state == follow_pose
+    "pos": [1.1, 2.2], // optional. The pose can have only pos or ori
+    "ori": 1.2 // optional. The pose can have only pos or ori
+  }
+}
+```
+
+`follow_state` has the following values:
+
+- `follow_pose`: Move to the given `target_pose`
+- `pause`: Hold the robot still
+- `fail`: Mark the current action as failed. To start following again, start another action.
