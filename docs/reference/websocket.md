@@ -877,9 +877,9 @@ When added, the format of map info should be like:
 
 ## Follow Target
 
-This topic is used for [following target](./moves.md#follow-target)
+This topic is used for [following a moving target](./moves.md#follow-target)
 
-The user should send this message to the robot at a moderate frequency around 2-4hz.
+The user should send this message to the robot at a reasonable rate(around 2-4hz).
 
 ```json
 {
