@@ -2,6 +2,7 @@
 
 ## 2.7.x(unreleased)
 
+- Support `/control/bump_based_speed_limit/enable` in [robot params](../reference/robot_params.md)
 - Support [following a moving target](../reference/moves.md#follow-target). Add cap `supportsFollowTarget`.
 
 ## 2.7.1

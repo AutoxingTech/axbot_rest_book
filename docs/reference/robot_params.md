@@ -16,6 +16,7 @@ curl http://localhost:8000/robot-params
   "/wheel_control/acc_smoother/smooth_level": "normal", // since 2.7.0. "disabled/lower/normal/higher"
   "/planning/auto_hold": true, // since 2.3.0
   "/control/bump_tolerance": 0.5, // since 2.4.0
+  "/control/bump_based_speed_limit/enable": true, //since 2.7.4
   "/robot/footprint": [[0.248, 0.108], [0.24, 0.174], "..." , [0.248, -0.108]] // since 2.5.0
 }
 ```
@@ -26,6 +27,8 @@ This can be convenient when users want to freely adjust the robot's heading and 
 to place goods on it.
 But when the robot stands on a steep slope, it will always be locked even when `auto_hold` is off.
 
+
+`/control/bump_based_speed_limit/enable` controls whether to use bumpiness information for deceleration.
 `/control/bump_tolerance` is the degree of tolerance of bumpiness.
 Value range is 0-1 with 0.5 as a neutral value.
 The robot can slow down when bumpiness increase to intolerable level.
