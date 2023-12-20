@@ -875,7 +875,7 @@ When added, the format of map info should be like:
 }
 ```
 
-## Follow Target
+## Follow Target State
 
 This topic is used for [following a moving target](./moves.md#follow-target)
 
@@ -883,7 +883,7 @@ The user should send this message to the robot at a reasonable rate(around 2-4hz
 
 ```json
 {
-  "topic": "/follow_target",
+  "topic": "/follow_target_state",
   "follow_state": "follow_pose|pause|fail",
   "target_pose": {
     // valid when follow_state == follow_pose
