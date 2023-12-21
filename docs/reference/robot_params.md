@@ -15,7 +15,7 @@ curl http://localhost:8000/robot-params
   "/wheel_control/max_angular_velocity": 0.78,
   "/wheel_control/acc_smoother/smooth_level": "normal", // since 2.7.0. "disabled/lower/normal/higher"
   "/planning/auto_hold": true, // since 2.3.0
-  "/control/bump_tolerance": 0.5, // since 2.7.4
+  "/control/bump_tolerance": 0.5, // since 2.4.0
   "/control/bump_based_speed_limit/enable": true, //since 2.7.4
   "/robot/footprint": [[0.248, 0.108], [0.24, 0.174], "..." , [0.248, -0.108]] // since 2.5.0
 }
