@@ -27,6 +27,16 @@ The following command uses `curl` to make a HTTP request, and use [jq](https://s
 curl -H "Secret: XXXXXXXXXXXXXXXXX" http://localhost:8000/device/status | jq
 ```
 
+::: tip
+Requests from the following IPs doesn't require a secret.
+
+```
+192.168.25.*   # added since 2.7.1
+172.16.*       # added since 2.7.1
+```
+
+:::
+
 ```json
 {
   "rosversion": "1.15.11",
