@@ -2,6 +2,24 @@
 
 For detailed notes(including minor releases), see [Full Release Notes](./releases_full.md)
 
+## 2.7.4
+
+- New Feature
+  - [RCSS-3784] REST API: 增加开关，控制是否启用自动减速
+- Improvement
+  - [RCSS-3796] Bag 包中，记录全部的 action
+- Task
+  - [RCSS-3786] 给 REST API 进程增加守护
+  - [RCSS-3792] 移远 4G 模块，切换到模式1，或许会提升稳定性
+- Bug
+  - [RCSS-3559] 颠簸减速敏感度调节不太好用
+  - [RCSS-3785] 泡泡龙机型，乐动雷达凉的时候，点云点云伸出车头外，导致卡死
+  - [RCSS-3787] 从收到算路请求，到首次车开始运动，延迟太高
+  - [RCSS-3788] 外部 RGB，如果在启动完成之前，就发送开启指令，会导致永远无法开启
+  - [RCSS-3800] 东阳光工厂上桩异常
+  - [RCSS-3801] ihawk 下视测距不准的机器上桩失败
+  - [RCSS-3806] 昆山新正源新昌县中医院 出现多次出电梯后定位错误
+
 ## 2.7.1
 
 - New Feature
