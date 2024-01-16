@@ -75,7 +75,7 @@ The **dark-red** pixels are the entity of the obstacles, while the **light-red**
 
 ## Positioning State
 
-::: note
+::: tip
 For debugging only.
 :::
 
@@ -376,7 +376,7 @@ h264 encoded data stream.
 
 ![](./rgb_camera.png)
 
-::: note
+::: tip
 For browser or NodeJS, the stream can be decoded with [jmuxer](https://github.com/samirkumardas/jmuxer).
 Use `flusingTime: 0` to avoid delay.
 
