@@ -374,9 +374,20 @@ h264 encoded data stream.
 }
 ```
 
-For Browser for Node. Use [jmuxer](https://github.com/samirkumardas/jmuxer) can decode it.
-
 ![](./rgb_camera.png)
+
+::: note
+For browser or NodeJS, the stream can be decoded with [jmuxer](https://github.com/samirkumardas/jmuxer).
+Use `flusingTime: 0` to avoid delay.
+
+```js
+this.jmuxer = new JMuxer({
+    node: myNativeElement,
+    mode: 'video',
+    flushingTime: 0,
+});
+```
+:::
 
 Currently topics: (Different devices may differ)
 
