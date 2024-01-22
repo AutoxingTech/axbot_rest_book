@@ -10,7 +10,6 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
   - 一系列内存优化
     - [RCSS-3849] 修复 map_server 中的内存泄露，并优化内存使用量
     - [RCSS-3865] bot_control 在切换地图后调用 malloc_trim 释放内存
-    - [RCSS-3871] 建图结果，使用 4bit grayscale image
   - 一系列性能优化
     - [RCSS-3837] 使用流式压缩，提升地图存储和加载性能
     - [RCSS-3839] 提升规控层切换地图的时间
@@ -18,6 +17,7 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
     - [RCSS-3866] 动态调整 constraint 的计算量
     - [RCSS-3828] map_server 为 `/map_server/set_map` service 调用添加磁盘缓存
     - [RCSS-3878] planning 中对静态地图的三值化改为查表
+    - [RCSS-3871] 建图结果，使用 4bit grayscale image
   - 安全问题
     - [RCSS-3803] 非严格沿轨道行驶时，给机器人更大的自由绕障权，只要有靠近障碍物的风险，就绕
     - [RCSS-3886] 自锁式急停按钮，反接电路更安全
