@@ -2,6 +2,41 @@
 
 For detailed notes(including minor releases), see [Full Release Notes](./releases_full.md)
 
+## 2.7.5
+
+- New Feature
+  - [RCSS-3850] 新增参数 app_only_alerts，可以把某些 alerts 变为只在 app 端显示，不上传
+- Improvement
+  - 一系列内存优化
+    - [RCSS-3849] 修复 map_server 中的内存泄露，并优化内存使用量
+    - [RCSS-3865] bot_control 在切换地图后调用 malloc_trim 释放内存
+    - [RCSS-3871] 建图结果，使用 4bit grayscale image
+  - 一系列性能优化
+    - [RCSS-3837] 使用流式压缩，提升地图存储和加载性能
+    - [RCSS-3839] 提升规控层切换地图的时间
+    - [RCSS-3857] 减少 /nearby_map 的 CPU 开销
+    - [RCSS-3866] 动态调整 constraint 的计算量
+    - [RCSS-3828] map_server 为 `/map_server/set_map` service 调用添加磁盘缓存
+    - [RCSS-3878] planning 中对静态地图的三值化改为查表
+  - 安全问题
+    - [RCSS-3803] 非严格沿轨道行驶时，给机器人更大的自由绕障权，只要有靠近障碍物的风险，就绕
+    - [RCSS-3886] 自锁式急停按钮，反接电路更安全
+- Task
+  - [RCSS-3809] 把 ihawk 限制电流的参数做出在线调参可配置
+  - [RCSS-3872] map_server 的磁盘缓存功能添加参数开关
+  - [RCSS-3858] bot_control 向 planning 发的内部 move 任务的 action_id 改用负数流水号
+- Bug
+  - [RCSS-3753] 机器人初始位姿歪10度左右时，可能无法自动纠正导致最后丢定位
+  - [RCSS-3799] 热力图文件损坏时，会占满 CPU
+  - [RCSS-3875] 机器人掉头时后退的太多
+  - [RCSS-3840] 建图模式下，无法流畅的运动
+  - [RCSS-3844] 循环记录bag，记录的时机有问题，导致有时候车已经运动了，但是没有记录
+  - [RCSS-3847] 沿轨道行驶，终点不在电梯内，被误判为在电梯内 - 中科一号反馈
+  - [RCSS-3868] 机器人出梯时，首次发出的 /planning_state 中 in_elevator 状态错误
+  - [RCSS-3855] 沿轨道行驶避障物离开后，机器人快速切回轨道导致原地转圈
+  - [RCSS-3879] 当更新新的 udev/rules 后，必须重新底盘后才生效
+  - [RCSS-3620] 澳门赌场切地图过慢，跨梯事务体验较差
+
 ## 2.7.4
 
 - New Feature
