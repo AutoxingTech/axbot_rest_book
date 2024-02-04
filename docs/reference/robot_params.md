@@ -49,7 +49,7 @@ curl -X POST \
 ## Get Default Params
 
 ```bash
-curl http://localhost:8000/robot-params/default
+curl http://localhost:8000/robot-params/default # Since 2.7.6
 ```
 
 ## Robot footprint
