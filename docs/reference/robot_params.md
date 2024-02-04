@@ -46,6 +46,11 @@ curl -X POST \
   -d '{"/wheel_control/max_forward_velocity": 1.2, "/control/bump_tolerance": 0.5}' \
   http://localhost:8000/robot-params
 ```
+## Get Default Params
+
+```bash
+curl http://localhost:8000/robot-params/default
+```
 
 ## Robot footprint
 
