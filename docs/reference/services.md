@@ -447,3 +447,30 @@ curl -X POST http://localhost:8000/services/step_time
   "message": "Step time successfully"
 }
 ```
+
+## Get Nav. Thumbnail
+
+Since 2.8.0, requires `caps.supportsGetNavThumbnail`
+
+Get an image snapshot of the robot and its surroundings, including map, costmap, point cloud, virtual walls, etc.
+
+The image is 200x200 pixels, can be used for error reporting.
+
+![](./navi_thumbnail.png)
+
+```json
+{
+  "stamp": 1707211001,
+  "map_name": "Ground Floor",
+  "map_uid": "xxxxx",
+  "map_version": 3,
+  "overlays_version": 8,
+  "map": {
+    "stamp": 1707211001,
+    "resolution": 0.05,
+    "size": [200, 200],
+    "origin": [12.12345, -3.12345],
+    "data": "iVBORw0KGgoAAAANS..." // base64 encoded PNG
+  }
+}
+```

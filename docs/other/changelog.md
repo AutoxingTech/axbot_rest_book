@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.8.x(unreleased)
+
+- Support [Get Nav. Thumbnail Service](../reference/services.md#get-nav-thumbnail)
+- Support websocket topic [/robot_signal](../reference/websocket.md#robot-signal)
+
 ## 2.7.x(unreleased)
 
 - Support `/control/bump_based_speed_limit/enable` in [robot params](../reference/robot_params.md)

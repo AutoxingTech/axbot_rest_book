@@ -909,3 +909,19 @@ The user should send this message to the robot at a reasonable rate(around 2-4hz
 - `follow_pose`: Move to the given `target_pose`
 - `pause`: Hold the robot still
 - `fail`: Mark the current action as failed. To start following again, start another action.
+
+## Robot Signal
+
+Since 2.8.0, requires `caps.supportsRobotSignal`.
+
+Some indicators to tell whether the robot is turning left/right, or braking.
+
+```json
+{
+  "topic": "/robot_signal",
+  "turn_left": true, // turning left
+  "turn_right": false,  // turning right
+  "brake": false, // braking
+  "reverse": false, // backing up
+}
+```
