@@ -466,7 +466,6 @@ The image is 200x200 pixels, can be used for error reporting.
   "map_version": 3,
   "overlays_version": 8,
   "map": {
-    "stamp": 1707211001,
     "resolution": 0.05,
     "size": [200, 200],
     "origin": [12.12345, -3.12345],
