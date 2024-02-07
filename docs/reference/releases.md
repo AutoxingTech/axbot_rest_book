@@ -2,6 +2,43 @@
 
 For detailed notes(including minor releases), see [Full Release Notes](./releases_full.md)
 
+## 2.7.6
+
+- New Feature
+  - [RCSS-3922] REST API: 增加获取默认参数的接口
+  - [RCSS-3763] REST API: 增加跟随接口
+  - [RCSS-3819] 实现蓝海雷达软休眠
+- Improvement
+  - [RCSS-3873] 放货任务，改为倒退放货，不在货位上旋转
+  - [RCSS-3921] 新增参数，支持货架和顶升后对齐
+  - [RCSS-3927] 加保护，机器顶着货架时，不应该执行充电或者对齐货架任务
+  - [RCSS-3730] 删除 costmap 膨胀参数中的膨胀半径，新增参数地势半径
+  - 性能优化
+    - [RCSS-3897] 优化FastCorrelativeScanMatcher的性能
+    - [RCSS-3900] 将 DWA 调试路线改为默认 2hz 发布
+    - [RCSS-3894] 把 nearby_map 改为 service，降低 CPU 占用
+- Task
+  - [RCSS-3632] 规控支持跟随任务
+  - [RCSS-3884] 内存报警适配8G内存机型
+  - [RCSS-3904] RGB 相机希望随便插到哪个口，都能绑定
+  - [RCSS-3908] 给 platform_monitor 增加 Xmlrpc Action Server
+  - [RCSS-3915] bot_control 中动态让行相关参数做调整
+  - [RCSS-3924] occupancy_grid_server 广播的 1Hz 避障图消息格式改为 MapImageMsgV2
+- Bug
+  - [RCSS-3919] eth0存在冲突问题，低概率导致断网
+  - [RCSS-3895] 可绕障的沿轨道行驶，没有尽可能避开障碍物，仍然有危险贴近障碍物的行为
+  - [RCSS-3889] 时间错误导致logrotate失败，日志文件过大
+  - [RCSS-3898] 越南 2024年1月23日的 planning 崩溃
+  - [RCSS-3903] Alert 报出 2002 时 1008 的错误原因未更新
+  - [RCSS-3906] 非严格沿轨道行驶，bot_control 让行后要能够恢复任务
+  - [RCSS-3909] IMU 的温度报警只在程序启动后的第 100秒才开始进行上报
+  - [RCSS-3911] 部分带小圆立柱\+乐动雷达的机器，出现拖尾去不干净的问题
+  - [RCSS-3914] 电梯内射灯影响 mars 机器人进入
+  - [RCSS-3916] longjack_1000 2024年1月29日的 planning 崩溃
+  - [RCSS-3923] 修改 /planning_state/aligning_with_rack 表示机器人正在进入货架位置
+  - [RCSS-3930] 2024年2月1日中午澳门两台机器人相对运动卡死
+  - [RCSS-3932] 使用 ESP NOW 控制自动门时，在自动门区域内发起任务会卡死
+
 ## 2.7.5
 
 - New Feature
@@ -113,7 +150,7 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
   - [RCSS-3648] 针对动态障碍物运动预测地势相关函数的改进
   - [RCSS-3678] 顶升处于保护状态，需要报警。
   - [RCSS-3679] 充电和对接货架失败时，自由行走到挂接点再重新尝试对接
-  - [RCSS-3693] move\_type 兼容支持 \`ENTER\_ELEVATOR\` 和 \`LEAVE\_ELEVATOR\`
+  - [RCSS-3693] move_type 兼容支持 \`ENTER_ELEVATOR\` 和 \`LEAVE_ELEVATOR\`
   - [RCSS-3695] 在线修改参数文件，进行更严格的格式验证
   - [RCSS-3473] 连续发起 move action，机器能持续流畅运动，不降速
   - [RCSS-3077] 完善补桩逻辑，无论什么情况掉桩都补
@@ -130,7 +167,7 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
     - [RCSS-3150] 细分算路失败的错误原因
     - [RCSS-3639] /planning state 中添加任务的创建者信息
     - [RCSS-3663] 对桩时增加使用 odom 位姿判断机器人行走距离
-    - [RCSS-3700] 新增报警码9017，监控optical\_flow\_fusion\_node节点心跳
+    - [RCSS-3700] 新增报警码9017，监控optical_flow_fusion_node节点心跳
     - [RCSS-3705] 修改滞后\(已位于当前机器人车头后方\)深度相机点过滤器逻辑
     - [RCSS-3025] ihawk 对射机型，打开上视相机的记忆
     - [RCSS-3042] 解决速度太快，导致搜索窗口变窄，引起的反复超调的问题
@@ -138,7 +175,7 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
   - 货架顶升相关
     - [RCSS-3044] 支持顶升，开发驱动
     - [RCSS-2948] feature_detectors 中整合新充电桩检测
-    - [RCSS-3514] occupancy\_grid\_server 在顶升状态下要过滤激光雷达看到的货架腿
+    - [RCSS-3514] occupancy_grid_server 在顶升状态下要过滤激光雷达看到的货架腿
     - [RCSS-3561] 如果货架被别的机器人占用，明确报错，不执行临停补位逻辑
     - [RCSS-3635] 识别的货架宽高，要根据根据参数做对齐
     - [RCSS-3636] 根据识别结果，生成货架的 footprint
@@ -156,7 +193,7 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
     - [RCSS-3491] bot_control 避免在 v2x 上持续广播的状态为 none 的 RobotIntent
   - 其它
     - [RCSS-3668] 香橙派空间不足，减少 video 的录制，为 bag 录制腾出空间
-    - [RCSS-3698] ax\_msgs/AxLaserScan 的 RViz 插件 TF 查询时间戳用上 time\_deltas 字段
+    - [RCSS-3698] ax_msgs/AxLaserScan 的 RViz 插件 TF 查询时间戳用上 time_deltas 字段
     - [RCSS-2651] 整理垃圾清理相关功能，和 REST API
     - [RCSS-3318] 使用 ax_msgs::LaserScan 改造点云驱动
     - [RCSS-3374] 开发 ax_msgs/AxLaserScan 的 RVIZ 插件
@@ -493,7 +530,7 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
   - [RCSS-2278] IMU 频率异常，未恢复
   - [RCSS-2723] 香橙派底盘供网无法切换成头壳上网
   - [RCSS-2636] 树莓派 DNS 服务（dnsmasq）异常原因
-  - [RCSS-2684] 云南大学附属医院\_亚重症一病区消杀 1 上的 imu 崩溃
+  - [RCSS-2684] 云南大学附属医院_亚重症一病区消杀 1 上的 imu 崩溃
   - [RCSS-2690] 树莓派的 EMI 没有上报
   - [RCSS-2692] 树莓派镜像，/tmp 不是纯内存，会影响磁盘寿命
   - [RCSS-2764] IMU 禁用时，颠簸检测建议速度始终为 0.1
