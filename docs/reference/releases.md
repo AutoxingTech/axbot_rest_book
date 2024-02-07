@@ -25,7 +25,7 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
   - [RCSS-3915] bot_control 中动态让行相关参数做调整
   - [RCSS-3924] occupancy_grid_server 广播的 1Hz 避障图消息格式改为 MapImageMsgV2
 - Bug
-  - [RCSS-3919] eth0存在冲突问题，低概率导致断网
+  - [RCSS-3919] eth0存在冲突问题，导致头壳无法连接底盘
   - [RCSS-3895] 可绕障的沿轨道行驶，没有尽可能避开障碍物，仍然有危险贴近障碍物的行为
   - [RCSS-3889] 时间错误导致logrotate失败，日志文件过大
   - [RCSS-3898] 越南 2024年1月23日的 planning 崩溃
