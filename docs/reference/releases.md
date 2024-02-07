@@ -7,7 +7,8 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
 - New Feature
   - [RCSS-3922] REST API: 增加获取默认参数的接口
   - [RCSS-3763] REST API: 增加跟随接口
-  - [RCSS-3819] 实现蓝海雷达软休眠
+  - [RCSS-3797] 行车记录视频里，显示当前车速
+  - [RCSS-3819] 实现蓝海雷达软休眠(beta)
 - Improvement
   - [RCSS-3873] 放货任务，改为倒退放货，不在货位上旋转
   - [RCSS-3921] 新增参数，支持货架和顶升后对齐
