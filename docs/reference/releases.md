@@ -31,8 +31,7 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
   - [RCSS-3898] 越南 2024年1月23日的 planning 崩溃
   - [RCSS-3903] Alert 报出 2002 时 1008 的错误原因未更新
   - [RCSS-3906] 非严格沿轨道行驶，bot_control 让行后要能够恢复任务
-  - [RCSS-3909] IMU 的温度报警只在程序启动后的第 100秒才开始进行上报
-  - [RCSS-3911] 部分带小圆立柱\+乐动雷达的机器，出现拖尾去不干净的问题
+  - [RCSS-3911] 部分带小圆立柱\+乐动雷达的机器，出现拖尾去不干净
   - [RCSS-3914] 电梯内射灯影响 mars 机器人进入
   - [RCSS-3916] longjack_1000 2024年1月29日的 planning 崩溃
   - [RCSS-3923] 修改 /planning_state/aligning_with_rack 表示机器人正在进入货架位置
