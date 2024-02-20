@@ -4,6 +4,7 @@
 
 - Support [Get Nav. Thumbnail Service](../reference/services.md#get-nav-thumbnail)
 - Support websocket topic [/robot_signal](../reference/websocket.md#robot-signal)
+- Support [Get Rgb Image Service](../reference/services.md#get-rgb-image)
 
 ## 2.7.x(unreleased)
 

@@ -473,3 +473,18 @@ The image is 200x200 pixels, can be used for error reporting.
   }
 }
 ```
+
+## Get RGB Image
+
+Since 2.8.0, requires `caps.supportsGetRgbImage`
+
+Get the latest image of a RGB camera. It's similar with [Websocket RGB Image Stream](./websocket.md#rgb-image-stream). For some use cases which only require the image on rare occasions, this service is more efficient.
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"topic": "/rgb_cameras/front/compressed"}' \
+  http://localhost:8000/services/get_rgb_image
+```
+
+The response is the same as the websocket topic.
