@@ -824,39 +824,9 @@ This topic is used to collect barcodes.
 }
 ```
 
-The collected barcodes should be added into map info.
-The barcodes in map info can be used in [global positioning](./services.md#start-global-positioning).
-When added, the format of map info should be like:
+The collected barcodes should be added into `overlays` of the map. See [overlays](./overlays.md#barcode)
+The barcodes in `overlays` can be used in [global positioning](./services.md#start-global-positioning).
 
-```json
-{
-  "topic": "/map/info",
-  "name": "19 floor",
-  "uid": "63c6404f2f32e40c768df884",
-  "map_version": 2,
-  "overlays_version": 214,
-  "overlays": {
-    "type": "FeatureCollection",
-    "features": [
-      {
-        "geometry": {
-          "coordinates": [-1.052, -5.485],
-          "type": "Point"
-        },
-        "id": "d43d15cf4e4ad0bd2a24891badd74891",
-        "type": "Feature",
-        "properties": {
-          "mapOverlay": true,
-          "name": "Some user defined name",
-          "barcode_id": "D2_29",
-          "type": "35",
-          "yaw": "177.8"
-        }
-      }
-    ]
-  }
-}
-```
 
 ## Detected Rack
 

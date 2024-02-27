@@ -278,6 +278,7 @@ Barcode is a marker which is made of interleaved reflective surface and ordinary
 In a given site, each barcode contains a unique ID. So, when a barcode is found, the robot will know its whereabouts unambiguously.
 
 When `use_barcode` is true, it has higher priority over point-cloud-based matching. And when a match is found, it will always be trusted.
+To use it, barcodes and theirs poses should be [collected into `overlays` of the map](./websocket.md#collected-barcode).
 
 ## Auto-Mapping
 

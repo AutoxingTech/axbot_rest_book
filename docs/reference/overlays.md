@@ -267,3 +267,28 @@ If it's not large enough, when the door opens, it may collide with the waiting r
 Similar to charger, this point is used to tell the robot where to find racks to load/unload.
 It should be used with move action type `align_with_rack` and `to_unload_point`.
 
+
+## Barcode
+
+[Barcodes](./services.md#barcode) are used to uniquely determine the global pose of the robot.
+
+```json
+{
+    "id": "d43d15cf4e4ad0bd2a24891badd74891",
+    "type": "Feature",
+    "properties": {
+        "mapOverlay": true,
+        "name": "Some user defined name",
+        "barcode_id": "D2_29",
+        "type": "35",
+        "yaw": "177.8"
+    }
+    "geometry": {
+        "coordinates": [
+            -1.052,
+            -5.485
+        ],
+        "type": "Point"
+    }
+}
+```
