@@ -1,11 +1,10 @@
 # Overlays
 
-The `overlays` field is in GeoJson format. In this field, we can have virtual walls, virtual regions, auto-doors, dockers, cargo-load points etc.
+The `overlays` field of a map is in GeoJson format. It contains virtual walls, virtual regions, auto-doors, dockers, cargo-load points etc.
 
-To update the over of a map, see ['Modify Map'](./maps.md#modify-map)
+To update the overlays of a map, see ['Modify Map'](./maps.md#modify-map)
 
 The top level format is:
-
 
 ```json
 {
@@ -27,6 +26,10 @@ Each feature can be a point, a polyline or a polygon. For example, this is a pol
         {
             "id":"SampleGate",
             "type":"Feature",
+            "properties":{
+                "regionType": 4,
+                "mac":"30C6F72FAE1C"
+            },
             "geometry":{
                 "type":"Polygon",
                 "coordinates":[
@@ -49,10 +52,6 @@ Each feature can be a point, a polyline or a polygon. For example, this is a pol
                         ]
                     ]
                 ]
-            },
-            "properties":{
-                "regionType": 4,
-                "mac":"30C6F72FAE1C"
             }
         }
     ]
@@ -103,7 +102,7 @@ Virtual walls/regions are used to prevent the robot from moving into certain are
 }
 ```
 
-**Virtual Regions** are stronger than virtual walls in that if the robot accidentally gets inside, it will not be able to move in any direction.
+**Virtual Regions** are stronger than virtual walls in that if the robot accidentally gets inside the region, it will not be able to move in any direction.
 
 ![](./virtual_region.png)
 
@@ -149,6 +148,7 @@ Virtual walls/regions are used to prevent the robot from moving into certain are
 ## Free Space
 
 Free spaces are used to clear out an area in the map, and allow the robot to move into those areas.
+It's used to remove redundant obstacles after creating the map.
 
 ```json
 {
@@ -221,7 +221,7 @@ Charger are used with move action type `charge`.
 
 ## Auto Door
 
-Auto doors are defined so the robot can open auto-doors ahead of it.
+When auto-doors are defined, the robot can open the doors ahead of it.
 The door is expressed as a polygon and must have a `mac` property.
 
 :::warning
