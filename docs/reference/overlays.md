@@ -63,13 +63,161 @@ Each feature can be a point, a polyline or a polygon. For example, this is a pol
 
 Virtual walls/regions are used to prevent the robot from moving into certain areas.
 
+**Virtual walls** are `LineString`. It prevents robot from passing from one side to another side. It's also often used to guide global path calculation.
+
+![](./virtual_wall.png)
+
+```json
+{
+    "id": "19f0684fdf2b1695054df052e002d8f6",
+    "type": "Feature",
+    "properties": {
+        "lineType": "2",
+        "mapOverlay": true
+    },
+    "geometry": {
+        "type": "LineString",
+        "coordinates": [
+            [
+                -35.0222214524365,
+                -14.968376602837452
+            ],
+            [
+                -35.094466030898275,
+                -22.120589758429787
+            ],
+            [
+                2.4727142286451453,
+                -22.554057221952917
+            ],
+            [
+                2.54495880739114,
+                -15.329599487756695
+            ],
+            [
+                -35.0222214524365,
+                -15.112865751092386
+            ]
+        ]
+    }
+}
+```
+
+**Virtual Regions** are stronger than virtual walls in that if the robot accidentally gets inside, it will not be able to move in any direction.
+
+![](./virtual_region.png)
+
+```json
+{
+   "id": "4d14040ea1ee7dd2e1d778f04a224d7a",
+   "type": "Feature",
+   "properties": {
+      "blocked": false,
+      "mapOverlay": true,
+      "regionType": "1"
+   },
+   "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+         [
+            [
+               -87.30882859651956,
+               -43.42832073191971
+            ],
+            [
+               -86.96655334631487,
+               -24.85988841115727
+            ],
+            [
+               0.22327395043930665,
+               -25.754819491083936
+            ],
+            [
+               0.22327395043930665,
+               -44.23768299574249
+            ],
+            [
+               -87.30882859651956,
+               -43.42832073191971
+            ]
+         ]
+      ]
+   }
+}
+```
+
 ## Free Space
 
 Free spaces are used to clear out an area in the map, and allow the robot to move into those areas.
 
+```json
+{
+   "id": "e4d544e92262c538dc31e116b630043b",
+   "type": "Feature",
+   "properties": {
+      "blocked": false,
+      "mapOverlay": true,
+      "regionType": "12"
+   },
+   "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+         [
+            [
+               1.1439716297445557,
+               -16.400667528273516
+            ],
+            [
+               3.5214924133697423,
+               -16.438682980748354
+            ],
+            [
+               2.9970246447419413,
+               -25.260207920183575
+            ],
+            [
+               0.6399114661803651,
+               -25.07582059422475
+            ],
+            [
+               1.1439716297445557,
+               -16.400667528273516
+            ]
+         ]
+      ]
+   }
+}
+```
+
 ## Charger
 
 Charger are used with move action type `charge`.
+
+![](./charger.png)
+
+```json
+{
+   "id": "642562bcf0e02ee8aff7dea7",
+   "type": "Feature",
+   "geometry": {
+      "type": "Point",
+      "coordinates": [
+         0,
+         0
+      ]
+   },
+   "properties": {
+      "deviceIds": [
+         "6181307902152yI"
+      ],
+      "dockingPointId": "65655d96f0e02ee8afc9cc5e",
+      "mapOverlay": true,
+      "name": "sac_01",
+      "type": "9",
+      "yaw": 90
+   }
+}
+```
 
 ## Auto Door
 
@@ -84,6 +232,10 @@ If it's not large enough, when the door opens, it may collide with the waiting r
 ```json
 {
     "type":"Feature",
+    "properties":{
+        "regionType": 4,
+        "mac":"30C6F72FAE1C"
+    },
     "geometry":{
         "type":"Polygon",
         "coordinates":[
@@ -106,10 +258,6 @@ If it's not large enough, when the door opens, it may collide with the waiting r
                 ]
             ]
         ]
-    },
-    "properties":{
-        "regionType": 4,
-        "mac":"30C6F72FAE1C"
     }
 }
 ```

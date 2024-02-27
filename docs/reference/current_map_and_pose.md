@@ -36,6 +36,7 @@ class SetCurrentMapWithDataRequest {
   grid_resolution: number; // 0.05
   grid_origin_x: number; // the X coordinate of lower left corner of PNG map
   grid_origin_y: number; // the Y coordinate of lower left corner of PNG map
+  overlays: string; // See documents about overlays
 }
 ```
 
