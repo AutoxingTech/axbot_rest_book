@@ -895,3 +895,40 @@ Some indicators to tell whether the robot is turning left/right, or braking.
   "reverse": false, // backing up
 }
 ```
+
+## Nearby Auto Doors
+
+This topic is used to visualize the state of auto-doors.
+
+![](./nearby_auto_doors.png)
+
+```json
+{
+  "topic": "/nearby_auto_doors",
+  "doors": [
+    {
+      "name": "Abc",
+      "mac": "123",
+      "state": "closed",
+      "polygon": [
+        [
+          2.937,
+          3.875
+        ],
+        [
+          2.899,
+          2.368
+        ],
+        [
+          3.208,
+          2.329
+        ],
+        [
+          3.237,
+          3.904
+        ]
+      ]
+    }
+  ]
+}
+```

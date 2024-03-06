@@ -13,6 +13,8 @@ Auto door and gateway are essentially the same device. A robot can open them aut
 A hardware controller must be installed so the door can talk to nearby robots.
 Each controller has a MAC address. In the [`overlay` field](../reference/overlays.md#auto-door) of the map, the MAC address and whereabouts of the door (modeled as a polygon) should be provided.
 
+The nearby auto-doors and theirs states can be visualized with Websocket [Nearby Auto Doors](../reference/websocket.md#nearby-auto-doors)
+
 With this information, here is how the robots talk to a door:
 
 * From the robot side:
