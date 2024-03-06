@@ -5,8 +5,9 @@
 - Support [Get Nav. Thumbnail Service](../reference/services.md#get-nav-thumbnail)
 - Support websocket topic [/robot_signal](../reference/websocket.md#robot-signal)
 - Support [Get Rgb Image Service](../reference/services.md#get-rgb-image)
+- Support Websocket topic [/nearby_auto_doors](../reference/websocket.md#nearby-auto-doors)
 
-## 2.7.x(unreleased)
+## 2.7.7
 
 - Support `/control/bump_based_speed_limit/enable` in [robot params](../reference/robot_params.md)
 - Support [following a moving target](../reference/moves.md#follow-target). Add cap `supportsFollowTarget`.
