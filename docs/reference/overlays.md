@@ -292,3 +292,46 @@ It should be used with move action type `align_with_rack` and `to_unload_point`.
     }
 }
 ```
+
+## Lidar Deceitful Area
+
+In areas where the terrain is not flat, the 2d lidar may hit the ground stably and mistake it for a wall.
+
+![](./lidar_deceitful_area.png)
+
+Adding a "lidar deceitful area" can help the robot to solve this problem. 
+When moving in these areas, the robot will put more trust in the odometry of the wheels over lidar observations.
+
+```json
+{
+    "type":"Feature",
+    "properties":{
+        "regionType": 8,
+    },
+    "geometry":{
+        "type":"Polygon",
+        "coordinates":[
+            [
+                [
+                -2.702,
+                -5.784
+                ],
+                [
+                -1.007,
+                -5.827
+                ],
+                [
+                -1.053,
+                -6.348
+                ],
+                [
+                -2.546,
+                -6.385
+                ]
+            ]
+        ]
+    }
+}
+```
+
+
