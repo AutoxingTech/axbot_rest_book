@@ -7,8 +7,8 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
 - New Feature
   - [RCSS-3913] 顶升支持巡检整个区域内货架位，从而实现区域之间的运输
   - [RCSS-3733] 支持精确描述充电片的位置，和机器人外轮廓解耦
-  - [RCSS-3928] 路径计算，支持阻力区
-  - [RCSS-3662] 举升机器人检测重量
+  - [RCSS-3928] 支持阻力区，机器人会尽力少走阻力区
+  - [RCSS-3662] 举升机器人，支持重量检测
   - [RCSS-3773] REST API: 支持附近自动门可视化
   - [RCSS-3899] REST_API: 支持输出转向、刹车状态
   - [RCSS-3870] 支持倒车将货架停放到目的地
@@ -83,7 +83,7 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
   - [RCSS-3961] planning 接收带速度方向的动态障碍物点云
   - [RCSS-3962] 新增报警码9018，监控 rack_detector_node 心跳
   - [RCSS-3973] 避障图接入 nearby map points
-  - [RCSS-3974] 发布用于录像和监控的点云 topic /semantic_points
+  - [RCSS-3974] 发布用于录像和监控的点云 topic `/semantic_points`
   - [RCSS-3976] 发布机器人周围静态障碍物的点云 `/nearby_map_points`
   - [RCSS-3982] 5cm 避障图接入 nearby map points 之后依然要接入 horizontal_laser_2d 点云
   - [RCSS-3989] 激光雷达货架腿过滤功能提取到 ax_ros_common 模块中
