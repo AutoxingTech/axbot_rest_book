@@ -2,6 +2,100 @@
 
 For detailed notes(including minor releases), see [Full Release Notes](./releases_full.md)
 
+## 2.8.0
+
+- New Feature
+  - [RCSS-3913] 顶升支持巡检整个区域内货架位，从而实现区域之间的运输
+  - [RCSS-3733] 支持精确描述充电片的位置，和机器人外轮廓解耦
+  - [RCSS-3928] 路径计算，支持阻力区
+  - [RCSS-3662] 举升机器人检测重量
+  - [RCSS-3773] REST API: 支持附近自动门可视化
+  - [RCSS-3899] REST_API: 支持输出转向、刹车状态
+  - [RCSS-3870] 支持倒车将货架停放到目的地
+  - 新增报警
+    - [RCSS-3721] 新增报警码1009：MapInfo 有检查警告
+    - [RCSS-3722] 对 map_info 中的充电桩做检查，如果充电桩面对墙，则报警
+    - [RCSS-3766] 对 map_info 中的缓行区域/坡度区域做检查，如果存在无效的限速值，则报警
+  - 新的硬件支持
+    - [RCSS-3783] 支持单独的避障副雷达
+    - [RCSS-3789] 支持蓝海 E100 雷达
+    - [RCSS-3623] 支持新的激光锐驰智光 lakibeam1
+    - [RCSS-3933] 支持蓝海 E110-R 雷达
+    - [RCSS-3712] 支持步科 kinco 的轮子
+- Improvement
+  - 行走安全性优化
+    - [RCSS-4036] 针对动态物体的一些规控优化：迎面动态物体减速等
+    - [RCSS-3901] 根据未来路线上车轮廓和障碍物的距离，做速度规划
+  - 性能和内存优化 
+    - [RCSS-3990] 默认打开 reduce_constraint_computation
+    - [RCSS-2807] /path 改为 Path2D 类型，节约内存
+    - [RCSS-3813]，[RCSS-3880], [RCSS-3820]，[RCSS-3826] 等其它优化
+  - [RCSS-3778] 优化充电桩识别
+  - [RCSS-3967] 底盘WIFI漫游补丁，改为根据 signal strength 漫游，而不是通过 ping gateway 来判断
+- Bug
+  - [RCSS-3802] 发起时间校准时，车的位置会跳动，也有一定概率内存过大杀进程
+  - [RCSS-3038] ihawk设备不吐数据的时候没有报警
+  - [RCSS-3757] 4G 模块 EC20 异常守护未正确生效---易主和新正源反馈
+  - [RCSS-3761] 当 USB hub 降速为 1.0 时，通过 axusb -l 无法正确显示为降速状态
+  - [RCSS-3821] planning 忽略限速区域的异常限速值
+  - [RCSS-3883] 双激光避障图闪烁
+  - [RCSS-3890] 潜伏式机器出货架时偶现不流畅
+  - [RCSS-3956] 机器人升级版本后无法回桩
+  - [RCSS-3964] 机器人会绕行不存在的障碍物
+  - [RCSS-3970] 新正源1182311102394CC 不上充电桩
+  - [RCSS-3981] /internal/planning_state 消息发布频率异常
+  - [RCSS-3997] 1008 进度没有更新，导致业务端自动切换到手动模式
+  - [RCSS-4012] 视野内一直选新路，视野外路线无效时才选路
+  - [RCSS-4013] 未设置地图时发送的任务，取消该任务，设置地图和位姿后还会被执行
+  - [RCSS-4014] 机器人离桩自动充电，距离限制失效
+  - [RCSS-4015] longjack_box_1035 2024年3月20日的 planning 崩溃
+  - [RCSS-4023] 德尔福货架机器人自由模式下轨道不居中影响行走
+- Task
+  - [RCSS-3907] 默认启用蓝海雷达的软休眠
+  - [RCSS-3697] 支持澳汀的 sw80 和 sw85 类型的机器
+  - [RCSS-3702] 增加调试频道 `/nearby_auto_doors`
+  - [RCSS-3738] v2x 中 RobotTrend 需要支持设置任意字符串为 map uid
+  - [RCSS-3752] 连续 move 请求时，未算路成功前，继续追踪旧的路线
+  - [RCSS-3764] monitor改成根据chronyc tracking的结果来判断当前时间是否有错
+  - [RCSS-3768] 增加参数 /bot_control/auto_charge/enable 用于开关补桩功能
+  - [RCSS-3791] 废除 air720 4G 模块的支持
+  - [RCSS-3793] 支持标准 Ubuntu 系统，不再依赖 wiring pi
+  - [RCSS-3822] 重构 planning 支持任务流水线
+  - [RCSS-3823] 所有机型，最小速度改为 0.005
+  - [RCSS-3827] 避障图中接入第三方简单避障传感器功能增加对 ax_msgs/AxLaserScan 格式消息的支持
+  - [RCSS-3829] 支持多个立柱平面，同一台机器的多个雷达，可能安装在不同的平面上
+  - [RCSS-3830] 支持明确指定一部分雷达参与建图，新增 /slam/lidar_topics
+  - [RCSS-3835] 支持禁用 baseboard
+  - [RCSS-3851] 监控多个雷达节点
+  - [RCSS-3867] 将 Planning 中 ROS 相关改到主线程执行
+  - [RCSS-3869] 将充电和对接货架改为始终使用识别结果更新路线
+  - [RCSS-3874] 将 Planning 中 DWA 控车改到主线程执行
+  - [RCSS-3877] bot_control 中使用 ESP NOW 打开自动门时，一次只打开一个门
+  - [RCSS-3882] 潜伏式顶升货架居中参数调整
+  - [RCSS-3885] 双向透传管理板数据
+  - [RCSS-3905] 新增 service /get_map_in_area，给定范围返回一定范围内的地图
+  - [RCSS-3910] planning 发布 /planning_intent 向识别模块提供意图及相关信息
+  - [RCSS-3920] 获取货架区域
+  - [RCSS-3937] 提供获取当前rgb摄像头图像的接口
+  - [RCSS-3948] 给世界坐标系下的点云，增加动态概率
+  - [RCSS-3957] costmap 膨胀相关系数改为可动态修改生效
+  - [RCSS-3960] 避障图接收带速度方向的动态障碍物点云
+  - [RCSS-3961] planning 接收带速度方向的动态障碍物点云
+  - [RCSS-3962] 新增报警码9018，监控 rack_detector_node 心跳
+  - [RCSS-3973] 避障图接入 nearby map points
+  - [RCSS-3974] 发布用于录像和监控的点云 topic /semantic_points
+  - [RCSS-3976] 发布机器人周围静态障碍物的点云 `/nearby_map_points`
+  - [RCSS-3982] 5cm 避障图接入 nearby map points 之后依然要接入 horizontal_laser_2d 点云
+  - [RCSS-3989] 激光雷达货架腿过滤功能提取到 ax_ros_common 模块中
+  - [RCSS-3991] 避障图增加参数开关控制是否清除轮廓线内部的障碍物像素
+  - [RCSS-3996] 把顶升机器人在顶升过程中的最小值功率存盘
+  - [RCSS-3998] 将避障图用到的所有参数集中写到一个 YAML 文件中
+  - [RCSS-3999] 避障图接入带速度方向动态障碍物点云的改进
+  - [RCSS-4002] 避障图接入带速度方向动态障碍物点云时，忽略机器人背后的点
+  - [RCSS-4009] 自动生成充电桩区域，向后扩展长度由30cm改为50cm
+  - [RCSS-4017] 将二级算路改到主线程中执行
+  - [RCSS-4018] iHawk 相机数据数据不更新的时候需要报出警告
+
 ## 2.7.6
 
 - New Feature
@@ -150,7 +244,7 @@ For detailed notes(including minor releases), see [Full Release Notes](./release
   - [RCSS-3648] 针对动态障碍物运动预测地势相关函数的改进
   - [RCSS-3678] 顶升处于保护状态，需要报警。
   - [RCSS-3679] 充电和对接货架失败时，自由行走到挂接点再重新尝试对接
-  - [RCSS-3693] move_type 兼容支持 \`ENTER_ELEVATOR\` 和 \`LEAVE_ELEVATOR\`
+  - [RCSS-3693] move_type 兼容支持 `ENTER_ELEVATOR` 和 `LEAVE_ELEVATOR`
   - [RCSS-3695] 在线修改参数文件，进行更严格的格式验证
   - [RCSS-3473] 连续发起 move action，机器能持续流畅运动，不降速
   - [RCSS-3077] 完善补桩逻辑，无论什么情况掉桩都补

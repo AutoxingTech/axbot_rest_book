@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.8.x(unreleased)
+## 2.8.0
 
 - Support [Get Nav. Thumbnail Service](../reference/services.md#get-nav-thumbnail)
 - Support websocket topic [/robot_signal](../reference/websocket.md#robot-signal)
