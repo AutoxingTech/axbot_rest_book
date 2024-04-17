@@ -114,9 +114,23 @@ curl http://localhost:8090/maps/1
 
 ## Create a Map
 
+A map can be created, by providing needed fields:
+
+* map_name
+* carto_map
+* occupancy_grid
+* grid_origin_x
+* grid_origin_y
+* grid_resolution
+* overlays_version (optional)
+* overlays (optional)
+* uid (optional)
+* map_version (optional)
+
 ```bash
 curl -X POST \
     -H "Content-Type: application/json" \
+    --data '{"map_name": "xxx", "carto_map": "xxxx", "occupancy_grid": "xxx" ...}' \
     http://localhost:8090/maps/
 ```
 
