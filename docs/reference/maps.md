@@ -67,6 +67,12 @@ curl http://localhost:8000/maps/
 | image_url     | The image(PNG) representation of the map, in original resolution |
 | thumbnail_url | The image(PNG) representation of the map, in low resolution      |
 
+## Delete a Map
+
+```bash
+curl -X DELETE http://localhost:8000/maps/1
+```
+
 ## Delete All Maps
 
 ```bash
