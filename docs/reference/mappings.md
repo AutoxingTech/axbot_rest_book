@@ -216,3 +216,15 @@ curl -X POST http://localhost:8000/maps/
   "url": "http://localhost:8000/maps/119"
 }
 ```
+
+## Delete a Mapping Task
+
+```bash
+curl -X DELETE http://localhost:8000/mappings/1
+```
+
+## Delete All Mapping Tasks
+
+```bash
+curl -X DELETE http://localhost:8000/mappings/
+```
