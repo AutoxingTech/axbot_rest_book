@@ -5,14 +5,14 @@ This service is used to add/delete local DNS entries:
 ## List Available Names
 
 ```bash
-curl http://localhost:8000/hostnames/
+curl http://localhost:8090/hostnames/
 ```
 
 ```json
 [
   {
     "hostname": "local.autoxing.com",
-    "url": "http://localhost:8000/hostnames/local.autoxing.com"
+    "url": "http://localhost:8090/hostnames/local.autoxing.com"
   }
 ]
 ```
@@ -23,7 +23,7 @@ curl http://localhost:8000/hostnames/
 curl -X PATCH \
   -H "Content-Type: application/json" \
   -d '{"ip": "192.168.10.12"}' \
-  http://localhost:8000/hostnames/local.autoxing.com
+  http://localhost:8090/hostnames/local.autoxing.com
 ```
 
 ```json
@@ -42,7 +42,7 @@ curl -X PATCH \
 ## Get Hostname
 
 ```bash
-curl http://localhost:8000/hostnames/local.autoxing.com
+curl http://localhost:8090/hostnames/local.autoxing.com
 ```
 
 ```json
@@ -61,7 +61,7 @@ curl http://localhost:8000/hostnames/local.autoxing.com
 ## Delete Hostname
 
 ```bash
-curl -X DELETE http://localhost:8000/hostnames/local.autoxing.com
+curl -X DELETE http://localhost:8090/hostnames/local.autoxing.com
 ```
 
 ```json

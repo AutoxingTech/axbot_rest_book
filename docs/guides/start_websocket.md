@@ -17,7 +17,7 @@ For studying purpose, we use `wscat` to test Websocket.
 On Ubuntu, use `sudo apt install node-ws` to install it. Or with NodeJS, use `sudo npm -g i wscat`.
 
 ```bash
-$ wscat -c ws://localhost:8000/ws/v2/topics
+$ wscat -c ws://localhost:8090/ws/v2/topics
 connected (press CTRL+C to quit)
 > {"enable_topic": "/slam/state"}
 < {"enabled_topics": ["/slam/state"]}
@@ -55,13 +55,13 @@ First, we need to switch control mode to `remote`:
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"mode": "remote"}' \
-  http://localhost:8000/services/wheel_control/set_control_mode
+  http://localhost:8090/services/wheel_control/set_control_mode
 ```
 
 And then, use websocket to send control commands:
 
 ```bash
-$ wscat -c ws://localhost:8000/ws/v2/topics
+$ wscat -c ws://localhost:8090/ws/v2/topics
 connected (press CTRL+C to quit)
 > {"topic": "/twist", "linear_velocity": 0, "angular_velocity": -0.6522}
 < {"topic": "/twist_feedback"}

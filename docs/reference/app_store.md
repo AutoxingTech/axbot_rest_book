@@ -7,7 +7,7 @@ Available since 2.5.0
 By refreshing app store, it will check the package index for new packages and available updates.
 
 ```bash
-curl -X POST http://localhost:8000/app_store/services/refresh_store
+curl -X POST http://localhost:8090/app_store/services/refresh_store
 ```
 
 ## List Packages
@@ -15,7 +15,7 @@ curl -X POST http://localhost:8000/app_store/services/refresh_store
 Package list contain all packages and their update status.
 
 ```bash
-curl -X GET http://localhost:8000/app_store/packages
+curl -X GET http://localhost:8090/app_store/packages
 ```
 
 **Response**
@@ -77,7 +77,7 @@ Before installation, packages must be downloaded first.
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"packages": ["ax", "py_axbot"]}' \
-  http://localhost:8000/app_store/services/download_packages
+  http://localhost:8090/app_store/services/download_packages
 ```
 
 **Response**
@@ -103,7 +103,7 @@ If succeeded, status code 201:
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"packages": ["ax", "py_axbot"]}' \
-  http://localhost:8000/app_store/services/install_packages
+  http://localhost:8090/app_store/services/install_packages
 ```
 
 **Response**
@@ -129,7 +129,7 @@ If succeeded, status code 201:
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"filename": "/tmp/ax.2.6.4.pi64.tar.gz"]}' \
-  http://localhost:8000/app_store/services/install_local_file
+  http://localhost:8090/app_store/services/install_local_file
 ```
 
 **Response**
@@ -162,7 +162,7 @@ curl http://tunnel.autoxing.com:10144/app_store/jobs/install/tasks
     "create_time": "2023-05-04 17:21:36",
     "start_time": "2023-05-04 17:21:47",
     "end_time": "2023-05-04 17:21:50",
-    "url": "http://localhost:8000/app_store/jobs/download/tasks/4/log"
+    "url": "http://localhost:8090/app_store/jobs/download/tasks/4/log"
   },
   {
     "id": 3,
@@ -172,7 +172,7 @@ curl http://tunnel.autoxing.com:10144/app_store/jobs/install/tasks
     "create_time": "2023-05-04 17:21:36",
     "start_time": "2023-05-04 17:21:36",
     "end_time": "2023-05-04 17:21:47",
-    "url": "http://localhost:8000/app_store/jobs/download/tasks/3/log"
+    "url": "http://localhost:8090/app_store/jobs/download/tasks/3/log"
   }
 ]
 ````
@@ -180,7 +180,7 @@ curl http://tunnel.autoxing.com:10144/app_store/jobs/install/tasks
 For a task, the logs of the task can be requested.
 
 ```bash
-curl "http://localhost:8000/app_store/jobs/download/tasks/4/log"
+curl "http://localhost:8090/app_store/jobs/download/tasks/4/log"
 ```
 
 But if the task is still in progress, the log will be incomplete.
@@ -191,7 +191,7 @@ With `POST` request, the log can be downloaded progressively, which is more suit
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"start": 0, "end": 1024}' \
-  http://localhost:8000/app_store/jobs/download/tasks/4/log
+  http://localhost:8090/app_store/jobs/download/tasks/4/log
 ```
 
 ```ts

@@ -19,7 +19,7 @@ A map contains the following fields:
 ## Map List
 
 ```bash
-curl http://localhost:8000/maps/
+curl http://localhost:8090/maps/
 ```
 
 ```json
@@ -31,9 +31,9 @@ curl http://localhost:8000/maps/
     "create_time": 1644568815,
     "map_version": 9,
     "overlays_version": 14,
-    "thumbnail_url": "http://localhost:8000/maps/1/thumbnail",
-    "image_url": "http://localhost:8000/maps/1.png",
-    "url": "http://localhost:8000/maps/1"
+    "thumbnail_url": "http://localhost:8090/maps/1/thumbnail",
+    "image_url": "http://localhost:8090/maps/1.png",
+    "url": "http://localhost:8090/maps/1"
   },
   {
     "id": 2,
@@ -42,9 +42,9 @@ curl http://localhost:8000/maps/
     "create_time": 1643007028,
     "map_version": 2,
     "overlays_version": 8,
-    "thumbnail_url": "http://localhost:8000/maps/2/thumbnail",
-    "image_url": "http://localhost:8000/maps/2.png",
-    "url": "http://localhost:8000/maps/2"
+    "thumbnail_url": "http://localhost:8090/maps/2/thumbnail",
+    "image_url": "http://localhost:8090/maps/2.png",
+    "url": "http://localhost:8090/maps/2"
   },
   {
     "id": 3,
@@ -53,9 +53,9 @@ curl http://localhost:8000/maps/
     "create_time": 1642680851,
     "map_version": 1,
     "overlays_version": 3,
-    "thumbnail_url": "http://localhost:8000/maps/3/thumbnail",
-    "image_url": "http://localhost:8000/maps/3.png",
-    "url": "http://localhost:8000/maps/3"
+    "thumbnail_url": "http://localhost:8090/maps/3/thumbnail",
+    "image_url": "http://localhost:8090/maps/3.png",
+    "url": "http://localhost:8090/maps/3"
   }
 ]
 ```
@@ -70,19 +70,19 @@ curl http://localhost:8000/maps/
 ## Delete a Map
 
 ```bash
-curl -X DELETE http://localhost:8000/maps/1
+curl -X DELETE http://localhost:8090/maps/1
 ```
 
 ## Delete All Maps
 
 ```bash
-curl -X DELETE http://localhost:8000/maps
+curl -X DELETE http://localhost:8090/maps
 ```
 
 ## Get Map Detail
 
 ```bash
-curl http://localhost:8000/maps/1
+curl http://localhost:8090/maps/1
 ```
 
 ```json
@@ -98,9 +98,9 @@ curl http://localhost:8000/maps/1
   "grid_resolution": 0.05,
   "overlays_version": 14,
   "overlays": "{\"type\": \"FeatureCollection\", \"features\": [{\"id\": ...",
-  "thumbnail_url": "http://localhost:8000/maps/1/thumbnail",
-  "image_url": "http://localhost:8000/maps/1.png",
-  "pbstream_url": "http://localhost:8000/maps/1.pbstream"
+  "thumbnail_url": "http://localhost:8090/maps/1/thumbnail",
+  "image_url": "http://localhost:8090/maps/1.png",
+  "pbstream_url": "http://localhost:8090/maps/1.pbstream"
 }
 ```
 
@@ -117,7 +117,7 @@ curl http://localhost:8000/maps/1
 ```bash
 curl -X POST \
     -H "Content-Type: application/json" \
-    http://localhost:8000/maps/
+    http://localhost:8090/maps/
 ```
 
 **Response**
@@ -130,9 +130,9 @@ curl -X POST \
   "create_time": 1657015615,
   "map_version": 1,
   "overlays_version": 1,
-  "thumbnail_url": "http://localhost:8000/maps/119/thumbnail",
-  "image_url": "http://localhost:8000/maps/119.png",
-  "url": "http://localhost:8000/maps/119"
+  "thumbnail_url": "http://localhost:8090/maps/119/thumbnail",
+  "image_url": "http://localhost:8090/maps/119.png",
+  "url": "http://localhost:8090/maps/119"
 }
 ```
 
@@ -144,6 +144,6 @@ Modify the name and overlays
 curl -X PATCH \
     -H "Content-Type: application/json" \
     -d '{"map_name": "...", "overlays": "..."}' \
-    http://localhost:8000/maps/1 {}
+    http://localhost:8090/maps/1 {}
 ```
 

@@ -3,7 +3,7 @@
 ## Device Information
 
 ```bash
-curl http://localhost:8000/device/info
+curl http://localhost:8090/device/info
 ```
 
 ```json
@@ -57,13 +57,13 @@ curl http://localhost:8000/device/info
 ## Short Device Information
 
 ```bash
-curl http://localhost:8000/device/info/brief # for less information
+curl http://localhost:8090/device/info/brief # for less information
 ```
 
 ## Wifi List
 
 ```bash
-curl http://localhost:8000/device/available_wifis
+curl http://localhost:8090/device/available_wifis
 ```
 
 ```json
@@ -86,7 +86,7 @@ curl http://localhost:8000/device/available_wifis
 ## Network Information
 
 ```bash
-curl http://localhost:8000/device/wifi_info
+curl http://localhost:8090/device/wifi_info
 ```
 
 Station mode response:
@@ -135,7 +135,7 @@ Usb devices are organized as a tree.
 ```
 
 ```
-curl http://localhost:8000/device/usb_devices
+curl http://localhost:8090/device/usb_devices
 ```
 
 This request list all usb devices on a robot:
@@ -222,19 +222,19 @@ Save devices:
 curl -X PUT \
   -H "Content-Type: application/json" \
   -d '[...]' \
-  http://localhost:8000/device/usb_devices/saved
+  http://localhost:8090/device/usb_devices/saved
 ```
 
 Get saved devices:
 
 ```bash
-curl http://localhost:8000/device/usb_devices/saved
+curl http://localhost:8090/device/usb_devices/saved
 ```
 
 Clear saved devices:
 
 ```bash
-curl -X DELETE http://localhost:8000/device/usb_devices/saved
+curl -X DELETE http://localhost:8090/device/usb_devices/saved
 ```
 
 ## Boot Progress
@@ -247,8 +247,8 @@ But, `GET /device/boot_progress` will always return `200`, even when booting is 
 For example:
 
 ```bash
-curl http://localhost:8000/device/info # will return 503 during boot process
-curl http://localhost:8000/device/boot_progress # always return 200
+curl http://localhost:8090/device/info # will return 503 during boot process
+curl http://localhost:8090/device/boot_progress # always return 200
 ```
 
 ```json
@@ -284,7 +284,7 @@ Since 2.7.1, one can control some configurations with the following APIs.
 The configuration of Chrony can be seen from:
 
 ```
-curl http://localhost:8000/device/chrony/chrony.conf
+curl http://localhost:8090/device/chrony/chrony.conf
 ```
 
 ### Time Sources
@@ -292,7 +292,7 @@ curl http://localhost:8000/device/chrony/chrony.conf
 Chrony can make use of a list of time sources.
 
 ```
-$ curl http://localhost:8000/device/chrony/sources
+$ curl http://localhost:8090/device/chrony/sources
 ```
 
 ```json
@@ -320,13 +320,13 @@ Set sources:
 ```
 curl -X PUT \
   --data '["pool 2.debian.pool.ntp.org iburst", "pool 0.cn.pool.ntp.org iburst"]' \
-  http://localhost:8000/device/chrony/sources
+  http://localhost:8090/device/chrony/sources
 ```
 
 Restore default time sources:
 
 ```
-curl -X DELETE http://localhost:8000/device/chrony/sources
+curl -X DELETE http://localhost:8090/device/chrony/sources
 ```
 
 ### NTP Server
@@ -338,7 +338,7 @@ To enable NTP for 192.168.2.*, use the following API:
 ```
 curl -X PUT \
   --data '["allow 192.168.2.0/24"]' \
-  http://localhost:8000/device/chrony/allows
+  http://localhost:8090/device/chrony/allows
 ```
 
 The syntax follows [Chrony Time Server](https://manpages.debian.org/experimental/chrony/chrony.conf.5.en.html#NTP_server).
@@ -350,11 +350,11 @@ allow [all] [SUBNET]
 Get current allow rules:
 
 ```
-curl http://localhost:8000/device/chrony/allows
+curl http://localhost:8090/device/chrony/allows
 ```
 
 Disable NTP Server
 
 ```
-curl -X DELETE http://localhost:8000/device/chrony/allows
+curl -X DELETE http://localhost:8090/device/chrony/allows
 ```

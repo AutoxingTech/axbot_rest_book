@@ -17,7 +17,7 @@ This document lists deprecated APIs and how to migrate to new ones.
 Previously when using `{"enable_topic": "/tracked_pose"}`, `{"enable_topic": "/path"}`, `{"enable_topic": "/map"}`, but the returned messages are `/chassis/pose`, `/chassis/path`, `/chassis/occupancy_grid`. The names are not consistent.
 
 ```bash
-$ wscat -c ws://localhost:8000/ws/topics
+$ wscat -c ws://localhost:8090/ws/topics
 > {"enable_topic": "/tracked_pose"}
 < {"topic": "/chassis/pose", "pos": [-3.548, -0.288], "ori": -1.28}
 ```
@@ -25,7 +25,7 @@ $ wscat -c ws://localhost:8000/ws/topics
 To solve the mess, please update websocket path from `/ws/topics` to `/ws/v2/topics`.
 
 ```bash
-$ wscat -c ws://localhost:8000/ws/v2/topics
+$ wscat -c ws://localhost:8090/ws/v2/topics
 > {"enable_topic": "/tracked_pose"}
 < {"topic": "/tracked_pose", "pos": [-3.548, -0.288], "ori": -1.28}
 ```
@@ -46,7 +46,7 @@ This topic was used to monitor control mode and emergency stop mode.
 There is a weird `parts` field in it.
 
 ```
-$ wscat -c ws://localhost:8000/ws/topics
+$ wscat -c ws://localhost:8090/ws/topics
 > {"enable_topic": "/chassis_state" }
 < {
     "topic": "/chassis_state",

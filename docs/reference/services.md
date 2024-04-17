@@ -7,7 +7,7 @@ Calibrate IMU. The robot must be set still on hard and flat surface.
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
-  http://localhost:8000/services/imu/recalibrate
+  http://localhost:8090/services/imu/recalibrate
 ```
 
 This service call only initiates the calibration. The actual process usually takes 10-20 seconds.
@@ -48,7 +48,7 @@ Sample failure output:
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"control_mode": "auto"}' \
-  http://localhost:8000/services/wheel_control/set_control_mode
+  http://localhost:8090/services/wheel_control/set_control_mode
 ```
 
 **Parameters**
@@ -62,7 +62,7 @@ class SetControlModeRequest {
 Use `/wheel_state` websocket topic，to monitor wheel state.
 
 ```bash
-$ wscat -c ws://localhost:8000/ws/v2/topics
+$ wscat -c ws://localhost:8090/ws/v2/topics
 > {"enable_topic": "/wheel_state"}
 < {"topic": "/wheel_state", "control_mode": "auto", "emergency_stop_pressed": true }
 ```
@@ -73,7 +73,7 @@ $ wscat -c ws://localhost:8000/ws/v2/topics
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"enable": true}' \
-  http://localhost:8000/services/wheel_control/set_emergency_stop
+  http://localhost:8090/services/wheel_control/set_emergency_stop
 ```
 
 **Parameters**
@@ -87,7 +87,7 @@ class SetEmergencyStopRequest {
 Use `/wheel_state` topic, to monitor emergency stop state.
 
 ```bash
-$ wscat -c ws://localhost:8000/ws/v2/topics
+$ wscat -c ws://localhost:8090/ws/v2/topics
 > {"enable_topic": "/wheel_state"}
 < {"topic": "/wheel_state", "control_mode": "auto", "emergency_stop_pressed": true }
 ```
@@ -99,7 +99,7 @@ Restart all services.
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
-  http://localhost:8000/services/restart_service
+  http://localhost:8090/services/restart_service
 ```
 
 ## Shutdown/Reboot Device
@@ -108,7 +108,7 @@ curl -X POST \
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"target": "main_power_supply", reboot: false}' \
-  http://localhost:8000/services/baseboard/shutdown
+  http://localhost:8090/services/baseboard/shutdown
 ```
 
 **Parameters**
@@ -125,7 +125,7 @@ class ShutdownRequest {
 ## Clear Wheel Errors
 
 ```bash
-curl -X POST http://localhost:8000/services/wheel_control/clear_errors
+curl -X POST http://localhost:8090/services/wheel_control/clear_errors
 ```
 
 ## Clear Flip Error
@@ -134,7 +134,7 @@ Error 8004(flip error) usually means serious trouble - the robot might have fall
 It requires human checking. If the problem is solved, use this service to clear the error to make the robot operational again.
 
 ```bash
-curl -X POST http://localhost:8000/services/monitor/clear_flip_error
+curl -X POST http://localhost:8090/services/monitor/clear_flip_error
 ```
 
 ## Clear Slide Error
@@ -146,7 +146,7 @@ Experimental Feature
 Error 2008(slide error) means the the robot may have serious impact with some invisible obstacle. It demands human checking before clearing the error.
 
 ```bash
-curl -X POST http://localhost:8000/services/monitor/clear_slipping_error
+curl -X POST http://localhost:8090/services/monitor/clear_slipping_error
 ```
 
 ## Power On/Off Lidar
@@ -155,7 +155,7 @@ curl -X POST http://localhost:8000/services/monitor/clear_slipping_error
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"action": "power_on"}' \
-  http://localhost:8000/services/baseboard/power_on_lidar
+  http://localhost:8090/services/baseboard/power_on_lidar
 ```
 
 **Parameters**
@@ -172,7 +172,7 @@ class PowerOnRequest {
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"enable": true}' \
-  http://localhost:8000/services/depth_camera/enable_cameras
+  http://localhost:8090/services/depth_camera/enable_cameras
 ```
 
 **Parameters**
@@ -191,7 +191,7 @@ Switch WIFI to Access-Point or Station mode.
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"mode": "station", "ssid":"xxxxxxxxx", "psk": "xxxxx"}' \
-  http://localhost:8000/services/setup_wifi
+  http://localhost:8090/services/setup_wifi
 ```
 
 **Parameters**
@@ -218,7 +218,7 @@ Set the route table rules of the chassis.
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"mode": "xxx"}' \
-  http://localhost:8000/services/set_route_mode
+  http://localhost:8090/services/set_route_mode
 ```
 
 **Parameters**
@@ -237,7 +237,7 @@ interface RouteModeRequest {
   Based on `ping` result. If wlan0 connects to Internet,
   use it as the default route. Or else, use wlan0.
 
-A static HTML page is also provided and can be accessed from local network. http://localhost:8000/wifi_setup
+A static HTML page is also provided and can be accessed from local network. http://localhost:8090/wifi_setup
 
 ![](./network_setup.png)
 
@@ -246,7 +246,7 @@ A static HTML page is also provided and can be accessed from local network. http
 Awake the robot from sleeping state. If robot is already in awake state, it does nothing.
 
 ```bash
-curl -X POST http://localhost:8000/services/wake_up_device
+curl -X POST http://localhost:8090/services/wake_up_device
 ```
 
 Monitor websocket [Sensor Manager State](./websocket.md#sensor-manager-state) for sleep/awake/awakening state.
@@ -256,7 +256,7 @@ Monitor websocket [Sensor Manager State](./websocket.md#sensor-manager-state) fo
 ```bash
 curl -X POST \
   -H "Content-Type: application/json"
-  http://localhost:8000/services/start_global_positioning
+  http://localhost:8090/services/start_global_positioning
 ```
 
 **Parameters**
@@ -293,7 +293,7 @@ It's only available in mapping mode.
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"enable": true}' \
-  http://localhost:8000/services/enable_auto_mapping
+  http://localhost:8090/services/enable_auto_mapping
 ```
 
 **Parameters**
@@ -332,7 +332,7 @@ Calibrate IMU. The robot must be set still on hard and flat surface.
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
-  http://localhost:8000/services/imu/calibrate_gyro_scale
+  http://localhost:8090/services/imu/calibrate_gyro_scale
 ```
 
 This service call only initiates the calibration. The actual process usually takes 20 seconds.
@@ -377,7 +377,7 @@ Resetting USB hub may help recover malfunctioned hardwares.
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"devices_to_reset": ["1/3", "8/1"]}' \
-  http://localhost:8000/services/reset_usb_devices
+  http://localhost:8090/services/reset_usb_devices
 ```
 
 ## Clear Alert System-Down-Unexpectedly
@@ -387,7 +387,7 @@ curl -X POST \
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
-  http://localhost:8000/services/clear_system_down_unexpectedly
+  http://localhost:8090/services/clear_system_down_unexpectedly
 ```
 
 ## Clear Range Data All Zero Error
@@ -399,7 +399,7 @@ This service temporarily clear this error message.
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
-  http://localhost:8000/services/clear_range_data_all_zero_error
+  http://localhost:8090/services/clear_range_data_all_zero_error
 ```
 
 ## Jack Device Up/Down
@@ -409,13 +409,13 @@ Raise up or lower down the jack device. The state of the jack device is in Webso
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
-  http://localhost:8000/services/jack_up
+  http://localhost:8090/services/jack_up
 ```
 
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
-  http://localhost:8000/services/jack_down
+  http://localhost:8090/services/jack_down
 ```
 
 ## Step Time
@@ -427,7 +427,7 @@ When time is wrong, use this service to correct it.
 :::
 
 ```bash
-curl http://localhost:8000/services/step_time
+curl http://localhost:8090/services/step_time
 ```
 
 ```json
@@ -440,7 +440,7 @@ curl http://localhost:8000/services/step_time
 `POST` is used to correct time.
 
 ```bash
-curl -X POST http://localhost:8000/services/step_time
+curl -X POST http://localhost:8090/services/step_time
 ```
 
 ```json
@@ -485,7 +485,7 @@ Get the latest image of a RGB camera. It's similar with [Websocket RGB Image Str
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"topic": "/rgb_cameras/front/compressed"}' \
-  http://localhost:8000/services/get_rgb_image
+  http://localhost:8090/services/get_rgb_image
 ```
 
 The response is the same as the websocket topic.

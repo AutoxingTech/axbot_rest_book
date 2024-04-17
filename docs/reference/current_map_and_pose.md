@@ -11,7 +11,7 @@ There are two ways to set current map:
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"map_id": 286}' \
-  http://localhost:8000/chassis/current-map
+  http://localhost:8090/chassis/current-map
 ```
 
 **Request Params**
@@ -43,7 +43,7 @@ class SetCurrentMapWithDataRequest {
 ## Get Current Map
 
 ```bash
-curl http://localhost:8000/chassis/current-map
+curl http://localhost:8090/chassis/current-map
 ```
 
 ```json
@@ -64,7 +64,7 @@ Latched topic `/map/info` contains the information of currently used map.
 When current map changes, a new message will be received.
 
 ```bash
-$ wscat -c ws://localhost:8000/ws/v2/topics
+$ wscat -c ws://localhost:8090/ws/v2/topics
 > {"enable_topic": "/map/info"}
 < {
   "topic": "/map/info",
@@ -84,7 +84,7 @@ Set the pose (position/orientation) of the robot on current map.
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"position": [0, 0, 0], "ori": 1.57}' \
-  http://localhost:8000/chassis/pose
+  http://localhost:8090/chassis/pose
 ```
 
 **Request Params**
@@ -120,7 +120,7 @@ So if you can be sure the initial pose is correct, specially when there are some
 Latched topic `/tracked_pose` contains the latest robot pose.
 
 ```bash
-$ wscat -c ws://localhost:8000/ws/v2/topics
+$ wscat -c ws://localhost:8090/ws/v2/topics
 > {"enable_topic": "/tracked_pose"}
 < {"topic": "/tracked_pose", "pos": [-3.553, -0.288], "ori": -1.28}
 < {"topic": "/tracked_pose", "pos": [-3.55, -0.285], "ori": -1.28}
