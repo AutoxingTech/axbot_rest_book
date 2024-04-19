@@ -1,6 +1,6 @@
 # IoT Devices
 
-The robot is can talk to auto-doors, elevators, gateways in two protocols: 
+The robot can talk to auto-doors, elevators, gateways in two protocols: 
 [ESP-NOW](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_now.html) or BLE.
 
 It's recommended to use ESP-NOW. Because it allows connection-less communication between dozens of devices
@@ -12,8 +12,6 @@ Auto door and gateway are essentially the same device. A robot can open them aut
 
 A hardware controller must be installed so the door can talk to nearby robots.
 Each controller has a MAC address. In the [`overlay` field](../reference/overlays.md#auto-door) of the map, the MAC address and whereabouts of the door (modeled as a polygon) should be provided.
-
-The nearby auto-doors and theirs states can be visualized with Websocket [Nearby Auto Doors](../reference/websocket.md#nearby-auto-doors)
 
 With this information, here is how the robots talk to a door:
 
@@ -31,13 +29,15 @@ With this information, here is how the robots talk to a door:
   * If it recreives any open-door command, it will open the door.
   * If no open-door command is received for 3 seconds, it will close the door.
 
+::: tip
+The nearby auto-doors and theirs states can be visualized with Websocket [Nearby Auto Doors](../reference/websocket.md#nearby-auto-doors)
+:::
+
 ## Bluetooth API
 
-Currently, unlike ESP-NOW IoT devices, the robot can't operate Bluetooth based IoT devices .
-In other words, it will not open auto-doors when it moves.
-
+Unlike ESP-NOW IoT devices, the robot can't operate Bluetooth based IoT devices directly.
 The Bluetooth APIs only help establishing a communication channel.
-Then the user and the device will talk in their predefined protocol.
+So that the user and the device can talk in their predefined protocol.
 
 ### Connect Bluetooth
 
@@ -70,8 +70,8 @@ $ wscat -c ws://localhost:8090/ws/v2/topics
 ```
 
 - `/bluetooth_state` The bluetooth connection state
-- `/bluetooth/inbound` For sending data to robot
-- `/bluetooth/outbound` For receiving data from robot
+- `/bluetooth/inbound` Send data from the robot to connected BLE device.
+- `/bluetooth/outbound` The data received from BLE device.
 
 ### Disconnect
 
