@@ -106,7 +106,8 @@ This is often used in stock inspection.
 This action is used to tell the robot to follow a moving target.
 
 ```
-curl -X POST -H "content-type: application/json"
+curl -X POST
+  -H "content-type: application/json" \
   --data '{"type":"follow_target"}' \
   http://localhost:8090/chassis/moves
 ```

@@ -319,6 +319,7 @@ Set sources:
 
 ```
 curl -X PUT \
+  -H "Content-Type: application/json" \
   --data '["pool 2.debian.pool.ntp.org iburst", "pool 0.cn.pool.ntp.org iburst"]' \
   http://localhost:8090/device/chrony/sources
 ```
@@ -337,6 +338,7 @@ To enable NTP for 192.168.2.*, use the following API:
 
 ```
 curl -X PUT \
+  -H "Content-Type: application/json" \
   --data '["allow 192.168.2.0/24"]' \
   http://localhost:8090/device/chrony/allows
 ```
