@@ -75,16 +75,16 @@ The **dark-red** pixels are the entity of the obstacles, while the **light-red**
 
 ## Positioning State
 
-::: tip
-For debugging only.
-:::
-
 ```json
 {
   "topic": "/slam/state",
-  "state": "positioning", // 'inactive/slam/positioning' 闲置/建图/定位
+  
+  // inactive: Idle. Not creating map, no map is set either.
+  // slam: creating map
+  // positioning: A map is set, the robot is in localization state.
+  "state": "positioning",
 
-  "reliable": true,
+  "reliable": true,       // false means the position is lost
 
   // The quality of positioning(Experimental)
   //
@@ -96,14 +96,15 @@ For debugging only.
   //  8 - good
   // 10 - excellent
   "position_quality": 10,
+  
+  // how much the current lidar points matches with the static map
+  "lidar_matching_score": 0.545, 
 
-  // Whether the lidar observation matches current map
-  //
-  // This is only for debug.
-  // If position is lost, or the environment changed too much, it will return false.
+  // other debugging flags
   "lidar_matched": true,
-  "inter_constraint_count": 20,
-  "good_constraint_count": 20
+  "wheel_slipping": false,
+  "inter_constraint_count": 27,
+  "good_constraint_count": 27
 }
 ```
 
