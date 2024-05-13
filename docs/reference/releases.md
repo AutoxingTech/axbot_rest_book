@@ -2,6 +2,49 @@
 
 For detailed notes(including minor releases), see [Full Release Notes](./releases_full.md)
 
+# Release notes - Robot Chassis Software System - 2.8.2
+
+- New Feature
+  - [RCSS-4016] 转向角速度根据顶升轮廓变化，确保安全 - 默认关闭
+- Task
+  - [RCSS-3864] 删除 map_server 中不用的那个 change_map service
+  - [RCSS-4027] 2.8.0 rc3 platform_monitor 崩溃 澳门银河赌场
+  - [RCSS-4031] 修改机器人型号的确定规则为在线优先
+  - [RCSS-4041] 监控 /traffic_conductor_node 节点心跳
+  - [RCSS-4044] DNS增加 8.8.8.8
+  - [RCSS-4050] REST API，支持读取急停按钮的模式
+  - [RCSS-4051] 将 nearby map 及近处更快速标记与擦除的逻辑整合成的概率图层加入避障图
+  - [RCSS-4053] 修改顶升顶起时机的判断条件
+  - [RCSS-4060] 业务端允许改的几个参数，把他们的默认值做备份
+  - [RCSS-4079] ax_startup服务的timesync函数使用chrony中配置的ntp服务器
+  - [RCSS-4080] 避障图在跟随模式下不应为前方同向运动的障碍物创建障碍物地势
+  - [RCSS-4084] occupancy_grid_server 中新增在跟随目标位置放置虚拟障碍物的功能
+- Bug
+  - [RCSS-4100] 所有型号的雷达都当成了12米用
+  - [RCSS-4083] IMU 过度守护，偶尔的错误反而造成长时间断线
+  - [RCSS-4101] 机器人上桩时有概率会在挂接点卡住一小会
+  - [RCSS-3988] 出货架前，如果发了新的钻货架任务，可能导致钻错货架
+  - [RCSS-4028] 顶升完全升起后，立即发任务可能会绕行
+  - [RCSS-4056] 香橙派声卡有杂音
+  - [RCSS-4057] 香橙派 pulseaudio 会有多个用户抢，导致没有声音
+  - [RCSS-4059] longjack_1019 顶升抬起后避障图中货架腿未消除干净
+  - [RCSS-4064] 建图如果时间过短，虽然看着没问题，但是会误报丢定位
+  - [RCSS-4072] 加长底盘没有倒着出电梯
+  - [RCSS-4076] rack_detector_node崩溃
+  - [RCSS-4091] 【Galaxy 物流機械人反馈】取消任务后，机器人还在继续运动
+  - [RCSS-4099] 【格瑞普反馈】二级路线震荡
+  - [RCSS-3769] 在休眠的时候，ihawk USB 掉线后恢复，ihawk 掉线报警一直存在
+
+
+# Release notes - Robot Chassis Software System - 2.8.1
+
+- Bug
+  - [RCSS-4032] 充电时会概率性出现在挂接点卡住一小会的情况
+  - [RCSS-4038] 【新正源反馈】撞到货架停下之后要一分钟才规划新的路线从旁边走
+  - [RCSS-4039] 机器人长时间静止后，没有识别出点云中的动态部分
+  - [RCSS-4040] 长时间静止后，机器人的位置有明显偏移
+  - [RCSS-4045] longtray plus 机器过狭窄弯道（90°）时会有短暂停车现象
+
 ## 2.8.0
 
 - New Feature
