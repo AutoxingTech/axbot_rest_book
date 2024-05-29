@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.8.3
+
+- Add `not_installed` package status. See [List Packages](../reference/app_store.md#list-packages)
+
 ## 2.8.0
 
 - Support [Get Nav. Thumbnail Service](../reference/services.md#get-nav-thumbnail)

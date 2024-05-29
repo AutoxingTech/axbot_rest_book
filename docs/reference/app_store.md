@@ -49,6 +49,7 @@ curl -X GET http://localhost:8090/app_store/packages
 type ListPackageResponse = Package[];
 
 type PackageStatus =
+  | 'not_installed'
   | 'upgradable'
   | 'downloading'
   | 'downloaded'
