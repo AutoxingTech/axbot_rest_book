@@ -279,8 +279,8 @@ It should be used with move action type `align_with_rack` and `to_unload_point`.
     "properties": {
         "mapOverlay": true,
         "name": "Some user defined name",
-        "barcode_id": "D2_29",
-        "type": "35",
+        "barcodeId": "D2_29",
+        "type": "37",
         "yaw": "177.8"
     }
     "geometry": {
