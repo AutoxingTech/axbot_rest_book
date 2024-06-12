@@ -49,6 +49,7 @@ module.exports = {
                             // '/reference/recordings',
                             // '/reference/bags',
                             '/reference/robot_params',
+                            '/reference/system_settings',
                             '/reference/app_store',
                             '/reference/hostnames',
                             '/reference/websocket'

@@ -2,6 +2,8 @@
 
 ## 2.9.0(Unreleased)
 
+- Add [System Settings](../reference/system_settings.md)
+- Deprecate [Robot Params](../reference/robot_params.md)
 - Add `docking_with_conveyer` and `is_waiting_for_dest` in [/planning_state](../reference/websocket.md#planning-state)
 - Add `wheels_released` in [/wheel_state](../reference/websocket.md#wheel-state).
 

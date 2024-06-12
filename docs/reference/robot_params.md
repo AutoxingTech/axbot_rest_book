@@ -1,5 +1,9 @@
 # Robot Params API
 
+:::warning
+DEPRECATED: Please use [System Settings](./system_settings.md) instead.
+:::
+
 ## Get Params
 
 ```bash
