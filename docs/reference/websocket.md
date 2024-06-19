@@ -243,7 +243,13 @@ enum StuckState {
   // stuck state
   "stuck_state": "move_stucked", // See StuckState, since 2.5.2
   "in_elevator": true, // optional, since 2.5.2
-  "viewport_blocked": true // optional, since 2.5.2
+  "viewport_blocked": true, // optional, since 2.5.2
+
+  // optional, since 2.9.0. 
+  // Destination is occupied by another robot. So it's waiting on road side.
+  "is_waiting_for_dest": true,
+
+  "docking_with_conveyer": true // optional, since 2.9.0
 }
 ```
 

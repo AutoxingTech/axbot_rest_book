@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.9.0(Unreleased)
+
+- Add `docking_with_conveyer` and `is_waiting_for_dest` in [/planning_state](../reference/websocket.md#planning-state)
+
+
 ## 2.8.3
 
 - Add `not_installed` package status. See [List Packages](../reference/app_store.md#list-packages)
