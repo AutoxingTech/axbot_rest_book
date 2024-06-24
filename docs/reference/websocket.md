@@ -68,8 +68,13 @@ The **dark-red** pixels are the entity of the obstacles, while the **light-red**
 ```json
 {
   "topic": "/wheel_state",
-  "control_mode": "auto", // auto/remote/manual，对应自动、手推、远控
-  "emergency_stop_pressed": true // 急停是否按下
+  "control_mode": "auto", // auto/remote/manual
+  "emergency_stop_pressed": true, // Whether in emergency stop mode
+
+  // optional. Only some specific robot model supports it. 
+  // Some wheels has a release-wheels-wire.
+  // This flag reflects whether the wire is active.
+  "wheels_released": true
 }
 ```
 
