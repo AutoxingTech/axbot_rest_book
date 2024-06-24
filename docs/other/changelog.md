@@ -3,6 +3,7 @@
 ## 2.9.0(Unreleased)
 
 - Add `docking_with_conveyer` and `is_waiting_for_dest` in [/planning_state](../reference/websocket.md#planning-state)
+- Add `wheels_released` in [/wheel_state](../reference/websocket.md#wheel-state).
 
 
 ## 2.8.3
