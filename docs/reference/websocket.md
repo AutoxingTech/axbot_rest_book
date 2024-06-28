@@ -944,3 +944,17 @@ This topic is used to visualize the state of auto-doors.
   ]
 }
 ```
+
+## Bumper State
+
+Since 2.9.0
+
+The state of the bump sensor around the robot.
+
+```json
+{
+  "topic": "/bumper_state",
+  "front_bumper_pressed": false,
+  "rear_bumper_pressed": false
+}
+```

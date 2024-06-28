@@ -6,6 +6,7 @@
 - Deprecate [Robot Params](../reference/robot_params.md)
 - Add `docking_with_conveyer` and `is_waiting_for_dest` in [/planning_state](../reference/websocket.md#planning-state)
 - Add `wheels_released` in [/wheel_state](../reference/websocket.md#wheel-state).
+- Add [/bumper_state](../reference/websocket.md#bumper-state)
 
 
 ## 2.8.3
