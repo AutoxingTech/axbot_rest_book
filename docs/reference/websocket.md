@@ -958,3 +958,16 @@ The state of the bump sensor around the robot.
   "rear_bumper_pressed": false
 }
 ```
+
+## Roller State
+
+Since 2.9.0
+
+The state of the roller.
+
+```json
+{
+  "topic": "/roller_state",
+  "state": "hold", // unknown, hold, loading, unloading
+}
+```

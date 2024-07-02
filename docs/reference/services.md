@@ -489,3 +489,21 @@ curl -X POST \
 ```
 
 The response is the same as the websocket topic.
+
+## Load/Unload Cargo with Roller
+
+Since 2.9.0
+
+The state of the roller is in Websocket [Roller State](./websocket.md#roller-state).
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  http://localhost:8090/services/roller_load
+```
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  http://localhost:8090/services/roller_unload
+```
