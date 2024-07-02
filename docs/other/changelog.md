@@ -7,8 +7,8 @@
 - Add `docking_with_conveyer` and `is_waiting_for_dest` in [/planning_state](../reference/websocket.md#planning-state)
 - Add `wheels_released` in [/wheel_state](../reference/websocket.md#wheel-state).
 - Add [/bumper_state](../reference/websocket.md#bumper-state)
-- Add roller services. See [Jack Up/Down](../reference/services.md#loadunload-cargo-with-roller)
-- Add roller websocket topic [`/roll_state`](../reference/websocket.md#roller-state)
+- Add roller services. See [Load/Unload Cargo with Roller](../reference/services.md#loadunload-cargo-with-roller)
+- Add roller websocket topic [/roll_state](../reference/websocket.md#roller-state)
 
 
 ## 2.8.3
