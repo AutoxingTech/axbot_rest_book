@@ -522,7 +522,7 @@ curl -X POST \
 
 Detect the width/depth of a rack with laser of the robot.
 
-:::note
+:::warning
 Rather than using this service, it is more accurate to refer to 
 the production manual (specification) of the rack or to simply measure it with a ruler.
 
