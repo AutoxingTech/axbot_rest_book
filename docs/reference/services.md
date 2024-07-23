@@ -507,3 +507,33 @@ curl -X POST \
   -H "Content-Type: application/json" \
   http://localhost:8090/services/roller_unload
 ```
+
+## Start Rack Size Detection
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  http://localhost:8090/services/start_rack_size_detection
+
+curl -X POST \
+  -H "Content-Type: application/json" \
+  http://localhost:8090/services/stop_rack_size_detection
+```
+
+Detect the width/depth of a rack with laser of the robot.
+
+:::note
+Rather than using this service, it is more accurate to refer to 
+the production manual (specification) of the rack or to simply measure it with a ruler.
+
+Only when you don't have either of them, use this service as a last resort.
+:::
+
+Steps to use:
+
+1. Push the robot in front of the rack.
+2. Call `/start_rack_size_detection`.
+3. Subscribe to [/detected_rack websocket topic](./websocket.md#detected-rack).
+4. Push the robot slowly, under the rack.
+5. If successfully detected, stop pushing and record the size of the rack.
+6. Set the width/depth into [system settings](./system_settings.md#rackspecs).

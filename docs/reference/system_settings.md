@@ -104,7 +104,7 @@ curl http://localhost:8090/system/settings/schema
          "type":"float",
          "default":0.5,
          "range":"[0, 1.0]"
-      }
+      },
    ]
 }
 ```
@@ -146,4 +146,35 @@ curl -X PATCH \
 
 ```
 curl http://localhost:8090/system/settings/effective
+```
+
+## Setting Options
+
+This section records all available options.
+
+### rack.specs
+
+The physical representation of a rack. And how a robot should carry it.
+
+```json
+{
+   "rack.specs": [
+      {
+         "width": 0.66,
+         "depth": 0.7,
+         "margin": [0, 0, 0, 0], // Some racks have extruded handles outside 
+                                 // the reams of the wheels.
+         "alignment": "center",  // center/back. 
+         "alignment_margin_back": 0.02,
+         "cargo_to_jack_front_edge_min_distance": 0.02,
+         "extra_leg_offset": 0.02, // Some rack legs have a base plate, which is invisible to laser.
+                                   // When crawling under the rack, the robot will avoid this extra area.
+         "leg_shape": "square", // Since 2.10  square/round/other
+         "leg_size": 0.03, // Since 2.10 the side size of a square leg, or the diameter of a round leg.
+         "foot_radius": 0.05 // Since 2.10 some racks have rotational wheels, 
+                             // which are invisible to the robot lasers. 
+                             // Use this parameter to expand the size of the rack to avoid collision.
+      }
+   ]
+}
 ```
