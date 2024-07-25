@@ -169,7 +169,6 @@ The physical representation of a rack. And how a robot should carry it.
 
          "alignment": "center",  // center/back. 
          "alignment_margin_back": 0.02,
-         "cargo_to_jack_front_edge_min_distance": 0.02,
 
          // Some rack legs have a base plate, which is invisible to laser.
          // When crawling under the rack, the robot will avoid this extra area.

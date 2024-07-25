@@ -853,8 +853,8 @@ The barcodes in `overlays` can be used in [global positioning](./services.md#sta
       "pos": [0.0, 0.0],
       "ori": 0.0
     },
-    "width": 64.324,
-    "height": 69.234
+    "width": 0.64324,
+    "height": 0.69234
   },
   // optional, valid when `rack_detected` is true
   "rack_box_aligned": {
@@ -862,8 +862,8 @@ The barcodes in `overlays` can be used in [global positioning](./services.md#sta
       "pos": [0.0, 0.0],
       "ori": 0.0
     },
-    "width": 66.0,
-    "height": 70.0
+    "width": 0.66,
+    "height": 0.70
   }
 }
 ```
