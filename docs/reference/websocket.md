@@ -829,10 +829,14 @@ This topic is used to collect barcodes.
 {
   "topic": "/collected_barcode",
   "state": "unknown|ok|no_result|not_unique|too_far|unaligned_with_robot",
-  "barcode": {
-    "id": "D2_57",
-    "pose": { "pos": [1.32, 20.97], "ori": 0.0 },
-    "relative_pose": { "pos": [0.12, 0.37], "ori": 0.5 } // Since 2.9.1
+  "barcode": 
+  {
+    "id": "D2_125", 
+    "pose": {"pos": [-14.842, 17.595], "ori": -1.457}, 
+
+    // Since 2.9.1
+    // It's only accurate when the robot is not moving
+    "relative_pose": {"pos": [-1.992, -0.092], "ori": -0.312} 
   }
 }
 ```
