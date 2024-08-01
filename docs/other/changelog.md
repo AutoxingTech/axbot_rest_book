@@ -1,6 +1,10 @@
 # Changelog
 
-## 2.9.0(Unreleased)
+## 2.9.1
+
+- Add `relative_pose` in [/collected_barcode](../reference/websocket.md#collected-barcode)
+
+## 2.9.0
 
 - Add [System Settings](../reference/system_settings.md)
 - Deprecate [Robot Params](../reference/robot_params.md)
