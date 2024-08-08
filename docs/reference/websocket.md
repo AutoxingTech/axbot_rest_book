@@ -976,3 +976,36 @@ The state of the roller.
   "state": "hold", // unknown, hold, loading, unloading
 }
 ```
+
+## Detected Pallets
+
+Since 2.10.0
+
+The detected pallets.
+
+![](./pallet.png)
+
+```json
+{
+    "topic": "/detected_pallets",
+    "pallets": [
+        {
+            "frame": "map",
+            "pallet_id": "SOME_PALLET_ID",
+            "pose": {
+                "pos": [120.0, 50.0],
+                "ori": 1.618,
+            },
+            "size": {
+                "width": 1.0,
+                "depth": 1.3,
+                "height": 0.3,
+                "pocket_width": 0.3,
+                "pocket_height": 0.2,
+                "pocket_spacing": 0.2,
+            }
+        }
+    ]
+}
+```
+

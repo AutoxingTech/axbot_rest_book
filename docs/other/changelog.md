@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.10.0 (Unreleased)
+
+- Add websocket topic [/detected_pallets](../reference/websocket.md#detected-pallets)
+
 ## 2.9.1
 
 - Add `relative_pose` in [/collected_barcode](../reference/websocket.md#collected-barcode)
