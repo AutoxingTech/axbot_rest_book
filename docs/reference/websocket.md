@@ -985,6 +985,8 @@ The detected pallets.
 
 ![](./pallet.png)
 
+![](./detected_pallet.png)
+
 ```json
 {
     "topic": "/detected_pallets",
