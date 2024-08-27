@@ -52,6 +52,7 @@ module.exports = {
                             '/reference/system_settings',
                             '/reference/app_store',
                             '/reference/hostnames',
+                            '/reference/landmarks',
                             '/reference/websocket'
                         ],
                         sidebarDepth: 2
