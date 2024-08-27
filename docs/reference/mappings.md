@@ -156,7 +156,8 @@ curl http://localhost:8090/mappings/48
   "bag_id": 27,
   "bag_url": "http://localhost:8090/bags/27.bag",
   "download_url": "http://localhost:8090/mappings/48/download", // get Base64 encoded map data(binary, used for positioning)
-  "trajectories_url": "http://localhost:8090/mappings/48/trajectories.json"
+  "trajectories_url": "http://localhost:8090/mappings/48/trajectories.json",
+  "landmark_url": "http://localhost:8090/mappings/48/landmarks.json" // since 2.11.0
 }
 ```
 
@@ -228,3 +229,25 @@ curl -X DELETE http://localhost:8090/mappings/1
 ```bash
 curl -X DELETE http://localhost:8090/mappings/
 ```
+
+## Get Landmarks
+
+Since 2.11.0
+
+```bash
+curl http://localhost:8090/mappings/48/landmarks.json
+```
+
+```json
+[
+  {
+    "id": "landmark_1",
+    "pos": [1.234, 2.345]
+  },
+  {
+    "id": "landmark_2",
+    "pos": [5.234, 8.345]
+  }
+]
+```
+

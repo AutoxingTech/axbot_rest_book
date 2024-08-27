@@ -1011,3 +1011,20 @@ The detected pallets.
 }
 ```
 
+## Landmarks
+
+Since 2.11.0
+
+This topic is used to visualize [landmarks](./landmarks.md) collected during the mapping process.
+
+```json
+{
+  "topic": "/landmarks",
+  "landmarks": [
+      {
+        "pos": [0.32, 0.97]
+      }
+  ]
+}
+```
+

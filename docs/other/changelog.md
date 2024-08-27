@@ -1,8 +1,13 @@
 # Changelog
 
-## 2.10.0 (Unreleased)
+## 2.11.0
+
+- Add [landmarks](../reference/landmarks.md)
+
+## 2.10.0
 
 - Add websocket topic [/detected_pallets](../reference/websocket.md#detected-pallets)
+- Add `properties` in mapping task object. It will be used to store landmarks.
 
 ## 2.9.1
 

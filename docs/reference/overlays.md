@@ -334,4 +334,22 @@ When moving in these areas, the robot will put more trust in the odometry of the
 }
 ```
 
+## Landmarks
 
+Since 2.11.0
+
+[Landmarks](./landmarks.md) are collected in the mapping process. 
+Only when stored in map overlays, they can be used for positioning.
+
+```json
+{
+    "type":"Feature",
+    "properties":{
+        "pointType": "landmark",
+    },
+    "geometry":{
+        "type":"Point",
+        "coordinates": [-2.702, -5.784]
+    }
+}
+```
