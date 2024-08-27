@@ -11,15 +11,15 @@ Landmarks are made of reflective cohesive material, sticked to legs of shelves, 
 The process to use landmarks are as follow:
 
 1. Deploy landmarks
-   - Stick on positions that will never change, like the corners of walls, legs of selves, etc.
+   - Stick landmark on positions that will never change, like the corners of walls, legs of selves, etc.
    - Adjacent landmarks should be at least 1 meters apart. The suggested density is 5 to 10 meters. 
 2. Start mapping process as usual
-   - Collected landmarks can be previewed in [`/landmarks`](../reference/websocket.md#landmarks) websocket channel.
+   - Optional: Collected landmarks can be realtime previewed in [`/landmarks`](../reference/websocket.md#landmarks) websocket channel.
 3. Finish mapping
    - The final result of landmarks can be accessed from [mapping result as `landmark_url`](../reference/mappings.md#mapping-detail).
-4. Import mapping result as a map
+4. Save mapping result as a map as usual
    - The collected landmarks are not used directly, but serves as raw materials to be imported into overlays.
-   - See [landmarks in overlays](../reference/overlays.md#landmarks)
+   - Save landmarks into overlays. See [landmarks in overlays](../reference/overlays.md#landmarks)
 5. Start positioning with the map
    - Landmarks will be used to enhance positioning automatically.
-   - The in-use landmarks can be observed from `/constraint_list` websocket channel.
+   - Optional: The in-use landmarks can be observed from `/constraint_list` websocket channel.
