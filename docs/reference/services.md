@@ -537,3 +537,14 @@ Steps to use:
 4. Push the robot slowly, under the rack.
 5. If successfully detected, stop pushing and record the size of the rack.
 6. Set the width/depth into [system settings](./system_settings.md#rackspecs).
+
+## Clear Jack Errors
+
+Jack device will report an error when overloads.
+
+When it happens, some jack models can still accept new commands.
+But some rare models will require manual clearing of errors before accepting new commands.
+
+```bash
+curl -X POST http://localhost:8090/services/clear_jack_errors.
+```

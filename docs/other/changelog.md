@@ -1,7 +1,8 @@
 # Changelog
 
-## 2.11.0
+## 2.11.0 (Unreleased)
 
+- Add [Clear Jack Errors](../reference/services.md#clear-jack-errors)
 - Add [landmarks](../reference/landmarks.md)
 
 ## 2.10.0
