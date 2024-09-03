@@ -542,7 +542,7 @@ Steps to use:
 
 Jack device will report an error when overloads.
 
-When it happens, some jack models can still accept new commands.
+When it happens, most jack models can still accept new commands.
 But some rare models will require manual clearing of errors before accepting new commands.
 
 ```bash
