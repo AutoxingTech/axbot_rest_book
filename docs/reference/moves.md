@@ -58,6 +58,10 @@ interface MoveActionCreate {
   use_target_zone?: boolean = false;
 
   charge_retry_count?: number; // retry times before `charge` action fails.
+
+  properties: { // Optional: since 2.11.0
+    inplace_rotate: boolean; // Optional. since 2.11.0 strictly rotate without any linear velocity.
+  }
 }
 ```
 
