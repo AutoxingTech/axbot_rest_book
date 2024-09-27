@@ -546,5 +546,19 @@ When it happens, most jack models can still accept new commands.
 But some rare models will require manual clearing of errors before accepting new commands.
 
 ```bash
-curl -X POST http://localhost:8090/services/clear_jack_errors.
+curl -X POST http://localhost:8090/services/clear_jack_errors
 ```
+
+## Confirm Emergency Stop
+
+When on slope or in slope area (specified in overlays), even emergency stop is pressed, 
+wheels will not be released. And there will be a warning message in `/alerts` websocket topic:
+
+![](./estop_warning.png)
+
+If you want to push the robots around, use the following command to confirm releasing the wheels.
+
+```bash
+curl -X POST http://localhost:8090/services/confirm_estop
+```
+

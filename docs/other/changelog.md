@@ -4,6 +4,7 @@
 
 - Add [Clear Jack Errors](../reference/services.md#clear-jack-errors)
 - Add [landmarks](../reference/landmarks.md)
+- Add [Confirm Estop](../reference/services.md#confirm-emergency-stop)
 
 ## 2.10.0
 
