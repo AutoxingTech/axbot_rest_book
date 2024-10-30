@@ -24,7 +24,7 @@ The following command uses `curl` to make a HTTP request, and use [jq](https://s
 
 ```bash
 # The secret is hidden. The real one must be requested.
-curl -H "Secret: XXXXXXXXXXXXXXXXX" http://192.168.25.25:8090/device/status | jq
+curl -H "Secret: XXXXXXXXXXXXXXXXX" http://192.168.25.25:8090/device/info | jq
 ```
 
 ::: tip
