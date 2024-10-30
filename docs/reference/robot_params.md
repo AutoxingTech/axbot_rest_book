@@ -7,7 +7,7 @@ DEPRECATED: Please use [System Settings](./system_settings.md) instead.
 ## Get Params
 
 ```bash
-curl http://localhost:8090/robot-params
+curl http://192.168.25.25:8090/robot-params
 ```
 
 ```json
@@ -48,12 +48,12 @@ Multiple params can be updated at once.
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"/wheel_control/max_forward_velocity": 1.2, "/control/bump_tolerance": 0.5}' \
-  http://localhost:8090/robot-params
+  http://192.168.25.25:8090/robot-params
 ```
 ## Get Default Params
 
 ```bash
-curl http://localhost:8090/robot-params/default # Since 2.7.6
+curl http://192.168.25.25:8090/robot-params/default # Since 2.7.6
 ```
 
 ## Robot footprint

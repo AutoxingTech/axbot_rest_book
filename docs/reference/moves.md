@@ -6,7 +6,7 @@
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"creator": "xxx", "type": "standard" ...}' \
-  http://localhost:8090/chassis/moves
+  http://192.168.25.25:8090/chassis/moves
 ```
 
 **Returns**
@@ -113,7 +113,7 @@ This action is used to tell the robot to follow a moving target.
 curl -X POST
   -H "content-type: application/json" \
   --data '{"type":"follow_target"}' \
-  http://localhost:8090/chassis/moves
+  http://192.168.25.25:8090/chassis/moves
 ```
 
 When this action is created, the user should then send target poses with websocket topic `/follow_target_state`: See [Follow Target](../reference/websocket.md#follow-target-state)
@@ -121,7 +121,7 @@ When this action is created, the user should then send target poses with websock
 ## Get Move Action Detail
 
 ```bash
-curl http://localhost:8090/chassis/moves/4409
+curl http://192.168.25.25:8090/chassis/moves/4409
 ```
 
 ```json
@@ -167,7 +167,7 @@ interface MoveAction extends MoveActionCreate {
 The history of all move actions
 
 ```bash
-curl http://localhost:8090/chassis/moves
+curl http://192.168.25.25:8090/chassis/moves
 ```
 
 ```json
@@ -235,7 +235,7 @@ Use websocket `/planning_state` to get updated of move state.
 curl -X PATCH \
   -H "Content-Type: application/json" \
   -d '{state: "cancelled"}' \
-  http://localhost:8090/chassis/moves/current
+  http://192.168.25.25:8090/chassis/moves/current
 ```
 
 ```json

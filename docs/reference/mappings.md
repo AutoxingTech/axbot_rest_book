@@ -19,7 +19,7 @@ A mapping task (in `/mappings`) can't be used for navigation. You have to save t
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"continue_mapping": false}' \
-  http://localhost:8090/mappings/
+  http://192.168.25.25:8090/mappings/
 ```
 
 ```
@@ -75,7 +75,7 @@ They can be rendered like this:
 curl -X PATCH \
   -H "Content-Type: application/json" \
   -d '{"state": "finished"}' \
-  http://localhost:8090/mappings/current
+  http://192.168.25.25:8090/mappings/current
 ```
 
 **Request Params**
@@ -97,26 +97,26 @@ You can request them with `/mappings/:id` afterwards.
 ## Mapping List
 
 ```bash
-curl http://localhost:8090/mappings/
+curl http://192.168.25.25:8090/mappings/
 ```
 
 ```json
 [
    {
       "id":48,
-      "thumbnail_url":"http://localhost:8090/mappings/48/thumbnail",
-      "image_url":"http://localhost:8090/mappings/48.png",
+      "thumbnail_url":"http://192.168.25.25:8090/mappings/48/thumbnail",
+      "image_url":"http://192.168.25.25:8090/mappings/48.png",
       "grid_origin_x":-8.050000190734863,
       "grid_origin_y":-5.650000095367432,
       "grid_resolution":0.05,
-      "url":"http://localhost:8090/mappings/48",
+      "url":"http://192.168.25.25:8090/mappings/48",
       "start_time":1647520760,
       "end_time":1647520995,
       "state":"finished",
       "bag_id":27,
-      "bag_url":"http://localhost:8090/bags/27.bag",
-      "download_url":"http://localhost:8090/mappings/48/download",
-      "trajectories_url": "http://localhost:8090/mappings/48/trajectories.json"
+      "bag_url":"http://192.168.25.25:8090/bags/27.bag",
+      "download_url":"http://192.168.25.25:8090/mappings/48/download",
+      "trajectories_url": "http://192.168.25.25:8090/mappings/48/trajectories.json"
    },
    {
       "id":47,
@@ -125,7 +125,7 @@ curl http://localhost:8090/mappings/
       "grid_origin_x":0.0,
       "grid_origin_y":0.0,
       "grid_resolution":0.0,
-      "url":"http://localhost:8090/mappings/47",
+      "url":"http://192.168.25.25:8090/mappings/47",
       "start_time":1647494329,
       "end_time":null,
       "state":"cancelled",
@@ -138,33 +138,33 @@ curl http://localhost:8090/mappings/
 ## Mapping Detail
 
 ```bash
-curl http://localhost:8090/mappings/48
+curl http://192.168.25.25:8090/mappings/48
 ```
 
 ```json
 {
   "id": 48,
-  "thumbnail_url": "http://localhost:8090/mappings/48/thumbnail",
-  "image_url": "http://localhost:8090/mappings/48.png", // Base64 encoded map image(PNG, used for display)
+  "thumbnail_url": "http://192.168.25.25:8090/mappings/48/thumbnail",
+  "image_url": "http://192.168.25.25:8090/mappings/48.png", // Base64 encoded map image(PNG, used for display)
   "grid_origin_x": -8.050000190734863,
   "grid_origin_y": -5.650000095367432,
   "grid_resolution": 0.05,
-  "url": "http://localhost:8090/mappings/48",
+  "url": "http://192.168.25.25:8090/mappings/48",
   "start_time": 1647520760,
   "end_time": 1647520995,
   "state": "finished", // The current state: running, finished, cancelled, failed
   "bag_id": 27,
-  "bag_url": "http://localhost:8090/bags/27.bag",
-  "download_url": "http://localhost:8090/mappings/48/download", // get Base64 encoded map data(binary, used for positioning)
-  "trajectories_url": "http://localhost:8090/mappings/48/trajectories.json",
-  "landmark_url": "http://localhost:8090/mappings/48/landmarks.json" // since 2.11.0
+  "bag_url": "http://192.168.25.25:8090/bags/27.bag",
+  "download_url": "http://192.168.25.25:8090/mappings/48/download", // get Base64 encoded map data(binary, used for positioning)
+  "trajectories_url": "http://192.168.25.25:8090/mappings/48/trajectories.json",
+  "landmark_url": "http://192.168.25.25:8090/mappings/48/landmarks.json" // since 2.11.0
 }
 ```
 
 ## Get Mapping Trajectory
 
 ```bash
-curl http://localhost:8090/mappings/48/trajectories.json
+curl http://192.168.25.25:8090/mappings/48/trajectories.json
 ```
 
 ```json
@@ -192,7 +192,7 @@ This way(with `mapping_id`) is more efficient than [POSTing the whole map](./map
 **Request**
 
 ```bash
-curl -X POST http://localhost:8090/maps/
+curl -X POST http://192.168.25.25:8090/maps/
 ```
 
 ```json
@@ -212,22 +212,22 @@ curl -X POST http://localhost:8090/maps/
   "create_time": 1657015615,
   "map_version": 1,
   "overlays_version": 1,
-  "thumbnail_url": "http://localhost:8090/maps/119/thumbnail",
-  "image_url": "http://localhost:8090/maps/119.png",
-  "url": "http://localhost:8090/maps/119"
+  "thumbnail_url": "http://192.168.25.25:8090/maps/119/thumbnail",
+  "image_url": "http://192.168.25.25:8090/maps/119.png",
+  "url": "http://192.168.25.25:8090/maps/119"
 }
 ```
 
 ## Delete a Mapping Task
 
 ```bash
-curl -X DELETE http://localhost:8090/mappings/1
+curl -X DELETE http://192.168.25.25:8090/mappings/1
 ```
 
 ## Delete All Mapping Tasks
 
 ```bash
-curl -X DELETE http://localhost:8090/mappings/
+curl -X DELETE http://192.168.25.25:8090/mappings/
 ```
 
 ## Get Landmarks
@@ -235,7 +235,7 @@ curl -X DELETE http://localhost:8090/mappings/
 Since 2.11.0
 
 ```bash
-curl http://localhost:8090/mappings/48/landmarks.json
+curl http://192.168.25.25:8090/mappings/48/landmarks.json
 ```
 
 ```json

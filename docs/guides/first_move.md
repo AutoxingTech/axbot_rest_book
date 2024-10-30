@@ -18,7 +18,7 @@ And use `POST /chassis/current-map` to set the map as current map.
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"map_id": 286}' \
-  http://localhost:8090/chassis/current-map
+  http://192.168.25.25:8090/chassis/current-map
 ```
 
 ```json
@@ -61,7 +61,7 @@ So the initial pose of the robot(on charger) becomes origin of the map.
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"position": [0, 0, 0], "ori": 1.57}' \
-  http://localhost:8090/chassis/pose
+  http://192.168.25.25:8090/chassis/pose
 ```
 
 - `position: [0, 0, 0]` means `x=0, y=0, z=0`。
@@ -79,7 +79,7 @@ As for now, use `POST /chassis/moves` to create a move action.
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"type":"standard", "target_x":0.731, "target_y":-1.525, "target_z":0, "creator":"head-unit"}' \
-  http://localhost:8090/chassis/moves
+  http://192.168.25.25:8090/chassis/moves
 ```
 
 ```json
@@ -109,7 +109,7 @@ curl -X POST \
 Use `GET /chassis/moves/:id` to see the state of a move action.
 
 ```bash
-curl http://localhost:8090/chassis/moves/4409
+curl http://192.168.25.25:8090/chassis/moves/4409
 ```
 
 ```json

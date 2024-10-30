@@ -6,10 +6,10 @@ To control the robot, first we must establish a connection.
 
 There are two ways to connect to the robot:
 
-1. Deploy your control program to the robot's main board. Use `http://localhost:8090`.
-2. Connect to the robot with a wired or WIFI connection and form a local network. Use `http://192.168.12.1:8090`.
+1. Connect to the robot with Ethernet RJ45 port. Use `http://192.168.25.25:8090`.
+2. Connect to the AP of the robot. Use `http://192.168.12.1:8090`.
 
-In this document, we shall log in to the robot and use `localhost:8090`.
+In this document, we shall connect to the robot and use `192.168.25.25:8090`.
 
 ## Authentication
 
@@ -24,7 +24,7 @@ The following command uses `curl` to make a HTTP request, and use [jq](https://s
 
 ```bash
 # The secret is hidden. The real one must be requested.
-curl -H "Secret: XXXXXXXXXXXXXXXXX" http://localhost:8090/device/status | jq
+curl -H "Secret: XXXXXXXXXXXXXXXXX" http://192.168.25.25:8090/device/status | jq
 ```
 
 ::: tip

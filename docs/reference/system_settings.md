@@ -16,7 +16,7 @@ By design, only `user.json` is modifiable. Whenever it is modified, `effective.j
 ## Schema
 
 ```
-curl http://localhost:8090/system/settings/schema
+curl http://192.168.25.25:8090/system/settings/schema
 ```
 
 ```json
@@ -113,7 +113,7 @@ curl http://localhost:8090/system/settings/schema
 ## Default Settings
 
 ```
-curl http://localhost:8090/system/settings/default
+curl http://192.168.25.25:8090/system/settings/default
 ```
 
 ## User Settings
@@ -121,7 +121,7 @@ curl http://localhost:8090/system/settings/default
 Get user settings:
 
 ```
-curl http://localhost:8090/system/settings/user
+curl http://192.168.25.25:8090/system/settings/user
 ```
 
 Save user settings:
@@ -130,7 +130,7 @@ Save user settings:
 curl -X POST \
     -H "Content-Type: application/json" \
     -d '...' \
-    http://localhost:8090/system/settings/user
+    http://192.168.25.25:8090/system/settings/user
 ```
 
 Partial update of user settings:
@@ -139,13 +139,13 @@ Partial update of user settings:
 curl -X PATCH \
     -H "Content-Type: application/json" \
     -d '...' \
-    http://localhost:8090/system/settings/user
+    http://192.168.25.25:8090/system/settings/user
 ```
 
 ## Effective Settings
 
 ```
-curl http://localhost:8090/system/settings/effective
+curl http://192.168.25.25:8090/system/settings/effective
 ```
 
 ## Setting Options

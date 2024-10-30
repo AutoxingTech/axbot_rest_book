@@ -9,7 +9,7 @@ Or, one can use `POST /recording` to manually record a bag.
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"filename_suffix": "xxx"}' \
-  http://localhost:8090/recording/
+  http://192.168.25.25:8090/recording/
 ```
 
 ```json
@@ -18,7 +18,7 @@ curl -X POST \
   "size": "1.3MB",
   "size_bytes": 1390762,
   "end": "20-Jul-2022 14:19:57",
-  "download_url": "http://localhost:8090/recording/2022-07-20%2014:19:56_xxx.bag/download"
+  "download_url": "http://192.168.25.25:8090/recording/2022-07-20%2014:19:56_xxx.bag/download"
 }
 ```
 
@@ -36,7 +36,7 @@ interface CreateRecordingRequest {
 ## Get Recording List
 
 ```bash
-curl http://localhost:8090/recording/
+curl http://192.168.25.25:8090/recording/
 ```
 
 ```json
@@ -46,7 +46,7 @@ curl http://localhost:8090/recording/
     "size": "18.3MB",
     "size_bytes": 19180918,
     "end": "13-Jul-2022 16:57:30",
-    "download_url": "http://localhost:8090/recording/2022-07-13%2016:57:27_1008.bag/download"
+    "download_url": "http://192.168.25.25:8090/recording/2022-07-13%2016:57:27_1008.bag/download"
   }
 ]
 ```

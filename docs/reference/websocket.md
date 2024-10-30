@@ -801,10 +801,10 @@ In this way, the data of websocket is greatly reduced. And the image has `Cache-
 }
 ```
 
-Use `http:://localhost:8090/static-files/map-d69c26ec2bdff8dad76fe6e8d3fa65d9b3041fc669ee3c0a96f7b544473fcec0.png` to access the image later.
+Use `http:://192.168.25.25:8090/static-files/map-d69c26ec2bdff8dad76fe6e8d3fa65d9b3041fc669ee3c0a96f7b544473fcec0.png` to access the image later.
 
 ```
-$ curl -I http://localhost:8090/static-files/map-d69c26ec2bdff8dad76fe6e8d3fa65d9b3041fc669ee3c0a96f7b544473fcec0.png
+$ curl -I http://192.168.25.25:8090/static-files/map-d69c26ec2bdff8dad76fe6e8d3fa65d9b3041fc669ee3c0a96f7b544473fcec0.png
 HTTP/1.1 200 OK
 date: Fri, 01 Sep 2023 12:20:04 GMT
 server: uvicorn

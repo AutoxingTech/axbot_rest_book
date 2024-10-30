@@ -13,7 +13,7 @@ For example, to delete map 3, we use `DELETE /maps/3`：
 The REST API is：
 
 ```
-$ curl -X DELETE -i http://localhost:8090/maps/3
+$ curl -X DELETE -i http://192.168.25.25:8090/maps/3
 HTTP/1.1 204 No Content
 date: Thu, 17 Mar 2022 05:06:59 GMT
 server: uvicorn
@@ -81,7 +81,7 @@ The response data is in JSON format. It can be:
 For example. Listing all maps returns a list.
 
 ```bash
-curl http://localhost:8090/maps/ | jq
+curl http://192.168.25.25:8090/maps/ | jq
 ```
 
 ```json
@@ -93,9 +93,9 @@ curl http://localhost:8090/maps/ | jq
     "create_time": 1644568815,
     "map_version": 9,
     "overlays_version": 14,
-    "thumbnail_url": "http://localhost:8090/maps/1/thumbnail",
-    "image_url": "http://localhost:8090/maps/1.png",
-    "url": "http://localhost:8090/maps/1"
+    "thumbnail_url": "http://192.168.25.25:8090/maps/1/thumbnail",
+    "image_url": "http://192.168.25.25:8090/maps/1.png",
+    "url": "http://192.168.25.25:8090/maps/1"
   },
   {
     "id": 2,
@@ -104,9 +104,9 @@ curl http://localhost:8090/maps/ | jq
     "create_time": 1643007028,
     "map_version": 2,
     "overlays_version": 8,
-    "thumbnail_url": "http://localhost:8090/maps/2/thumbnail",
-    "image_url": "http://localhost:8090/maps/2.png",
-    "url": "http://localhost:8090/maps/2"
+    "thumbnail_url": "http://192.168.25.25:8090/maps/2/thumbnail",
+    "image_url": "http://192.168.25.25:8090/maps/2.png",
+    "url": "http://192.168.25.25:8090/maps/2"
   },
   {
     "id": 3,
@@ -115,9 +115,9 @@ curl http://localhost:8090/maps/ | jq
     "create_time": 1642680851,
     "map_version": 1,
     "overlays_version": 3,
-    "thumbnail_url": "http://localhost:8090/maps/3/thumbnail",
-    "image_url": "http://localhost:8090/maps/3.png",
-    "url": "http://localhost:8090/maps/3"
+    "thumbnail_url": "http://192.168.25.25:8090/maps/3/thumbnail",
+    "image_url": "http://192.168.25.25:8090/maps/3.png",
+    "url": "http://192.168.25.25:8090/maps/3"
   }
 ]
 ```
@@ -125,7 +125,7 @@ curl http://localhost:8090/maps/ | jq
 While getting detail of a map, returns an object.
 
 ```bash
-curl http://localhost:8090/maps/1 | jq
+curl http://192.168.25.25:8090/maps/1 | jq
 ```
 
 ```json
@@ -141,9 +141,9 @@ curl http://localhost:8090/maps/1 | jq
   "grid_resolution": 0.05,
   "overlays_version": 14,
   "overlays": "{\"type\": \"FeatureCollection\", \"features\": [{\"id\": ...",
-  "thumbnail_url": "http://localhost:8090/maps/1/thumbnail",
-  "image_url": "http://localhost:8090/maps/1.png",
-  "download_url": "http://localhost:8090/maps/1/download",
-  "pbstream_url": "http://localhost:8090/maps/1.pbstream"
+  "thumbnail_url": "http://192.168.25.25:8090/maps/1/thumbnail",
+  "image_url": "http://192.168.25.25:8090/maps/1.png",
+  "download_url": "http://192.168.25.25:8090/maps/1/download",
+  "pbstream_url": "http://192.168.25.25:8090/maps/1.pbstream"
 }
 ```

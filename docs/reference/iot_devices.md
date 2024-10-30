@@ -45,7 +45,7 @@ So that the user and the device can talk in their predefined protocol.
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"address": "00:11:22:33:FF:EE"}' \
-  http://localhost:8090/bluetooth/connect
+  http://192.168.25.25:8090/bluetooth/connect
 ```
 
 **Parameters**
@@ -59,7 +59,7 @@ class BluetoothConnectRequest {
 When bluetooth is connected. Use Websocket to communicate with device.
 
 ```bash
-$ wscat -c ws://localhost:8090/ws/v2/topics
+$ wscat -c ws://192.168.25.25:8090/ws/v2/topics
 > {"enable_topic": "/bluetooth/outbound" }
 > {"enable_topic": "/bluetooth_state" }
 < {"topic": "/bluetooth_state", "stamp": 1644835395.429, "connected_devices": ["00:11:22:33:FF:EE", ... ] }
@@ -79,7 +79,7 @@ $ wscat -c ws://localhost:8090/ws/v2/topics
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"address": "00:11:22:33:FF:EE"}' \
-  http://localhost:8090/bluetooth/disconnect
+  http://192.168.25.25:8090/bluetooth/disconnect
 ```
 
 **Parameters**
