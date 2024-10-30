@@ -1028,3 +1028,48 @@ This topic is used to visualize [landmarks](./landmarks.md) collected during the
 }
 ```
 
+## Digital Input/Output
+
+(Under discussion)
+
+The IO board is a dedicated hardware. It connects to the robot with the USB port.
+It supports 16 or more IO pins. The IO pins work at 12V/24V.
+Some IO pins are predefined as braking light, turning light etc. And some can be controlled by the user.
+
+The state of the IO pins:
+
+```json
+{
+  "topic": "/io_pins_state",
+  "inputs": [
+    [0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 1, 1, 0, 0, 0, 0]
+  ],
+  "outputs": [
+    [0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 1, 1, 0, 0, 0, 0]
+  ]
+}
+```
+
+Full update of output pins:
+
+```json
+{
+  "topic": "/set_output_pins",
+  "outputs": [
+    [0, 0, 1, 1, 1, 1, 0, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0, 0, 0]
+  ]
+}
+```
+
+Selected update of output pins:
+
+```json
+{
+  "topic": "/modify_output_pins",
+  "enable": [0, 9, 13],
+  "disable": [2, 4, 6],
+}
+```
