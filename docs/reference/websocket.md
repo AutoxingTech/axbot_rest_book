@@ -156,7 +156,7 @@ enum VisualObjectLabel {
 }
 ```
 
-## Battery Information
+## Battery State
 
 ![](./battery.png)
 
@@ -168,6 +168,24 @@ enum VisualObjectLabel {
   "current": 3.6, // 电池电流。充电时，一般为负。运行时，一般为正。
   "percentage": 0.64, // 电量
   "power_supply_status": "discharging" // charging/discharing/full
+}
+```
+
+## Detailed Battery State
+
+Since 2.11.0
+
+![](./battery.png)
+
+```json
+{
+  "topic": "/detailed_battery_state",
+  "secs": 1653299708, // 时间戳
+  "voltage": 26.3, // 电池电压
+  "current": 3.6, // 电池电流。充电时，一般为负。运行时，一般为正。
+  "percentage": 0.64, // 电量
+  "power_supply_status": "discharging", // charging/discharing/full
+  "cell_voltages": [4.141, 4.138, 4.139, 4.133, 4.136, 4.138, 4.138],
 }
 ```
 
