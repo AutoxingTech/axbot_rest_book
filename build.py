@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-import re
-import os
 import subprocess
 import sys
 import argparse
@@ -17,47 +15,8 @@ def exec(cmd: str, debug=False):
             sys.exit(e.returncode)
 
 
-def modify():
-    for d, dirs, files in os.walk("docs/.vuepress/dist"):
-        for filename in files:
-            if filename.endswith(".html") or filename.endswith(".js"):
-                full_name = f"{d}/{filename}"
-                print(full_name)
-
-                txt = ""
-                new_txt = ""
-                with open(full_name, "r", encoding="utf8") as f:
-                    txt = f.read()
-
-                new_txt = txt
-                new_txt = re.sub("Autoxing", "BIGL", new_txt, flags=re.IGNORECASE)
-                new_txt = re.sub("景行慧动", "BIGL", new_txt, flags=re.IGNORECASE)
-                new_txt = re.sub("axbot", "biglbot", new_txt, flags=re.IGNORECASE)
-
-                if new_txt != txt:
-                    print("changed")
-
-                    with open(full_name, "w", encoding="utf8") as f:
-                        f.write(new_txt)
-
-
 parser = argparse.ArgumentParser()
-parser.add_argument(
-    "--bigl", action="store_true", default=False, help="For BIGL, a Singapore company"
-)
-
 args = parser.parse_args()
 
-bigl = args.bigl
-
 exec("npm run docs:build")
-
-if bigl:
-    modify()
-    exec("docker build . -f Dockerfile_bigl -t autoxing/biglbot_rest_book")
-    exec("rsync -rv docs/.vuepress/dist/* my-server:/opt/www/biglbot_rest_book/")
-else:
-    # exec(
-    #     "docker build . -f Dockerfile -t registry.cn-beijing.aliyuncs.com/autoxing/axbot_rest_book"
-    # )
-    exec("rsync -rv docs/.vuepress/dist/* my-server:/opt/www/axbot_rest_book/")
+exec("rsync -rv docs/.vuepress/dist/* my-server:/opt/www/axbot_rest_book/")
