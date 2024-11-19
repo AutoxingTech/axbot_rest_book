@@ -6,6 +6,8 @@
 - Add [Clear Jack Errors](../reference/services.md#clear-jack-errors)
 - Add [landmarks](../reference/landmarks.md)
 - Add [Confirm Estop](../reference/services.md#confirm-emergency-stop)
+- Support [Loading map from local file](../reference/current_map_and_pose.md#set-current-map-by-loading-local-files)
+- Support new service [Calibrate Depth Camera Masks](../reference/services.md#calibrate-depth-camera-masks)
 
 ## 2.10.0
 

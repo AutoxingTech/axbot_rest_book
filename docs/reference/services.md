@@ -562,3 +562,13 @@ If you want to push the robots around, use the following command to confirm rele
 curl -X POST http://192.168.25.25:8090/services/confirm_estop
 ```
 
+
+## Calibrate Depth Camera Masks
+
+Some depth cameras can see part of the robot itself. This service is used to determine which pixels in the depth camera should be treated as the body of itself and should not be mistaken as obstacles.
+
+Before calibrating, the robot should be place in a empty space. No obstacles should be in the view of all depth cameras.
+
+```bash
+curl -X POST http://192.168.25.25:8090/services/calibrate_depth_camera_masks
+```

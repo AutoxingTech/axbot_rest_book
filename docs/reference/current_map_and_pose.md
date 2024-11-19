@@ -26,7 +26,10 @@ class SetCurrentMapRequest {
 }
 ```
 
+### Set current map with data
+
 Since 2.7.0, we can use the following `POST` request to set current map.
+This method is very slow for large map.
 
 ```ts
 class SetCurrentMapWithDataRequest {
@@ -37,6 +40,39 @@ class SetCurrentMapWithDataRequest {
   grid_origin_x: number; // the X coordinate of lower left corner of PNG map
   grid_origin_y: number; // the Y coordinate of lower left corner of PNG map
   overlays: string; // See documents about overlays
+}
+```
+
+### Set current map by loading local files
+
+Since 2.11.0, current map can be loaded directly from a local file.
+
+```bash
+curl -X POST http://localhost:8090/chassis/current-map \
+  -H "Content-Type: application/json"
+  --data '{"data_url":"file:///home/simba/tmp_map/map_73.pbstream", "map_name": "xxx"}'
+```
+
+3 files are need:
+
+```
+/home/simba/tmp_map/map_73.pbstream
+/home/simba/tmp_map/map_73.png
+/home/simba/tmp_map/map_73.yaml
+```
+
+The yaml file should contain:
+
+```yaml
+uid: 62202f9fed0883652d08ad5c
+grid_origin_x: -5.900000095367432
+grid_origin_y: -9.199999809265137
+grid_resolution: 0.05
+map_version: 3
+overlays_version: 1
+overlays: {
+  "map_uid": "62202f9fed0883652d08ad5c",
+  "features": []
 }
 ```
 
