@@ -1,17 +1,21 @@
-# Autoxing 机器人测试手册
+# Autoxing Rest API Document
 
-本文档使用 [VuePress](https://vuepress.vuejs.org/) 编写。
+This document is written with  [VuePress](https://vuepress.vuejs.org/)
 
-## 调试运行
+## Compile
 
-首次初始化，要安装 VuePress 等依赖库
+Before compiling, VuePress and all related libraries should be installed:
 
 ```shell
 yarn install
 ```
 
-调试运行：运行以下命令，然后用浏览器访问 http://localhost:8080/
+## Debug
+
+Run the following command:
 
 ```shell
 yarn run docs:dev
 ```
+
+Then view pages from http://localhost:8080/
