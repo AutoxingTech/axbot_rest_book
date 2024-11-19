@@ -1,5 +1,7 @@
 # Changelog of Releases <!-- omit in toc -->
 
+2.8 以后，随缘发布新版本。也不再写changelog。
+
 For detailed notes(including minor releases), see [Full Release Notes](./releases_full.md)
 
 # Release notes - Robot Chassis Software System - 2.8.2

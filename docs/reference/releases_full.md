@@ -1,5 +1,7 @@
 # Changelog of Releases (FULL) <!-- omit in toc -->
 
+2.8 以后，随缘发布新版本。也不再写changelog。
+
 ## 2.6.0-rc3
 
 - Improvement
