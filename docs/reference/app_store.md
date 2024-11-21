@@ -149,9 +149,9 @@ One can view logs of these tasks.
 
 ````
 # for download tasks
-curl http://tunnel.autoxing.com:10144/app_store/jobs/download/tasks
+curl http://192.168.25.25:8090/app_store/jobs/download/tasks
 # for installation tasks
-curl http://tunnel.autoxing.com:10144/app_store/jobs/install/tasks
+curl http://192.168.25.25:8090/app_store/jobs/install/tasks
 
 ```json
 [
