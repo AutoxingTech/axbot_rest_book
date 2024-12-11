@@ -345,7 +345,8 @@ Only when stored in map overlays, they can be used for positioning.
 {
     "type":"Feature",
     "properties":{
-        "pointType": "landmark",
+        "type": "39",
+        "landmarkId": "landmark_1"
     },
     "geometry":{
         "type":"Point",

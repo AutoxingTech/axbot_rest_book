@@ -272,7 +272,12 @@ enum StuckState {
   // Destination is occupied by another robot. So it's waiting on road side.
   "is_waiting_for_dest": true,
 
-  "docking_with_conveyer": true // optional, since 2.9.0
+  "docking_with_conveyer": true, // optional, since 2.9.0
+
+  // optional, since 2.11.0. Default to 0. 
+  // Only valid when moving along a given route.
+  // It gives the number of points which are already passed.
+  "given_route_passed_point_count": 3 
 }
 ```
 
