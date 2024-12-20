@@ -7,8 +7,8 @@
   "license": "copyright",
   "devDependencies": {
     "vuepress": "^1.8.2",
-    "webpack": "^5.97.1",
-    "webpack-cli": "^5.1.4"
+    "webpack": "^4.47.0",
+    "webpack-cli": "^3.3.12"
   },
   "scripts": {
     "docs:dev": "vuepress dev docs --temp .temp",
