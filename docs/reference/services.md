@@ -572,3 +572,20 @@ Before calibrating, the robot should be placed in an empty space. No obstacles s
 ```bash
 curl -X POST http://192.168.25.25:8090/services/calibrate_depth_camera_masks
 ```
+
+## Collect Landmarks
+
+This service is used to collect landmarks for an existing map.
+
+```bash
+curl -X POST http://192.168.25.25:8090/services/start_collecting_landmarks
+curl -X POST http://192.168.25.25:8090/services/stop_collecting_landmarks
+```
+
+The result is stored in:
+
+```bash
+curl http://192.168.25.25:8090/collected_data
+```
+
+The collected data serves as raw materials. The developer must insert landmarks into [overlays](./overlays.md#landmarks) for them to work.
