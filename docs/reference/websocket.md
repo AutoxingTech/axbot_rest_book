@@ -1045,7 +1045,9 @@ This topic is used to visualize [landmarks](./landmarks.md) collected during the
   "topic": "/landmarks",
   "landmarks": [
       {
-        "pos": [0.32, 0.97]
+        "id": "landmark_1",
+        "pos": [0.32, 0.97],
+        "in_use": true
       }
   ]
 }
