@@ -782,7 +782,8 @@ The state of the jacking device.
   "topic": "/jack_state",
   "state": "hold", // unknown, hold, jacking_up, jacking_down
   "progress": 0.35, // position of the jacking device, in percentage
-  "self_checking": false
+  "self_checking": false,
+  "self_check_state": "no_error" // no_error, up, down, error, unknown
 }
 ```
 
