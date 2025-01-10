@@ -1,5 +1,4 @@
-Piece by Piece Mapping
-======================
+# Piece by Piece Mapping
 
 For a very large map which exceeds the capability of a single map, we can create several connected maps instead. When the robot moves in the overlapped area between two maps, it can switch to another map and continue moving.
 
@@ -7,7 +6,7 @@ For a very large map which exceeds the capability of a single map, we can create
 
 ### 简单分区建图步骤
 
-![](suitable.png)
+![](./suitable.png)
 
 1. 先建 Area 1。
 2. 使用 Area 1 定位，并走到 Area1 和 Area2 的重叠处。
@@ -19,8 +18,10 @@ For a very large map which exceeds the capability of a single map, we can create
 
 ### 简单法适用场景
 
+简单法，只是在开始建图的某一个点上，继承了上一个地图的坐标。并没有地图之间的匹配和回环。所以只能保证单点附近的匹配度。
+
 有些地图，有明显的单通道切点可以切开成多个部分。就可以采用这个方法。
-如果切开后，两部分之间会有多条通道相连。此时就不适合使用这个简单方法。
+如果切开后，两部分之间有多条通道相连，就不适合使用这个简单方法。
 
 如下图。绿色线适合切开，红色线就不适合。
 
@@ -28,17 +29,19 @@ For a very large map which exceeds the capability of a single map, we can create
 
 另外，分开的多区域，用不能有大的环状结构。如图：
 
-| Suitable          | Not Suitable          |
-| ----------------- | --------------------- |
-| ![](suitable.png) | ![](not_suitable.png) |
+| Suitable            | Not Suitable            |
+| ------------------- | ----------------------- |
+| ![](./suitable.png) | ![](./not_suitable.png) |
 
 
 ## 主干法
 
+主干法，可以适应多通道的场景，并把各个通道都匹配好。
+
 ### 主干法分区建图步骤
 
-1. 先做分析和规划，找到骨干和枝叶。
-2. 先沿着骨干走，把骨干建出来（主干要包含主要的大回环，并且能通向所有的枝叶）。起名 backbone 。
+1. 先做分析和规划，找到骨干和枝叶。主干要包含主要的大通路、大回环，并且能通向所有的枝叶。
+2. 先沿着骨干走，把骨干建出来。起名 backbone 。主干建立后，整个地图的大的形状就已经确定。
 3. 加载 backbone，走到第一个区域 Area 1 附近，开启增量建图。
 4. 结束建图。注意，要选择 `{"new_map_only": true}`。也就是只保存增量的部分，不保存 backbone 中的部分。
 5. 以此类推，把每个区域都建好。
