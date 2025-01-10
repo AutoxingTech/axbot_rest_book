@@ -58,6 +58,14 @@ module.exports = {
                         sidebarDepth: 2
                     },
                     {
+                        title: 'Articles',
+                        collapsable: false,
+                        children: [
+                            '/articles/piece_by_piece_mapping',
+                        ],
+                        sidebarDepth: 2
+                    },
+                    {
                         title: 'Other',
                         collapsable: false,
                         children: [
