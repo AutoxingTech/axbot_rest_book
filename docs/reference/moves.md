@@ -138,7 +138,7 @@ curl http://192.168.25.25:8090/chassis/moves/4409
   "use_target_zone": null,
   "is_charging": null,
   "charge_retry_count": 0,
-  "fail_reason": 0,
+  "fail_reason": 0, // See MoveFailReason
   "fail_reason_str": "None - None",
   "fail_message": "",
   "create_time": 1647509573,
@@ -177,7 +177,7 @@ curl http://192.168.25.25:8090/chassis/moves
     "creator": "robot-admin-web",
     "state": "cancelled",
     "type": "standard",
-    "fail_reason": 0,
+    "fail_reason": 0, // See MoveFailReason
     "fail_reason_str": "None - None",
     "fail_message": "",
     "create_time": 1647509573,
@@ -188,7 +188,7 @@ curl http://192.168.25.25:8090/chassis/moves
     "creator": "control_unit",
     "state": "succeeded",
     "type": "none",
-    "fail_reason": 0,
+    "fail_reason": 0, // See MoveFailReason
     "fail_reason_str": "None - None",
     "fail_message": "",
     "create_time": 1647427995,
@@ -217,7 +217,7 @@ Use websocket `/planning_state` to get updated of move state.
   },
   "going_back_to_charger": false,
   "action_id": 4410, // The current executing(or last) move action ID.
-  "fail_reason": 0,
+  "fail_reason": 0, // See MoveFailReason
   "fail_reason_str": "none",
   "remaining_distance": 3.546117067337036,
   "move_intent": "none",
@@ -241,3 +241,74 @@ curl -X PATCH \
 ```json
 { "state": "cancelled" }
 ```
+
+## Move Fail Reason
+
+The "fail_reason" field is a number to indicate why a move action is failed. 
+
+```ts
+enum MoveFailReason
+{
+  none = 0, // None
+  unknown = 1, // Unknown reason
+  GetMapFailed = 2, // Failed to obtain map (WorldMap)
+  StartingPointOutOfMap = 3,  // Starting point is outside the map
+  EndingPointOutOfMap = 4, // Ending point is outside the map
+  StartingPointNotInGround = 5, // Starting point is not in a passable area
+  EndingPointNotInGround = 6, // Ending point is not in a passable area
+  StartingEqualEnding = 7, // Starting point and ending point are the same
+  CalculateGlobalPathExtendedDataError = 8, // Failed to calculate global path extended data
+  CalculationFailed = 9, // Roads are not connected
+  CalculationTimeout = 10, // Calculation timeout
+  NoGlobalPath = 11, // No global path available
+  NotGrabStartIndexOnGlobalPath = 12, // Failed to grab starting point on the global path
+  NotGrabEndIndexOnGlobalPath = 13, // Failed to grab ending point on the global path
+  PlanningTimeout = 14, // Path planning unsuccessful for a long time
+  MoveTimeout = 15, // Path planning successful, move timeout
+  ControlCostmapError = 16, // Local obstacle avoidance map data error, sensor data anomaly
+  PowerCableConnected = 17, // Currently charging with cable
+  RotateTimeout = 18, // Rotation timeout
+  ChargeRetryCountExceeded = 100, // Charge retry count exceeded
+  ChargeDockDetectionError = 101, // Charge dock detection error
+  ChargeDockSignalError = 102, // Did not receive successful docking signal from charge dock
+  InvalidChargeDock = 103, // Invalid charge dock position
+  AlreadyInCharging = 104, // Currently already charging
+  NoChargeCurrent = 105, // No charge current received for a long time after contact
+  InvalidCabinetPos = 200, // Invalid cabinet position
+  CabinetDetectionError = 201, // Cabinet detection error
+  NoDockWithConveyer = 202, // No docking with conveyer at the moment
+  NoApproachConveyer = 203, // No approaching conveyer at the moment
+  ElevatorPointOccupied = 300, // Elevator point occupied
+  ElevatorClosed = 301, // Elevator closed
+  ElevatorPointObscuredTimeout = 302, // Elevator point obscured for a long time
+  ElevatorPointOccupancyDetectionTimeout = 303, // Elevator point occupancy detection timeout
+  ElevatorEnterProgressUpdateTimeout = 304, // Elevator entry progress update timeout
+  InvalidTrackPoints = 400, // Invalid track points (number of input coordinates is not even or number of track points < 2)
+  TooFarFromStartOfTrack = 401, // Too far from start of track
+  InvalidRackDetectionPos = 500, // Invalid rack detection point
+  RackDetectionError = 501, // Rack detection error
+  RackRetryCountExceeded = 502, // Exceeded retry count for docking
+  UnloadPointOccupied = 503, // Unload point occupied
+  UnloadPointUnreachable = 504, // Unload point unreachable
+  RackMoved = 505, // Rack moved significantly
+  JackInUpState = 506, // Jack in raised state
+  InvalidRackAreaId = 507, // Invalid rack area ID
+  InvalidRackArea = 508, // Invalid rack area (no rack positions)
+  UnknownRackSpaceState = 509, // Unknown rack space state
+  NoRackInRackArea = 510, // No racks in rack area
+  AlignFailedInRackArea = 511, // Docking failed in rack area with racks
+  NoFreeSpaceInRackArea = 512, // No free space in rack area
+  FailedToUnloadInRackArea = 513, // Failed to unload in rack area with free rack positions
+  FollowFailed = 600, // Follow target lost
+  PoiDetectionError = 700, // POI detection error
+  PoiUnreachable = 701, // POI unreachable
+  BarcodeDetectionError = 702, // Barcode detection error
+  PlatformAlertError = 1000, // System exception
+  ServiceCallError = 1001, // Service call error (restapi usage)
+  InternalError = 1002, // Internal ASSERT error
+  MapChanged = 1003, // Map changed or cleared during task execution
+  MoveActionTypeDeprecated = 1004, // Interface deprecated
+}
+```
+
+A slightly more up-to-date version is at "https://rb-admin.autoxing.com/api/v1/static/move_failed_reason.json".
