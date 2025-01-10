@@ -2,6 +2,7 @@
 
 ## 2.11.0 (Unreleased)
 
+- Add websocket topic [Push Handle State](../reference/websocket.md#push-handle-state)
 - Add websocket topic [Detailed Battery State](../reference/websocket.md#detailed-battery-state)
 - Add [Clear Jack Errors](../reference/services.md#clear-jack-errors)
 - Add [landmarks](../reference/landmarks.md)
