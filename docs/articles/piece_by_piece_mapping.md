@@ -40,7 +40,7 @@ The backbone method can accommodate multi-channel scenarios and properly match a
 
 ### Steps for Backbone Partition Mapping
 
-1. First, perform analysis and planning to identify the backbone and branches. The backbone should include major main routes and large loops, and it should connect to all branches.
+1. First, perform analysis and planning to identify the backbone and areas. The backbone should include major main routes and large loops, and it should connect to all area.
 2. Walk along the backbone to create it, naming it "backbone". Once the backbone is established, the overall shape of the map is determined.
 3. Load the backbone and walk to the vicinity of the first area, Area 1, then start incremental mapping.
 4. Finish mapping, ensuring to select `{"new_map_only": true}`. This means only the incremental part is saved, not the backbone part.
