@@ -1111,3 +1111,22 @@ Selected update of output pins:
   "calibrating": true, // Optional. Only present when true
 }
 ```
+
+## Detected Trailer
+
+![](./trailer.png)
+
+```json
+{
+    "topic": "/detected_trailer",
+    "detected": true,
+    "hitch_position": [0, -0.35], // relative to the pose of the robot
+    "hitch_arm_length": 0.4,  // the length of the hitch arm
+    "width": 0.5, // width of the trailer
+    "depth": 1.0, // depth(length) of the trailer
+    "pose": {  // pose of the trailer, relative to the robot
+        "pos": [0.31, -0.85],
+        "ori": 0.13
+    }
+}
+```
