@@ -2,6 +2,7 @@
 
 ## 2.11.0 (Unreleased)
 
+- Add service [clear_fall_risk_warning](../reference/services.md#clear-fall-risk-warning).
 - Add `capacity`, `design_capacity`, `state_of_health` and `cycle_count` in [detailed_battery_state](../reference/websocket.md#detailed-battery-state).
 - Add websocket topic [Detected Trailer](../reference/websocket.md#detected-trailer)
 - Add websocket topic [Push Handle State](../reference/websocket.md#push-handle-state)
