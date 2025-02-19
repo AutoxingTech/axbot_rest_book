@@ -186,6 +186,10 @@ Since 2.11.0
   "percentage": 0.64, // 电量
   "power_supply_status": "discharging", // charging/discharing/full
   "cell_voltages": [4.141, 4.138, 4.139, 4.133, 4.136, 4.138, 4.138],
+  "capacity": 14.0, // Ah
+  "design_capacity": 15.0, // Ah
+  "state_of_health": 0.93, // percentage
+  "cycle_count": 80,
 }
 ```
 

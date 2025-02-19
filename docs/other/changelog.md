@@ -2,6 +2,7 @@
 
 ## 2.11.0 (Unreleased)
 
+- Add `capacity`, `design_capacity`, `state_of_health` and `cycle_count` in [detailed_battery_state](../reference/websocket.md#detailed-battery-state).
 - Add websocket topic [Detected Trailer](../reference/websocket.md#detected-trailer)
 - Add websocket topic [Push Handle State](../reference/websocket.md#push-handle-state)
 - Add websocket topic [Detailed Battery State](../reference/websocket.md#detailed-battery-state)
