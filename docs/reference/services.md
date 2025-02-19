@@ -589,3 +589,10 @@ curl http://192.168.25.25:8090/collected_data
 ```
 
 The collected data serves as raw materials. The developer must insert landmarks into [overlays](./overlays.md#landmarks) for them to work.
+
+## Clear Fall Risk Warning
+
+```bash
+curl -X POST http://192.168.25.25:8090/services/clear_fall_risk_warning
+```
+
