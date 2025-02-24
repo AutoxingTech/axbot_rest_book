@@ -91,6 +91,17 @@ The **dark-red** pixels are the entity of the obstacles, while the **light-red**
 
   "reliable": true,       // false means the position is lost
 
+  // "lidar_reliable = False" means that no constraint exists between newly created 
+  // observations(submaps) and the current static map.
+  // 
+  // The position loss steps are as follow:
+  // 1. No constraints(between new observations and static map) exists, "lidar_reliable" will become false.
+  // 2. The robot enters pure dead-reckoning mode. And "position_loss_progress" will start to increase.
+  // 3. After some movements if new constraints are created, "lidar_reliable" will become true.
+  //    But if "position_loss_progress" reaches 1.0, "reliable" will also become false.
+  "lidar_reliable": false, // since 2.11.0-rc18
+  "position_loss_progress": 0.35  // since 2.11.0-rc18. Only exists when lidar_reliable = false
+
   // The quality of positioning(Experimental)
   //
   // Only valid in positioning state.
