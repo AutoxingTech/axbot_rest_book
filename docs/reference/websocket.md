@@ -1145,3 +1145,16 @@ Selected update of output pins:
     }
 }
 ```
+
+## Depth Camera Images
+
+![](./depth_image_rainbow.png)
+
+```json
+{
+    "topic": "/depth_camera/downward/image",
+    "size": [160, 100],
+    "data": "iVBORw0KGgoAAAANSUhEUgAAALYAAAA7BAAAAA..." // Base64 encoded PNG file
+}
+```
+
