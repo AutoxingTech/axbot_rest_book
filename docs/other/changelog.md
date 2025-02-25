@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.12.0 (Unreleased)
+
+- Add `/device/sensors` [Sensors List](../reference/device.md#sensor-list), for quality control process.
+
 ## 2.11.0 (Unreleased)
 
 - Add service [clear_fall_risk_warning](../reference/services.md#clear-fall-risk-warning).
