@@ -361,7 +361,7 @@ Disable NTP Server
 curl -X DELETE http://192.168.25.25:8090/device/chrony/allows
 ```
 
-### Sensor List
+## Sensor List
 
 Since 2.12.0
 
