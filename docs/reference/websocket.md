@@ -300,7 +300,10 @@ enum StuckState {
 
 ![](./pointcloud.png)
 
-The point cloud in world frame.
+### Point Cloud Used for SLAM
+
+The combined point cloud from one or multiple lidar(if any) used for SLAM.
+The coordinates are in world frame.
 
 ```json
 {
@@ -312,6 +315,49 @@ The point cloud in world frame.
     [7.79, 4.14, 0.04]
     ...
   ]
+}
+```
+
+### Point Cloud for Individual Lidar Device
+
+Since 2.12.0
+
+This topic is used to debug individual lidar device.
+The coordinates are in world frame.
+
+Commonly used topic names are:
+
+```
+/horizontal_laser_2d/matched
+/left_laser_2d/matched
+/right_laser_2d/matched
+/lt_laser_2d/matched (left top)
+/rb_laser_2d/matched (right back)
+```
+
+```json
+{
+    "topic": "/horizontal_laser_2d/matched",
+    "stamp": 1741764468.939,
+    "fields": [
+        {
+            "name": "x",
+            "data_type": "f32"
+        },
+        {
+            "name": "y",
+            "data_type": "f32"
+        },
+        {
+            "name": "z",
+            "data_type": "f32"
+        },
+        {
+            "name": "intensity",
+            "data_type": "f32"
+        }
+    ],
+    "data": "QphAQHPLmkHDpvk/xcTEPk+RQED22ppBp6..." // base64 encoded binary data
 }
 ```
 
@@ -1148,6 +1194,8 @@ Selected update of output pins:
 
 ## Depth Camera Images
 
+Since 2.12.0
+
 ![](./depth_image_rainbow.png)
 
 ```json
@@ -1158,3 +1206,10 @@ Selected update of output pins:
 }
 ```
 
+Commonly used topic names are:
+
+```
+/depth_camera/downward/image
+/depth_camera/upward/image
+/depth_camera/forward/image
+```

@@ -375,11 +375,11 @@ curl http://192.168.25.25:8090/device/sensors
 {
     "depth_cameras": [
         {
-            "name": "ihawk_1",
+            "name": "ihawk_upward",
             "depth_image_topic": "/depth_camera/downward/image"
         },
         {
-            "name": "ihawk_2",
+            "name": "ihawk_downward",
             "depth_image_topic": "/depth_camera/backward/image"
         }
     ],
@@ -391,7 +391,7 @@ curl http://192.168.25.25:8090/device/sensors
     ],
     "rgb_cameras": [
         {
-            "name": "camera_1",
+            "name": "rgb_forward",
             "image_topic": "/rgb_cameras/front/compressed"
         }
     ]
