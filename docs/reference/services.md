@@ -598,7 +598,6 @@ curl -X POST http://192.168.25.25:8090/services/clear_fall_risk_warning
 
 ## Query Pose
 
-This API is used to help collecting the poses of some POIs.
 This API helps collect the poses of various points of interest (POIs). 
 
 For example, when the robot docks on a charger, it calculates the charger’s pose 
