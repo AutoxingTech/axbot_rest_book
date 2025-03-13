@@ -2,6 +2,7 @@
 
 ## 2.12.0 (Unreleased)
 
+- Add `/services/query_pose` [Query Pose](../reference/services.md#query-pose)
 - Add `/device/sensors` [Sensors List](../reference/device.md#sensor-list), for quality control process.
 - Add `/xxxx_laser_2d/matched` [point cloud for individual lidar device](../reference/websocket.md#point-cloud-for-individual-lidar-device).
 - Add `/depth_camera/xxx/image` [depth camera images](../reference/websocket.md#depth-camera-images)
