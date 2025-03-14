@@ -1213,3 +1213,17 @@ Commonly used topic names are:
 /depth_camera/upward/image
 /depth_camera/forward/image
 ```
+
+## Updated Map Slice
+
+```json
+{
+    "topic": "/updated_map_slice",
+    "width": 298,
+    "height": 356,
+    "resolution": 0.05,
+    "origin_x": -4.4,
+    "origin_y": -9.0,
+    "data": "iVBORw0KGgoAAAANSUhEUg..." // base64 encoded greyscale PNG
+}
+```
