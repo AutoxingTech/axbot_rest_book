@@ -106,7 +106,6 @@ Some new fail reason are introduced, like:
 
 * `InvalidRackAreaId`
 * `InvalidRackArea`
-* `InvalidRackAreaId`
 * `UnknownRackSpaceState`
 * `NoRackInRackArea`
 * `AlignFailedInRackArea`
@@ -115,7 +114,8 @@ Some new fail reason are introduced, like:
 
 ### Area-to-Area Move
 
-The robot will patrol the source area, find the first rack point with is not empty, and align with it.
+Create move action `type=align_with_rack` and `rack_area_id={SOME_ID}`, the robot will patrol the source area, 
+find the first rack point with a rack in it, and align with it.
 
 ### Follow Given Route Strictly
 
