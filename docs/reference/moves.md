@@ -88,6 +88,7 @@ In a typical point-to-point task，In a typical point-to-point task, the robot s
 
 :::warning
 Some parameters must be configured correctly for safe using. See [rack.specs](./system_settings.md#rackspecs)
+:::
 
 ### Point-to-Area Move
 
