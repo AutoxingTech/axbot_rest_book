@@ -188,3 +188,14 @@ The physical representation of a rack. And how a robot should carry it.
    ]
 }
 ```
+
+- `width`, `depth` - The size of the rack.
+- `margin` - Some racks have extruded parts outside of rectangle formed by the legs.
+- `extra_leg_offset` - Some racks have inward extruded legs that can't be seen by lidar.
+- `cargo_to_jack_front_edge_min_distance` - When mounted, the distance between the front edge of the rack to the front edge of the jack panel.
+:::
+
+![](./rack_params1.png)
+
+![](./rack_params2.png)
+

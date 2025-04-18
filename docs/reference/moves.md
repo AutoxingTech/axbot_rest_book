@@ -59,6 +59,8 @@ interface MoveActionCreate {
 
   charge_retry_count?: number; // retry times before `charge` action fails.
 
+  rack_area_id: string; // When executing point-to-area or area-to-area cargo move action, give the target rack area id.
+
   properties: { // Optional: since 2.11.0
     inplace_rotate: boolean; // Optional. since 2.11.0 strictly rotate without any linear velocity.
   }
@@ -69,33 +71,50 @@ interface MoveActionCreate {
 
 Since 2.7.0, there is a new model(codename **Longjack**), it can crawl under a rack and jack it up.
 
-The steps are summaries as follow:
+In a typical point-to-point task，In a typical point-to-point task, the robot should use the following sequence of commands to load a cargo and unload it to another place:
 
-1. Create a move action, with `type=align_with_rack` to crawl under the rack.
-2. When the move succeeded, call `/services/jack_up`.
-3. The progress of the jack device is reported from [Jack State Topic](../reference/websocket.md#jack-state).
-4. When the jack is fully up, the footprint of the robot will expand to accommodate that of the rack.
+1. **Crawl under the rack** Create a move action, with `type=align_with_rack` to crawl under the rack.
+2. **Raise the jack device** When the move succeeded, call `/services/jack_up`.
+   1. The progress of the jack device is reported from [Jack State Topic](../reference/websocket.md#jack-state).
+   2. When the jack is fully up, the footprint of the robot will expand to accommodate that of the rack.
    The updated footprint can be received from [Robot Model Topic](../reference/websocket.md#robot-model).
-5. When the jack is fully up, use `type=to_unload_point` to move to the unload point.
-6. Call `/services/jack_down` to unload.
+3. **Move to unload point** When the jack is fully up, create another move action `type=to_unload_point` to move to the unload point.
+4. **Lower the jack device** Call `/services/jack_down` to unload.
+5. Optionally, create the next move action. The robot will move out of the rack point and before taking the next action.
 
 | Robot Admin Screenshot  | Photo                |
 | ----------------------- | -------------------- |
 | ![](./jack_monitor.png) | ![](./jack_real.jpg) |
 
 :::warning
-Some parameters must be configured correctly for safe using:
+Some parameters must be configured correctly for safe using. See [rack.specs](./system_settings.md#rackspecs)
 
-- `/rack_detector/rack_width|rack_depth` - The size of the rack.
-- `/rack_detector/margin` - Some racks have extruded parts outside of rectangle formed by the legs.
-- `/jack/extra_leg_offset` - Some racks have inward extruded legs that can't be seen by lidar.
-- `/jack/cargo_to_jack_front_edge_min_distance` - When mounted, the distance between the front edge of the rack to the front edge of the jack panel.
+### Point-to-Area Move
 
-:::
+In addition to point-to-point move, which moves a rack/pallet from one point to another,
+we also support:
 
-![](./rack_params1.png)
+* **Point-to-area move** This is the mostly used move, when you can't known in advance which points in target area are empty.
+* **Area-to-area move** When you want to move every rack/pallet from one area to another area.
 
-![](./rack_params2.png)
+In the mapping platform, one should add a rack area polygon. All rack points which are inside the area are considered a group.
+
+When receiving a move action with `type=to_unload_point` and `rack_area_id={SOME_ID}`, the robot will scan all rack points in that area and move to the first empty point. If all points are occupied, the move will failed with error `NoFreeSpaceInRackArea`. 
+
+Some new fail reason are introduced, like:
+
+* `InvalidRackAreaId`
+* `InvalidRackArea`
+* `InvalidRackAreaId`
+* `UnknownRackSpaceState`
+* `NoRackInRackArea`
+* `AlignFailedInRackArea`
+* `NoFreeSpaceInRackArea`
+* `FailedToUnloadInRackArea`
+
+### Area-to-Area Move
+
+The robot will patrol the source area, find the first rack point with is not empty, and align with it.
 
 ### Follow Given Route Strictly
 
@@ -117,6 +136,7 @@ curl -X POST
 ```
 
 When this action is created, the user should then send target poses with websocket topic `/follow_target_state`: See [Follow Target](../reference/websocket.md#follow-target-state)
+
 
 ## Get Move Action Detail
 
