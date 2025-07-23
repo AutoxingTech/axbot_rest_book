@@ -2,6 +2,7 @@
 
 ## 2.12.0
 
+- Add websocket channel [Raw Io-board State](../reference/websocket.md#raw-io-board-state)
 - Add path orientation in [/path](../reference/websocket.md#global-path)
 - Add `expanded_footprint` in [/robot_model](../reference/websocket.md#robot-model)
 - Add websocket channel [Updated Map Slice](../reference/websocket.md#updated-map-slice)

@@ -1235,3 +1235,17 @@ Commonly used topic names are:
     "data": "iVBORw0KGgoAAAANSUhEUg..." // base64 encoded greyscale PNG
 }
 ```
+
+## Raw Io-board State
+
+![](./raw_io_board_state.png)
+
+The current state of input & output of the IoBoard.
+
+```json
+rtn = {
+    "topic": "/raw_io_board_state",
+    "inputs_active": [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1],
+    "outputs_active": [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1],
+}
+```
