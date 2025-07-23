@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.12.0 (Unreleased)
+## 2.12.0
 
 - Add path orientation in [/path](../reference/websocket.md#global-path)
 - Add `expanded_footprint` in [/robot_model](../reference/websocket.md#robot-model)
@@ -10,7 +10,7 @@
 - Add `/xxxx_laser_2d/matched` [point cloud for individual lidar device](../reference/websocket.md#point-cloud-for-individual-lidar-device).
 - Add `/depth_camera/xxx/image` [depth camera images](../reference/websocket.md#depth-camera-images)
 
-## 2.11.0 (Unreleased)
+## 2.11.0
 
 - Add service [clear_fall_risk_warning](../reference/services.md#clear-fall-risk-warning).
 - Add `capacity`, `design_capacity`, `state_of_health` and `cycle_count` in [detailed_battery_state](../reference/websocket.md#detailed-battery-state).
