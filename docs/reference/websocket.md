@@ -562,6 +562,14 @@ This topic is used to know the dynamic footprint of the robot.
     [-0.203, -0.228],
     [-0.13, -0.25]
   ],
+  // since 2.12.4 The expanded_footprint adds more safe zone around the robot
+  "expanded_footprint": [
+    [-0.245, -0.077],
+    [-0.235, -0.178],
+    [-0.203, -0.228],
+    [-0.13, -0.25]
+    "..."
+  ]
   "width": 0.496
 }
 ```

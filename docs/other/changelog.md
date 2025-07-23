@@ -2,6 +2,7 @@
 
 ## 2.12.0 (Unreleased)
 
+- Add `expanded_footprint` in [/robot_model](../reference/websocket.md#robot-model)
 - Add websocket channel [Updated Map Slice](../reference/websocket.md#updated-map-slice)
 - Add `/services/query_pose` [Query Pose](../reference/services.md#query-pose)
 - Add `/device/sensors` [Sensors List](../reference/device.md#sensor-list), for quality control process.
