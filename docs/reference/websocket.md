@@ -372,9 +372,9 @@ Current global path.
   "topic": "/path",
   "stamp": 1653301966860,
   "positions": [
-    [0.94, 0.27],
-    [0.94, 0.25],
-    [0.96, 0.25]
+    [0.94, 0.27, 0.01], // the heading(3rd member) is added since 2.12.0
+    [0.94, 0.25, 0.01],
+    [0.96, 0.25, 0.01]
   ]
 }
 ```
