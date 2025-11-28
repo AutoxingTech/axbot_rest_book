@@ -602,12 +602,9 @@ This API helps collect the poses of various points of interest (POIs).
 
 For example, when the robot docks on a charger, it calculates the charger’s pose 
 based on the robot’s position. 
-Similarly, if a forklift is parked in a cargo location, the system infers that
-cargo location’s pose from the forklift’s position.
 
 ```bash
 curl http://192.168.25.25:8090/services/query_pose/charger_pose
-curl http://192.168.25.25:8090/services/query_pose/pallet_pose
 ```
 
 ```json
@@ -618,3 +615,27 @@ curl http://192.168.25.25:8090/services/query_pose/pallet_pose
     }
 }
 ```
+
+Similarly, if a forklift is parked in a cargo location, the system infers that
+cargo location’s pose from the forklift’s position. 
+
+```bash
+curl http://192.168.25.25:8090/services/query_pose/pallet_pose
+```
+
+
+```json
+{
+    "pose": {
+        "pos": [4.179, -26.094],
+        "ori": 3.18,
+    }
+
+    // since 2.13.0. If reference == 'pallet_front_edge' the returned pose is
+    // the center of the pallet front edge(new logic).
+    // If not, the pose is the center of the pallet(deprecated).
+    "reference": "pallet_front_edge" 
+}
+```
+
+
