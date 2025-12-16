@@ -631,10 +631,10 @@ curl http://192.168.25.25:8090/services/query_pose/pallet_pose
         "ori": 3.18,
     }
 
-    // since 2.13.0. If reference == 'pallet_front_edge' the returned pose is
+    // since 2.13.0. If reference == 'center_of_front_edge' the returned pose is
     // the center of the pallet front edge(new logic).
     // If not, the pose is the center of the pallet(deprecated).
-    "reference": "pallet_front_edge" 
+    "ref": "center_of_front_edge"
 }
 ```
 
