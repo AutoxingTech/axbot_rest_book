@@ -2,6 +2,8 @@
 
 ## 2.12.0
 
+- Add websocket channel [V2X Health State](../reference/websocket.md#v2x-health-state)
+- Add service [Probe V2X Beacons](../reference/services.md#probe-v2x-beacons)
 - Add websocket channel [Raw Io-board State](../reference/websocket.md#raw-io-board-state)
 - Add path orientation in [/path](../reference/websocket.md#global-path)
 - Add `expanded_footprint` in [/robot_model](../reference/websocket.md#robot-model)

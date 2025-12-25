@@ -638,4 +638,16 @@ curl http://192.168.25.25:8090/services/query_pose/pallet_pose
 }
 ```
 
+## Probe V2X Beacons
+
+This service sends messages to beacons to make them active for several seconds. It's useful for testing beacon connectivity and triggering beacon responses.
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  http://192.168.25.25:8090/services/probe_v2x_beacons
+```
+
+Use the [V2X Health State](./websocket.md#v2x-health-state) websocket topic to monitor beacon responses and health status.
+
 

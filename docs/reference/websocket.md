@@ -1249,3 +1249,18 @@ rtn = {
     "outputs_active": [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1],
 }
 ```
+
+## V2X Health State
+
+This topic provides the health state of V2X beacons, including message reception rates and active states.
+
+```json
+{
+  "topic": "/v2x_health_state",
+  "test_time_window": 10.0,  // Time window in seconds for testing beacon health
+  "rate": 2,  // Expected message rate per second
+  "beacon_ids": ["beacon_001", "beacon_002", "beacon_003"],  // List of beacon identifiers
+  "beacon_message_counts": [18, 19, 3],  // Number of messages received from each beacon during the test window
+  "beacon_active_states": [true, true, false]  // Active state of each beacon (true if receiving messages at expected rate)
+}
+```
