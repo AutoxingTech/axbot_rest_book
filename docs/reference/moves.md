@@ -61,8 +61,12 @@ interface MoveActionCreate {
 
   rack_area_id: string; // When executing point-to-area or area-to-area cargo move action, give the target rack area id.
 
-  properties: { // Optional: since 2.11.0
-    inplace_rotate: boolean; // Optional. since 2.11.0 strictly rotate without any linear velocity.
+  properties?: { // Optional: since 2.11.0
+    inplace_rotate?: boolean; // Optional. since 2.11.0 strictly rotate without any linear velocity.
+
+    // Optional. An index into the layers of rack stack. 
+    // For type = "align_with_rack" and "to_unload_point".
+    rack_layer?: number; 
   }
 }
 ```
