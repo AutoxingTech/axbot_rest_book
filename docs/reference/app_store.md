@@ -2,14 +2,6 @@
 
 Available since 2.5.0
 
-## Refresh App Store
-
-By refreshing app store, it will check the package index for new packages and available updates.
-
-```bash
-curl -X POST http://192.168.25.25:8090/app_store/services/refresh_store
-```
-
 ## List Packages
 
 Package list contain all packages and their update status.
@@ -49,16 +41,18 @@ curl -X GET http://192.168.25.25:8090/app_store/packages
 type ListPackageResponse = Package[];
 
 type PackageStatus =
-  | 'not_installed'
-  | 'upgradable'
+  | 'not_installed' // show a GET button
+  | 'upgradable' // show a download button
   | 'downloading'
-  | 'downloaded'
+  | 'downloaded' // show a install button
   | 'installing'
   | 'up_to_date'
   | 'download_queueing'
   | 'install_queueing'
-  | 'download_failed'
-  | 'install_failed';
+  | 'download_failed' // show a retry button. call download API
+  | 'install_failed' // show a retry button. call install API
+  | 'uninstalling'
+  | 'uninstalling_failed' // show a retry button. call uninstall API
 
 interface Package {
   name: string;
@@ -68,6 +62,15 @@ interface Package {
   download_task_id?: number;
   install_task_id?: number;
 }
+```
+
+## Refresh App Store
+
+By refreshing app store, it will check the package index for new packages and available updates.
+The package index will be updated. But because it's asynchronous, the user should GET the package list at a regular interval.
+
+```bash
+curl -X POST http://192.168.25.25:8090/app_store/services/refresh_store
 ```
 
 ## Download Packages
@@ -95,7 +98,7 @@ If failed, status code 400:
 If succeeded, status code 201:
 
 ```json
-{}
+{"py_axbot": {"task_id": 16, "version": "1.1.6-opi64"}}
 ```
 
 ## Install Packages
@@ -121,7 +124,7 @@ If failed, status code 400:
 If succeeded, status code 201:
 
 ```json
-{}
+{"follow": {"task_id": 19, "version": "1.1.6-opi64"}}
 ```
 
 ## Install Package from Local File
