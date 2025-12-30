@@ -25,14 +25,16 @@ curl -X GET http://192.168.25.25:8090/app_store/packages
     "latest_version": "1.0.5",
     "current_version": "1.0.4",
     "status": "downloading",
-    "download_task_id": 3
+    "download_task_id": 3,
+    "optional": false
   },
   {
     "name": "package_manager",
     "latest_version": "0.3.2",
     "current_version": "0.3.0",
     "status": "installing",
-    "install_task_id": 4
+    "install_task_id": 4,
+    "optional": false
   }
 ]
 ```
@@ -43,24 +45,40 @@ type ListPackageResponse = Package[];
 type PackageStatus =
   | 'not_installed' // show a GET button
   | 'upgradable' // show a download button
-  | 'downloading'
-  | 'downloaded' // show a install button
-  | 'installing'
   | 'up_to_date'
   | 'download_queueing'
-  | 'install_queueing'
+  | 'downloading'
+  | 'downloaded' // show a install button
   | 'download_failed' // show a retry button. call download API
+  | 'install_queueing'
+  | 'installing'
   | 'install_failed' // show a retry button. call install API
+  | 'uninstall_queueing'
   | 'uninstalling'
-  | 'uninstalling_failed' // show a retry button. call uninstall API
+  | 'uninstall_failed'
 
 interface Package {
   name: string;
   latest_version: string;
   current_version: string;
   status: PackageStatus;
+
+  // download-related (optional)
+  downloaded_versions?: string[];
+  downloading_version?: string;
+  downloading_progress?: number; // 0.0 - 1.0
   download_task_id?: number;
+
+  // install-related (optional)
+  installing_version?: string;
+  installing_progress?: number; // 0.0 - 1.0
   install_task_id?: number;
+  install_failed_reason?: string;
+
+  // uninstall-related (optional)
+  uninstall_task_id?: number;
+
+  optional?: boolean;
 }
 ```
 
@@ -116,8 +134,8 @@ If failed, status code 400:
 
 ```json
 {
-  "ax": "installed version(master-pi64) is higher than downloaded version(2.4.1-pi64), skip...",
-  "iot": "installed version(master) is higher than downloaded version(1.0.5), skip..."
+  "ax": { "error": "installed version(master-pi64) is higher than downloaded version(2.4.1-pi64), skip..." },
+  "iot": { "error": "installed version(master) is higher than downloaded version(1.0.5), skip..." }
 }
 ```
 
@@ -132,7 +150,7 @@ If succeeded, status code 201:
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
-  -d '{"filename": "/tmp/ax.2.6.4.pi64.tar.gz"]}' \
+  -d '{"filename": "/tmp/ax.2.6.4.pi64.tar.gz"}' \
   http://192.168.25.25:8090/app_store/services/install_local_file
 ```
 
@@ -145,16 +163,41 @@ curl -X POST \
 }
 ```
 
+## Uninstall Packages
+
+Uninstall installed packages.
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"packages": ["follow"]}' \
+  http://192.168.25.25:8090/app_store/services/uninstall_packages
+```
+
+**Response**
+
+```json
+{
+  "follow": {
+    "task_id": 7,
+    "version": "2.2.0-opi64"
+  }
+}
+```
+
 ## View Download/Installation Tasks
 
 When downloading/installing packages, there are associated "download/install tasks".
 One can view logs of these tasks.
 
-````
+```bash
 # for download tasks
 curl http://192.168.25.25:8090/app_store/jobs/download/tasks
 # for installation tasks
 curl http://192.168.25.25:8090/app_store/jobs/install/tasks
+```
+
+**Response**
 
 ```json
 [
@@ -179,7 +222,9 @@ curl http://192.168.25.25:8090/app_store/jobs/install/tasks
     "url": "http://192.168.25.25:8090/app_store/jobs/download/tasks/3/log"
   }
 ]
-````
+```
+
+### Show Download/Installation Task Detail (Log)
 
 For a task, the logs of the task can be requested.
 
@@ -189,26 +234,85 @@ curl "http://192.168.25.25:8090/app_store/jobs/download/tasks/4/log"
 
 But if the task is still in progress, the log will be incomplete.
 
-With `POST` request, the log can be downloaded progressively, which is more suitable for realtime display.
+With query parameters, the log can be downloaded progressively, which is more suitable for realtime display.
+
+```
+curl http://192.168.25.25:8090/app_store/jobs/download/tasks/4/log?start=0&end=1024
+```
+
+Optional query params:
+
+- `start` (number): start character, inclusive
+- `end` (number): end character, exclusive
+
+**Response**
+
+- Headers:
+
+  - `Content-Type: text/plain; charset=utf-8`
+  - `X-MORE-DATA`: "true"/"false" (indicates whether more log data is available)
+  - `X-TEXT-SIZE`: number (total size of the log in characters)
+
+```
+id: 5
+create time: 2024-01-03 18:46:47
+install task package_manager(0.4.4) added
+start time: 2024-01-03 18:46:47
+install task package_manager(0.4.4) begin
+=== installing package_manager:0.4.4
+=== checking checksum
+=== extract
+...
+```
+
+## Refresh Firmware Store
+
+App store also supports manage firmware packages. Check available firmware updates from remote repository.
+
+```bash
+curl -X POST http://192.168.25.25:8090/app_store/firmware/refresh_store
+```
+
+**Response**
+
+```json
+{ "status": 200 }
+```
+
+## Firmware Status
+
+Get firmware packages status. Response is same as normal package status.
+
+```bash
+curl http://192.168.25.25:8090/app_store/firmware/packages
+```
+
+**Response**
+
+```json
+[
+  {
+    "name": "bottom-sensor",
+    "latest_version": "1.4.3",
+    "current_version": "1.3.1",
+    "status": "upgradable"
+  }
+]
+```
+
+## Firmware Install
+
+Unlike normal packages, firmware packages do not require download package beforehand. It will automatically download and install firmware packages.
 
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
-  -d '{"start": 0, "end": 1024}' \
-  http://192.168.25.25:8090/app_store/jobs/download/tasks/4/log
+  -d '{"packages": ["bottom-sensor"]}' \
+  http://192.168.25.25:8090/app_store/firmware/install_packages
 ```
 
-```ts
-interface TaskLogRequest {
-  // start character
-  // If both start and end are missing, the whole file will be returned
-  start?: number;
+**Response**
 
-  end?: number; // end character, exclusive
-}
+```json
+{ "bottom-sensor": { "task_id": 12, "version": "1.5.4" } }
 ```
-
-The server will return additional response headers:
-
-- **`x-more-data`** - `true` means the log is incomplete, `false` otherwise.
-- **`x-text-size`** - Currently available characters of the whole file
