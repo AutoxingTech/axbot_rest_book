@@ -189,23 +189,10 @@ curl "http://192.168.25.25:8090/app_store/jobs/download/tasks/4/log"
 
 But if the task is still in progress, the log will be incomplete.
 
-With `POST` request, the log can be downloaded progressively, which is more suitable for realtime display.
+With `GET` request, the log can be downloaded progressively, which is more suitable for realtime display.
 
 ```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"start": 0, "end": 1024}' \
-  http://192.168.25.25:8090/app_store/jobs/download/tasks/4/log
-```
-
-```ts
-interface TaskLogRequest {
-  // start character
-  // If both start and end are missing, the whole file will be returned
-  start?: number;
-
-  end?: number; // end character, exclusive
-}
+curl https://192.168.25.25:8090/app_store/jobs/download/tasks/5/log?start=193&end=0
 ```
 
 The server will return additional response headers:
