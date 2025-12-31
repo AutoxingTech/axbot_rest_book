@@ -10,18 +10,18 @@ curl http://192.168.25.25:8090/device/info
 {
   "rosversion": "1.15.11",
   "rosdistro": "noetic",
-  "axbot_version": "1.9.x", // The version of main package
+  "axbot_version": "1.9.x", // The version of the main software package.
   "device": {
-    "model": "hygeia", // device model. hygeia/waiter/hotel/tray/longtray etc.
-    "sn": "71822043000350z", // SN. Unique for all devices.
-    "name": "71822043000350z" // Some prototype devices has a name.
-    // But for most devices, it's the same as SN.
+    "model": "hygeia", // The device model (e.g., hygeia, waiter, hotel, tray, longtray).
+    "sn": "71822043000350z", // The Serial Number (SN), which is unique for every device.
+    "name": "71822043000350z" // Some prototype devices may have a specific name.
+    // For most production devices, this is identical to the SN.
   },
   "baseboard": {
     "firmware_version": "22a32218"
   },
   "wheel_control": {
-    "firmware_version": "amps_20211103" // wheel firmware version
+    "firmware_version": "amps_20211103" // The firmware version of the wheel controller.
   },
   "bottom_sensor_pack": {
     "firmware_version": "1.1.1"
@@ -36,31 +36,31 @@ curl http://192.168.25.25:8090/device/info
     "thickness": 0.546,
     "wheel_distance": 0.36,
     "width": 0.496,
-    "charge_contact_position": "back" // Position of the charge contact. "back" or "front"
+    "charge_contact_position": "back" // The position of the charging contact ("back" or "front").
   },
   "caps": {
-    "supportsImuRecalibrateService": true, // supports /services/imu/recalibrate
-    "supportsShutdownService": true, // supports /services/baseboard/shutdown
-    "supportsRestartService": true, // supports /services/restart_service
-    "supportsResetOccupancyGridService": true, // supports /services/occupancy_grid_server/reset
-    "supportsImuRecalibrationFeedback": true, // supports /imu_state WebSocket topic
-    "supportsSetControlModeService": true, // supports /services/wheel_control/set_control_mode
-    "supportsSetEmergencyStopService": true, // supports /services/wheel_control/set_emergency_stop
-    "supportsWheelStateTopic": true, // supports /wheel_state WebSocket topic
-    "supportsWsV2": true, // supports ws://HOST/ws/v2/topics
-    "supportsRgbCamera": true, // supports RGB related topics
-    "combineImuBiasAndPoseCalibration": true // Since 2.4.0. Combine bias and pose calibration.
+    "supportsImuRecalibrateService": true, // Supports the /services/imu/recalibrate service.
+    "supportsShutdownService": true, // Supports the /services/baseboard/shutdown service.
+    "supportsRestartService": true, // Supports the /services/restart_service service.
+    "supportsResetOccupancyGridService": true, // Supports the /services/occupancy_grid_server/reset service.
+    "supportsImuRecalibrationFeedback": true, // Supports the /imu_state WebSocket topic.
+    "supportsSetControlModeService": true, // Supports the /services/wheel_control/set_control_mode service.
+    "supportsSetEmergencyStopService": true, // Supports the /services/wheel_control/set_emergency_stop service.
+    "supportsWheelStateTopic": true, // Supports the /wheel_state WebSocket topic.
+    "supportsWsV2": true, // Supports the V2 WebSocket API (ws://HOST/ws/v2/topics).
+    "supportsRgbCamera": true, // Supports RGB camera-related topics.
+    "combineImuBiasAndPoseCalibration": true // Available since version 2.4.0. Combines IMU bias and pose calibration.
   }
 }
 ```
 
-## Short Device Information
+## Brief Device Information
 
 ```bash
-curl http://192.168.25.25:8090/device/info/brief # for less information
+curl http://192.168.25.25:8090/device/info/brief # Retrieves a reduced set of device information.
 ```
 
-## Wifi List
+## Wi-Fi List
 
 ```bash
 curl http://192.168.25.25:8090/device/available_wifis
@@ -72,13 +72,13 @@ curl http://192.168.25.25:8090/device/available_wifis
     "ssid": "AutoXing",
     "bss": "a4:fa:76:33:d3:62",
     "rssi": -45,
-    "open": false // since 2.3.0
+    "open": false // Available since version 2.3.0.
   },
   {
     "ssid": "AutoXing-guest",
     "bss": "a4:fa:76:33:d3:72",
     "rssi": -33,
-    "open": false // since 2.3.0
+    "open": false // Available since version 2.3.0.
   }
 ]
 ```
@@ -89,7 +89,7 @@ curl http://192.168.25.25:8090/device/available_wifis
 curl http://192.168.25.25:8090/device/wifi_info
 ```
 
-Station mode response:
+Response in Station mode:
 
 ```json
 {
@@ -115,15 +115,15 @@ Station mode response:
 }
 ```
 
-AP mode response:
+Response in AP mode:
 
 ```json
 { "mode": "ap" }
 ```
 
-## List Usb Devices
+## List USB Devices
 
-Usb devices are organized as a tree.
+USB devices are organized in a tree structure.
 
 ```
 008/001 1d6b:0001 8 [fe3a0000.usb] USB 1.1 root hub
@@ -138,7 +138,7 @@ Usb devices are organized as a tree.
 curl http://192.168.25.25:8090/device/usb_devices
 ```
 
-This request list all usb devices on a robot:
+This request lists all USB devices connected to the robot:
 
 ```
 [
@@ -214,9 +214,9 @@ This request list all usb devices on a robot:
 
 ## Saved USB Devices
 
-Because USB devices may disconnect after shipping, this API allows to make a backup of the USB device list. It can be used to identify lost devices later.
+Since USB devices may occasionally disconnect, this API allows you to back up the current USB device list. This backup can be used to identify any missing or disconnected devices later.
 
-Save devices:
+Save the current USB device list:
 
 ```bash
 curl -X PUT \
@@ -225,13 +225,13 @@ curl -X PUT \
   http://192.168.25.25:8090/device/usb_devices/saved
 ```
 
-Get saved devices:
+Retrieve the saved USB device list:
 
 ```bash
 curl http://192.168.25.25:8090/device/usb_devices/saved
 ```
 
-Clear saved devices:
+Clear the saved USB device list:
 
 ```bash
 curl -X DELETE http://192.168.25.25:8090/device/usb_devices/saved
@@ -239,16 +239,16 @@ curl -X DELETE http://192.168.25.25:8090/device/usb_devices/saved
 
 ## Boot Progress
 
-During boot process, accessing any API will result in 503(Service Unavailable).
-When booting is done, the APIs will back to normal.
+During the boot process, any API request will return a `503 Service Unavailable` status code.
+Once the boot process is complete, the APIs will function normally.
 
-But, `GET /device/boot_progress` will always return `200`, even when booting is done.
+However, `GET /device/boot_progress` will always return a `200 OK` status, even after booting is finished.
 
 For example:
 
 ```bash
-curl http://192.168.25.25:8090/device/info # will return 503 during boot process
-curl http://192.168.25.25:8090/device/boot_progress # always return 200
+curl http://192.168.25.25:8090/device/info # Returns 503 during the boot process.
+curl http://192.168.25.25:8090/device/boot_progress # Always returns 200.
 ```
 
 ```json
@@ -277,11 +277,11 @@ curl http://192.168.25.25:8090/device/boot_progress # always return 200
 
 ## Time Configuration
 
-[Chrony](https://chrony-project.org/) is used to manage time of the robot.
+[Chrony](https://chrony-project.org/) is used to manage the robot's system time.
 
-Since 2.7.1, one can control some configurations with the following APIs.
+Starting from version 2.7.1, you can manage certain time configurations using the following APIs.
 
-The configuration of Chrony can be seen from:
+The current Chrony configuration can be retrieved from:
 
 ```
 curl http://192.168.25.25:8090/device/chrony/chrony.conf
@@ -289,7 +289,7 @@ curl http://192.168.25.25:8090/device/chrony/chrony.conf
 
 ### Time Sources
 
-Chrony can make use of a list of time sources.
+Chrony can utilize a list of configured time sources.
 
 ```
 $ curl http://192.168.25.25:8090/device/chrony/sources
@@ -307,15 +307,15 @@ $ curl http://192.168.25.25:8090/device/chrony/sources
 ]
 ```
 
-The syntax is a subset of [Chrony Time Source](https://manpages.debian.org/experimental/chrony/chrony.conf.5.en.html#Time_sources).
+The syntax is a subset of the [Chrony Time Source](https://manpages.debian.org/experimental/chrony/chrony.conf.5.en.html#Time_sources) configuration.
 
 * `server [HOSTNAME] [PORT port] [iburst] [trust]`
 * `pool [NAME] [PORT port] [iburst] [trust]`
 
-It recommended to have at least 4 time sources to prevent one incorrect time source(falseticker).
+It is recommended to configure at least four time sources to mitigate the impact of an inaccurate source (a "falseticker").
 See https://access.redhat.com/solutions/58025
 
-Set sources:
+Set the time sources:
 
 ```
 curl -X PUT \
@@ -324,7 +324,7 @@ curl -X PUT \
   http://192.168.25.25:8090/device/chrony/sources
 ```
 
-Restore default time sources:
+Restore the default time sources:
 
 ```
 curl -X DELETE http://192.168.25.25:8090/device/chrony/sources
@@ -332,9 +332,9 @@ curl -X DELETE http://192.168.25.25:8090/device/chrony/sources
 
 ### NTP Server
 
-Chrony can also be configured as a NTP server.
+Chrony can also be configured to act as an NTP server.
 
-To enable NTP for 192.168.2.*, use the following API:
+To enable NTP access for the `192.168.2.*` subnet, use the following API:
 
 ```
 curl -X PUT \
@@ -343,19 +343,19 @@ curl -X PUT \
   http://192.168.25.25:8090/device/chrony/allows
 ```
 
-The syntax follows [Chrony Time Server](https://manpages.debian.org/experimental/chrony/chrony.conf.5.en.html#NTP_server).
+The syntax follows the [Chrony Time Server](https://manpages.debian.org/experimental/chrony/chrony.conf.5.en.html#NTP_server) configuration.
 
 ```
 allow [all] [SUBNET]
 ```
 
-Get current allow rules:
+Retrieve the current allow rules:
 
 ```
 curl http://192.168.25.25:8090/device/chrony/allows
 ```
 
-Disable NTP Server
+Disable the NTP Server:
 
 ```
 curl -X DELETE http://192.168.25.25:8090/device/chrony/allows
@@ -363,9 +363,9 @@ curl -X DELETE http://192.168.25.25:8090/device/chrony/allows
 
 ## Sensor List
 
-Since 2.12.0
+Available since version 2.12.0.
 
-Return all sensors and their main topics, for human inspection in quality control process.
+Returns a list of all sensors and their primary topics, intended for human inspection during the quality control process.
 
 ```
 curl http://192.168.25.25:8090/device/sensors

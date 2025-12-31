@@ -2,10 +2,11 @@
 
 ## Set Current Map
 
-There are two ways to set current map:
+There are several ways to set the current map:
 
-- Set current map with `map_id` or `map_uid`.
-- Set current map with data directly. (Since 2.7.0)
+- Using a `map_id` or `map_uid`.
+- Providing the map data directly (available since version 2.7.0).
+- Loading from a local file (available since version 2.11.0).
 
 ```bash
 curl -X POST \
@@ -14,38 +15,38 @@ curl -X POST \
   http://192.168.25.25:8090/chassis/current-map
 ```
 
-**Request Params**
+**Request Parameters**
 
 ```ts
 class SetCurrentMapRequest {
   map_id?: number; // Either 'map_id' or 'map_uid' must be provided.
 
-  // Since 2.5.2. Map can be set with "uid".
-  // Before that, only 'map_id' is supported.
+  // Available since version 2.5.2. The map can be identified by its "uid".
+  // In earlier versions, only 'map_id' was supported.
   map_uid?: string;
 }
 ```
 
-### Set current map with data
+### Set Current Map with Data
 
-Since 2.7.0, we can use the following `POST` request to set current map.
-This method is very slow for large map.
+Starting from version 2.7.0, you can use the following `POST` request to set the current map directly.
+**Note:** This method can be very slow for large maps.
 
 ```ts
 class SetCurrentMapWithDataRequest {
   map_name: string;
-  occupancy_grid: string; // base64 encoded PNG
-  carto_map: string; // binary map data
-  grid_resolution: number; // 0.05
-  grid_origin_x: number; // the X coordinate of lower left corner of PNG map
-  grid_origin_y: number; // the Y coordinate of lower left corner of PNG map
-  overlays: string; // See documents about overlays
+  occupancy_grid: string; // Base64-encoded PNG image.
+  carto_map: string; // Binary map data.
+  grid_resolution: number; // e.g., 0.05
+  grid_origin_x: number; // The X-coordinate of the lower-left corner of the PNG map.
+  grid_origin_y: number; // The Y-coordinate of the lower-left corner of the PNG map.
+  overlays: string; // Refer to the documentation on overlays.
 }
 ```
 
-### Set current map by loading local files
+### Set Current Map by Loading Local Files
 
-Since 2.11.0, current map can be loaded directly from a local file.
+Starting from version 2.11.0, the current map can be loaded directly from a local file on the robot.
 
 ```bash
 curl -X POST http://localhost:8090/chassis/current-map \
@@ -53,7 +54,7 @@ curl -X POST http://localhost:8090/chassis/current-map \
   --data '{"data_url":"file:///home/simba/tmp_map/map_73.pbstream", "map_name": "xxx"}'
 ```
 
-3 files are need:
+Three files are required:
 
 ```
 /home/simba/tmp_map/map_73.pbstream
@@ -61,7 +62,7 @@ curl -X POST http://localhost:8090/chassis/current-map \
 /home/simba/tmp_map/map_73.yaml
 ```
 
-The yaml file should contain:
+The YAML file should contain the following structure:
 
 ```yaml
 uid: 62202f9fed0883652d08ad5c
@@ -93,12 +94,11 @@ curl http://192.168.25.25:8090/chassis/current-map
 }
 ```
 
-`id` represents a map of [Map List](./maps.md#map-list).
-When current map is set with data directly, `id` will be -1.
+The `id` corresponds to an entry in the [Map List](./maps.md#map-list).
+If the current map was set directly with data, the `id` will be `-1`.
 
-Latched topic `/map/info` contains the information of currently used map.
-When current map changes, a new message will be received.
-
+The latched WebSocket topic `/map/info` contains information about the currently active map.
+A new message is broadcast on this topic whenever the current map changes.
 ```bash
 $ wscat -c ws://192.168.25.25:8090/ws/v2/topics
 > {"enable_topic": "/map/info"}
@@ -114,7 +114,7 @@ $ wscat -c ws://192.168.25.25:8090/ws/v2/topics
 
 ## Set Pose
 
-Set the pose (position/orientation) of the robot on current map.
+Sets the pose (position and orientation) of the robot on the current map.
 
 ```bash
 curl -X POST \
@@ -123,37 +123,37 @@ curl -X POST \
   http://192.168.25.25:8090/chassis/pose
 ```
 
-**Request Params**
+**Request Parameters**
 
 ```ts
 class SetPoseRequest {
-  position: [number, number, number]; // coordinates x, y, z. z is always 0。
-  ori: number; // heading of the robot, in radian, counter-clockwise. 0 means x-positive.
+  position: [number, number, number]; // Coordinates [x, y, z]. Note that `z` is always 0.
+  ori: number; // The heading of the robot in radians, measured counter-clockwise. A value of 0 corresponds to the positive X-axis.
 
   // [Optional]
-  // If True, we will try to correct initial position error within a small area.
-  // If False, we will not attempt to do it.
-  // If not provided, the behavior is undefined. It may differ
-  // with software version, environment and some global settings.
+  // If true, the system will attempt to correct initial position errors within a small area.
+  // If false, no correction will be attempted.
+  // If not provided, the behavior is undefined and may vary depending on the software version,
+  // environment, and global settings.
   adjust_position?: boolean;
 }
 ```
 
-If `adjust_position = true`, we will detect and correct initial position error, based on lidar observation.
-For example, if the heading of the robot is wrongly assigned, we will make best effort to correct it.
+When `adjust_position` is set to `true`, the system detects and corrects initial position errors based on Lidar observations.
+For instance, if the robot's heading is incorrectly assigned, the system will make its best effort to correct it.
 
 | Before Correction            | After Correction            |
 | ---------------------------- | --------------------------- |
 | ![](./correction-before.png) | ![](./correction-after.png) |
 
 :::warning
-Inevitably, the correction algorithm may be misguided by changed environment.
-So if you can be sure the initial pose is correct, specially when there are some misguiding patterns, make sure `adjust_position=false`
+The correction algorithm can occasionally be misguided by changes in the environment.
+Therefore, if you are certain the initial pose is correct—especially in environments with potentially misleading patterns—ensure that `adjust_position` is set to `false`.
 :::
 
 ## Pose Feedback
 
-Latched topic `/tracked_pose` contains the latest robot pose.
+The latched WebSocket topic `/tracked_pose` provides the latest robot pose.
 
 ```bash
 $ wscat -c ws://192.168.25.25:8090/ws/v2/topics

@@ -1,41 +1,40 @@
-# Robot Admin (Standalone)
+# Robot Admin (Standalone Version)
 
-Robot admin (standalone version) is a pure frontend website(HTML+Javascript), served directly from the robot.
+Robot Admin (standalone version) is a pure frontend website (HTML + JavaScript) served directly from the robot.
 
-It calls the REST APIs of the robot.
-By observing how it works, you can quickly learn how to use the APIs.
+It interacts with the robot's REST APIs. By observing its operation, you can quickly learn how to utilize these APIs.
 
-It's an optional package. When installed, you can access it from `http://ROBOT_IP:8090/rb-admin/`.
+This is an optional package. Once installed, it can be accessed at `http://ROBOT_IP:8090/rb-admin/`.
 
 ![](./rb_admin_login.png)
 
-Login with username: `guest@autoxing.com`, password: `autoxing`.
-Once login, you can do a lot of things like:
+Log in with the username `guest@autoxing.com` and the password `autoxing`.
+Once logged in, you can perform various tasks, including:
 
-- Create new map
-- Browse existing maps, and choose one as current map
-- Set robot's current location
-- Create move actions to move the robot
-- Visualize sensor data(Lidar point clouds, depth camera point cloud, RGB camera, etc...)
-- Calibrate sensors
-- See alerts and action log
-- Save bag file(for error reporting)
+- Creating new maps
+- Browsing existing maps and selecting one as the current map
+- Setting the robot's current location
+- Creating move actions to navigate the robot
+- Visualizing sensor data (Lidar point clouds, depth camera point clouds, RGB camera feeds, etc.)
+- Calibrating sensors
+- Viewing alerts and action logs
+- Saving bag files (for error reporting)
 
 ![](./rb_admin.png)
 
-## Brief Introduction of UI
+## UI Overview
 
 ### Visualization Topic Bar
 
 ![](./topic_bar.png)
 
-- LIDAR PTS - Lidar points
-- COSTMAP(l) - Low resolution cost map
-- COSTMAP(h) - High resolution cost map
-- MAP INFO - Virtual Walls, Chargers, Elevator Areas, etc
-- EMATCH MAP - Environment matching map, show the degree of map change since initial mapping
-- BUMP MAP - See the bumpiness perceived by the robot when it moves
-- GRID - 1m x 1m grids
+- LIDAR PTS - Lidar points.
+- COSTMAP(l) - Low-resolution costmap.
+- COSTMAP(h) - High-resolution costmap.
+- MAP INFO - Virtual walls, chargers, elevator areas, etc.
+- EMATCH MAP - Environment matching map, showing the degree of change since the initial mapping.
+- BUMP MAP - Visualizes the bumpiness perceived by the robot during movement.
+- GRID - 1m x 1m grid lines.
 
 ### Control Tabs
 
@@ -43,10 +42,10 @@ Once login, you can do a lot of things like:
 
 From left to right:
 
-- Alerts - Show alerts of the robot
-- Control - When this tab is active, in "AUTO" mode, you can "double click" on map to move the robot
-- Mapping - For creating new map
-- More Visualization Options - To see more data from sensors
+- Alerts - Displays robot alerts.
+- Control - When this tab is active in "AUTO" mode, you can double-click on the map to move the robot.
+- Mapping - Used for creating new maps.
+- More Visualization Options - Provides access to additional sensor data.
 
 ### Action Panel
 
@@ -54,45 +53,45 @@ From left to right:
 
 ## Common Tasks
 
-### Create New Map Remotely
+### Creating a New Map Remotely
 
 1. Enable `LIDAR PTs.`
-2. Switch to the 3rd tab, click "START NEW MAPPING". The robot will be in **mapping mode**
+2. Switch to the third tab and click "START NEW MAPPING". The robot will enter **mapping mode**.
 
 ![](./mapping.png)
 
-3. Switch to the 2rd tab, choose "Auto" mode.
-4. Double click on free space around the robot. (Must double click on free space, which is white.)
-5. Continuously move the robot around, until the map is complete.
-6. Switch to the 3rd tab:
-   1. If you just want to use the map temporarily, click "ABORT".
-   2. If you want to save the map permanently, click "FINISH". It will be save in "Mapping List"
+3. Switch to the second tab and select "Auto" mode.
+4. Double-click on the free space around the robot (indicated by white areas).
+5. Continuously move the robot until the map is complete.
+6. Switch back to the third tab:
+   1. To use the map temporarily without saving, click "ABORT".
+   2. To save the map permanently, click "FINISH". It will be stored in the "Mapping List".
 
-After clicking either "ABORT" or "FINISH", the robot will switch to **positioning mode**, you can move the robot around the newly created map.
+After clicking either "ABORT" or "FINISH", the robot will switch to **positioning mode**, allowing you to navigate within the newly created map.
 
-To use a newly created map again:
+To reuse a newly created map:
 
-1. Select "OPEN MAPPING LIST", to view all mappings tasks.
-2. Click "SAVE" on one of the mapping task(for example "mapping 26"). It will be saved to "Map List".
-3. Switch to the 2rd tab, click "CHANGE MAP", then click "USE" on "Mapping 27"
+1. Select "OPEN MAPPING LIST" to view all mapping tasks.
+2. Click "SAVE" on a mapping task (e.g., "mapping 26") to save it to the "Map List".
+3. Switch to the second tab, click "CHANGE MAP", and then click "USE" for the desired map (e.g., "Mapping 27").
 
 ![](./use_mapping_result.png)
 
-### Set Robot Current Position
+### Setting the Robot's Current Position
 
-Click the robot, the "adjustment bar" will appear.
+Click on the robot to display the "adjustment bar".
 
 **Automatic Global Positioning**
 
-You can use the "automatic global positioning" button to determine the robot's position.
-On a large map, it may take a while.
+Use the "automatic global positioning" button to automatically determine the robot's position.
+This may take some time on larger maps.
 
-- If you are lucky, the robot will be moved to new position automatically.
-- If the system can't be sure, you must click "CONFIRM" to the result.(See if the Lidar points align with the map perfectly)
-- If you are not lucky. It will fail.
+- If successful, the robot's position will be updated automatically.
+- If the system is uncertain, you must manually "CONFIRM" the result after verifying that the Lidar points align perfectly with the map.
+- If the system cannot determine the position, the process will fail.
 
 ![](./manual_position.png)
 
-** Manual Positioning**
+**Manual Positioning**
 
-Click "TRANSLATE" or "ROTATE", then drag the cursor to move or rotate the robot.
+Click "TRANSLATE" or "ROTATE", then drag the cursor to manually move or rotate the robot.

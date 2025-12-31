@@ -1,7 +1,6 @@
 # Recording API
 
-Some alerts(like 7002 - position lost) will trigger automatic recording of bags.
-Or, one can use `POST /recording` to manually record a bag.
+Certain alerts, such as `7002 - position lost`, will trigger the automatic recording of bag files. Alternatively, you can use `POST /recording/` to manually initiate a recording.
 
 ## Create a Recording
 
@@ -22,13 +21,13 @@ curl -X POST \
 }
 ```
 
-**Paramters**
+**Parameters**
 
 ```ts
 interface CreateRecordingRequest {
-  // The suffix of the file name.
-  // The actual file name will be {time}_{filename_suffix}.bag
-  // Without suffix, it will be {time}.bag
+  // The suffix to be appended to the filename.
+  // The resulting filename will be {time}_{filename_suffix}.bag.
+  // If no suffix is provided, the filename will simply be {time}.bag.
   filename_suffix?: string;
 }
 ```

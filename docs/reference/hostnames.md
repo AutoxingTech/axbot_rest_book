@@ -1,8 +1,8 @@
-# Host Name API
+# Hostname API
 
-This service is used to add/delete local DNS entries:
+This service is used to manage local DNS entries (add, delete, or update):
 
-## List Available Names
+## List Available Hostnames
 
 ```bash
 curl http://192.168.25.25:8090/hostnames/
@@ -17,7 +17,7 @@ curl http://192.168.25.25:8090/hostnames/
 ]
 ```
 
-## Add Hostname
+## Add or Update a Hostname
 
 ```bash
 curl -X PATCH \
@@ -39,7 +39,7 @@ curl -X PATCH \
 }
 ```
 
-## Get Hostname
+## Get Hostname Details
 
 ```bash
 curl http://192.168.25.25:8090/hostnames/local.autoxing.com
@@ -58,7 +58,7 @@ curl http://192.168.25.25:8090/hostnames/local.autoxing.com
 }
 ```
 
-## Delete Hostname
+## Delete a Hostname
 
 ```bash
 curl -X DELETE http://192.168.25.25:8090/hostnames/local.autoxing.com

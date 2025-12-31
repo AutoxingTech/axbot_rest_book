@@ -1,10 +1,10 @@
 # Overlays
 
-The `overlays` field of a map is in GeoJson format. It contains virtual walls, virtual regions, auto-doors, dockers, cargo-load points etc.
+The `overlays` field of a map is in GeoJSON format. It contains virtual walls, virtual regions, automatic doors, dockers, cargo-load points, etc.
 
-To update the overlays of a map, see ['Modify Map'](./maps.md#modify-map)
+To update the overlays of a map, see [Modify Map](./maps.md#modify-map).
 
-The top level format is:
+The top-level format is:
 
 ```json
 {
@@ -17,7 +17,7 @@ The top level format is:
 }
 ```
 
-Each feature can be a point, a polyline or a polygon. For example, this is a polygon:
+Each feature can be a point, a polyline, or a polygon. For example, here is a polygon:
 
 ```json
 {
@@ -58,11 +58,11 @@ Each feature can be a point, a polyline or a polygon. For example, this is a pol
 }
 ```
 
-## Virtual Walls/Regions
+## Virtual Walls and Regions
 
-Virtual walls/regions are used to prevent the robot from moving into certain areas.
+Virtual walls and regions are used to prevent the robot from entering specific areas.
 
-**Virtual walls** are `LineString`. It prevents robot from passing from one side to another side. It's also often used to guide global path calculation.
+**Virtual walls** are `LineString` features. They prevent the robot from crossing from one side to the other and are often used to guide global path calculations.
 
 ![](./virtual_wall.png)
 
@@ -102,7 +102,7 @@ Virtual walls/regions are used to prevent the robot from moving into certain are
 }
 ```
 
-**Virtual Regions** are stronger than virtual walls in that if the robot accidentally gets inside the region, it will not be able to move in any direction.
+**Virtual regions** are more restrictive than virtual walls; if the robot accidentally enters a virtual region, it will be unable to move in any direction.
 
 ![](./virtual_region.png)
 
@@ -147,8 +147,8 @@ Virtual walls/regions are used to prevent the robot from moving into certain are
 
 ## Free Space
 
-Free spaces are used to clear out an area in the map, and allow the robot to move into those areas.
-It's used to remove redundant obstacles after creating the map.
+Free spaces are used to clear an area on the map, allowing the robot to move into those regions.
+They are used to remove redundant obstacles after the map has been created.
 
 ```json
 {
@@ -191,7 +191,7 @@ It's used to remove redundant obstacles after creating the map.
 
 ## Charger
 
-Charger are used with move action type `charge`.
+Chargers are used with the `charge` move action type.
 
 ![](./charger.png)
 
@@ -219,14 +219,14 @@ Charger are used with move action type `charge`.
 }
 ```
 
-## Auto Door
+## Automatic Door
 
-When auto-doors are defined, the robot can open the doors ahead of it.
-The door is expressed as a polygon and must have a `mac` property.
+When automatic doors are defined, the robot can open doors in its path.
+A door is represented as a polygon and must include a `mac` property.
 
 :::warning
-The polygon must cover the entire area where the door moves.
-If it's not large enough, when the door opens, it may collide with the waiting robot.
+The polygon must encompass the entire area through which the door moves.
+If the area is too small, the door may collide with the waiting robot as it opens.
 :::
 
 ```json
@@ -264,8 +264,8 @@ If it's not large enough, when the door opens, it may collide with the waiting r
 
 ## Cargo Point
 
-Similar to charger, this point is used to tell the robot where to find racks to load/unload.
-It should be used with move action type `align_with_rack` and `to_unload_point`.
+Similar to a charger, this point indicates where the robot can find racks for loading or unloading.
+It should be used with the `align_with_rack` and `to_unload_point` move action types.
 
 
 ## Barcode
@@ -293,14 +293,14 @@ It should be used with move action type `align_with_rack` and `to_unload_point`.
 }
 ```
 
-## Lidar Deceitful Area
+## LiDAR Deceitful Area
 
-In areas where the terrain is not flat, the 2d lidar may hit the ground stably and mistake it for a wall.
+In areas with uneven terrain, the 2D LiDAR may consistently hit the ground and mistake it for a wall.
 
 ![](./lidar_deceitful_area.png)
 
-Adding a "lidar deceitful area" can help the robot to solve this problem. 
-When moving in these areas, the robot will put more trust in the odometry of the wheels over lidar observations.
+Adding a "LiDAR deceitful area" can help resolve this issue. 
+When moving through these areas, the robot will prioritize wheel odometry over LiDAR observations.
 
 ```json
 {
@@ -338,8 +338,8 @@ When moving in these areas, the robot will put more trust in the odometry of the
 
 Since 2.11.0
 
-[Landmarks](./landmarks.md) are collected in the mapping process. 
-Only when stored in map overlays, they can be used for positioning.
+[Landmarks](./landmarks.md) are collected during the mapping process. 
+They can only be used for positioning once they are stored in the map overlays.
 
 ```json
 {

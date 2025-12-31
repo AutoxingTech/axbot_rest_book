@@ -1,20 +1,20 @@
 # Deprecations
 
-In order to keep improving, APIs will evolve.
-Sometimes, new APIs are added to replace the old ones.
-But we will keep a central promise:
+To ensure continuous improvement, our APIs will evolve over time.
+Occasionally, new APIs are introduced to replace existing ones.
+However, we maintain a core commitment:
 
-**Old APIs will be kept and coexist with new ones for at least 1 major version.**
+**Legacy APIs will be maintained and coexist with their replacements for at least one major version.**
 
-In this period, old APIs are considered deprecated. And we hope our users can evolve with us and use the new APIs.
+During this period, the older APIs are considered deprecated. We encourage our users to migrate to the newer APIs to take advantage of improvements.
 
-This document lists deprecated APIs and how to migrate to new ones.
+This document lists deprecated APIs and provides guidance on migrating to their replacements.
 
 ## 1.8.8
 
-### Deprecate websocket `/chassis/pose`, `/chassis/path`, `/chassis/occupancy_grid`
+### Deprecate WebSocket Topics: `/chassis/pose`, `/chassis/path`, `/chassis/occupancy_grid`
 
-Previously when using `{"enable_topic": "/tracked_pose"}`, `{"enable_topic": "/path"}`, `{"enable_topic": "/map"}`, but the returned messages are `/chassis/pose`, `/chassis/path`, `/chassis/occupancy_grid`. The names are not consistent.
+Previously, subscribing to topics like `/tracked_pose`, `/path`, or `/map` would return messages labeled as `/chassis/pose`, `/chassis/path`, or `/chassis/occupancy_grid`, respectively. This inconsistency in naming has been addressed.
 
 ```bash
 $ wscat -c ws://192.168.25.25:8090/ws/topics
@@ -22,7 +22,7 @@ $ wscat -c ws://192.168.25.25:8090/ws/topics
 < {"topic": "/chassis/pose", "pos": [-3.548, -0.288], "ori": -1.28}
 ```
 
-To solve the mess, please update websocket path from `/ws/topics` to `/ws/v2/topics`.
+To resolve this, please update your WebSocket connection path from `/ws/topics` to `/ws/v2/topics`.
 
 ```bash
 $ wscat -c ws://192.168.25.25:8090/ws/v2/topics
@@ -32,18 +32,18 @@ $ wscat -c ws://192.168.25.25:8090/ws/v2/topics
 
 ### Deprecate `PATCH /chassis/status`
 
-This API was used to change control mode, set emergency stop, clear wheel errors.
+This API was previously used to change the control mode, set the emergency stop, and clear wheel errors.
 
-Deprecated by:
+Replaced by:
 
 - `POST /services/wheel_control/set_control_mode` [Set Control Mode](../reference/services.md#set-control-mode)
 - `POST /services/wheel_control/set_emergency_stop_pressed` [Set Emergency Stop](../reference/services.md#setclear-emergency-stop)
 - `POST /services/wheel_control/clear_errors` [Clear wheel errors](../reference/services.md#clear-wheel-errors)
 
-### Deprecate websocket `/chassis_state`
+### Deprecate WebSocket Topic: `/chassis_state`
 
-This topic was used to monitor control mode and emergency stop mode.
-There is a weird `parts` field in it.
+This topic was used to monitor the control mode and emergency stop status.
+It contained an unnecessary `parts` field.
 
 ```
 $ wscat -c ws://192.168.25.25:8090/ws/topics
@@ -59,17 +59,17 @@ $ wscat -c ws://192.168.25.25:8090/ws/topics
   }
 ```
 
-Deprecated by:
+Replaced by:
 
-- `/wheel_state`，See [Wheel State](../reference/websocket.md#wheel-state)。
+- `/wheel_state`, see [Wheel State](../reference/websocket.md#wheel-state).
 
 ## 1.8.0
 
 ### Deprecate `POST /device`
 
-This API was used to calibrate IMU, reboot service or device.
+This API was used for IMU calibration and for rebooting the service or the device.
 
-Deprecated by:
+Replaced by:
 
 - `POST /services/imu/recalibrate` [IMU Calibration](../reference/services.md#recalibrate-imu)
 - `POST /services/restart_service` [Restart Service](../reference/services.md#restart-service)

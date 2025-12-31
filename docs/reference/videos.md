@@ -1,11 +1,10 @@
 # Video API
 
-The robot may comes with one or more RGB cameras. When operating, it will record video clips.
-Video API allows you to download these video clips.
+The robot may be equipped with one or more RGB cameras. During operation, it records video clips that can be downloaded via the Video API.
 
-For realtime video stream, see [Websocket](websocket.md#rgb-video-stream).
+For real-time video streaming, see the [WebSocket](./websocket.md#rgb-video-stream) documentation.
 
-The video clips are in H264 raw stream format.
+Video clips are provided in raw H.264 stream format.
 
 ## Video List
 

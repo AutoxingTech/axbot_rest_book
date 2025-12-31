@@ -13,7 +13,7 @@ curl -X POST \
 
 ```json
 {
-  "id": 5 // The Id of the newly created action
+  "id": 5 // The ID of the newly created action.
 }
 ```
 
@@ -21,50 +21,50 @@ curl -X POST \
 
 ```ts
 interface MoveActionCreate {
-  creator: string; // Initiator of the action. For diagnosis only.
+  creator: string; // The initiator of the action (for diagnostic purposes only).
   type:
     | 'standard'
-    | 'charge' // to to charger and docker with it
+    | 'charge' // Go to the charger and dock with it.
     | 'return_to_elevator_waiting_point'
     | 'enter_elevator'
-    | 'leave_elevator' // Deprecated. Don't use it anymore.
-    | 'along_given_route' // Follow a given path.
-    | 'align_with_rack' // crawl under a rack(to jack it up later)
-    | 'to_unload_point' // move to a rack unload point(to jack it down later)
-    | 'follow_target'; // follow a moving target
+    | 'leave_elevator' // Deprecated. Do not use.
+    | 'along_given_route' // Follow a specified path.
+    | 'align_with_rack' // Crawl under a rack (to jack it up later).
+    | 'to_unload_point' // Move to a rack unload point (to jack it down later).
+    | 'follow_target'; // Follow a moving target.
   target_x?: number;
   target_y?: number;
   target_z?: number;
   target_ori?: number;
-  target_accuracy?: number; // in meters. optional.
+  target_accuracy?: number; // In meters (optional).
 
   // A path to follow.
   //
-  // Only valid with type `along_given_route`.
-  // It's a list of coordinates, as comma separated string,
-  // in the format of "x1, y1, x2, y2"
+  // Only valid when `type` is `along_given_route`.
+  // A list of coordinates as a comma-separated string,
+  // in the format "x1, y1, x2, y2".
   route_coordinates?: string;
 
-  // Allowed detour distance when go around an obstacle,
-  // while following a given path.
+  // The allowed detour distance when navigating around an obstacle
+  // while following a specified path.
   //
-  // Only valid with type `along_given_route`.
-  // When 0 is given, it will always stop and wait before an obstacle,
-  // instead of trying to go around it.
+  // Only valid when `type` is `along_given_route`.
+  // When 0 is specified, the robot will always stop and wait before an obstacle
+  // instead of attempting to go around it.
   detour_tolerance?: number;
 
-  // if true, action will succeed right away
-  // when within radius of `target_accuracy`
+  // If true, the action will succeed immediately
+  // when within the radius of `target_accuracy`.
   use_target_zone?: boolean = false;
 
-  charge_retry_count?: number; // retry times before `charge` action fails.
+  charge_retry_count?: number; // Number of retries before the `charge` action fails.
 
-  rack_area_id: string; // When executing point-to-area or area-to-area cargo move action, give the target rack area id.
+  rack_area_id: string; // When executing point-to-area or area-to-area cargo move actions, provide the target rack area ID.
 
   properties?: { // Optional: since 2.11.0
-    inplace_rotate?: boolean; // Optional. since 2.11.0 strictly rotate without any linear velocity.
+    inplace_rotate?: boolean; // Optional. since 2.11.0: strictly rotate without any linear velocity.
 
-    // Optional. An index into the layers of rack stack. 
+    // Optional. An index into the layers of a rack stack. 
     // For type = "align_with_rack" and "to_unload_point".
     rack_layer?: number; 
   }
@@ -73,40 +73,39 @@ interface MoveActionCreate {
 
 ### Jack Device
 
-Since 2.7.0, there is a new model(codename **Longjack**), it can crawl under a rack and jack it up.
+Since 2.7.0, there is a new model (codename **Longjack**) that can crawl under a rack and jack it up.
 
-In a typical point-to-point task，In a typical point-to-point task, the robot should use the following sequence of commands to load a cargo and unload it to another place:
+In a typical point-to-point task, the robot should use the following sequence of commands to load cargo and unload it at another location:
 
-1. **Crawl under the rack** Create a move action, with `type=align_with_rack` to crawl under the rack.
-2. **Raise the jack device** When the move succeeded, call `/services/jack_up`.
-   1. The progress of the jack device is reported from [Jack State Topic](../reference/websocket.md#jack-state).
+1. **Crawl under the rack**: Create a move action with `type=align_with_rack` to crawl under the rack.
+2. **Raise the jack device**: When the move succeeds, call `/services/jack_up`.
+   1. The progress of the jack device is reported via the [Jack State Topic](../reference/websocket.md#jack-state).
    2. When the jack is fully up, the footprint of the robot will expand to accommodate that of the rack.
-   The updated footprint can be received from [Robot Model Topic](../reference/websocket.md#robot-model).
-3. **Move to unload point** When the jack is fully up, create another move action `type=to_unload_point` to move to the unload point.
-4. **Lower the jack device** Call `/services/jack_down` to unload.
-5. Optionally, create the next move action. The robot will move out of the rack point and before taking the next action.
+   The updated footprint can be received via the [Robot Model Topic](../reference/websocket.md#robot-model).
+3. **Move to the unload point**: When the jack is fully up, create another move action with `type=to_unload_point` to move to the unload point.
+4. **Lower the jack device**: Call `/services/jack_down` to unload.
+5. Optionally, create the next move action. The robot will move away from the rack point before initiating the next action.
 
 | Robot Admin Screenshot  | Photo                |
 | ----------------------- | -------------------- |
 | ![](./jack_monitor.png) | ![](./jack_real.jpg) |
 
 :::warning
-Some parameters must be configured correctly for safe using. See [rack.specs](./system_settings.md#rackspecs)
+Certain parameters must be configured correctly for safe operation. See [rack.specs](./system_settings.md#rackspecs)
 :::
 
 ### Point-to-Area Move
 
-In addition to point-to-point move, which moves a rack/pallet from one point to another,
-we also support:
+In addition to point-to-point moves, which transport a rack or pallet from one point to another, we also support:
 
-* **Point-to-area move** This is the mostly used move, when you can't known in advance which points in target area are empty.
-* **Area-to-area move** When you want to move every rack/pallet from one area to another area.
+* **Point-to-area move**: This is the most commonly used move when it is not known in advance which points in the target area are empty.
+* **Area-to-area move**: Used when you want to move every rack or pallet from one area to another.
 
-In the mapping platform, one should add a rack area polygon. All rack points which are inside the area are considered a group.
+On the mapping platform, a rack area polygon should be added. All rack points within this area are considered part of a group.
 
-When receiving a move action with `type=to_unload_point` and `rack_area_id={SOME_ID}`, the robot will scan all rack points in that area and move to the first empty point. If all points are occupied, the move will failed with error `NoFreeSpaceInRackArea`. 
+Upon receiving a move action with `type=to_unload_point` and `rack_area_id={SOME_ID}`, the robot scans all rack points in that area and moves to the first empty point. If all points are occupied, the move fails with the error `NoFreeSpaceInRackArea`. 
 
-Some new fail reason are introduced, like:
+Several new failure reasons have been introduced, such as:
 
 * `InvalidRackAreaId`
 * `InvalidRackArea`
@@ -118,20 +117,19 @@ Some new fail reason are introduced, like:
 
 ### Area-to-Area Move
 
-Create move action `type=align_with_rack` and `rack_area_id={SOME_ID}`, the robot will patrol the source area, 
-find the first rack point with a rack in it, and align with it.
+Create a move action with `type=align_with_rack` and `rack_area_id={SOME_ID}`; the robot patrols the source area, finds the first rack point containing a rack, and aligns with it.
 
 ### Follow Given Route Strictly
 
-When `route_coordinates` is given and `detour_tolerance=0`, the robot will follow the route as closely as possible and will not try to evade obstacles(only stop ahead).
+When `route_coordinates` is provided and `detour_tolerance=0`, the robot follows the route as closely as possible and does not attempt to evade obstacles (it will only stop in front of them).
 
-This is often used in stock inspection.
+This is frequently used for stock inspection.
 
 ![](./follow_given_route.png)
 
 ### Follow Target
 
-This action is used to tell the robot to follow a moving target.
+This action instructs the robot to follow a moving target.
 
 ```
 curl -X POST
@@ -140,7 +138,7 @@ curl -X POST
   http://192.168.25.25:8090/chassis/moves
 ```
 
-When this action is created, the user should then send target poses with websocket topic `/follow_target_state`: See [Follow Target](../reference/websocket.md#follow-target-state)
+Once this action is created, the user should send target poses via the WebSocket topic `/follow_target_state`: See [Follow Target](../reference/websocket.md#follow-target-state)
 
 
 ## Get Move Action Detail
@@ -176,20 +174,19 @@ curl http://192.168.25.25:8090/chassis/moves/4409
 ```ts
 interface MoveAction extends MoveActionCreate {
   state: 'idle' | 'moving' | 'succeeded' | 'failed' | 'cancelled';
-  create_time: number; // unix timestamp, like 1647509573
-  last_modified_time: number; // unix timestamp, like 1647509573
-  fail_reason: number; // fail code. Only valid when state="failed"
-  // internal fail messge - for debugging. Only valid when state="failed"
+  create_time: number; // Unix timestamp (e.g., 1647509573).
+  last_modified_time: number; // Unix timestamp (e.g., 1647509573).
+  fail_reason: number; // Failure code. Only valid when state="failed".
+  // Internal failure message for debugging. Only valid when state="failed".
   fail_reason_str: string;
-  // internal fail message in Chinese
-  // for debugging，Only valid when state="failed"
+  // Internal failure message in Chinese for debugging. Only valid when state="failed".
   fail_message: string;
 }
 ```
 
 ## Move Action List
 
-The history of all move actions
+The history of all move actions.
 
 ```bash
 curl http://192.168.25.25:8090/chassis/moves
@@ -224,7 +221,7 @@ curl http://192.168.25.25:8090/chassis/moves
 
 ## Move State Feedback
 
-Use websocket `/planning_state` to get updated of move state.
+Use the WebSocket topic `/planning_state` to receive updates on the move state.
 
 ```json
 {
@@ -241,7 +238,7 @@ Use websocket `/planning_state` to get updated of move state.
     "ori": 0
   },
   "going_back_to_charger": false,
-  "action_id": 4410, // The current executing(or last) move action ID.
+  "action_id": 4410, // The ID of the currently executing (or last) move action.
   "fail_reason": 0, // See MoveFailReason
   "fail_reason_str": "none",
   "remaining_distance": 3.546117067337036,
@@ -267,9 +264,9 @@ curl -X PATCH \
 { "state": "cancelled" }
 ```
 
-## Move Fail Reason
+## Move Failure Reasons
 
-The "fail_reason" field is a number to indicate why a move action is failed. 
+The `fail_reason` field is a numeric code indicating why a move action failed. 
 
 ```ts
 enum MoveFailReason
@@ -336,4 +333,4 @@ enum MoveFailReason
 }
 ```
 
-A slightly more up-to-date version is at "https://rb-admin.autoxing.com/api/v1/static/move_failed_reason.json".
+A more up-to-date version is available at [this URL](https://rb-admin.autoxing.com/api/v1/static/move_failed_reason.json).

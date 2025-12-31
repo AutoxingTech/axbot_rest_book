@@ -1,10 +1,10 @@
-# Robot Params API
+# Robot Parameters API
 
 :::warning
 DEPRECATED: Please use [System Settings](./system_settings.md) instead.
 :::
 
-## Get Params
+## Get Parameters
 
 ```bash
 curl http://192.168.25.25:8090/robot-params
@@ -17,32 +17,30 @@ curl http://192.168.25.25:8090/robot-params
   "/wheel_control/max_forward_acc": 0.26,
   "/wheel_control/max_forward_decel": -2.0,
   "/wheel_control/max_angular_velocity": 0.78,
-  "/wheel_control/acc_smoother/smooth_level": "normal", // since 2.7.0. "disabled/lower/normal/higher"
-  "/planning/auto_hold": true, // since 2.3.0
-  "/control/bump_tolerance": 0.5, // since 2.4.0
-  "/control/bump_based_speed_limit/enable": true, //since 2.7.4
-  "/robot/footprint": [[0.248, 0.108], [0.24, 0.174], "..." , [0.248, -0.108]] // since 2.5.0
+  "/wheel_control/acc_smoother/smooth_level": "normal", // Available since version 2.7.0. Options: "disabled", "lower", "normal", "higher".
+  "/planning/auto_hold": true, // Available since version 2.3.0.
+  "/control/bump_tolerance": 0.5, // Available since version 2.4.0.
+  "/control/bump_based_speed_limit/enable": true, // Available since version 2.7.4.
+  "/robot/footprint": [[0.248, 0.108], [0.24, 0.174], "..." , [0.248, -0.108]] // Available since version 2.5.0.
 }
 ```
 
-`/planning/auto_hold` controls whether the wheels are locked or free when the robot is idle.
-With `auto_hold` turns off, when the robot is not on-duty, the user can freely push/drag it.
-This can be convenient when users want to freely adjust the robot's heading and make it more comfortable
-to place goods on it.
-But when the robot stands on a steep slope, it will always be locked even when `auto_hold` is off.
+The `/planning/auto_hold` parameter determines whether the wheels are locked or free when the robot is idle.
+When `auto_hold` is disabled and the robot is not performing a task, it can be freely pushed or dragged.
+This is useful for manually adjusting the robot's heading or positioning it for loading goods.
+However, if the robot is on a steep slope, the wheels will remain locked for safety, even if `auto_hold` is disabled.
 
+The `/control/bump_based_speed_limit/enable` parameter determines whether the robot uses detected bumpiness to automatically decelerate.
+The `/control/bump_tolerance` parameter sets the robot's sensitivity to bumpiness.
+The value ranges from 0 to 1, with 0.5 as the neutral setting.
+The robot will slow down when detected bumpiness exceeds the tolerance level.
+The system also learns the locations of door sills and other bumpy areas on the map, allowing the robot to decelerate in advance.
+A larger value makes the robot less sensitive to bumpiness.
+A smaller value causes the robot to move more cautiously (slowing down more for door sills and uneven surfaces).
 
-`/control/bump_based_speed_limit/enable` controls whether to use bumpiness information for deceleration.
-`/control/bump_tolerance` is the degree of tolerance of bumpiness.
-Value range is 0-1 with 0.5 as a neutral value.
-The robot can slow down when bumpiness increase to intolerable level.
-It also learns and remember doorsills in a map and slow down in advance.
-With a larger value, the robot is less affected by bumpiness.
-With a smaller value, the robot moves even slower(before doorsills and bumpy road).
+## Set Parameters
 
-## Set Params
-
-Multiple params can be updated at once.
+Multiple parameters can be updated in a single request.
 
 ```bash
 curl -X POST \
@@ -50,25 +48,25 @@ curl -X POST \
   -d '{"/wheel_control/max_forward_velocity": 1.2, "/control/bump_tolerance": 0.5}' \
   http://192.168.25.25:8090/robot-params
 ```
-## Get Default Params
+
+## Get Default Parameters
 
 ```bash
-curl http://192.168.25.25:8090/robot-params/default # Since 2.7.6
+curl http://192.168.25.25:8090/robot-params/default # Available since version 2.7.6.
 ```
 
-## Robot footprint
+## Robot Footprint
 
-`/robot/footprint` should reflect the top view of the robot. 
-It's used for collision detection and must be configured correctly.
-The data of the footprint is defined as follow:
+The `/robot/footprint` parameter should accurately represent the top-down profile of the robot. 
+This footprint is used for collision detection and must be configured correctly to ensure safe operation.
+The footprint data must adhere to the following rules:
 
-1. The origin of the footprint should be the rotation center of the robot.
-2. The x axis points to the right of the robot. The y axis points to the front of the robot
-3. The polygon **MUST BE A CONVEX**.
-4. The polygon should not be closed (the first point should not be the same as the last one).
+1. The origin (0,0) must be the rotation center of the robot.
+2. The X-axis points to the robot's right, and the Y-axis points to the robot's front.
+3. The polygon **MUST BE CONVEX**.
+4. The polygon should not be closed (i.e., the first point should not be repeated as the last point).
 
 ![](./footprint.png)
 
-Since 2.7.0, one can use [Robot Model Topic](../reference/websocket.md#robot-model) to monitor the changes of the footprint. Especially when a rack is mounted on the robot, the footprint will be the combined convex hull of the robot's footprint and the rack's footprint.
-
+Starting from version 2.7.0, you can use the [Robot Model Topic](../reference/websocket.md#robot-model) to monitor real-time changes to the footprint. For example, when a rack is mounted, the footprint automatically updates to the combined convex hull of the robot and the rack.
 

@@ -1,10 +1,10 @@
 # App Store API
 
-Available since 2.5.0
+Available since version 2.5.0
 
 ## List Packages
 
-Package list contain all packages and their update status.
+The package list contains all available packages and their current update status.
 
 ```bash
 curl -X GET http://192.168.25.25:8090/app_store/packages
@@ -43,16 +43,16 @@ curl -X GET http://192.168.25.25:8090/app_store/packages
 type ListPackageResponse = Package[];
 
 type PackageStatus =
-  | 'not_installed' // show a GET button
-  | 'upgradable' // show a download button
+  | 'not_installed' // Displays a 'GET' button.
+  | 'upgradable' // Displays a 'Download' button.
   | 'up_to_date'
   | 'download_queueing'
   | 'downloading'
-  | 'downloaded' // show a install button
-  | 'download_failed' // show a retry button. call download API
+  | 'downloaded' // Displays an 'Install' button.
+  | 'download_failed' // Displays a 'Retry' button; calls the download API.
   | 'install_queueing'
   | 'installing'
-  | 'install_failed' // show a retry button. call install API
+  | 'install_failed' // Displays a 'Retry' button; calls the install API.
   | 'uninstall_queueing'
   | 'uninstalling'
   | 'uninstall_failed'
@@ -84,8 +84,8 @@ interface Package {
 
 ## Refresh App Store
 
-By refreshing app store, it will check the package index for new packages and available updates.
-The package index will be updated. But because it's asynchronous, the user should GET the package list at a regular interval.
+Refreshing the App Store checks the package index for new packages and available updates.
+The package index will be updated asynchronously; therefore, the client should poll the package list at regular intervals to see the changes.
 
 ```bash
 curl -X POST http://192.168.25.25:8090/app_store/services/refresh_store
@@ -93,7 +93,7 @@ curl -X POST http://192.168.25.25:8090/app_store/services/refresh_store
 
 ## Download Packages
 
-Before installation, packages must be downloaded first.
+Packages must be downloaded before they can be installed.
 
 ```bash
 curl -X POST \
@@ -104,7 +104,7 @@ curl -X POST \
 
 **Response**
 
-If failed, status code 400:
+If the request fails (status code 400):
 
 ```json
 {
@@ -113,7 +113,7 @@ If failed, status code 400:
 }
 ```
 
-If succeeded, status code 201:
+If the request succeeds (status code 201):
 
 ```json
 {"py_axbot": {"task_id": 16, "version": "1.1.6-opi64"}}
@@ -130,7 +130,7 @@ curl -X POST \
 
 **Response**
 
-If failed, status code 400:
+If the request fails (status code 400):
 
 ```json
 {
@@ -139,13 +139,13 @@ If failed, status code 400:
 }
 ```
 
-If succeeded, status code 201:
+If the request succeeds (status code 201):
 
 ```json
 {"follow": {"task_id": 19, "version": "1.1.6-opi64"}}
 ```
 
-## Install Package from Local File
+## Install Package from a Local File
 
 ```bash
 curl -X POST \
@@ -165,7 +165,7 @@ curl -X POST \
 
 ## Uninstall Packages
 
-Uninstall installed packages.
+Uninstalls previously installed packages.
 
 ```bash
 curl -X POST \
@@ -185,15 +185,15 @@ curl -X POST \
 }
 ```
 
-## View Download/Installation Tasks
+## View Download and Installation Tasks
 
-When downloading/installing packages, there are associated "download/install tasks".
-One can view logs of these tasks.
+Downloading or installing packages creates associated "download" or "install" tasks.
+You can view the logs for these tasks using the following endpoints:
 
 ```bash
-# for download tasks
+# For download tasks
 curl http://192.168.25.25:8090/app_store/jobs/download/tasks
-# for installation tasks
+# For installation tasks
 curl http://192.168.25.25:8090/app_store/jobs/install/tasks
 ```
 
@@ -224,34 +224,34 @@ curl http://192.168.25.25:8090/app_store/jobs/install/tasks
 ]
 ```
 
-### Show Download/Installation Task Detail (Log)
+### Show Download or Installation Task Details (Log)
 
-For a task, the logs of the task can be requested.
+You can request the logs for a specific task.
 
 ```bash
 curl "http://192.168.25.25:8090/app_store/jobs/download/tasks/4/log"
 ```
 
-But if the task is still in progress, the log will be incomplete.
+Note that if the task is still in progress, the log will be incomplete.
 
-With query parameters, the log can be downloaded progressively, which is more suitable for realtime display.
+Using query parameters, the log can be downloaded progressively, which is ideal for real-time display.
 
 ```
 curl http://192.168.25.25:8090/app_store/jobs/download/tasks/4/log?start=0&end=1024
 ```
 
-Optional query params:
+Optional Query Parameters:
 
-- `start` (number): start character, inclusive
-- `end` (number): end character, exclusive
+- `start` (number): The starting character index (inclusive).
+- `end` (number): The ending character index (exclusive).
 
 **Response**
 
 - Headers:
 
   - `Content-Type: text/plain; charset=utf-8`
-  - `X-MORE-DATA`: "true"/"false" (indicates whether more log data is available)
-  - `X-TEXT-SIZE`: number (total size of the log in characters)
+  - `X-MORE-DATA`: "true"/"false" (Indicates whether more log data is available.)
+  - `X-TEXT-SIZE`: number (The total size of the log in characters.)
 
 ```
 id: 5
@@ -267,10 +267,10 @@ install task package_manager(0.4.4) begin
 
 ## Refresh Firmware Store
 
-App store also supports manage firmware packages. Check available firmware updates from remote repository.
+The App Store also supports managing firmware packages. This endpoint checks for available firmware updates from the remote repository.
 
 ```bash
-curl -X POST http://192.168.25.25:8090/app_store/firmware/refresh_store
+curl -X POST http://192.168.25.25:8090/app_store/services/refresh_store
 ```
 
 **Response**
@@ -281,11 +281,10 @@ curl -X POST http://192.168.25.25:8090/app_store/firmware/refresh_store
 
 ## Firmware Status
 
-Get firmware packages status. Response is same as normal package status.
+Retrieves the status of firmware packages. The response format is identical to that of normal package status.
 
 ```bash
 curl http://192.168.25.25:8090/app_store/firmware/packages
->>>>>>> origin/update_app_store
 ```
 
 **Response**
@@ -301,9 +300,9 @@ curl http://192.168.25.25:8090/app_store/firmware/packages
 ]
 ```
 
-## Firmware Install
+## Firmware Installation
 
-Unlike normal packages, firmware packages do not require download package beforehand. It will automatically download and install firmware packages.
+Unlike standard packages, firmware packages do not need to be downloaded beforehand; they are automatically downloaded and installed in a single step.
 
 ```bash
 curl -X POST \

@@ -1,38 +1,38 @@
 # Getting Started
 
-## Connect to Robot
+## Connecting to the Robot
 
-To control the robot, you must first establish a connection.
+To control the robot, you must first establish a network connection.
 
-There are two ways to connect to the robot:
+There are two primary ways to connect to the robot:
 
-1. Connect to the robot via the Ethernet RJ45 port using `http://192.168.25.25:8090`.
-2. Connect to the robot's Access Point (AP) using `http://192.168.12.1:8090`.
+1. Via the Ethernet (RJ45) port: `http://192.168.25.25:8090`.
+2. Via the robot's Access Point (AP): `http://192.168.12.1:8090`.
 
-In this guide, we will use the IP address `192.168.25.25:8090` for all examples.
+Throughout this guide, we will use the IP address `192.168.25.25:8090` in our examples.
 
 ## Authentication
 
-Assuming a secure local network, we use a simple HTTP header-based authentication.
+Assuming a secure local network environment, we utilize a simple HTTP header-based authentication mechanism.
 All HTTP requests must include a `Secret` header.
 
-For simplicity, this tutorial will not repeat the header in every example.
+For brevity, this tutorial will not repeat the header in every subsequent example.
 
-## First Request: Query Device Info
+## First Request: Querying Device Information
 
-The following command uses `curl` to make an HTTP request and [jq](https://stedolan.github.io/jq/) to format the output:
+The following command uses `curl` to perform an HTTP request and [jq](https://stedolan.github.io/jq/) to format the JSON output:
 
 ```bash
-# The secret is masked; you must use your actual secret.
+# The secret is masked; replace it with your actual secret.
 curl -H "Secret: XXXXXXXXXXXXXXXXX" http://192.168.25.25:8090/device/info | jq
 ```
 
 ::: tip
-Requests from the following IP ranges do not require a secret:
+Requests originating from the following IP ranges do not require a secret header:
 
 ```
-192.168.25.*   # added since 2.7.1
-172.16.*       # added since 2.7.1
+192.168.25.*   # Added in version 2.7.1
+172.16.*       # Added in version 2.7.1
 ```
 
 :::

@@ -1,16 +1,16 @@
 # REST API Principles
 
-REST APIs are in one-request-one-response form.
+REST APIs follow a request-response pattern.
 
-Request contains **target** and **action**.
-Response contains **status** and **data**.
+A request contains a **target** and an **action**.
+A response contains a **status** and **data**.
 
-For example, to delete map 3, we use `DELETE /maps/3`：
+For example, to delete map 3, use `DELETE /maps/3`:
 
 - Request: action=`DELETE` target=`/maps/3`
-- Response: status=`204` data=`{}`(empty json)
+- Response: status=`204` data=`{}` (empty JSON)
 
-The REST API is：
+The REST API call is:
 
 ```
 $ curl -X DELETE -i http://192.168.25.25:8090/maps/3
@@ -21,28 +21,28 @@ Vary: Accept, Cookie
 Content-Length: 0
 ```
 
-204 - No Content means an object is delete successfully.
+204 - No Content means an object was deleted successfully.
 
 ## TARGET
 
-There are two kinds of **target**, **list** and **single**. For example:
+There are two types of **targets**: **list** and **single**. For example:
 
 - **/maps** - Map list
-- **/maps/3** - Map 3(single)
-- **/chassis/moves** - move action list
-- **/chassis/moves/1150** - move action 1150(single)
+- **/maps/3** - Map 3 (single)
+- **/chassis/moves** - Move action list
+- **/chassis/moves/1150** - Move action 1150 (single)
 - **/services** - Service list
-- **/services/imu/recalibrate** - IMU calibration service(single)
+- **/services/imu/recalibrate** - IMU calibration service (single)
 
 ## ACTION
 
-Common actions are `query`, `create`, `delete`, `modify` and `overwrite`.
-The corresponding HTTP request type are `GET`, `POST`, `DELETE`, `PATCH` and `PUT`.
+Common actions are `query`, `create`, `delete`, `modify`, and `overwrite`.
+The corresponding HTTP request methods are `GET`, `POST`, `DELETE`, `PATCH`, and `PUT`.
 
-The common patterns are summarized below. Especially:
+The common patterns are summarized below. In particular:
 
-- `POST` to a list, means creating a new object.
-- `DELETE` a list means deleting all objects in that list.
+- `POST` to a list endpoint creates a new object.
+- `DELETE` a list endpoint deletes all objects in that list.
 
 | Action | Target  | Description                         |
 | ------ | ------- | ----------------------------------- |
@@ -56,29 +56,29 @@ The common patterns are summarized below. Especially:
 
 ## STATUS
 
-The response status code is consistent with [HTTP Status Code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).
+Response status codes follow the standard [HTTP Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).
 
 - 2xx are successful responses.
 - 4xx are client error responses.
 - 5xx are server error responses.
 
-Among them, the most common ones are:
+The most common status codes are:
 
 - 200 OK
-- 201 Created - Object created or service executed.
+- 201 Created - The object was created or the service was executed.
 - 204 No Content - Deleted successfully.
-- 400 Bad Request - The request parameter is mal-formatted. Or some other precondition is not met.
-- 404 Not Found - The resource doesn't exist. (Bad URL)
-- 500 Internal Server Error - The server runs into error.
+- 400 Bad Request - The request parameters are malformed, or some other precondition was not met.
+- 404 Not Found - The resource doesn't exist (Bad URL).
+- 500 Internal Server Error - The server encountered an error.
 
 ## DATA
 
-The response data is in JSON format. It can be:
+Response data is in JSON format and can be:
 
 - An object
-- Or a list.
+- A list
 
-For example. Listing all maps returns a list.
+For example, listing all maps returns a list:
 
 ```bash
 curl http://192.168.25.25:8090/maps/ | jq
@@ -122,7 +122,7 @@ curl http://192.168.25.25:8090/maps/ | jq
 ]
 ```
 
-While getting detail of a map, returns an object.
+Requesting the details of a specific map returns an object:
 
 ```bash
 curl http://192.168.25.25:8090/maps/1 | jq

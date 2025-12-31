@@ -5,16 +5,16 @@ A map contains the following fields:
 | name             | type   | description                                                  |
 | ---------------- | ------ | ------------------------------------------------------------ |
 | uid              | string | Unique ID.                                                   |
-| map_name         | float  | name of the map                                              |
-| map_version      | int    | version of the map                                           |
-| create_time      | int    | Unix timestamp, like 1644568815                              |
-| grid_origin_x    | float  | X coordinate of the lower-left corner                        |
-| grid_origin_y    | float  | Y coordinate of the lower-left corner                        |
-| grid_resolution  | float  | the size of a single pixel. Typically 0.05(m/pixel)          |
-| overlays_version | int    | overlays version                                             |
-| overlays         | string | Overlays in GeoJson Format. Contains POIs/virtual walls etc. |
-| carto_map        | string | base64 encoded binary map data(for positioning)              |
-| occupancy_grid   | string | base64 encoded PNG image data(for display)                   |
+| map_name         | float  | The name of the map.                                         |
+| map_version      | int    | The version of the map.                                      |
+| create_time      | int    | A Unix timestamp (e.g., 1644568815).                         |
+| grid_origin_x    | float  | The X-coordinate of the lower-left corner.                   |
+| grid_origin_y    | float  | The Y-coordinate of the lower-left corner.                   |
+| grid_resolution  | float  | The size of a single pixel, typically 0.05 m/pixel.          |
+| overlays_version | int    | The version of the overlays.                                 |
+| overlays         | string | Overlays in GeoJSON format, containing POIs, virtual walls, etc. |
+| carto_map        | string | Base64-encoded binary map data (used for positioning).       |
+| occupancy_grid   | string | Base64-encoded PNG image data (used for display).            |
 
 ## Map List
 
@@ -64,8 +64,8 @@ curl http://192.168.25.25:8090/maps/
 
 | name          | description                                                      |
 | ------------- | ---------------------------------------------------------------- |
-| image_url     | The image(PNG) representation of the map, in original resolution |
-| thumbnail_url | The image(PNG) representation of the map, in low resolution      |
+| image_url     | The PNG image representation of the map at its original resolution. |
+| thumbnail_url | The PNG image representation of the map at a low resolution (thumbnail). |
 
 ## Get Map Detail
 
@@ -96,13 +96,13 @@ curl http://192.168.25.25:8090/maps/1
 
 | name          | description                                                   |
 | ------------- | ------------------------------------------------------------- |
-| image_url     | URL to get the image(PNG) of the map, in original resolution. |
-| thumbnail_url | URL to get the thumbnail(PNG) image of the map                |
-| pbstream_url  | URL to get the data of the map. Binary.                       |
+| image_url     | The URL to retrieve the PNG image of the map at its original resolution. |
+| thumbnail_url | The URL to retrieve the thumbnail (PNG) image of the map.      |
+| pbstream_url  | The URL to retrieve the binary map data.                      |
 
 ## Create a Map
 
-A map can be created, by providing needed fields:
+A map can be created by providing the following required fields:
 
 * map_name
 * carto_map
@@ -126,7 +126,7 @@ curl -X POST \
 
 ```json
 {
-  "id": 119, // The newly created map id. Use this id to load it into robot.
+  "id": 119, // The ID of the newly created map. Use this ID to load it onto the robot.
   "uid": "9b94ac16-239b-11ed-9446-1e49da274768",
   "map_name": "From Mapping 4",
   "create_time": 1657015615,
@@ -140,7 +140,7 @@ curl -X POST \
 
 ## Modify Map
 
-Modify the name and overlays
+Modify the name and overlays.
 
 ```bash
 curl -X PATCH \

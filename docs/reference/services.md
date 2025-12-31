@@ -2,7 +2,7 @@
 
 ## Recalibrate IMU
 
-Calibrate IMU. The robot must be set still on hard and flat surface.
+Initiates IMU calibration. The robot must remain perfectly still on a hard, flat surface during this process.
 
 ```bash
 curl -X POST \
@@ -10,11 +10,11 @@ curl -X POST \
   http://192.168.25.25:8090/services/imu/recalibrate
 ```
 
-This service call only initiates the calibration. The actual process usually takes 10-20 seconds.
+This service call only triggers the calibration; the actual process typically takes 10 to 20 seconds to complete.
 
-When calibration finished. An action will be received in websocket:
+Once the calibration is finished, a notification will be sent via the `/action` WebSocket topic.
 
-Sample success output:
+**Sample Success Output:**
 
 ```json
 {
@@ -28,7 +28,7 @@ Sample success output:
 }
 ```
 
-Sample failure output:
+**Sample Failure Output:**
 
 ```json
 {
@@ -59,7 +59,7 @@ class SetControlModeRequest {
 }
 ```
 
-Use `/wheel_state` websocket topic，to monitor wheel state.
+Use the `/wheel_state` WebSocket topic to monitor the current control mode and wheel status.
 
 ```bash
 $ wscat -c ws://192.168.25.25:8090/ws/v2/topics
@@ -67,7 +67,7 @@ $ wscat -c ws://192.168.25.25:8090/ws/v2/topics
 < {"topic": "/wheel_state", "control_mode": "auto", "emergency_stop_pressed": true }
 ```
 
-## Set/Clear Emergency Stop
+## Set or Clear Emergency Stop
 
 ```bash
 curl -X POST \
@@ -84,7 +84,7 @@ class SetEmergencyStopRequest {
 }
 ```
 
-Use `/wheel_state` topic, to monitor emergency stop state.
+Use the `/wheel_state` WebSocket topic to monitor the emergency stop status.
 
 ```bash
 $ wscat -c ws://192.168.25.25:8090/ws/v2/topics
@@ -92,9 +92,9 @@ $ wscat -c ws://192.168.25.25:8090/ws/v2/topics
 < {"topic": "/wheel_state", "control_mode": "auto", "emergency_stop_pressed": true }
 ```
 
-## Restart Service
+## Restart Services
 
-Restart all services.
+Restarts all software services on the robot.
 
 ```bash
 curl -X POST \
@@ -102,7 +102,7 @@ curl -X POST \
   http://192.168.25.25:8090/services/restart_service
 ```
 
-## Shutdown/Reboot Device
+## Shutdown or Reboot the Device
 
 ```bash
 curl -X POST \
@@ -116,9 +116,9 @@ curl -X POST \
 ```ts
 class ShutdownRequest {
   target:
-    | 'main_computing_unit' // only reboot/shutdown the main computing board
-    | 'main_power_supply'; // reboot/shutdown the whole device
-  reboot: boolean; // true = reboot， false = shutdown
+    | 'main_computing_unit' // Reboot or shutdown only the main computing board.
+    | 'main_power_supply'; // Reboot or shutdown the entire device.
+  reboot: boolean; // true to reboot, false to shutdown.
 }
 ```
 
@@ -130,8 +130,8 @@ curl -X POST http://192.168.25.25:8090/services/wheel_control/clear_errors
 
 ## Clear Flip Error
 
-Error 8004(flip error) usually means serious trouble - the robot might have fallen over.
-It requires human checking. If the problem is solved, use this service to clear the error to make the robot operational again.
+Error `8004` (flip error) indicates a serious issue, such as the robot having tipped over.
+This requires manual inspection. Once the issue is resolved, use this service to clear the error and restore the robot to an operational state.
 
 ```bash
 curl -X POST http://192.168.25.25:8090/services/monitor/clear_flip_error
@@ -143,13 +143,13 @@ curl -X POST http://192.168.25.25:8090/services/monitor/clear_flip_error
 Experimental Feature
 :::
 
-Error 2008(slide error) means the the robot may have serious impact with some invisible obstacle. It demands human checking before clearing the error.
+Error `2008` (slide error) indicates that the robot may have had a significant impact with an invisible obstacle. Manual inspection is required before clearing this error.
 
 ```bash
 curl -X POST http://192.168.25.25:8090/services/monitor/clear_slipping_error
 ```
 
-## Power On/Off Lidar
+## Power On or Off the Lidar
 
 ```bash
 curl -X POST \
@@ -166,7 +166,7 @@ class PowerOnRequest {
 }
 ```
 
-## Power On/Off Depth Camera
+## Power On or Off the Depth Camera
 
 ```bash
 curl -X POST \
@@ -183,9 +183,9 @@ class EnableDepthCameraRequest {
 }
 ```
 
-## Setup Wifi
+## Configure Wi-Fi
 
-Switch WIFI to Access-Point or Station mode.
+Switches the Wi-Fi between Access Point (AP) and Station mode.
 
 ```bash
 curl -X POST \
@@ -212,7 +212,7 @@ interface SetupWifiRequest {
 
 ## Set Route Mode
 
-Set the route table rules of the chassis.
+Configures the routing table rules for the robot's chassis.
 
 ```bash
 curl -X POST \
@@ -229,27 +229,26 @@ interface RouteModeRequest {
 }
 ```
 
-`route_mode`: Set the priority of the route table
+`route_mode`: Determines the priority of network interfaces in the routing table:
 
-- `eth0_first`: Put eth0 as the default route, if available
-- `wlan0_first`: Put wlan0 as the default route, if available
-- `usb0_first`: Put usb0 as the default route, if available.
-  Based on `ping` result. If wlan0 connects to Internet,
-  use it as the default route. Or else, use wlan0.
+- `eth0_first`: Sets `eth0` as the default route, if available.
+- `wlan0_first`: Sets `wlan0` as the default route, if available.
+- `usb0_first`: Sets `usb0` as the default route, if available.
+- `wlan0_usb0_auto_first`: Based on `ping` results: if `wlan0` has internet connectivity, it is used as the default route; otherwise, `usb0` is used.
 
-A static HTML page is also provided and can be accessed from local network. http://192.168.25.25:8090/wifi_setup
+A static HTML page for network configuration is also available on the local network at: http://192.168.25.25:8090/wifi_setup
 
 ![](./network_setup.png)
 
-## Wake Up Device
+## Wake Up the Device
 
-Awake the robot from sleeping state. If robot is already in awake state, it does nothing.
+Wakes the robot from its sleep state. If the robot is already awake, this command has no effect.
 
 ```bash
 curl -X POST http://192.168.25.25:8090/services/wake_up_device
 ```
 
-Monitor websocket [Sensor Manager State](./websocket.md#sensor-manager-state) for sleep/awake/awakening state.
+Monitor the [Sensor Manager State](./websocket.md#sensor-manager-state) WebSocket topic for sleep, awake, or awakening status.
 
 ## Start Global Positioning
 
@@ -268,17 +267,17 @@ interface StartGlobalPositioningRequest {
 }
 ```
 
-The feedback can be received from [Global Positioning State](./websocket.md#global-positioning-state).
+Feedback can be monitored via the [Global Positioning State](./websocket.md#global-positioning-state) WebSocket topic.
 
 ### Barcode
 
 ![](./barcode.png)
 
-Barcode is a marker which is made of interleaved reflective surface and ordinary surface.
-In a given site, each barcode contains a unique ID. So, when a barcode is found, the robot will know its whereabouts unambiguously.
+A barcode is a marker composed of interleaved reflective and non-reflective surfaces.
+Each barcode at a site contains a unique ID, allowing the robot to determine its exact location unambiguously upon detection.
 
-When `use_barcode` is true, it has higher priority over point-cloud-based matching. And when a match is found, it will always be trusted.
-To use it, barcodes and theirs poses should be [collected into `overlays` of the map](./websocket.md#collected-barcode).
+When `use_barcode` is set to `true`, it takes priority over point-cloud-based matching. Detected barcode matches are always considered highly reliable.
+To utilize this feature, barcodes and their corresponding poses must be [collected and added to the map's overlays](./websocket.md#collected-barcode).
 
 ## Auto-Mapping
 
@@ -286,8 +285,8 @@ To use it, barcodes and theirs poses should be [collected into `overlays` of the
 Experimental Feature
 :::
 
-When "auto-mapping" is enabled, the robot will explore the environment automatically.
-It's only available in mapping mode.
+When auto-mapping is enabled, the robot will automatically explore and map its environment.
+This feature is only available while the robot is in mapping mode.
 
 ```bash
 curl -X POST \
@@ -304,7 +303,7 @@ interface EnableAutoMappingRequest {
 }
 ```
 
-## Recheck Error
+## Recheck Errors
 
 ```
 POST /services/monitor_recheck_errors
@@ -312,12 +311,12 @@ POST /services/monitor_recheck_errors
 
 ## Calibrate Depth Cameras
 
-This service aligns the point clouds of depth cameras with the point cloud of horizontal lidar.
+This service aligns the point clouds from the depth cameras with the point cloud from the horizontal Lidar.
 
-Before calling this service, make sure:
+Before initiating calibration, ensure that:
 
-- The robot is on flat ground.
-- The robot is facing a corner of wall or big box.
+- The robot is on a flat, level surface.
+- The robot is facing a wall corner or a large, rectangular object.
 
 ![](./2023-02-02-16-44-19.png)
 
@@ -327,7 +326,7 @@ POST /services/calibrate_depth_cameras
 
 ## Calibrate Gyroscope Scale
 
-Calibrate IMU. The robot must be set still on hard and flat surface.
+Initiates gyroscope scale calibration. The robot must remain perfectly still on a hard, flat surface during this process.
 
 ```bash
 curl -X POST \
@@ -335,11 +334,11 @@ curl -X POST \
   http://192.168.25.25:8090/services/imu/calibrate_gyro_scale
 ```
 
-This service call only initiates the calibration. The actual process usually takes 20 seconds.
+This service call only triggers the calibration; the actual process typically takes about 20 seconds to complete.
 
-When calibration finished. An action will be received in websocket:
+Once the calibration is finished, a notification will be sent via the `/action` WebSocket topic.
 
-Sample success output:
+**Sample Success Output:**
 
 ```json
 {
@@ -353,7 +352,7 @@ Sample success output:
 }
 ```
 
-Sample failure output:
+**Sample Failure Output:**
 
 ```json
 {
@@ -367,11 +366,11 @@ Sample failure output:
 }
 ```
 
-## Reset Usb Devices
+## Reset USB Devices
 
-Resetting USB hub may help recover malfunctioned hardwares.
+Resetting the USB hub can sometimes help recover malfunctioning hardware devices.
 
-"1/3" means the `bus_id/dev_id` in a device tree. See [List Usb Devices](./device.md#list-usb-devices)
+The format `"1/3"` represents the `bus_id/dev_id` in the device tree. For more information, see [List USB Devices](./device.md#list-usb-devices).
 
 ```bash
 curl -X POST \
@@ -380,7 +379,7 @@ curl -X POST \
   http://192.168.25.25:8090/services/reset_usb_devices
 ```
 
-## Clear Alert System-Down-Unexpectedly
+## Clear "System Down Unexpectedly" Alert
 
 ![](./system-down-alert.png)
 
@@ -390,11 +389,11 @@ curl -X POST \
   http://192.168.25.25:8090/services/clear_system_down_unexpectedly
 ```
 
-## Clear Range Data All Zero Error
+## Clear "Range Data All Zero" Error
 
-When all Lidar points have 0 values, it indicates the Lidar device is already broken(or will broke).
+If all Lidar points return a value of 0, it indicates that the Lidar device is malfunctioning or failing.
 
-This service temporarily clear this error message.
+This service temporarily clears the associated error message.
 
 ```bash
 curl -X POST \
@@ -404,7 +403,7 @@ curl -X POST \
 
 ## Jack Device Up/Down
 
-Raise up or lower down the jack device. The state of the jack device is in Websocket [Jack State](./websocket.md#jack-state).
+Raise or lower the jack device. The state of the jack device is available via the WebSocket [Jack State](./websocket.md#jack-state).
 
 ```bash
 curl -X POST \
@@ -420,10 +419,10 @@ curl -X POST \
 
 ## Step Time
 
-When time is wrong, use this service to correct it.
+Use this service to correct the system time if it is inaccurate.
 
 ::: warning
-`GET` is used to detect time error. But don't call it frequently. Please use websocket `/alerts` instead to detect time error.
+`GET` is used to detect time errors. Do not call it frequently. Use the WebSocket `/alerts` topic instead to monitor time errors.
 :::
 
 ```bash
@@ -432,12 +431,12 @@ curl http://192.168.25.25:8090/services/step_time
 
 ```json
 {
-  "should_step": false, // there is no need to correct time
+  "should_step": false, // No need to correct time
   "message": "there is no need to make step: system time is 0.000253560 seconds fast of NTP time"
 }
 ```
 
-`POST` is used to correct time.
+`POST` is used to correct the time.
 
 ```bash
 curl -X POST http://192.168.25.25:8090/services/step_time
@@ -451,11 +450,11 @@ curl -X POST http://192.168.25.25:8090/services/step_time
 
 ## Get Nav. Thumbnail
 
-Since 2.8.0, requires `caps.supportsGetNavThumbnail`
+Since 2.8.0, requires `caps.supportsGetNavThumbnail`.
 
-Get an image snapshot of the robot and its surroundings, including map, costmap, point cloud, virtual walls, etc.
+Retrieves an image snapshot of the robot and its surroundings, including the map, costmap, point cloud, and virtual walls.
 
-The image is 200x200 pixels, can be used for error reporting.
+The image is 200x200 pixels and can be used for error reporting.
 
 ![](./navi_thumbnail.png)
 
@@ -477,9 +476,9 @@ The image is 200x200 pixels, can be used for error reporting.
 
 ## Get RGB Image
 
-Since 2.8.0, requires `caps.supportsGetRgbImage`
+Since 2.8.0, requires `caps.supportsGetRgbImage`.
 
-Get the latest image of a RGB camera. It's similar with [Websocket RGB Image Stream](./websocket.md#rgb-image-stream). For some use cases which only require the image on rare occasions, this service is more efficient.
+Retrieves the latest image from an RGB camera. This is similar to the [WebSocket RGB Image Stream](./websocket.md#rgb-image-stream) but is more efficient for use cases that only require occasional images.
 
 ```bash
 curl -X POST \
@@ -488,13 +487,13 @@ curl -X POST \
   http://192.168.25.25:8090/services/get_rgb_image
 ```
 
-The response is the same as the websocket topic.
+The response format is identical to the WebSocket topic.
 
 ## Load/Unload Cargo with Roller
 
-Since 2.9.0
+Since 2.9.0.
 
-The state of the roller is in Websocket [Roller State](./websocket.md#roller-state).
+The state of the roller is available via the WebSocket [Roller State](./websocket.md#roller-state).
 
 ```bash
 curl -X POST \
@@ -520,30 +519,26 @@ curl -X POST \
   http://192.168.25.25:8090/services/stop_rack_size_detection
 ```
 
-Detect the width/depth of a rack with laser of the robot.
+Detect the width and depth of a rack using the robot's laser scanner.
 
 :::warning
-Rather than using this service, it is more accurate to refer to 
-the production manual (specification) of the rack or to simply measure it with a ruler.
-
-Only when you don't have either of them, use this service as a last resort.
+It is generally more accurate to refer to the rack's technical specifications or measure it manually with a ruler. Use this service only as a last resort.
 :::
 
 Steps to use:
 
-1. Push the robot in front of the rack.
+1. Position the robot directly in front of the rack.
 2. Call `/start_rack_size_detection`.
-3. Subscribe to [/detected_rack websocket topic](./websocket.md#detected-rack).
-4. Push the robot slowly, under the rack.
-5. If successfully detected, stop pushing and record the size of the rack.
-6. Set the width/depth into [system settings](./system_settings.md#rackspecs).
+3. Subscribe to the [/detected_rack WebSocket topic](./websocket.md#detected-rack).
+4. Slowly push the robot under the rack.
+5. Once successfully detected, stop pushing and record the rack dimensions.
+6. Enter the width and depth into the [system settings](./system_settings.md#rackspecs).
 
 ## Clear Jack Errors
 
-Jack device will report an error when overloads.
+The jack device will report an error if it becomes overloaded.
 
-When it happens, most jack models can still accept new commands.
-But some rare models will require manual clearing of errors before accepting new commands.
+When this occurs, most jack models can still accept new commands. However, some rare models require errors to be cleared manually before they will accept further commands.
 
 ```bash
 curl -X POST http://192.168.25.25:8090/services/clear_jack_errors
@@ -551,23 +546,21 @@ curl -X POST http://192.168.25.25:8090/services/clear_jack_errors
 
 ## Confirm Emergency Stop
 
-When on slope or in slope area (specified in overlays), even emergency stop is pressed, 
-wheels will not be released. And there will be a warning message in `/alerts` websocket topic:
+When the robot is on a slope or in a designated slope area (specified in overlays), the wheels will not be released even if the emergency stop is pressed. A warning message will appear in the `/alerts` WebSocket topic:
 
 ![](./estop_warning.png)
 
-If you want to push the robots around, use the following command to confirm releasing the wheels.
+If you need to push the robot manually, use the following command to confirm releasing the wheels.
 
 ```bash
 curl -X POST http://192.168.25.25:8090/services/confirm_estop
 ```
 
-
 ## Calibrate Depth Camera Masks
 
-Some depth cameras can see parts of the robot itself. This service is used to determine which pixels in the depth camera should be treated as the body of itself and not be mistaken as obstacles.
+Some depth cameras may capture parts of the robot's own body. This service identifies which pixels should be masked to prevent the robot from mistaking itself for an obstacle.
 
-Before calibrating, the robot should be placed in an empty space. No obstacles should be in the view of all depth cameras.
+Before calibrating, place the robot in an open area with no obstacles in the field of view of any depth cameras.
 
 ```bash
 curl -X POST http://192.168.25.25:8090/services/calibrate_depth_camera_masks
@@ -582,13 +575,13 @@ curl -X POST http://192.168.25.25:8090/services/start_collecting_landmarks
 curl -X POST http://192.168.25.25:8090/services/stop_collecting_landmarks
 ```
 
-The result is stored in:
+The result is stored at:
 
 ```bash
 curl http://192.168.25.25:8090/collected_data
 ```
 
-The collected data serves as raw materials. The developer must insert landmarks into [overlays](./overlays.md#landmarks) for them to work.
+The collected data serves as raw material. Developers must manually insert these landmarks into [overlays](./overlays.md#landmarks) for them to be used.
 
 ## Clear Fall Risk Warning
 
@@ -598,7 +591,7 @@ curl -X POST http://192.168.25.25:8090/services/clear_fall_risk_warning
 
 ## Query Pose
 
-This API helps collect the poses of various points of interest (POIs). 
+This API retrieves the coordinates of various points of interest (POIs). 
 
 For example, when the robot docks on a charger, it calculates the charger’s pose 
 based on the robot’s position. 
@@ -616,8 +609,7 @@ curl http://192.168.25.25:8090/services/query_pose/charger_pose
 }
 ```
 
-Similarly, if a forklift is parked in a cargo location, the system infers that
-cargo location’s pose from the forklift’s position. 
+Similarly, if a forklift is parked at a cargo location, the system can infer the location's pose from the forklift's current position. 
 
 ```bash
 curl http://192.168.25.25:8090/services/query_pose/pallet_pose
@@ -629,18 +621,18 @@ curl http://192.168.25.25:8090/services/query_pose/pallet_pose
     "pose": {
         "pos": [4.179, -26.094],
         "ori": 3.18,
-    }
+    },
 
-    // since 2.13.0. If reference == 'center_of_front_edge' the returned pose is
-    // the center of the pallet front edge(new logic).
-    // If not, the pose is the center of the pallet(deprecated).
+    // Since 2.13.0. If reference == 'center_of_front_edge', the returned pose is
+    // the center of the pallet's front edge (new logic).
+    // Otherwise, the pose is the center of the pallet (deprecated).
     "ref": "center_of_front_edge"
 }
 ```
 
 ## Probe V2X Beacons
 
-This service sends messages to beacons to make them active for several seconds. It's useful for testing beacon connectivity and triggering beacon responses.
+This service sends messages to beacons to activate them for several seconds. This is useful for testing connectivity and triggering responses.
 
 ```bash
 curl -X POST \
@@ -648,6 +640,6 @@ curl -X POST \
   http://192.168.25.25:8090/services/probe_v2x_beacons
 ```
 
-Use the [V2X Health State](./websocket.md#v2x-health-state) websocket topic to monitor beacon responses and health status.
+Use the [V2X Health State](./websocket.md#v2x-health-state) WebSocket topic to monitor beacon responses and health status.
 
 

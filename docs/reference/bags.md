@@ -1,6 +1,6 @@
 # Bags API
 
-Since 2.7.0, bags are recorded at all time. But when the total size exceeds a limit, the oldest onces are purged.
+Starting from version 2.7.0, bag files are recorded continuously. When the total storage size exceeds a predefined limit, the oldest files are automatically purged.
 
 ## Get Bag List
 

@@ -1,17 +1,17 @@
 # Mapping API
 
-With Mapping API, you can:
+With the Mapping API, you can:
 
-1. Create/finish/cancel/delete a mapping task.
+1. Create, finish, cancel, or delete a mapping task.
 2. View all mapping tasks.
-3. Save(the artifacts of) a mapping task as a map.
+3. Save the artifacts of a mapping task as a map.
 
-A task has a state. It can be running/finished/cancelled/failed.
+A task has a state, which can be `running`, `finished`, `cancelled`, or `failed`.
 
-When a task is successfully created, it's in running state.
-When finished, it will contain a map and a bag file. The bag file contains the sensor data which are used during creation of the map.
+When a task is successfully created, it enters the `running` state.
+Once finished, it will contain a map and a bag file. The bag file contains the sensor data used during the creation of the map.
 
-A mapping task (in `/mappings`) can't be used for navigation. You have to save the artifacts of a mapping task into `/maps` first.
+A mapping task (in `/mappings`) cannot be used for navigation. You must first save the artifacts of a mapping task into `/maps`.
 
 ## Start Mapping
 
@@ -44,32 +44,32 @@ curl -X POST \
 
 ```ts
 interface MappingCreateRequest {
-  // false(default) for creating new map.
+  // false (default) to create a new map.
   // true for incremental mapping.
-  // If true, the current map(and its coordinates) will be inherited.
+  // If true, the current map (and its coordinates) will be inherited.
   continue_mapping: boolean;
 
   // (since 1.8.8)
-  // zero(default): Use x=0,y=0,ori=0 as start point. (Start new coordinate frame)
-  // current_pose: Use current pose as start point. (Inherit coordinate frame)
+  // zero (default): Use x=0, y=0, ori=0 as the starting point (starts a new coordinate frame).
+  // current_pose: Use the current pose as the starting point (inherits the coordinate frame).
   start_pose_type: 'zero' | 'current_pose';
 }
 ```
 
 ## Visualization of Mapping Process
 
-During mapping, use Websocket to receive realtime feedbacks:
+During mapping, use WebSockets to receive real-time feedback:
 
 - [Current Pose](./websocket.md#current-pose)
-- [Map](./websocket.md#map). Updated at regular interval.
-- [Trajectory](./websocket.md#mapping-trajectory) History trajectory which can help you know which part of the map has been visited.
-- [Point Cloud](./websocket.md#lidar-point-cloud) and [Obstacle Map](./websocket.md#obstacle-map) Can help avoid collision during remote mapping.
+- [Map](./websocket.md#map): Updated at regular intervals.
+- [Trajectory](./websocket.md#mapping-trajectory): A history of the trajectory that helps you identify which parts of the map have been visited.
+- [Point Cloud](./websocket.md#lidar-point-cloud) and [Obstacle Map](./websocket.md#obstacle-map): These help avoid collisions during remote mapping.
 
 They can be rendered like this:
 
 ![](./mapping.png)
 
-## Finish/Cancel Mapping
+## Finishing or Cancelling Mapping
 
 ```bash
 curl -X PATCH \
@@ -82,17 +82,17 @@ curl -X PATCH \
 
 ```ts
 interface MappingFinishRequest {
-  state: 'finished' | 'cancelled'; // Finish or cancel mapping task
+  state: 'finished' | 'cancelled'; // Finish or cancel the mapping task
 
   // (since 1.8.8)
-  // false(default), save the whole map.
-  // true, Only save the incremented part of the map.(For incremental mapping only.)
+  // false (default): Save the entire map.
+  // true: Save only the incremented part of the map (for incremental mapping only).
   new_map_only: boolean;
 }
 ```
 
-When a mapping task finished, the artifacts will be saved.
-You can request them with `/mappings/:id` afterwards.
+When a mapping task is finished, the artifacts are saved.
+You can subsequently request them using `/mappings/:id`.
 
 ## Mapping List
 
@@ -145,7 +145,7 @@ curl http://192.168.25.25:8090/mappings/48
 {
   "id": 48,
   "thumbnail_url": "http://192.168.25.25:8090/mappings/48/thumbnail",
-  "image_url": "http://192.168.25.25:8090/mappings/48.png", // Base64 encoded map image(PNG, used for display)
+  "image_url": "http://192.168.25.25:8090/mappings/48.png", // Base64-encoded map image (PNG, used for display)
   "grid_origin_x": -8.050000190734863,
   "grid_origin_y": -5.650000095367432,
   "grid_resolution": 0.05,
@@ -155,7 +155,7 @@ curl http://192.168.25.25:8090/mappings/48
   "state": "finished", // The current state: running, finished, cancelled, failed
   "bag_id": 27,
   "bag_url": "http://192.168.25.25:8090/bags/27.bag",
-  "download_url": "http://192.168.25.25:8090/mappings/48/download", // get Base64 encoded map data(binary, used for positioning)
+  "download_url": "http://192.168.25.25:8090/mappings/48/download", // Get Base64-encoded map data (binary, used for positioning)
   "trajectories_url": "http://192.168.25.25:8090/mappings/48/trajectories.json",
   "landmark_url": "http://192.168.25.25:8090/mappings/48/landmarks.json" // since 2.11.0
 }
@@ -184,8 +184,8 @@ curl http://192.168.25.25:8090/mappings/48/trajectories.json
 
 ## Save Mapping Artifacts Directly as a Map
 
-Only when saved as a map, the robot can load and use it for navigation.
-This way(with `mapping_id`) is more efficient than [POSTing the whole map](./maps.md#create-a-map) with all fields.
+The robot can only load and use a map for navigation once it has been saved.
+This method (using `mapping_id`) is more efficient than [POSTing the entire map](./maps.md#create-a-map) with all fields.
 
 ![](./save_mapping_as_map.png)
 
@@ -197,8 +197,8 @@ curl -X POST http://192.168.25.25:8090/maps/
 
 ```json
 {
-  "map_name": "From Mapping 4", // Give the map a name
-  "mapping_id": 4 // Mapping Action id
+  "map_name": "From Mapping 4", // Provide a name for the map
+  "mapping_id": 4 // The ID of the mapping action
 }
 ```
 
@@ -206,7 +206,7 @@ curl -X POST http://192.168.25.25:8090/maps/
 
 ```json
 {
-  "id": 119, // The newly created map id. Use this id to load it into robot.
+  "id": 119, // The ID of the newly created map. Use this ID to load it onto the robot.
   "uid": "9b94ac16-239b-11ed-9446-1e49da274768",
   "map_name": "From Mapping 4",
   "create_time": 1657015615,

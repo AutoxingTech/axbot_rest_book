@@ -1,45 +1,44 @@
 # IoT Devices
 
-The robot can talk to auto-doors, elevators, gateways in two protocols: 
+The robot can communicate with automatic doors, elevators, and gateways using two protocols: 
 [ESP-NOW](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_now.html) or BLE.
 
-It's recommended to use ESP-NOW. Because it allows connection-less communication between dozens of devices
-and the signal strength is higher than that of the BLE.
+We recommend using ESP-NOW, as it enables connectionless communication between dozens of devices and typically offers better signal strength than BLE.
 
-## Auto Door and Gateway
+## Automatic Doors and Gateways
 
-Auto door and gateway are essentially the same device. A robot can open them automatically when it moves.
+Automatic doors and gateways are functionally identical from the robot's perspective; the robot can trigger them to open automatically during navigation.
 
-A hardware controller must be installed so the door can talk to nearby robots.
-Each controller has a MAC address. In the [`overlay` field](../reference/overlays.md#auto-door) of the map, the MAC address and whereabouts of the door (modeled as a polygon) should be provided.
+A hardware controller must be installed on the door to enable communication with nearby robots.
+Each controller is identified by a MAC address. The door's MAC address and its physical location (modeled as a polygon) must be specified in the map's [`overlay` field](../reference/overlays.md#auto-door).
 
-With this information, here is how the robots talk to a door:
+Using this information, the robot interacts with the door as follows:
 
-* From the robot side:
-  * The robot check whether it will go through an auto-door very soon, by detecting whether the [global path](../reference/websocket.md#global-path) ahead crosses the polygon of a auto-door.
-  * If a door is on the global path ahead, the robot will broadcast `Open Door {MAC} for {ROBOT SN}` at regular interval.
-  * If the door's state is 'open', it will be able to pass it. Otherwise, the polygon of the door become impassable.
-  * When the robot has passed the door, it will stop requesting it.
-* From the door side:
-  * The door broadcasts its status(open/closed/opening/closing) and ETC(estimated time of closeing) at regular interval. Examples are:
+* **From the robot side:**
+  * The robot continuously checks if its [global path](../reference/websocket.md#global-path) intersects with an automatic door's polygon.
+  * If a door is detected on the path ahead, the robot broadcasts an `Open Door {MAC} for {ROBOT SN}` command at regular intervals.
+  * If the door reports its state as 'open', the robot proceeds. Otherwise, the door's polygon is treated as an impassable obstacle.
+  * Once the robot has successfully passed through, it stops sending the open-door request.
+* **From the door side:**
+  * The door periodically broadcasts its status (open, closed, opening, or closing) and an Estimated Time of Closing (ETC). Examples include:
     * `Door {MAC} is closed`
     * `Door {MAC} is opening`
     * `Door {MAC} is open, ETC in 3 seconds`    
     * `Door {MAC} is closing`
-  * If it recreives any open-door command, it will open the door.
-  * If no open-door command is received for 3 seconds, it will close the door.
+  * If the door controller receives an open-door command, it triggers the door to open.
+  * If no open-door commands are received for three seconds, the door will automatically close.
 
 ::: tip
-The nearby auto-doors and theirs states can be visualized with Websocket [Nearby Auto Doors](../reference/websocket.md#nearby-auto-doors)
+The status of nearby automatic doors can be monitored via the [Nearby Auto Doors](../reference/websocket.md#nearby-auto-doors) WebSocket topic.
 :::
 
 ## Bluetooth API
 
-Unlike ESP-NOW IoT devices, the robot can't operate Bluetooth based IoT devices directly.
-The Bluetooth APIs only help establishing a communication channel.
-So that the user and the device can talk in their predefined protocol.
+Unlike ESP-NOW devices, the robot does not interact with Bluetooth-based IoT devices directly.
+Instead, the Bluetooth APIs facilitate the establishment of a communication channel.
+This allows the user and the device to communicate using their own predefined protocol.
 
-### Connect Bluetooth
+### Connect to a Bluetooth Device
 
 ```bash
 curl -X POST \
@@ -52,11 +51,11 @@ curl -X POST \
 
 ```ts
 class BluetoothConnectRequest {
-  address: string; // address, in form of "00:11:22:33:FF:EE"
+  address: string; // The MAC address of the device (e.g., "00:11:22:33:FF:EE").
 }
 ```
 
-When bluetooth is connected. Use Websocket to communicate with device.
+Once the Bluetooth connection is established, use WebSockets to communicate with the device.
 
 ```bash
 $ wscat -c ws://192.168.25.25:8090/ws/v2/topics
@@ -69,11 +68,11 @@ $ wscat -c ws://192.168.25.25:8090/ws/v2/topics
 < {"topic": "/bluetooth/outbound", "device_address": "00:11:22:33:FF:EE", "data": "..." }
 ```
 
-- `/bluetooth_state` The bluetooth connection state
-- `/bluetooth/inbound` Send data from the robot to connected BLE device.
-- `/bluetooth/outbound` The data received from BLE device.
+- `/bluetooth_state`: The current Bluetooth connection state.
+- `/bluetooth/inbound`: Sends data from the robot to the connected BLE device.
+- `/bluetooth/outbound`: Data received from the BLE device.
 
-### Disconnect
+### Disconnect from a Bluetooth Device
 
 ```bash
 curl -X POST \
@@ -86,6 +85,6 @@ curl -X POST \
 
 ```ts
 class BluetoothDisconnectRequest {
-  address: string; // Mac address, in form of "00:11:22:33:FF:EE"
+  address: string; // The MAC address of the device (e.g., "00:11:22:33:FF:EE").
 }
 ```
