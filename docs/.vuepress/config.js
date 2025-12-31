@@ -62,6 +62,7 @@ module.exports = {
                         collapsable: false,
                         children: [
                             '/articles/piece_by_piece_mapping',
+                            '/articles/tips_for_mapping_large_area',
                         ],
                         sidebarDepth: 2
                     },
