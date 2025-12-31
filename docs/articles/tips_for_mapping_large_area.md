@@ -35,21 +35,21 @@ The correct mapping method for such a large loop is:
 | Bad Case | Good Case |
 |----------|-----------|
 | Only walking in a serpentine pattern without loop closure will cause overall deformation | Walk one loop first to establish the skeleton, then walk the details |
-| ![alt text](image.png)  | ![alt text](image-1.png) |
+| ![](./image.png)  | ![](./image-1.png) |
 
 2. Avoid S-shaped movements or spinning in place. These will increase the amount of data.
 
 | Bad Case | Bad Case |
 |----------|----------|
 | Serpentine movement | Spinning in place |
-| ![alt text](image-2.png) | ![alt text](image-3.png) |
+| ![](./image-2.png) | ![](./image-3.png) |
 
 3. Plan your route well. Use appropriate loop closures (just walk a bit of the repeated road), and try to avoid repeating large sections of the road. Sometimes repeated roads are unavoidable, but if more than 20-30% of the road is repeated, the route planning might not be appropriate.
 
 | Bad Case |
 |----------|
 | Walking the same road too many times |
-| ![alt text](image-4.png) |
+| ![](./image-4.png) |
 
 4. Do not exceed 1 hour for a single mapping session. If the area is truly very large, you can finish the skeleton in one go and then end the mapping. Use incremental mapping to complete the details in multiple sessions. If you need to leave temporarily during mapping (e.g., for a meal), end the mapping first and then use incremental mapping when you return.
 
