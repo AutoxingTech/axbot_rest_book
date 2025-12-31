@@ -6,6 +6,11 @@ The main purpose of this article is to guide users on how to successfully scan l
 
 It also introduces the composition of map capacity. Understanding this knowledge can help you use good mapping habits to save CPU and memory, and create correct, complete, and large-scale maps.
 
+<video width="100%" controls>
+  <source src="./Mapping_Megastructures.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 ## Scene Analysis
 
 Map data is not just a simple image. It contains point clouds, submaps, trajectories, etc. Therefore, a larger area does not necessarily mean a larger map file.

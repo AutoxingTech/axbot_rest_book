@@ -1,21 +1,21 @@
-# Autoxing Rest API Document
+# Autoxing REST API Documentation
 
-This document is written with  [VuePress](https://vuepress.vuejs.org/)
+This documentation is built using [VuePress](https://vuepress.vuejs.org/).
 
-## Compile
+## Build
 
-Before compiling, VuePress and all related libraries should be installed:
+Before building, install VuePress and all required dependencies:
 
-```shell
+```bash
 yarn install
 ```
 
-## Debug
+## Development
 
-Run the following command:
+To run a local development server:
 
-```shell
+```bash
 yarn run docs:dev
 ```
 
-Then view pages from http://localhost:8080/
+Then view the pages at http://localhost:8080/
