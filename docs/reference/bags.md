@@ -78,7 +78,8 @@ Fetches messages within a specific time range. This is used by the frontend to s
 | `start_time` | float | Yes | The start of the time range in seconds (Unix epoch). |
 | `end_time` | float | Yes | The end of the time range in seconds (Unix epoch). |
 
-#### Success Response
+### Success Response
+
 - **Code:** `200 OK`
 - **Content:**
   ```json
@@ -90,14 +91,18 @@ Fetches messages within a specific time range. This is used by the frontend to s
       {
         "topic": "/some_topic",
         "field1": "value1",
-        "__stamp": 1674650010.123
+        "__stamp": 1674650010.123,
+        "__latched": true
       },
       ...
     ]
   }
   ```
   - `messages`: A list of JSON-converted ROS messages. 
-  - Each message includes a `__stamp` field containing the high-precision timestamp when the message was recorded.
+  - Each message includes:
+    - `__stamp`: High-precision timestamp when the message was recorded.
+    - `__latched`: Boolean flag set to `true` if the message belongs to a latched topic. This includes both backfilled messages (previous state) and messages occurring within the requested time range.
+
 
 #### Special Behavior: Latched Topics
 When a time range is requested, the API automatically includes the most recent message for "latched" topics that occurred *before* the `start_time`. This ensures the player has the current state for static or slowly-changing topics (like maps or configurations) as soon as the chunk starts.
