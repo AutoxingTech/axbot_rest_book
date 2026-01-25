@@ -34,8 +34,6 @@ The Bag Player API allows for replaying ROS bag files online. It provides metada
 ### Endpoint
 `GET /bags/<filename>/player`
 
----
-
 ### 1. Get Bag Metadata
 Fetches general information about the bag file, such as the total number of messages and the time duration.
 
@@ -49,22 +47,12 @@ Fetches general information about the bag file, such as the total number of mess
   {
     "total_messages": 5000,
     "start_time": 1674650000,
-    "end_time": 1674653600,
-    "messages": [
-      {
-        "topic": "/some_topic",
-        "field1": "value1",
-        "__stamp": 1674650010.123,
-        "__latched": true
-      },
-      ...
-    ]
+    "end_time": 1674653600
   }
   ```
-  - `messages`: A list of JSON-converted ROS messages. 
-  - Each message includes:
-    - `__stamp`: High-precision timestamp when the message was recorded.
-    - `__latched`: Boolean flag set to `true` if the message belongs to a latched topic. This includes both backfilled messages (previous state) and messages occurring within the requested time range.
+  - `total_messages`: Integer representing the total number of messages in the bag.
+  - `start_time`: Integer timestamp (Unix epoch) of the first message.
+  - `end_time`: Integer timestamp (Unix epoch) of the last message.
 
 ### 2. Get Message Chunks
 Fetches messages within a specific time range. This is used by the frontend to stream or download chunks of the bag.
