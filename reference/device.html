@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Device Information API | Autoxing REST API Book</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="A complete guide to control Autoxing Tech's Robots with REST API">
+    
+    <link rel="preload" href="/axbot_rest_book/assets/css/0.styles.69eb42ba.css" as="style"><link rel="preload" href="/axbot_rest_book/assets/js/app.b60f550b.js" as="script"><link rel="preload" href="/axbot_rest_book/assets/js/2.45d5bdca.js" as="script"><link rel="preload" href="/axbot_rest_book/assets/js/28.ec0587c6.js" as="script"><link rel="prefetch" href="/axbot_rest_book/assets/js/10.fcd62aad.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/11.b52874ca.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/12.3c479eac.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/13.6846a132.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/14.acbfcbaa.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/15.2f74967e.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/16.9043b211.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/17.12cb887e.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/18.4f8fc16d.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/19.823c708f.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/20.bf9b5760.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/21.579c2b75.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/22.01c7ecac.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/23.b11a9e65.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/24.19491ba7.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/25.7168a7b3.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/26.934f7d50.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/27.66e3a507.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/29.5bbedbec.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/3.e37ca2f0.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/30.55ca55fd.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/31.d933964d.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/32.bd765dc4.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/33.e835e08b.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/34.550c848c.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/35.2ff7da5f.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/4.7dd951d8.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/5.f3d20739.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/6.d38e10a9.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/7.a46e340d.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/8.53ca0fed.js"><link rel="prefetch" href="/axbot_rest_book/assets/js/9.59c31f00.js">
+    <link rel="stylesheet" href="/axbot_rest_book/assets/css/0.styles.69eb42ba.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/axbot_rest_book/" class="home-link router-link-active"><!----> <span class="site-name">Autoxing REST API Book</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Guide</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/axbot_rest_book/overview/getting_start.html" class="sidebar-link">Getting Started</a></li><li><a href="/axbot_rest_book/guides/first_move.html" class="sidebar-link">Start Moving</a></li><li><a href="/axbot_rest_book/guides/start_websocket.html" class="sidebar-link">Getting Started with WebSockets</a></li><li><a href="/axbot_rest_book/guides/robot_admin.html" class="sidebar-link">Robot Admin (Standalone Version)</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Reference</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/axbot_rest_book/reference/api_principals.html" class="sidebar-link">REST API Principles</a></li><li><a href="/axbot_rest_book/reference/maps.html" class="sidebar-link">Map API</a></li><li><a href="/axbot_rest_book/reference/moves.html" class="sidebar-link">Move API</a></li><li><a href="/axbot_rest_book/reference/current_map_and_pose.html" class="sidebar-link">Current Map and Pose API</a></li><li><a href="/axbot_rest_book/reference/overlays.html" class="sidebar-link">Overlays</a></li><li><a href="/axbot_rest_book/reference/mappings.html" class="sidebar-link">Mapping API</a></li><li><a href="/axbot_rest_book/reference/services.html" class="sidebar-link">Service API</a></li><li><a href="/axbot_rest_book/reference/iot_devices.html" class="sidebar-link">IoT Devices</a></li><li><a href="/axbot_rest_book/reference/device.html" aria-current="page" class="active sidebar-link">Device Information API</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/axbot_rest_book/reference/device.html#device-information" class="sidebar-link">Device Information</a></li><li class="sidebar-sub-header"><a href="/axbot_rest_book/reference/device.html#brief-device-information" class="sidebar-link">Brief Device Information</a></li><li class="sidebar-sub-header"><a href="/axbot_rest_book/reference/device.html#wi-fi-list" class="sidebar-link">Wi-Fi List</a></li><li class="sidebar-sub-header"><a href="/axbot_rest_book/reference/device.html#network-information" class="sidebar-link">Network Information</a></li><li class="sidebar-sub-header"><a href="/axbot_rest_book/reference/device.html#list-usb-devices" class="sidebar-link">List USB Devices</a></li><li class="sidebar-sub-header"><a href="/axbot_rest_book/reference/device.html#saved-usb-devices" class="sidebar-link">Saved USB Devices</a></li><li class="sidebar-sub-header"><a href="/axbot_rest_book/reference/device.html#boot-progress" class="sidebar-link">Boot Progress</a></li><li class="sidebar-sub-header"><a href="/axbot_rest_book/reference/device.html#time-configuration" class="sidebar-link">Time Configuration</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/axbot_rest_book/reference/device.html#time-sources" class="sidebar-link">Time Sources</a></li><li class="sidebar-sub-header"><a href="/axbot_rest_book/reference/device.html#ntp-server" class="sidebar-link">NTP Server</a></li></ul></li><li class="sidebar-sub-header"><a href="/axbot_rest_book/reference/device.html#sensor-list" class="sidebar-link">Sensor List</a></li></ul></li><li><a href="/axbot_rest_book/reference/robot_params.html" class="sidebar-link">Robot Parameters API</a></li><li><a href="/axbot_rest_book/reference/system_settings.html" class="sidebar-link">System Settings</a></li><li><a href="/axbot_rest_book/reference/app_store.html" class="sidebar-link">App Store API</a></li><li><a href="/axbot_rest_book/reference/hostnames.html" class="sidebar-link">Hostname API</a></li><li><a href="/axbot_rest_book/reference/landmarks.html" class="sidebar-link">Landmarks</a></li><li><a href="/axbot_rest_book/reference/websocket.html" class="sidebar-link">WebSocket Reference</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Articles</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/axbot_rest_book/articles/piece_by_piece_mapping.html" class="sidebar-link">Piece-by-Piece Mapping</a></li><li><a href="/axbot_rest_book/articles/tips_for_mapping_large_area.html" class="sidebar-link">Tips for Mapping Large Areas</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Other</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/axbot_rest_book/other/deprecations.html" class="sidebar-link">Deprecations</a></li><li><a href="/axbot_rest_book/other/changelog.html" class="sidebar-link">Changelog</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="device-information-api"><a href="#device-information-api" class="header-anchor">#</a> Device Information API</h1> <h2 id="device-information"><a href="#device-information" class="header-anchor">#</a> Device Information</h2> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">curl</span> http://192.168.25.25:8090/device/info
+</code></pre></div><div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;rosversion&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1.15.11&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;rosdistro&quot;</span><span class="token operator">:</span> <span class="token string">&quot;noetic&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;axbot_version&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1.9.x&quot;</span><span class="token punctuation">,</span> <span class="token comment">// The version of the main software package.</span>
+  <span class="token property">&quot;device&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;model&quot;</span><span class="token operator">:</span> <span class="token string">&quot;hygeia&quot;</span><span class="token punctuation">,</span> <span class="token comment">// The device model (e.g., hygeia, waiter, hotel, tray, longtray).</span>
+    <span class="token property">&quot;sn&quot;</span><span class="token operator">:</span> <span class="token string">&quot;71822043000350z&quot;</span><span class="token punctuation">,</span> <span class="token comment">// The Serial Number (SN), which is unique for every device.</span>
+    <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;71822043000350z&quot;</span> <span class="token comment">// Some prototype devices may have a specific name.</span>
+    <span class="token comment">// For most production devices, this is identical to the SN.</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;baseboard&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;firmware_version&quot;</span><span class="token operator">:</span> <span class="token string">&quot;22a32218&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;wheel_control&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;firmware_version&quot;</span><span class="token operator">:</span> <span class="token string">&quot;amps_20211103&quot;</span> <span class="token comment">// The firmware version of the wheel controller.</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;bottom_sensor_pack&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;firmware_version&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1.1.1&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;depth_camera&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;firmware_version&quot;</span><span class="token operator">:</span> <span class="token string">&quot;[/dev/camera:1.2.5-s2-ax-D1]&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;robot&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;footprint&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;inscribed_radius&quot;</span><span class="token operator">:</span> <span class="token number">0.248</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;height&quot;</span><span class="token operator">:</span> <span class="token number">1.2</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;thickness&quot;</span><span class="token operator">:</span> <span class="token number">0.546</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;wheel_distance&quot;</span><span class="token operator">:</span> <span class="token number">0.36</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;width&quot;</span><span class="token operator">:</span> <span class="token number">0.496</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;charge_contact_position&quot;</span><span class="token operator">:</span> <span class="token string">&quot;back&quot;</span> <span class="token comment">// The position of the charging contact (&quot;back&quot; or &quot;front&quot;).</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;caps&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;supportsImuRecalibrateService&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Supports the /services/imu/recalibrate service.</span>
+    <span class="token property">&quot;supportsShutdownService&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Supports the /services/baseboard/shutdown service.</span>
+    <span class="token property">&quot;supportsRestartService&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Supports the /services/restart_service service.</span>
+    <span class="token property">&quot;supportsResetOccupancyGridService&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Supports the /services/occupancy_grid_server/reset service.</span>
+    <span class="token property">&quot;supportsImuRecalibrationFeedback&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Supports the /imu_state WebSocket topic.</span>
+    <span class="token property">&quot;supportsSetControlModeService&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Supports the /services/wheel_control/set_control_mode service.</span>
+    <span class="token property">&quot;supportsSetEmergencyStopService&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Supports the /services/wheel_control/set_emergency_stop service.</span>
+    <span class="token property">&quot;supportsWheelStateTopic&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Supports the /wheel_state WebSocket topic.</span>
+    <span class="token property">&quot;supportsWsV2&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Supports the V2 WebSocket API (ws://HOST/ws/v2/topics).</span>
+    <span class="token property">&quot;supportsRgbCamera&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Supports RGB camera-related topics.</span>
+    <span class="token property">&quot;combineImuBiasAndPoseCalibration&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Available since version 2.4.0. Combines IMU bias and pose calibration.</span>
+    <span class="token property">&quot;supportsJackCheck&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Supports POST /services/jack_self_check</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="brief-device-information"><a href="#brief-device-information" class="header-anchor">#</a> Brief Device Information</h2> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">curl</span> http://192.168.25.25:8090/device/info/brief <span class="token comment"># Retrieves a reduced set of device information.</span>
+</code></pre></div><h2 id="wi-fi-list"><a href="#wi-fi-list" class="header-anchor">#</a> Wi-Fi List</h2> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">curl</span> http://192.168.25.25:8090/device/available_wifis
+</code></pre></div><div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;ssid&quot;</span><span class="token operator">:</span> <span class="token string">&quot;AutoXing&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;bss&quot;</span><span class="token operator">:</span> <span class="token string">&quot;a4:fa:76:33:d3:62&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;rssi&quot;</span><span class="token operator">:</span> <span class="token number">-45</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;open&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span> <span class="token comment">// Available since version 2.3.0.</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;ssid&quot;</span><span class="token operator">:</span> <span class="token string">&quot;AutoXing-guest&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;bss&quot;</span><span class="token operator">:</span> <span class="token string">&quot;a4:fa:76:33:d3:72&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;rssi&quot;</span><span class="token operator">:</span> <span class="token number">-33</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;open&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span> <span class="token comment">// Available since version 2.3.0.</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h2 id="network-information"><a href="#network-information" class="header-anchor">#</a> Network Information</h2> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">curl</span> http://192.168.25.25:8090/device/wifi_info
+</code></pre></div><p>Response in Station mode:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;wifi_mode&quot;</span><span class="token operator">:</span> <span class="token string">&quot;station&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;wpa_state&quot;</span><span class="token operator">:</span> <span class="token string">&quot;completed&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;route_mode&quot;</span><span class="token operator">:</span> <span class="token string">&quot;eth0_first&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;wifi_ip&quot;</span><span class="token operator">:</span> <span class="token string">&quot;10.10.41.43&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;wifi_mac&quot;</span><span class="token operator">:</span> <span class="token string">&quot;e4:5f:01:6d:bd:6a&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;ssid&quot;</span><span class="token operator">:</span> <span class="token string">&quot;AutoXing&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;debug_message&quot;</span><span class="token operator">:</span><span class="token string">&quot;info: Switching to station mode.&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;routes&quot;</span><span class="token operator">:</span><span class="token punctuation">[</span>
+    <span class="token string">&quot;default via 192.168.25.2 dev eth0 src 192.168.25.25 metric 202 &quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;default via 10.10.40.1 dev wlan0 proto dhcp metric 600 &quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;10.10.40.0/23 dev wlan0 proto kernel scope link src 10.10.41.43 metric 600 &quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;192.168.25.0/24 dev eth0 proto dhcp scope link src 192.168.25.25 metric 202 &quot;</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;active_access_point&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span>
+    <span class="token property">&quot;ssid&quot;</span><span class="token operator">:</span><span class="token string">&quot;AutoXing&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;hw_address&quot;</span><span class="token operator">:</span><span class="token string">&quot;a4:fa:76:33:d3:70&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;strength&quot;</span><span class="token operator">:</span><span class="token number">100</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;last_wifi_connect_result&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Response in AP mode:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span> <span class="token property">&quot;mode&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ap&quot;</span> <span class="token punctuation">}</span>
+</code></pre></div><h2 id="list-usb-devices"><a href="#list-usb-devices" class="header-anchor">#</a> List USB Devices</h2> <p>USB devices are organized in a tree structure.</p> <div class="language- extra-class"><pre class="language-text"><code>008/001 1d6b:0001 8 [fe3a0000.usb] USB 1.1 root hub
+004/001 1d6b:0001 4 [fe3e0000.usb] USB 1.1 root hub
+007/001 1d6b:0002 7 [fe380000.usb] USB 2.0 root hub
+    007/002 1a40:0101 7-1 [] USB 2.0 hub
+        007/033 0603:000a 7-1.3 [HK100QB2A26D1143] iHawk_100Q
+        007/035 0603:000a 7-1.4 [HK100QB2A26D1346] iHawk_100Q
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>curl http://192.168.25.25:8090/device/usb_devices
+</code></pre></div><p>This request lists all USB devices connected to the robot:</p> <div class="language- extra-class"><pre class="language-text"><code>[
+    {
+        &quot;vendor_product&quot;: &quot;1d6b:0001&quot;,
+        &quot;sn&quot;: &quot;fe3a0000.usb&quot;,
+        &quot;alias&quot;: &quot;USB 1.1 root hub&quot;,
+        &quot;description&quot;: &quot;Linux Foundation 1.1 root hub&quot;,
+        &quot;bind&quot;: &quot;&quot;,
+        &quot;bus_id&quot;: 8,
+        &quot;dev_id&quot;: 1,
+        &quot;port&quot;: 1,
+        &quot;full_port&quot;: &quot;8&quot;,
+        &quot;level&quot;: 0,
+        &quot;devices&quot;: [],
+    },
+    {
+        &quot;vendor_product&quot;: &quot;1d6b:0002&quot;,
+        &quot;sn&quot;: &quot;fe380000.usb&quot;,
+        &quot;alias&quot;: &quot;USB 2.0 root hub&quot;,
+        &quot;description&quot;: &quot;Linux Foundation 2.0 root hub&quot;,
+        &quot;bind&quot;: &quot;&quot;,
+        &quot;bus_id&quot;: 7,
+        &quot;dev_id&quot;: 1,
+        &quot;port&quot;: 1,
+        &quot;full_port&quot;: &quot;7&quot;,
+        &quot;level&quot;: 0,
+        &quot;devices&quot;: [
+            {
+                &quot;vendor_product&quot;: &quot;1a40:0101&quot;,
+                &quot;sn&quot;: &quot;&quot;,
+                &quot;alias&quot;: &quot;USB 2.0 hub&quot;,
+                &quot;description&quot;: &quot;Terminus Technology Inc. Hub&quot;,
+                &quot;bind&quot;: &quot;&quot;,
+                &quot;bus_id&quot;: 7,
+                &quot;dev_id&quot;: 2,
+                &quot;port&quot;: 1,
+                &quot;full_port&quot;: &quot;7-1&quot;,
+                &quot;level&quot;: 4,
+                &quot;devices&quot;: [
+                    {
+                        &quot;vendor_product&quot;: &quot;0603:000a&quot;,
+                        &quot;sn&quot;: &quot;HK100QB2A26D1143&quot;,
+                        &quot;alias&quot;: &quot;iHawk_100Q&quot;,
+                        &quot;description&quot;: &quot;Novatek Microelectronics Corp. &quot;,
+                        &quot;bind&quot;: &quot;&quot;,
+                        &quot;bus_id&quot;: 7,
+                        &quot;dev_id&quot;: 33,
+                        &quot;port&quot;: 3,
+                        &quot;full_port&quot;: &quot;7-1.3&quot;,
+                        &quot;level&quot;: 8,
+                        &quot;devices&quot;: [],
+                    },
+                    {
+                        &quot;vendor_product&quot;: &quot;0603:000a&quot;,
+                        &quot;sn&quot;: &quot;HK100QB2A26D1346&quot;,
+                        &quot;alias&quot;: &quot;iHawk_100Q&quot;,
+                        &quot;description&quot;: &quot;Novatek Microelectronics Corp. &quot;,
+                        &quot;bind&quot;: &quot;&quot;,
+                        &quot;bus_id&quot;: 7,
+                        &quot;dev_id&quot;: 35,
+                        &quot;port&quot;: 4,
+                        &quot;full_port&quot;: &quot;7-1.4&quot;,
+                        &quot;level&quot;: 8,
+                        &quot;devices&quot;: [],
+                    },
+                ],
+            }
+        ],
+    },
+]
+</code></pre></div><h2 id="saved-usb-devices"><a href="#saved-usb-devices" class="header-anchor">#</a> Saved USB Devices</h2> <p>Since USB devices may occasionally disconnect, this API allows you to back up the current USB device list. This backup can be used to identify any missing or disconnected devices later.</p> <p>Save the current USB device list:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">curl</span> -X PUT <span class="token punctuation">\</span>
+  -H <span class="token string">&quot;Content-Type: application/json&quot;</span> <span class="token punctuation">\</span>
+  -d <span class="token string">'[...]'</span> <span class="token punctuation">\</span>
+  http://192.168.25.25:8090/device/usb_devices/saved
+</code></pre></div><p>Retrieve the saved USB device list:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">curl</span> http://192.168.25.25:8090/device/usb_devices/saved
+</code></pre></div><p>Clear the saved USB device list:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">curl</span> -X DELETE http://192.168.25.25:8090/device/usb_devices/saved
+</code></pre></div><h2 id="boot-progress"><a href="#boot-progress" class="header-anchor">#</a> Boot Progress</h2> <p>During the boot process, any API request will return a <code>503 Service Unavailable</code> status code.
+Once the boot process is complete, the APIs will function normally.</p> <p>However, <code>GET /device/boot_progress</code> will always return a <code>200 OK</code> status, even after booting is finished.</p> <p>For example:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">curl</span> http://192.168.25.25:8090/device/info <span class="token comment"># Returns 503 during the boot process.</span>
+<span class="token function">curl</span> http://192.168.25.25:8090/device/boot_progress <span class="token comment"># Always returns 200.</span>
+</code></pre></div><div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;start_time&quot;</span><span class="token operator">:</span> <span class="token number">1697777324.597</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;progress&quot;</span><span class="token operator">:</span> <span class="token number">0.21</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;logs&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;stamp&quot;</span><span class="token operator">:</span> <span class="token number">1697777324.597</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;progress&quot;</span><span class="token operator">:</span> <span class="token number">0.0</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;msg&quot;</span><span class="token operator">:</span> <span class="token string">&quot;=== AutoXing Axbot Starting Up ===&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;stamp&quot;</span><span class="token operator">:</span> <span class="token number">1697777328.597</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;progress&quot;</span><span class="token operator">:</span> <span class="token number">0.2</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;msg&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Loading remote params ...&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;stamp&quot;</span><span class="token operator">:</span> <span class="token number">1697777330.601</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;progress&quot;</span><span class="token operator">:</span> <span class="token number">0.21</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;msg&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Starting lidar_node ...&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="time-configuration"><a href="#time-configuration" class="header-anchor">#</a> Time Configuration</h2> <p><a href="https://chrony-project.org/" target="_blank" rel="noopener noreferrer">Chrony<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> is used to manage the robot's system time.</p> <p>Starting from version 2.7.1, you can manage certain time configurations using the following APIs.</p> <p>The current Chrony configuration can be retrieved from:</p> <div class="language- extra-class"><pre class="language-text"><code>curl http://192.168.25.25:8090/device/chrony/chrony.conf
+</code></pre></div><h3 id="time-sources"><a href="#time-sources" class="header-anchor">#</a> Time Sources</h3> <p>Chrony can utilize a list of configured time sources.</p> <div class="language- extra-class"><pre class="language-text"><code>$ curl http://192.168.25.25:8090/device/chrony/sources
+</code></pre></div><div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token string">&quot;pool 2.debian.pool.ntp.org iburst&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;pool 1.cn.pool.ntp.org iburst&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;pool 2.cn.pool.ntp.org iburst&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;pool 3.cn.pool.ntp.org iburst&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;pool 0.cn.pool.ntp.org iburst&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;server ntp1.autoxing.com iburst&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;server ntp2.autoxing.com iburst&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>The syntax is a subset of the <a href="https://manpages.debian.org/experimental/chrony/chrony.conf.5.en.html#Time_sources" target="_blank" rel="noopener noreferrer">Chrony Time Source<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> configuration.</p> <ul><li><code>server [HOSTNAME] [PORT port] [iburst] [trust]</code></li> <li><code>pool [NAME] [PORT port] [iburst] [trust]</code></li></ul> <p>It is recommended to configure at least four time sources to mitigate the impact of an inaccurate source (a &quot;falseticker&quot;).
+See https://access.redhat.com/solutions/58025</p> <p>Set the time sources:</p> <div class="language- extra-class"><pre class="language-text"><code>curl -X PUT \
+  -H &quot;Content-Type: application/json&quot; \
+  --data '[&quot;pool 2.debian.pool.ntp.org iburst&quot;, &quot;pool 0.cn.pool.ntp.org iburst&quot;]' \
+  http://192.168.25.25:8090/device/chrony/sources
+</code></pre></div><p>Restore the default time sources:</p> <div class="language- extra-class"><pre class="language-text"><code>curl -X DELETE http://192.168.25.25:8090/device/chrony/sources
+</code></pre></div><h3 id="ntp-server"><a href="#ntp-server" class="header-anchor">#</a> NTP Server</h3> <p>Chrony can also be configured to act as an NTP server.</p> <p>To enable NTP access for the <code>192.168.2.*</code> subnet, use the following API:</p> <div class="language- extra-class"><pre class="language-text"><code>curl -X PUT \
+  -H &quot;Content-Type: application/json&quot; \
+  --data '[&quot;allow 192.168.2.0/24&quot;]' \
+  http://192.168.25.25:8090/device/chrony/allows
+</code></pre></div><p>The syntax follows the <a href="https://manpages.debian.org/experimental/chrony/chrony.conf.5.en.html#NTP_server" target="_blank" rel="noopener noreferrer">Chrony Time Server<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> configuration.</p> <div class="language- extra-class"><pre class="language-text"><code>allow [all] [SUBNET]
+</code></pre></div><p>Retrieve the current allow rules:</p> <div class="language- extra-class"><pre class="language-text"><code>curl http://192.168.25.25:8090/device/chrony/allows
+</code></pre></div><p>Disable the NTP Server:</p> <div class="language- extra-class"><pre class="language-text"><code>curl -X DELETE http://192.168.25.25:8090/device/chrony/allows
+</code></pre></div><h2 id="sensor-list"><a href="#sensor-list" class="header-anchor">#</a> Sensor List</h2> <p>Available since version 2.12.0.</p> <p>Returns a list of all sensors and their primary topics, intended for human inspection during the quality control process.</p> <div class="language- extra-class"><pre class="language-text"><code>curl http://192.168.25.25:8090/device/sensors
+</code></pre></div><div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+    <span class="token property">&quot;depth_cameras&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ihawk_upward&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;depth_image_topic&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/depth_camera/downward/image&quot;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ihawk_downward&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;depth_image_topic&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/depth_camera/backward/image&quot;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;laser_scanners&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;lidar_node&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;scan_topic&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/horizontal_laser_2d/matched&quot;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;rgb_cameras&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;rgb_forward&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;image_topic&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/rgb_cameras/front/compressed&quot;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">1/28/2026, 8:03:13 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/axbot_rest_book/reference/iot_devices.html" class="prev">
+        IoT Devices
+      </a></span> <span class="next"><a href="/axbot_rest_book/reference/robot_params.html">
+        Robot Parameters API
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/axbot_rest_book/assets/js/app.b60f550b.js" defer></script><script src="/axbot_rest_book/assets/js/2.45d5bdca.js" defer></script><script src="/axbot_rest_book/assets/js/28.ec0587c6.js" defer></script>
+  </body>
+</html>
