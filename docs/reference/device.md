@@ -50,9 +50,7 @@ curl http://192.168.25.25:8090/device/info
     "supportsWsV2": true, // Supports the V2 WebSocket API (ws://HOST/ws/v2/topics).
     "supportsRgbCamera": true, // Supports RGB camera-related topics.
     "combineImuBiasAndPoseCalibration": true, // Available since version 2.4.0. Combines IMU bias and pose calibration.
-    "jack": [
-      "check" // Supports POST /services/jack_self_check
-    ]
+    "supportsJackCheck": true, // Supports POST /services/jack_self_check
   }
 }
 ```
