@@ -401,7 +401,7 @@ curl -X POST \
   http://192.168.25.25:8090/services/clear_range_data_all_zero_error
 ```
 
-## Jack Device Up/Down
+## Jack Device Up, Down, Self-Check
 
 Raise or lower the jack device. The state of the jack device is available via the WebSocket [Jack State](./websocket.md#jack-state).
 
@@ -415,6 +415,12 @@ curl -X POST \
 curl -X POST \
   -H "Content-Type: application/json" \
   http://192.168.25.25:8090/services/jack_down
+```
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  http://192.168.25.25:8090/services/jack_self_check
 ```
 
 ## Step Time

@@ -1,5 +1,7 @@
 # Changelog
 
+- Add service [/service/jack_self_check](../reference/services.md#jack-device-up-down-self-check)
+
 ## 2.12.0
 
 - Add websocket channel [V2X Health State](../reference/websocket.md#v2x-health-state)
@@ -88,7 +90,7 @@
   - New capability flag: `supportsJack`
   - New move action type: `align_with_rack`, `to_unload_point`. See [Jack Device](../reference/moves.md#jack-device)
   - New move actin fail reason `rack_moved`.
-  - Add services. See [Jack Up/Down](../reference/services.md#jack-device-updown)
+  - Add services. See [Jack Up/Down](../reference/services.md#jack-device-up-down-self-check)
   - Add websocket topic [`/jack_state`](../reference/websocket.md#jack-state)
 - Support [dynamic footprint](../reference/robot_params.md#robot-footprint):
   - New capability flag: `supportsDynamicFootprints`.
