@@ -1260,7 +1260,7 @@ This topic provides the health status of V2X beacons, including message receptio
 }
 ```
 
-## CHC NavState (GNSS/INS)
+## CHC NavState (GNSS/INS) <a id="devpvt"></a>
 
 Since [master](no final release yet).
 
