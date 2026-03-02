@@ -1257,3 +1257,29 @@ This topic provides the health status of V2X beacons, including message receptio
   "beacon_active_states": [true, true, false]  // Active state of each beacon (true if receiving messages at expected rate).
 }
 ```
+
+## CHC NavState (GNSS/INS)
+
+Since [master](no final release yet).
+
+Raw navigation data from the CHC (华测) GNSS/INS sensor on topic `/devpvt`.
+
+```json
+{
+  "topic": "/devpvt",
+  "speed": 0.352,           // Ground speed (m/s).
+  "heading": 270.123,       // Track angle — velocity heading in vehicle frame, clockwise, [0, 360] deg.
+  "heading2": 180.654,      // Dual-antenna heading in vehicle frame, clockwise, [0, 360] deg.
+
+  // Overall INS/GNSS fusion state (stat[0]):
+  //   init | sat_nav | combined_nav | pure_inertial
+  "combined_state": "combined_nav",
+
+  // GNSS fix and heading quality (stat[1]):
+  //   no_fix_no_heading | single_point | pseudorange_diff | combined_dead_reckoning
+  //   rtk_fixed | rtk_float
+  //   single_point_no_heading | pseudorange_diff_no_heading | rtk_fixed_no_heading | rtk_float_no_heading
+  "gnss_state": "rtk_fixed",
+
+  "warning": 0              // Sensor warning bitmask (0 = no warning).
+}
