@@ -1,7 +1,8 @@
 # Changelog
 
+- Add `nav_sat_state` in [/slam/state](../reference/websocket.md#positioning-state)
+- Add `/devpvt` websocket channel [CHC NavState (GNSS/INS)](../reference/websocket.md#chc-navstate-gnssins) 
 - Add service [/service/jack_self_check](../reference/services.md#jack-device-up-down-self-check)
-- Add websocket channel [CHC NavState (GNSS/INS)](../reference/websocket.md#chc-navstate-gnssins) `/devpvt`
 
 ## 2.12.0
 
