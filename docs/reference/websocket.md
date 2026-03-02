@@ -89,6 +89,8 @@ Dark-red pixels represent the actual obstacles, while light-red pixels are extru
   // positioning: A map is set, and the robot is in the localization state.
   "state": "positioning",
 
+  "nav_sat_state": "no_fix", // Since 3.14. no_fix, sat_base or ground_base_with_ori
+
   "reliable": true,       // false means the position is lost.
 
   // "lidar_reliable = False" means that no constraint exists between newly created 
