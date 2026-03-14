@@ -51,6 +51,7 @@ curl http://192.168.25.25:8090/device/info
     "supportsRgbCamera": true, // Supports RGB camera-related topics.
     "combineImuBiasAndPoseCalibration": true, // Available since version 2.4.0. Combines IMU bias and pose calibration.
     "supportsJackCheck": true, // Supports POST /services/jack_self_check
+    "supportsDuoLidar": true, // Supports POST /services/calibrate_duo_lidar_poses
   }
 }
 ```

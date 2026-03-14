@@ -649,3 +649,20 @@ curl -X POST \
 Use the [V2X Health State](./websocket.md#v2x-health-state) WebSocket topic to monitor beacon responses and health status.
 
 
+## Calibrate Duo Lidar Poses
+
+This service is used to calibrate the poses of duo lidars mounted at the left-front and right-back corners.
+This service should only be called when "caps.supportsDuoLidar" is true.
+
+Before calibration, make sure:
+
+There must be clear horizontal and vertical walls in one of the overlapping areas of the duo lidars' fields of view.
+
+![](./duo-lidars.png)
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  http://192.168.25.25:8090/services/calibrate_duo_lidar_poses
+```
+
