@@ -104,35 +104,36 @@ curl http://192.168.25.25:8090/mappings/
 [
    {
       "id":48,
-      "thumbnail_url":"http://192.168.25.25:8090/mappings/48/thumbnail",
-      "image_url":"http://192.168.25.25:8090/mappings/48.png",
+      "url":"http://192.168.25.25:8090/mappings/48",
       "grid_origin_x":-8.050000190734863,
       "grid_origin_y":-5.650000095367432,
-      "grid_resolution":0.05,
-      "url":"http://192.168.25.25:8090/mappings/48",
+      "grid_resolution":0.05,     
       "start_time":1647520760,
       "end_time":1647520995,
       "state":"finished",
       "bag_id":27,
-      "bag_url":"http://192.168.25.25:8090/bags/27.bag",
-      "download_url":"http://192.168.25.25:8090/mappings/48/download",
-      "trajectories_url": "http://192.168.25.25:8090/mappings/48/trajectories.json"
+
+      //////////////////////////////
+      // Main data
+      "pbstream_url":"http://192.168.25.25:8090/mappings/48.pbstream",  // the binary map data file. 
+                                                                        // Supports RANGE + ETAG based downloading.
+      "image_url":"http://192.168.25.25:8090/mappings/48.png",
+      "properties_url": "http://tunnel.autoxing.com:21044/mappings/19/properties.json", // landmarks, etc
+
+      //////////////////////////////
+      // Auxiliary data
+      "thumbnail_url":"http://192.168.25.25:8090/mappings/48/thumbnail",
+      "trajectories_url": "http://192.168.25.25:8090/mappings/48/trajectories.json", // the trajectory of this mapping task
+      "bag_url":"http://192.168.25.25:8090/bags/27.bag", // for debugging slam
+
+      //////////////////////////////
+      // Obsolete
+      "download_url":"http://192.168.25.25:8090/mappings/48/download", // obsolete. Base64 map data. Unsuitable for large map.
    },
    {
-      "id":47,
-      "thumbnail_url":null,
-      "image_url":null,
-      "grid_origin_x":0.0,
-      "grid_origin_y":0.0,
-      "grid_resolution":0.0,
-      "url":"http://192.168.25.25:8090/mappings/47",
-      "start_time":1647494329,
-      "end_time":null,
-      "state":"cancelled",
-      "bag_id":null,
-      "bag_url":null,
-      "download_url":null
-   },
+    ...
+   }
+]
 ```
 
 ## Mapping Detail
