@@ -1,5 +1,6 @@
 # Changelog
 
+- Emphasize download mapping result by binary file, with [pbstream_url](../reference/mappings.md#mapping-list)
 - Add `nav_sat_state` in [/slam/state](../reference/websocket.md#positioning-state)
 - Add `/devpvt` websocket channel [CHC NavState (GNSS/INS)](../reference/websocket.md#devpvt) 
 - Add service [/service/jack_self_check](../reference/services.md#jack-device-up-down-self-check)

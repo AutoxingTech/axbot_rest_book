@@ -115,20 +115,32 @@ curl http://192.168.25.25:8090/mappings/
 
       //////////////////////////////
       // Main data
-      "pbstream_url":"http://192.168.25.25:8090/mappings/48.pbstream",  // the binary map data file. 
-                                                                        // Supports RANGE + ETAG based downloading.
+      //////////////////////////////
+
+      // the binary map data file. Supports RANGE + ETAG based downloading.
+      "pbstream_url":"http://192.168.25.25:8090/mappings/48.pbstream",  
+      // The PNG image
       "image_url":"http://192.168.25.25:8090/mappings/48.png",
-      "properties_url": "http://tunnel.autoxing.com:21044/mappings/19/properties.json", // landmarks, etc
+      // landmarks, etc
+      "properties_url": "http://tunnel.autoxing.com:21044/mappings/48/properties.json", 
 
       //////////////////////////////
       // Auxiliary data
+      //////////////////////////////
+      
+      // A smaller sized PNG image
       "thumbnail_url":"http://192.168.25.25:8090/mappings/48/thumbnail",
-      "trajectories_url": "http://192.168.25.25:8090/mappings/48/trajectories.json", // the trajectory of this mapping task
-      "bag_url":"http://192.168.25.25:8090/bags/27.bag", // for debugging slam
+      // the trajectory of this mapping task
+      "trajectories_url": "http://192.168.25.25:8090/mappings/48/trajectories.json",
+      // for debugging slam
+      "bag_url":"http://192.168.25.25:8090/bags/48.bag",
 
       //////////////////////////////
       // Obsolete
-      "download_url":"http://192.168.25.25:8090/mappings/48/download", // obsolete. Base64 map data. Unsuitable for large map.
+      //////////////////////////////
+
+      // obsolete. Map data & Image, in JSON format(base64ed). Unsuitable for large map.
+      "download_url":"http://192.168.25.25:8090/mappings/48/download", 
    },
    {
     ...
