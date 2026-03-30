@@ -1,5 +1,6 @@
 # Changelog
 
+- Support creating maps directly from local files in [Map API](../reference/maps.md#create-map-from-local-files)
 - Emphasize download mapping result by binary file, with [pbstream_url](../reference/mappings.md#mapping-list)
 - Add `nav_sat_state` in [/slam/state](../reference/websocket.md#positioning-state)
 - Add `/devpvt` websocket channel [CHC NavState (GNSS/INS)](../reference/websocket.md#devpvt) 
