@@ -4,8 +4,6 @@ blacklist = {
     ".vscode",
     ".git",
     "__pycache__",
-    "docs/reference/releases.md",
-    "docs/reference/releases_full.md",
     "docs/reference/recordings.md",
     "docs/reference/videos.md",
     "docs/reference/bags.md",
