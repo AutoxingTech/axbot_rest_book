@@ -1,195 +1,95 @@
 # Map API
 
-A map contains the following fields:
+The current SDK wraps only the map operations needed for routine lifecycle management:
 
-| name             | type   | description                                                  |
-| ---------------- | ------ | ------------------------------------------------------------ |
-| uid              | string | Unique ID.                                                   |
-| map_name         | float  | The name of the map.                                         |
-| map_version      | int    | The version of the map.                                      |
-| create_time      | int    | A Unix timestamp (e.g., 1644568815).                         |
-| grid_origin_x    | float  | The X-coordinate of the lower-left corner.                   |
-| grid_origin_y    | float  | The Y-coordinate of the lower-left corner.                   |
-| grid_resolution  | float  | The size of a single pixel, typically 0.05 m/pixel.          |
-| overlays_version | int    | The version of the overlays.                                 |
-| overlays         | string | Overlays in GeoJSON format, containing POIs, virtual walls, etc. |
-| carto_map        | string | Base64-encoded binary map data (used for positioning).       |
-| occupancy_grid   | string | Base64-encoded PNG image data (used for display).            |
+| SDK helper | Method | Path | Request body |
+| --- | --- | --- | --- |
+| `saveMappingAsMap(mappingId, mapName)` | `POST` | `/maps/` | `{ "mapping_id": number, "map_name": string }` |
+| `deleteMap(mapId)` | `DELETE` | `/maps/{id}` | none |
 
-## Map List
+The robot REST API also exposes map list, detail, create, and patch endpoints, but those are not currently wrapped by `robotApi.ts`. This page keeps the map resource model for reference and marks the raw-only parts clearly.
 
-```bash
-curl http://192.168.25.25:8090/maps/
+## Map Resource Shape
+
+The SDK exports a `MapItem` type through `@kingsimba/axbot-sdk/msgs`.
+
+```ts
+type MapItem = {
+  id: number;
+  uid: string;
+  map_name: string;
+  create_time: number;
+  last_modified_time?: number;
+  map_version: number;
+  overlays_version: number;
+  thumbnail_url?: string;
+  image_url?: string;
+  pbstream_url?: string;
+  url?: string;
+  grid_origin_x?: number;
+  grid_origin_y?: number;
+  grid_resolution?: number;
+  overlays?: string;
+};
 ```
 
-```json
-[
-  {
-    "id": 1,
-    "uid": "620620f9c0fd0ecb0f66d981",
-    "map_name": "5层地图",
-    "create_time": 1644568815,
-    "map_version": 9,
-    "overlays_version": 14,
-    "thumbnail_url": "http://192.168.25.25:8090/maps/1/thumbnail",
-    "image_url": "http://192.168.25.25:8090/maps/1.png",
-    "url": "http://192.168.25.25:8090/maps/1"
-  },
-  {
-    "id": 2,
-    "uid": "61ee4c3ac0fd0ecb0f66d165",
-    "map_name": "前台大厅",
-    "create_time": 1643007028,
-    "map_version": 2,
-    "overlays_version": 8,
-    "thumbnail_url": "http://192.168.25.25:8090/maps/2/thumbnail",
-    "image_url": "http://192.168.25.25:8090/maps/2.png",
-    "url": "http://192.168.25.25:8090/maps/2"
-  },
-  {
-    "id": 3,
-    "uid": "61e95264c0fd0ecb0f66c71e",
-    "map_name": "楼道大图",
-    "create_time": 1642680851,
-    "map_version": 1,
-    "overlays_version": 3,
-    "thumbnail_url": "http://192.168.25.25:8090/maps/3/thumbnail",
-    "image_url": "http://192.168.25.25:8090/maps/3.png",
-    "url": "http://192.168.25.25:8090/maps/3"
-  }
-]
-```
+Common fields:
 
-**Extra Fields**
+| Field | Meaning |
+| --- | --- |
+| `id` | Numeric map identifier |
+| `uid` | Stable map UID |
+| `map_name` | Human-readable map name |
+| `map_version` | Binary map revision |
+| `overlays_version` | Overlay revision |
+| `grid_origin_x`, `grid_origin_y`, `grid_resolution` | Occupancy-grid placement metadata |
+| `image_url` | Rendered PNG map image |
+| `pbstream_url` | Binary SLAM/map artifact |
+| `overlays` | GeoJSON string for POIs, virtual walls, and related overlays |
 
-| name          | description                                                      |
-| ------------- | ---------------------------------------------------------------- |
-| image_url     | The PNG image representation of the map at its original resolution. |
-| thumbnail_url | The PNG image representation of the map at a low resolution (thumbnail). |
-
-## Get Map Detail
-
-```bash
-curl http://192.168.25.25:8090/maps/1
-```
-
-```json
-{
-  "id": 1,
-  "map_name": "5层地图",
-  "uid": "620620f9c0fd0ecb0f66d981",
-  "map_version": 9,
-  "create_time": 1644568815,
-  "last_modified_time": 1647333821,
-  "grid_origin_x": -53.1968,
-  "grid_origin_y": -25.0135,
-  "grid_resolution": 0.05,
-  "overlays_version": 14,
-  "overlays": "{\"type\": \"FeatureCollection\", \"features\": [{\"id\": ...",
-  "thumbnail_url": "http://192.168.25.25:8090/maps/1/thumbnail",
-  "image_url": "http://192.168.25.25:8090/maps/1.png",
-  "pbstream_url": "http://192.168.25.25:8090/maps/1.pbstream"
-}
-```
-
-**Extra Fields**
-
-| name          | description                                                   |
-| ------------- | ------------------------------------------------------------- |
-| image_url     | The URL to retrieve the PNG image of the map at its original resolution. |
-| thumbnail_url | The URL to retrieve the thumbnail (PNG) image of the map.      |
-| pbstream_url  | The URL to retrieve the binary map data.                      |
-
-## Create a Map
-
-Maps can be created using base64-encoded data or from local file paths directly on the server. There is also a method to create a map directly from a mapping task (see [mappings.md](mappings.md#save-mapping-artifacts-directly-as-a-map)).
-
-### Create Map from Base64 Data
-
-A map can be created by providing the following required fields:
-
-* map_name
-* carto_map (Base64-encoded binary map data)
-* occupancy_grid (Base64-encoded PNG image data)
-* grid_origin_x
-* grid_origin_y
-* grid_resolution
-* overlays_version (optional)
-* overlays (optional)
-* uid (optional)
-* map_version (optional)
+## Save Mapping Artifacts As A Map
 
 ```bash
 curl -X POST \
-    -H "Content-Type: application/json" \
-    --data '{"map_name": "xxx", "carto_map": "xxxx", "occupancy_grid": "xxx" ...}' \
-    http://192.168.25.25:8090/maps/
+  -H "Content-Type: application/json" \
+  -d '{"mapping_id":48,"map_name":"From Mapping 48"}' \
+  "$ROBOT_API_BASE/maps/"
 ```
 
-### Create Map from Local Files
-
-If the `.pbstream` and `.png` files already exist on the device, you can create a map without Base64 encoding by passing absolute file paths. 
-
-:::tip
-**Advantages over Base64 JSON:**
-- **Instant speed**: No base64 decoding or payload parsing overhead.
-- **Almost 0 memory usage**: Avoids loading huge map files into memory during the API request.
-- **0 additional disk space usage**: Uses hard links directly to your source files so no data is duplicated.
-:::
-
-* map_name
-* carto_map_filename (Absolute path to the source `.pbstream` file)
-* occupancy_grid_filename (Absolute path to the source `.png` file)
-* grid_origin_x
-* grid_origin_y
-* grid_resolution
-* overlays_version (optional)
-* overlays (optional)
-* uid (optional)
-* map_version (optional)
-
-```bash
-curl -X POST \
-    -H "Content-Type: application/json" \
-    --data '{"map_name": "Floor 1", "carto_map_filename": "/path/to/source.pbstream", "occupancy_grid_filename": "/path/to/source.png"}' \
-    http://192.168.25.25:8090/maps/
-```
-
-**Response**
+The typical response is a newly created map record:
 
 ```json
 {
-  "id": 119, // The ID of the newly created map. Use this ID to load it onto the robot.
+  "id": 119,
   "uid": "9b94ac16-239b-11ed-9446-1e49da274768",
-  "map_name": "From Mapping 4",
+  "map_name": "From Mapping 48",
   "create_time": 1657015615,
   "map_version": 1,
   "overlays_version": 1,
-  "thumbnail_url": "http://192.168.25.25:8090/maps/119/thumbnail",
-  "image_url": "http://192.168.25.25:8090/maps/119.png",
-  "url": "http://192.168.25.25:8090/maps/119"
+  "thumbnail_url": "http://ROBOT_HOST:8090/maps/119/thumbnail",
+  "image_url": "http://ROBOT_HOST:8090/maps/119.png",
+  "url": "http://ROBOT_HOST:8090/maps/119"
 }
 ```
 
-## Modify Map
-
-Modify the name and overlays.
+## Delete A Map
 
 ```bash
-curl -X PATCH \
-    -H "Content-Type: application/json" \
-    -d '{"map_name": "...", "overlays": "..."}' \
-    http://192.168.25.25:8090/maps/1 {}
+curl -X DELETE "$ROBOT_API_BASE/maps/18"
 ```
 
-## Delete Map
+This is the only destructive map-management operation wrapped by the current SDK.
 
-```bash
-curl -X DELETE http://192.168.25.25:8090/maps/1
-```
+## Raw REST Endpoints Not Wrapped By The Current SDK
 
-## Delete All Maps
+The following endpoints remain useful for admin tools and migration scripts, but they are outside the typed SDK helper layer:
 
-```bash
-curl -X DELETE http://192.168.25.25:8090/maps
-```
+| Endpoint | Status |
+| --- | --- |
+| `GET /maps/` | Raw REST only |
+| `GET /maps/{id}` | Raw REST only |
+| `POST /maps/` with `carto_map` and `occupancy_grid` payloads | Raw REST only |
+| `POST /maps/` with local file paths | Raw REST only |
+| `PATCH /maps/{id}` | Raw REST only |
+
+If you build against those endpoints directly, validate them on the target robot build and keep your own request and response types in sync with the deployed firmware.

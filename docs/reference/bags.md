@@ -1,123 +1,86 @@
 # Bags API
 
-Starting from version 2.7.0, bag files are recorded continuously. When the total storage size exceeds a predefined limit, the oldest files are automatically purged.
+The current SDK supports bag deletion and the shared bag-player interface.
 
-## Get Bag List
+| SDK helper | Method | Path | Notes |
+| --- | --- | --- | --- |
+| `removeBag(filename?)` | `DELETE` | `/bags/{filename}` or `/bags/` | Deletes one bag or all bags |
+| `getBagPlayerMetadata(filename, 'bags')` | `GET` | `/bags/{filename}/player` | Metadata only |
+| `getBagPlayerChunk(filename, startTime, endTime, 'bags')` | `GET` | `/bags/{filename}/player?start_time=...&end_time=...` | Parsed JSON chunk |
+| `getBagPlayerChunkStream(...)` | `GET` | same as above | Raw streaming `Response` |
+
+The robot also exposes list and download endpoints for bags, but those are not currently wrapped by `robotApi.ts`.
+
+## List Bags
 
 ```bash
-curl http://192.168.25.25:8090/bags/
+curl "$ROBOT_API_BASE/bags/"
 ```
+
+A current robot response looks like this:
 
 ```json
 [
   {
-    "filename": "2023-10-31_14-30-00.bag",
-    "size": "6.8KB",
-    "size_bytes": 6922,
-    "end": "31-Oct-2023 14:36:17",
-    "download_url": "http://192.168.25.25:8090/bags/2023-10-31_14-30-00.bag/download"
-  },
-  {
-    "filename": "2023-11-01_13-50-00.bag",
-    "size": "4.1KB",
-    "size_bytes": 4172,
-    "end": "01-Nov-2023 13:55:10",
-    "download_url": "http://192.168.25.25:8090/bags/2023-11-01_13-50-00.bag/download"
+    "filename": "B652507a06100Ao_2026-04-06_01-50-00.bag",
+    "size": "3.8MB",
+    "size_bytes": 4027099,
+    "end": "06-Apr-2026 02:00:00",
+    "download_url": "http://tunnel.autoxing.com:21044/bags/B652507a06100Ao_2026-04-06_01-50-00.bag/download"
   }
 ]
 ```
 
-## Bag Player API
+## Delete Bags
 
-The Bag Player API allows for replaying ROS bag files online. It provides metadata about the bag and enables downloading message chunks within specific time ranges.
+```bash
+curl -X DELETE "$ROBOT_API_BASE/bags/B652507a06100Ao_2026-04-06_01-50-00.bag"
+curl -X DELETE "$ROBOT_API_BASE/bags/"
+```
 
-### Endpoint
-`GET /bags/<filename>/player`
+Omit `filename` only when you explicitly want to clear the entire bag store.
 
-### 1. Get Bag Metadata
-Fetches general information about the bag file, such as the total number of messages and the time duration.
+## Bag Player Metadata
 
-#### Request
-`GET /bags/<filename>/player`
+```bash
+curl "$ROBOT_API_BASE/bags/SOME_FILE.bag/player"
+```
 
-### Success Response
-- **Code:** `200 OK`
-- **Content:**
-  ```json
-  {
-    "total_messages": 5000,
-    "start_time": 1674650000,
-    "end_time": 1674653600
-  }
-  ```
-  - `total_messages`: Integer representing the total number of messages in the bag.
-  - `start_time`: Integer timestamp (Unix epoch) of the first message.
-  - `end_time`: Integer timestamp (Unix epoch) of the last message.
+The SDK expects this payload shape:
 
-### 2. Get Message Chunks
-Fetches messages within a specific time range. This is used by the frontend to stream or download chunks of the bag.
+```json
+{
+  "total_messages": 5000,
+  "start_time": 1674650000,
+  "end_time": 1674653600
+}
+```
 
-#### Request
-`GET /bags/<filename>/player?start_time=<float>&end_time=<float>`
+## Bag Player Chunk
 
-#### Query Parameters
-| Parameter | Type | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `start_time` | float | Yes | The start of the time range in seconds (Unix epoch). |
-| `end_time` | float | Yes | The end of the time range in seconds (Unix epoch). |
+```bash
+curl "$ROBOT_API_BASE/bags/SOME_FILE.bag/player?start_time=1674650000&end_time=1674650060"
+```
 
-### Success Response
+The SDK parses the chunk as:
 
-- **Code:** `200 OK`
-- **Content:**
-  ```json
-  {
-    "total_messages": 5000,
-    "start_time": 1674650000,
-    "end_time": 1674653600,
-    "messages": [
-      {
-        "topic": "/some_topic",
-        "field1": "value1",
-        "__stamp": 1674650010.123,
-        "__latched": true
-      },
-      ...
-    ]
-  }
-  ```
-  - `messages`: A list of JSON-converted ROS messages. 
-  - Each message includes:
-    - `__stamp`: High-precision timestamp when the message was recorded.
-    - `__latched`: Boolean flag set to `true` if the message belongs to a latched topic. This includes both backfilled messages (previous state) and messages occurring within the requested time range.
+```json
+{
+  "total_messages": 5000,
+  "start_time": 1674650000,
+  "end_time": 1674653600,
+  "messages": [
+    {
+      "topic": "/some_topic",
+      "__stamp": 1674650010.123,
+      "__latched": true
+    }
+  ]
+}
+```
 
+Each message is the JSON-converted topic payload with an added `__stamp`. Latched messages may also include `__latched=true`.
 
-#### Special Behavior: Latched Topics
-When a time range is requested, the API automatically includes the most recent message for "latched" topics that occurred *before* the `start_time`. This ensures the player has the current state for static or slowly-changing topics (like maps or configurations) as soon as the chunk starts.
+## Notes On Live Robots
 
-**Latched topics include:**
-- `/map/info`
-- `/alerts`
-- `/map_image`
-- `/sensor_manager_state`
-- `/robot_model`
-- `/nearby_robot_footprints`
-- `/path`
-- `/local_path`
-- `/detected_features/racks_v2`
-- `/detected_features/pallets`
-- `/detected_features/chargers`
-- `/planning_state`
-- `/jack_state`
-- `/towing_state`
-
----
-
-### Caching
-Responses are cached with the following header:
-`Cache-Control: public, max-age=2592000` (30 days)
-
-### Error Responses
-- **Code:** `400 BAD REQUEST`
-- **Content:** `{"error": "string explaining the error"}` (e.g., if the bag file is not found or corrupted).
-
+On the upgraded robot used for this sweep, the player endpoint for one historical continuous bag returned a file-not-found error because the file had already been rotated out of the cache. The SDK contract itself is unchanged; if a bag still exists on disk, the endpoint shape above is what clients should expect.
