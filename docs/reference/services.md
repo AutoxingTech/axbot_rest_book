@@ -615,10 +615,11 @@ curl http://192.168.25.25:8090/services/query_pose/charger_pose
 }
 ```
 
-Similarly, if a forklift is parked at a cargo location, the system can infer the location's pose from the forklift's current position. 
+Similarly, if a robot (e.g., a forklift or a trailer robot) is parked at a cargo location (e.g., a pallet or trailer), the system can infer the location's pose from the robot's current position. 
 
 ```bash
 curl http://192.168.25.25:8090/services/query_pose/pallet_pose
+curl http://192.168.25.25:8090/services/query_pose/trailer_pose
 ```
 
 
@@ -630,8 +631,8 @@ curl http://192.168.25.25:8090/services/query_pose/pallet_pose
     },
 
     // Since 2.13.0. If reference == 'center_of_front_edge', the returned pose is
-    // the center of the pallet's front edge (new logic).
-    // Otherwise, the pose is the center of the pallet (deprecated).
+    // the center of the pallet or trailer's front edge (new logic).
+    // Otherwise, the pose is the center of the pallet or trailer (deprecated).
     "ref": "center_of_front_edge"
 }
 ```
