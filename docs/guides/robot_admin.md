@@ -8,7 +8,7 @@ This is an optional package. Once installed, it can be accessed at `http://ROBOT
 
 ![](./rb_admin_login.png)
 
-Log in with the username `guest@autoxing.com` and the password `autoxing`.
+Log in with your username and password (the defaults are usually `guest@autoxing.com` and `autoxing`).
 Once logged in, you can perform various tasks, including:
 
 - Creating new maps
