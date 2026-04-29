@@ -2,6 +2,8 @@
 
 ## 2.14.0
 
+- 2026-04-29 Add services [Towing Hook Lock, Towing Hook Release, Clear Towing Hook Error](../reference/services.md#towing-hook-lock)
+- 2026-04-29 Add services [Load/Unload Cargo](../reference/services.md#loadunload-cargo)
 - Add `/services/query_pose/trailer_pose` [Query Pose](../reference/services.md#query-pose)
 - Support creating maps directly from local files in [Map API](../reference/maps.md#create-map-from-local-files)
 - Emphasize download mapping result by binary file, with [pbstream_url](../reference/mappings.md#mapping-list)
