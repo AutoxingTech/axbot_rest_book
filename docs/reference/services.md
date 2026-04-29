@@ -667,3 +667,49 @@ curl -X POST \
   http://192.168.25.25:8090/services/calibrate_duo_lidar_poses
 ```
 
+
+## Towing Hook Lock
+
+Locks the towing hook to secure an attached trailer.
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  http://192.168.25.25:8090/services/towing_hook_lock
+```
+
+## Towing Hook Release
+
+Releases the towing hook to detach an attached trailer.
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  http://192.168.25.25:8090/services/towing_hook_release
+```
+
+## Clear Towing Hook Error
+
+Clears an error reported by the towing hook device.
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  http://192.168.25.25:8090/services/clear_towing_hook_error
+```
+
+## Load/Unload Cargo
+
+Triggers loading or unloading of cargo via the robot's cargo handling mechanism.
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  http://192.168.25.25:8090/services/load_cargo
+```
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  http://192.168.25.25:8090/services/unload_cargo
+```
