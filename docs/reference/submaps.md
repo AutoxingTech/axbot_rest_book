@@ -55,13 +55,15 @@ Example payload:
       "trajectory_id": 12,
       "submap_index": 3,
       "submap_version": 42,
-      "pose_position_x": 1.25,
-      "pose_position_y": -3.5,
-      "pose_position_z": 0,
-      "pose_orientation_x": 0,
-      "pose_orientation_y": 0,
-      "pose_orientation_z": 0.7071,
-      "pose_orientation_w": 0.7071,
+      "pose": {
+        "x": 1.25,
+        "y": -3.5,
+        "z": 0,
+        "qx": 0,
+        "qy": 0,
+        "qz": 0.7071,
+        "qw": 0.7071
+      },
       "is_frozen": true,
       "is_incremental_submap": false,
       "is_nearby_map": false
@@ -85,8 +87,8 @@ Each entry in `submap` contains:
 | `trajectory_id` | integer | Cartographer trajectory ID. |
 | `submap_index` | integer | Submap index within the trajectory. |
 | `submap_version` | integer | Incrementing content version. Refetch textures when this changes. |
-| `pose_position_x`, `pose_position_y`, `pose_position_z` | number | Submap position in world coordinates. |
-| `pose_orientation_x`, `pose_orientation_y`, `pose_orientation_z`, `pose_orientation_w` | number | Submap orientation quaternion. |
+| `pose.x`, `pose.y`, `pose.z` | number | Submap position in world coordinates. |
+| `pose.qx`, `pose.qy`, `pose.qz`, `pose.qw` | number | Submap orientation quaternion. |
 | `is_frozen` | boolean | Whether the submap is frozen. |
 | `is_incremental_submap` | boolean | Whether the submap belongs to incremental mapping output. |
 | `is_nearby_map` | boolean | Whether the submap comes from a nearby map source. |
