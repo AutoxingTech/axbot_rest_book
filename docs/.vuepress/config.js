@@ -40,6 +40,7 @@ module.exports = {
                             '/reference/maps',
                             '/reference/moves',
                             '/reference/current_map_and_pose',
+                            '/reference/submaps',
                             '/reference/overlays',
                             '/reference/mappings',
                             '/reference/services',
