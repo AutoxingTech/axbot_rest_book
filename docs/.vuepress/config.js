@@ -40,7 +40,6 @@ module.exports = {
                             '/reference/maps',
                             '/reference/moves',
                             '/reference/current_map_and_pose',
-                            '/reference/submaps',
                             '/reference/overlays',
                             '/reference/mappings',
                             '/reference/services',
@@ -54,7 +53,8 @@ module.exports = {
                             '/reference/app_store',
                             '/reference/hostnames',
                             '/reference/landmarks',
-                            '/reference/websocket'
+                            '/reference/websocket',
+                            '/reference/submaps'
                         ],
                         sidebarDepth: 2
                     },

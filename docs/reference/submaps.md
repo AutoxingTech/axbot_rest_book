@@ -1,5 +1,7 @@
 # Submaps
 
+Submap rendering is an advanced alternative to the [`/map_v2` WebSocket topic](./websocket.md) for displaying a robot's map. Instead of receiving the entire map as a single PNG, the client composites the map from many small, overlapping PNG images — one per cartographer submap. Unlike regular image tiles, submaps can overlap and vary in size. This approach is necessary for very large maps (> 2–3 km²) where a single full-resolution PNG becomes impractical.
+
 Submap rendering uses two pieces that are designed to work together:
 
 - The WebSocket topic `/submap_list` publishes the current list of cartographer submaps, including pose, version, and the SLAM session UUID.
@@ -13,6 +15,25 @@ The intended consumer flow is:
 4. Decode the returned protobuf and render its `textures`.
 
 This is a major mapping surface. The WebSocket topic gives you discovery and invalidation. The HTTP API gives you the actual texture payload.
+
+## Submap Rendering vs. `/map_v2`
+
+Submap rendering is an alternative to subscribing to the `/map_v2` WebSocket topic.
+
+**`/map_v2`** publishes the entire occupancy grid as a single PNG covering the whole map. It is straightforward to implement and the payload is usually small. However, as the map grows beyond roughly 2–3 km², storing the full resolution (normally 0.05 m/pixel) in a single image becomes impractical — the pixel count explodes. Even dropping to 0.1 m/pixel only delays the problem.
+
+**Submap rendering** represents the map as many small, overlapping PNGs — one per cartographer submap. Unlike uniform image tiles, submaps can overlap and are not equal-sized. This scales to arbitrarily large environments because each image is bounded in size. The trade-off is added complexity: you must maintain a per-submap cache, handle individual network requests, and composite potentially overlapping images at render time. The total number of PNG downloads also increases memory usage.
+
+| | `/map_v2` (single PNG) | Submap rendering |
+| --- | --- | --- |
+| Implementation complexity | Low | High |
+| Typical payload for a small map | ~100 KB (one download) | ~1 MB total (e.g. 100 submaps × 10 KB each) |
+| Supports very large maps (> 2–3 km²) | No | Yes |
+| Memory usage | Low for small maps | Higher (many images in cache) |
+| Network traffic | One large download | Many small downloads |
+| Image layout | Non-overlapping | Overlapping, variable size |
+
+Choose `/map_v2` for typical indoor environments. Switch to submap rendering when you expect maps that exceed a few square kilometres.
 
 ## `/submap_list` WebSocket Topic
 
