@@ -13,7 +13,8 @@
   "scripts": {
     "docs:dev": "vuepress dev docs --temp .temp",
     "docs:build": "vuepress build docs",
-    "check-links": "find docs -name '*.md' -exec markdown-link-check -c mlc_config.json {} \\;",
+    "docs:check-links": "find docs -name '*.md' -exec markdown-link-check -c mlc_config.json {} \\;",
+    "docs:check-links:modified": "git status --porcelain | grep '\\.md$' | cut -c 4- | xargs -r -L1 markdown-link-check -c mlc_config.json",
     "docker:build": "vuepress build docs && docker build . -t autoxing/axbot_rest_book",
     "docker:push": "docker push autoxing/axbot_rest_book"
   },

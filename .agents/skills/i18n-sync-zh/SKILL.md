@@ -17,22 +17,30 @@ This skill ensures that the Chinese documentation remains a perfect mirror of th
    - All code blocks (Shell, JSON, TypeScript, etc.) must be exactly the same as the English version.
    - **Exception**: Translate comments within the code blocks to Simplified Chinese.
 3. **Pseudo-code & Schema**: Pseudo-code and JSON examples must remain identical in structure and values.
-4. **Link Preservation**: Maintain all internal and external links, ensuring they point to the correct localized version if applicable (e.g., internal links should point to `/zh/...`).
+4. **Explicit Anchor Names**:
+   - Every header (Level 1, 2, 3) MUST have an explicit anchor ID appended to it that matches the English slug.
+   - Syntax: `## 中文标题 (English Title) {#english-slug}`.
+   - This ensures that internal links using `#` (e.g., `./websocket.md#sensor-manager-state`) remain consistent across all languages.
+5. **Link Preservation & Asset Paths**:
+   - Maintain all internal and external links.
+   - Reference original assets in `docs/reference/` or `docs/guides/` using relative paths (e.g., `../../reference/image.png`) to avoid duplication.
 
 ## Workflow
 
 1. **Source Discovery**: Identify the English source file (e.g., `docs/reference/maps.md`).
 2. **Target Mapping**: Locate or create the target Chinese file (e.g., `docs/zh/reference/maps.md`).
 3. **Verification**: Compare headings and structure between source and target.
-4. **Translation**:
+4. **Translation & Anchor Tagging**:
    - Translate all prose and headings.
+   - Append `{#anchor-id}` to every translated heading.
    - Translate table headers and cell content.
    - Translate comments inside code blocks.
-   - Ensure technical terms (e.g., "Namespace", "Payload", "Topic") are translated according to established project conventions or industry standards.
+5. **Validation**: Run the automated link checker on modified files: `npm run docs:check-links:modified`.
 
 ## Quality Checklist
 
 - [ ] Are all headings identical in level and order?
+- [ ] Does every heading have a `{#...}` explicit anchor?
 - [ ] Are all code blocks present and identical in content (except comments)?
-- [ ] Are all images and tables accounted for?
-- [ ] Do all internal links resolve correctly to the `/zh/` path?
+- [ ] Do all image paths point correctly to the common asset directories?
+- [ ] Does `npm run docs:check-links` pass with zero internal errors?
