@@ -1,0 +1,78 @@
+# 主机名 (Hostname) API
+
+此服务用于管理本地 DNS 条目（添加、删除或更新）：
+
+## 列出可用主机名
+
+```bash
+curl http://192.168.25.25:8090/hostnames/
+```
+
+```json
+[
+  {
+    "hostname": "local.autoxing.com",
+    "url": "http://192.168.25.25:8090/hostnames/local.autoxing.com"
+  }
+]
+```
+
+## 添加或更新主机名
+
+```bash
+curl -X PATCH \
+  -H "Content-Type: application/json" \
+  -d '{"ip": "192.168.10.12"}' \
+  http://192.168.25.25:8090/hostnames/local.autoxing.com
+```
+
+```json
+{
+  "message": "192.168.10.12 local.autoxing.com added"
+}
+```
+
+```json
+// 状态码 = 400
+{
+  "message": "error: local2.autoxing.com is not allowed. It must be one of ['local.autoxing.com']"
+}
+```
+
+## 获取主机名详情
+
+```bash
+curl http://192.168.25.25:8090/hostnames/local.autoxing.com
+```
+
+```json
+{
+  "ip": "192.168.20.20"
+}
+```
+
+```json
+// 状态码 = 404
+{
+  "message": "error: local.autoxing.com not found"
+}
+```
+
+## 删除主机名
+
+```bash
+curl -X DELETE http://192.168.25.25:8090/hostnames/local.autoxing.com
+```
+
+```json
+{
+  "message": "error: Hostname local.autoxing.com deleted"
+}
+```
+
+```json
+// 状态码 = 404
+{
+  "message": "error: local.autoxing.com not found"
+}
+```

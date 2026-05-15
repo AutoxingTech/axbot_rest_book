@@ -70,50 +70,55 @@ module.exports = {
                 ],
                 lastUpdated: 'Last Updated'
             },
-            // "/chs/": {
-            //     nav: [
-            //     ],
-            //     sidebar: [
-            //         {
-            //             title: '导引教程',
-            //             collapsable: false, // optional, defaults to true
-            //             sidebarDepth: 0,    // optional, defaults to 1
-            //             children: [
-            //                 '/chs/overview/getting_start',
-            //                 '/chs/guides/first_move',
-            //                 '/chs/guides/start_websocket',
-            //             ]
-            //         },
-            //         {
-            //             title: '参考手册',
-            //             collapsable: false,
-            //             children: [
-            //                 '/chs/reference/api_principals',
-            //                 '/chs/reference/maps',
-            //                 '/chs/reference/moves',
-            //                 '/chs/reference/current_map_and_pose',
-            //                 '/chs/reference/mappings',
-            //                 '/chs/reference/services',
-            //                 '/chs/reference/bluetooth',
-            //                 '/chs/reference/device',
-            //                 '/chs/reference/videos',
-            //                 '/chs/reference/recordings',
-            //                 '/chs/reference/websocket'
-            //             ],
-            //             sidebarDepth: 2
-            //         },
-            //         {
-            //             title: '其它',
-            //             collapsable: false,
-            //             children: [
-            //                 '/chs/other/deprecations',
-            //                 '/chs/other/changelog'
-            //             ],
-            //             sidebarDepth: 2
-            //         }
-            //     ],
-            //     lastUpdated: '最后更新'
-            // }
+            "/zh/": {
+                nav: [],
+                sidebar: [
+                    {
+                        title: '入门指南',
+                        collapsable: false,
+                        sidebarDepth: 0,
+                        children: [
+                            '/zh/overview/getting_start',
+                            '/zh/guides/first_move',
+                            '/zh/guides/start_websocket',
+                            '/zh/guides/robot_admin',
+                        ]
+                    },
+                    {
+                        title: '参考手册',
+                        collapsable: false,
+                        children: [
+                            '/zh/reference/api_principals',
+                            '/zh/reference/maps',
+                            '/zh/reference/moves',
+                            '/zh/reference/current_map_and_pose',
+                            '/zh/reference/overlays',
+                            '/zh/reference/mappings',
+                            '/zh/reference/services',
+                            '/zh/reference/iot_devices',
+                            '/zh/reference/device',
+                            '/zh/reference/robot_params',
+                            '/zh/reference/system_settings',
+                            '/zh/reference/app_store',
+                            '/zh/reference/hostnames',
+                            '/zh/reference/landmarks',
+                            '/zh/reference/websocket',
+                            '/zh/reference/submaps'
+                        ],
+                        sidebarDepth: 2
+                    },
+                    {
+                        title: '其他',
+                        collapsable: false,
+                        children: [
+                            '/zh/other/deprecations',
+                            '/zh/other/changelog'
+                        ],
+                        sidebarDepth: 2
+                    }
+                ],
+                lastUpdated: '最后更新'
+            }
         }
     },
     locales: {
@@ -124,10 +129,10 @@ module.exports = {
             title: 'Autoxing REST API Book',
             description: "A complete guide to control Autoxing Tech's Robots with REST API",
         },
-        // '/chs/': {
-        //     lang: 'zh-CN',
-        //     title: 'Autoxing REST API Book',
-        //     description: '景行慧动机器人 REST API 手册'
-        // },
+        '/zh/': {
+            lang: 'zh-CN',
+            title: 'Autoxing REST API Book',
+            description: '景行慧动机器人 REST API 手册'
+        },
     }
 }
