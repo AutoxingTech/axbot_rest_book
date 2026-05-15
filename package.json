@@ -6,20 +6,21 @@
   "author": "kingsimba <kingsimba0511@gmail.com>",
   "license": "copyright",
   "devDependencies": {
-    "vuepress": "^1.8.2",
-    "webpack": "^4.47.0",
-    "webpack-cli": "^3.3.12"
+    "@vuepress/bundler-vite": "2.0.0-rc.30",
+    "@vuepress/client": "2.0.0-rc.30",
+    "@vuepress/theme-default": "2.0.0-rc.130",
+    "markdown-it-anchor": "^9.2.0",
+    "markdown-it-imsize": "^2.0.1",
+    "sass-embedded": "^1.99.0",
+    "vue": "^3.5.34",
+    "vuepress": "2.0.0-rc.30"
   },
   "scripts": {
-    "docs:dev": "vuepress dev docs --temp .temp",
+    "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "docs:check-links": "find docs -name '*.md' -exec markdown-link-check -c mlc_config.json {} \\;",
     "docs:check-links:modified": "git status --porcelain | grep '\\.md$' | cut -c 4- | xargs -r -L1 markdown-link-check -c mlc_config.json",
-    "docker:build": "vuepress build docs && docker build . -t autoxing/axbot_rest_book",
+    "docker:build": "pnpm docs:build && docker build . -t autoxing/axbot_rest_book",
     "docker:push": "docker push autoxing/axbot_rest_book"
-  },
-  "dependencies": {
-    "markdown-it-anchor": "^9.2.0",
-    "markdown-it-imsize": "^2.0.1"
   }
 }

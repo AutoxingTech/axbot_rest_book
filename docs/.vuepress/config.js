@@ -1,148 +1,134 @@
-module.exports = {
-    base: "/axbot_rest_book/",
-    markdown: {
-        extendMarkdown: md => {
-            md.set({ breaks: false })
-            md.use(require('markdown-it-imsize'))
-            md.use(require('markdown-it-anchor'), {
-                permalink: false,
-                slugify: (s) => {
-                    const match = /\{#([a-z0-9-]+)\}$/i.exec(s);
-                    if (match) {
-                        return match[1];
-                    }
-                    return encodeURIComponent(String(s).trim().toLowerCase().replace(/\s+/g, '-'));
-                }
-            })
-        }
+import { defaultTheme } from '@vuepress/theme-default'
+import { defineUserConfig } from 'vuepress'
+import { viteBundler } from '@vuepress/bundler-vite'
+import anchor from 'markdown-it-anchor'
+import imsize from 'markdown-it-imsize'
+
+export default defineUserConfig({
+  base: "/axbot_rest_book/",
+  bundler: viteBundler(),
+  locales: {
+    '/': {
+      lang: 'en-US',
+      title: 'Autoxing REST API Book',
+      description: "A complete guide to control Autoxing Tech's Robots with REST API",
     },
-    themeConfig: {
-        locales: {
-            "/": {
-                nav: [
-                    // { text: '底盘JIRA', link: 'https://autoxing.atlassian.net/browse/RCSS' }
-                ],
-                // sidebar: [
-                //     '/overview/overview',
-                //     '/reference/reference'
-                // ],
-                // sidebar: {
-                //     '/overview/': ["overview"],
-                //     '/reference/': ["reference"]
-                // },
-                sidebar: [
-                    {
-                        title: 'Guide',
-                        collapsable: false, // optional, defaults to true
-                        sidebarDepth: 0,    // optional, defaults to 1
-                        children: [
-                            '/overview/getting_start',
-                            '/guides/first_move',
-                            '/guides/start_websocket',
-                            '/guides/robot_admin',
-                        ]
-                    },
-                    {
-                        title: 'Reference',
-                        collapsable: false,
-                        children: [
-                            '/reference/api_principals',
-                            '/reference/maps',
-                            '/reference/moves',
-                            '/reference/current_map_and_pose',
-                            '/reference/overlays',
-                            '/reference/mappings',
-                            '/reference/services',
-                            '/reference/iot_devices',
-                            '/reference/device',
-                            // '/reference/videos',
-                            // '/reference/recordings',
-                            // '/reference/bags',
-                            '/reference/robot_params',
-                            '/reference/system_settings',
-                            '/reference/app_store',
-                            '/reference/hostnames',
-                            '/reference/landmarks',
-                            '/reference/websocket',
-                            '/reference/submaps'
-                        ],
-                        sidebarDepth: 2
-                    },
-                    {
-                        title: 'Other',
-                        collapsable: false,
-                        children: [
-                            '/other/deprecations',
-                            '/other/changelog'
-                        ],
-                        sidebarDepth: 2
-                    }
-                ],
-                lastUpdated: 'Last Updated'
-            },
-            "/zh/": {
-                nav: [],
-                sidebar: [
-                    {
-                        title: '入门指南',
-                        collapsable: false,
-                        sidebarDepth: 0,
-                        children: [
-                            '/zh/overview/getting_start',
-                            '/zh/guides/first_move',
-                            '/zh/guides/start_websocket',
-                            '/zh/guides/robot_admin',
-                        ]
-                    },
-                    {
-                        title: '参考手册',
-                        collapsable: false,
-                        children: [
-                            '/zh/reference/api_principals',
-                            '/zh/reference/maps',
-                            '/zh/reference/moves',
-                            '/zh/reference/current_map_and_pose',
-                            '/zh/reference/overlays',
-                            '/zh/reference/mappings',
-                            '/zh/reference/services',
-                            '/zh/reference/iot_devices',
-                            '/zh/reference/device',
-                            '/zh/reference/robot_params',
-                            '/zh/reference/system_settings',
-                            '/zh/reference/app_store',
-                            '/zh/reference/hostnames',
-                            '/zh/reference/landmarks',
-                            '/zh/reference/websocket',
-                            '/zh/reference/submaps'
-                        ],
-                        sidebarDepth: 2
-                    },
-                    {
-                        title: '其他',
-                        collapsable: false,
-                        children: [
-                            '/zh/other/deprecations',
-                            '/zh/other/changelog'
-                        ],
-                        sidebarDepth: 2
-                    }
-                ],
-                lastUpdated: '最后更新'
-            }
-        }
+    '/zh/': {
+      lang: 'zh-CN',
+      title: 'Autoxing REST API Book',
+      description: '景行慧动机器人 REST API 手册'
     },
+  },
+  theme: defaultTheme({
     locales: {
-        // The key is the path for the locale to be nested under.
-        // As a special case, the default locale can use '/' as its path.
-        '/': {
-            lang: 'en-US', // this will be set as the lang attribute on <html>
-            title: 'Autoxing REST API Book',
-            description: "A complete guide to control Autoxing Tech's Robots with REST API",
-        },
-        '/zh/': {
-            lang: 'zh-CN',
-            title: 'Autoxing REST API Book',
-            description: '景行慧动机器人 REST API 手册'
-        },
+      "/": {
+        navbar: [],
+        sidebar: [
+          {
+            text: 'Guide',
+            collapsible: false,
+            children: [
+              '/overview/getting_start.md',
+              '/guides/first_move.md',
+              '/guides/start_websocket.md',
+              '/guides/robot_admin.md',
+            ]
+          },
+          {
+            text: 'Reference',
+            collapsible: false,
+            children: [
+              '/reference/api_principals.md',
+              '/reference/maps.md',
+              '/reference/moves.md',
+              '/reference/current_map_and_pose.md',
+              '/reference/overlays.md',
+              '/reference/mappings.md',
+              '/reference/services.md',
+              '/reference/iot_devices.md',
+              '/reference/device.md',
+              '/reference/robot_params.md',
+              '/reference/system_settings.md',
+              '/reference/app_store.md',
+              '/reference/hostnames.md',
+              '/reference/landmarks.md',
+              '/reference/websocket.md',
+              '/reference/submaps.md'
+            ],
+          },
+          {
+            text: 'Other',
+            collapsible: false,
+            children: [
+              '/other/deprecations.md',
+              '/other/changelog.md'
+            ],
+          }
+        ],
+        lastUpdated: true,
+        lastUpdatedText: 'Last Updated'
+      },
+      "/zh/": {
+        navbar: [],
+        sidebar: [
+          {
+            text: '入门指南',
+            collapsible: false,
+            children: [
+              '/zh/overview/getting_start.md',
+              '/zh/guides/first_move.md',
+              '/zh/guides/start_websocket.md',
+              '/zh/guides/robot_admin.md',
+            ]
+          },
+          {
+            text: '参考手册',
+            collapsible: false,
+            children: [
+              '/zh/reference/api_principals.md',
+              '/zh/reference/maps.md',
+              '/zh/reference/moves.md',
+              '/zh/reference/current_map_and_pose.md',
+              '/zh/reference/overlays.md',
+              '/zh/reference/mappings.md',
+              '/zh/reference/services.md',
+              '/zh/reference/iot_devices.md',
+              '/zh/reference/device.md',
+              '/zh/reference/robot_params.md',
+              '/zh/reference/system_settings.md',
+              '/zh/reference/app_store.md',
+              '/zh/reference/hostnames.md',
+              '/zh/reference/landmarks.md',
+              '/zh/reference/websocket.md',
+              '/zh/reference/submaps.md'
+            ],
+          },
+          {
+            text: '其他',
+            collapsible: false,
+            children: [
+              '/zh/other/deprecations.md',
+              '/zh/other/changelog.md'
+            ],
+          }
+        ],
+        lastUpdated: true,
+        lastUpdatedText: '最后更新'
+      }
     }
-}
+  }),
+  extendsMarkdown: (md) => {
+    md.set({ breaks: false })
+    md.use(imsize)
+    md.use(anchor, {
+      permalink: false,
+      slugify: (s) => {
+        const match = /\{#([a-z0-9-]+)\}$/i.exec(s);
+        if (match) {
+          return match[1];
+        }
+        return encodeURIComponent(String(s).trim().toLowerCase().replace(/\s+/g, '-'));
+      }
+    })
+  },
+})
