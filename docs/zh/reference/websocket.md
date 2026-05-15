@@ -21,7 +21,7 @@ Topic 用于接收机器人的实时信息。
 
 在建图模式下，地图会以较短的固定间隔更新。
 
-![](./map.png)
+![](../../reference/map.png)
 
 ```json
 {
@@ -45,7 +45,7 @@ Topic 用于接收机器人的实时信息。
 | -------------------------- | ---------------------------- |
 | /maps/5cm/1hz              | /maps/1cm/1hz                |
 | 用于路径规划。               | 用于碰撞检测。                |
-| ![](./low_res_costmap.png) | ![](./high_res_costmap.png)  |
+| ![](../../reference/low_res_costmap.png) | ![](../../reference/high_res_costmap.png)  |
 
 ```
 {
@@ -170,7 +170,7 @@ enum VisualObjectLabel {
 
 ## 电池状态 (Battery State) {#battery-state}
 
-![](./battery.png)
+![](../../reference/battery.png)
 
 ```json
 {
@@ -187,7 +187,7 @@ enum VisualObjectLabel {
 
 自 2.11.0 起
 
-![](./battery.png)
+![](../../reference/battery.png)
 
 ```json
 {
@@ -299,7 +299,7 @@ enum StuckState {
 
 ## 激光雷达点云 (LiDAR Point Cloud) {#lidar-point-cloud}
 
-![](./pointcloud.png)
+![](../../reference/pointcloud.png)
 
 ### 用于 SLAM 的点云 (Point Cloud Used for SLAM) {#point-cloud-used-for-slam}
 
@@ -366,7 +366,7 @@ enum StuckState {
 
 当前全局路径。
 
-![](./route.png)
+![](../../reference/route.png)
 
 ```json
 {
@@ -387,7 +387,7 @@ enum StuckState {
 - 在建图模式下，轨迹代表整个建图过程的完整路径。
 - 在纯定位模式下，轨迹会定期被修剪。
 
-![](./trajectory.png)
+![](../../reference/trajectory.png)
 
 :::warning
 对于 2.5.0 或更低版本，此启用消息被错误地命名为 `/trajectory_node_list`。
@@ -428,7 +428,7 @@ enum StuckState {
 
 报警的完整列表可在[此 URL](https://rb-admin.autoxing.com/api/v1/static/error_code_map_full.json) 找到。
 
-![](./alerts.png)
+![](../../reference/alerts.png)
 
 ```json
 {
@@ -471,7 +471,7 @@ H.264 编码的数据流。
 }
 ```
 
-![](./rgb_camera.png)
+![](../../reference/rgb_camera.png)
 
 ::: tip
 对于浏览器或 Node.js，可以使用 [jmuxer](https://github.com/samirkumardas/jmuxer) 解码该流。
@@ -492,7 +492,7 @@ this.jmuxer = new JMuxer({
 - `/rgb_cameras/back/video`
 - `/rgb_cameras/front_augmented/video`: 用于调试基于视觉的对象检测的增强视频流。
 
-![](./detect.png)
+![](../../reference/detect.png)
 
 ## RGB 图像流 (RGB Image Stream) {#rgb-image-stream}
 
@@ -580,7 +580,7 @@ type PowerState =
 
 此信息可用于避免机器人之间的碰撞或进行编队移动。
 
-![](./nearby_robots.png)
+![](../../reference/nearby_robots.png)
 
 ```json
 {
@@ -777,7 +777,7 @@ type PowerState =
 
 红色区域表示环境发生了变化。如果检测到显著变化（红色区域过多），则应重建地图。
 
-![](./2023-02-02-16-32-47.png)
+![](../../reference/2023-02-02-16-32-47.png)
 
 请求：
 
@@ -804,7 +804,7 @@ type PowerState =
 
 红色表示特征缺失的环境，如隧道或宽敞的大厅。
 
-![](./2023-02-02-16-33-45.png)
+![](../../reference/2023-02-02-16-33-45.png)
 
 请求：
 
@@ -861,7 +861,7 @@ type PowerState =
 
 虽然 Topic 中的图像是灰度的，但 `RobotAdmin` 会转换这些颜色：红色像素代表新障碍物，浅蓝色像素代表新清理出的空间。
 
-![](./incremental_map.png)
+![](../../reference/incremental_map.png)
 
 ```json
 {
@@ -1006,7 +1006,7 @@ Cross-Origin-Opener-Policy: same-origin
 
 此 Topic 用于可视化自动门的状态。
 
-![](./nearby_auto_doors.png)
+![](../../reference/nearby_auto_doors.png)
 
 ```json
 {
@@ -1072,9 +1072,9 @@ Cross-Origin-Opener-Policy: same-origin
 
 关于检测到的托盘的信息。
 
-![](./pallet.png)
+![](../../reference/pallet.png)
 
-![](./detected_pallet.png)
+![](../../reference/detected_pallet.png)
 
 ```json
 {
@@ -1177,7 +1177,7 @@ IO 引脚的状态：
 
 ## 检测到的挂车 (Detected Trailer) {#detected-trailer}
 
-![](./trailer.png)
+![](../../reference/trailer.png)
 
 ```json
 {
@@ -1198,7 +1198,7 @@ IO 引脚的状态：
 
 自 2.12.0 起
 
-![](./depth_image_rainbow.png)
+![](../../reference/depth_image_rainbow.png)
 
 ```json
 {
@@ -1232,7 +1232,7 @@ IO 引脚的状态：
 
 ## 裸 IO 板状态 (Raw Io-board State) {#raw-io-board-state}
 
-![](./raw_io_board_state.png)
+![](../../reference/raw_io_board_state.png)
 
 IO 板当前输入和输出的原始状态。
 
@@ -1261,7 +1261,7 @@ rtn = {
 
 ## CHC 导航状态 (GNSS/INS) (CHC NavState (GNSS/INS)) {#devpvt}
 
-自 [master](尚未正式发布) 起。
+自 `master`（尚未正式发布）起。
 
 来自 `/devpvt` Topic 上的 CHC (华测) GNSS/INS 传感器的原始导航数据。
 

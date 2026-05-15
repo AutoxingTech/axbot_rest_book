@@ -236,7 +236,7 @@ interface RouteModeRequest {
 - `usb0_first`: Sets `usb0` as the default route, if available.
 - `wlan0_usb0_auto_first`: Based on `ping` results: if `wlan0` has internet connectivity, it is used as the default route; otherwise, `usb0` is used.
 
-A static HTML page for network configuration is also available on the local network at: http://192.168.25.25:8090/wifi_setup
+A static HTML page for network configuration is also available on the local network at: `http://192.168.25.25:8090/wifi_setup`
 
 ![](./network_setup.png)
 

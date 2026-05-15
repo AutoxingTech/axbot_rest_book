@@ -236,9 +236,9 @@ interface RouteModeRequest {
 - `usb0_first`: 如果可用，将 `usb0` 设置为默认路由。
 - `wlan0_usb0_auto_first`: 根据 `ping` 结果：如果 `wlan0` 具有互联网连接，则将其用作默认路由；否则，使用 `usb0`。
 
-在此本地网络地址也可以访问静态的 Wi-Fi 配置 HTML 页面：http://192.168.25.25:8090/wifi_setup
+在此本地网络地址也可以访问静态的 Wi-Fi 配置 HTML 页面：`http://192.168.25.25:8090/wifi_setup`
 
-![](./network_setup.png)
+![](../../reference/network_setup.png)
 
 ## 唤醒设备 (Wake Up the Device) {#wake-up-the-device}
 
@@ -271,7 +271,7 @@ interface StartGlobalPositioningRequest {
 
 ### 条码 (Barcode) {#barcode}
 
-![](./barcode.png)
+![](../../reference/barcode.png)
 
 条码是由反光和不反光表面交替组成的标记。
 现场的每个条码都包含唯一的 ID，使机器人能够在检测到条码时明确地确定其精确位置。
@@ -318,7 +318,7 @@ POST /services/monitor_recheck_errors
 - 机器人位于平整、水平的地面上。
 - 机器人正对着墙角或一个大型的长方体物体。
 
-![](./2023-02-02-16-44-19.png)
+![](../../reference/2023-02-02-16-44-19.png)
 
 ```
 POST /services/calibrate_depth_cameras
@@ -381,7 +381,7 @@ curl -X POST \
 
 ## 清除“系统异常关闭”报警 (Clear "System Down Unexpectedly" Alert) {#clear-system-down-unexpectedly-alert}
 
-![](./system-down-alert.png)
+![](../../reference/system-down-alert.png)
 
 ```bash
 curl -X POST \
@@ -462,7 +462,7 @@ curl -X POST http://192.168.25.25:8090/services/step_time
 
 图像尺寸为 200x200 像素，可用于错误报告。
 
-![](./navi_thumbnail.png)
+![](../../reference/navi_thumbnail.png)
 
 ```json
 {
@@ -554,7 +554,7 @@ curl -X POST http://192.168.25.25:8090/services/clear_jack_errors
 
 当机器人在坡道上或处于指定的坡道区域（在 Overlays 中指定）时，即使按下急停，车轮也不会释放。警告消息将出现在 `/alerts` WebSocket Topic 中：
 
-![](./estop_warning.png)
+![](../../reference/estop_warning.png)
 
 如果需要手动推动机器人，请使用以下命令确认释放车轮。
 
@@ -658,7 +658,7 @@ curl -X POST \
 
 在双激光雷达视野的重叠区域之一，必须有清晰的水平和垂直墙壁。
 
-![](./duo-lidars.png)
+![](../../reference/duo-lidars.png)
 
 ```bash
 curl -X POST \
