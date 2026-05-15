@@ -8,6 +8,7 @@
   "devDependencies": {
     "@vuepress/bundler-vite": "2.0.0-rc.30",
     "@vuepress/client": "2.0.0-rc.30",
+    "@vuepress/plugin-search": "2.0.0-rc.130",
     "@vuepress/theme-default": "2.0.0-rc.130",
     "markdown-it-anchor": "^9.2.0",
     "markdown-it-attrs": "^4.3.1",

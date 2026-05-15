@@ -1,6 +1,7 @@
 import { defaultTheme } from '@vuepress/theme-default'
 import { defineUserConfig } from 'vuepress'
 import { viteBundler } from '@vuepress/bundler-vite'
+import { searchPlugin } from '@vuepress/plugin-search'
 import anchor from 'markdown-it-anchor'
 import imsize from 'markdown-it-imsize'
 import attrs from 'markdown-it-attrs'
@@ -8,6 +9,18 @@ import attrs from 'markdown-it-attrs'
 export default defineUserConfig({
     base: "/axbot_rest_book/",
     bundler: viteBundler(),
+    plugins: [
+        searchPlugin({
+            locales: {
+                '/': {
+                    placeholder: 'Search',
+                },
+                '/zh/': {
+                    placeholder: '搜索',
+                },
+            },
+        }),
+    ],
     locales: {
         '/': {
             lang: 'en-US',
