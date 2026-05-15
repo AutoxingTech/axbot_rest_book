@@ -17,6 +17,7 @@
     "docker:push": "docker push autoxing/axbot_rest_book"
   },
   "dependencies": {
+    "markdown-it-anchor": "^9.2.0",
     "markdown-it-imsize": "^2.0.1"
   }
 }

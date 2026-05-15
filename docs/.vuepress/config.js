@@ -4,6 +4,16 @@ module.exports = {
         extendMarkdown: md => {
             md.set({ breaks: false })
             md.use(require('markdown-it-imsize'))
+            md.use(require('markdown-it-anchor'), {
+                permalink: false,
+                slugify: (s) => {
+                    const match = /\{#([a-z0-9-]+)\}$/i.exec(s);
+                    if (match) {
+                        return match[1];
+                    }
+                    return encodeURIComponent(String(s).trim().toLowerCase().replace(/\s+/g, '-'));
+                }
+            })
         }
     },
     themeConfig: {
