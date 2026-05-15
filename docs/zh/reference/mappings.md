@@ -13,7 +13,7 @@
 
 建图任务（在 `/mappings` 下）不能直接用于导航。您必须先将建图任务的产物保存到 `/maps` 中。
 
-## 开始建图
+## 开始建图 {#start-mapping}
 
 ```bash
 curl -X POST \
@@ -56,7 +56,7 @@ interface MappingCreateRequest {
 }
 ```
 
-## 建图过程的可视化
+## 建图过程的可视化 {#visualization-of-mapping-process}
 
 在建图过程中，使用 WebSockets 接收实时反馈：
 
@@ -69,7 +69,7 @@ interface MappingCreateRequest {
 
 ![](../../reference/mapping.png)
 
-## 完成或取消建图
+## 完成或取消建图 {#finish-or-cancel-mapping}
 
 ```bash
 curl -X PATCH \
@@ -94,7 +94,7 @@ interface MappingFinishRequest {
 建图任务完成后，任务产物会被保存。
 随后您可以使用 `/mappings/:id` 请求获取它们。
 
-## 建图列表
+## 建图列表 {#mapping-list}
 
 ```bash
 curl http://192.168.25.25:8090/mappings/
@@ -148,7 +148,7 @@ curl http://192.168.25.25:8090/mappings/
 ]
 ```
 
-## 建图详情
+## 建图详情 {#mapping-detail}
 
 ```bash
 curl http://192.168.25.25:8090/mappings/48
@@ -174,7 +174,7 @@ curl http://192.168.25.25:8090/mappings/48
 }
 ```
 
-## 获取建图轨迹
+## 获取建图轨迹 {#get-mapping-trajectory}
 
 ```bash
 curl http://192.168.25.25:8090/mappings/48/trajectories.json
@@ -195,7 +195,7 @@ curl http://192.168.25.25:8090/mappings/48/trajectories.json
 ]
 ```
 
-## 直接将建图产物保存为地图
+## 直接将建图产物保存为地图 {#save-mapping-as-map}
 
 机器人只有在地图被保存后才能加载并将其用于导航。
 此方法（使用 `mapping_id`）比[上传整个地图](./maps.md#create-a-map)及其所有字段更加高效。
@@ -231,19 +231,19 @@ curl -X POST http://192.168.25.25:8090/maps/
 }
 ```
 
-## 删除建图任务
+## 删除建图任务 {#delete-mapping}
 
 ```bash
 curl -X DELETE http://192.168.25.25:8090/mappings/1
 ```
 
-## 删除所有建图任务
+## 删除所有建图任务 {#delete-all-mappings}
 
 ```bash
 curl -X DELETE http://192.168.25.25:8090/mappings/
 ```
 
-## 获取陆标 (Landmarks)
+## 获取陆标 (Landmarks) {#get-landmarks}
 
 自 2.11.0 起支持
 

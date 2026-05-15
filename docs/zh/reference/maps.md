@@ -16,7 +16,7 @@
 | carto_map        | string | Base64 编码的二进制地图数据（用于定位）。                    |
 | occupancy_grid   | string | Base64 编码的 PNG 图像数据（用于显示）。                    |
 
-## 地图列表
+## 地图列表 {#map-list}
 
 ```bash
 curl http://192.168.25.25:8090/maps/
@@ -67,7 +67,7 @@ curl http://192.168.25.25:8090/maps/
 | image_url     | 地图原始分辨率的 PNG 图像。          |
 | thumbnail_url | 地图低分辨率的 PNG 图像（缩略图）。 |
 
-## 获取地图详情
+## 获取地图详情 {#get-map-detail}
 
 ```bash
 curl http://192.168.25.25:8090/maps/1
@@ -100,11 +100,11 @@ curl http://192.168.25.25:8090/maps/1
 | thumbnail_url | 获取地图缩略图 (PNG) 的 URL。            |
 | pbstream_url  | 获取二进制地图数据的 URL。               |
 
-## 创建地图
+## 创建地图 {#create-a-map}
 
 可以使用 Base64 编码的数据创建地图，或直接从服务器上的本地文件路径创建。还有一种从建图任务直接创建地图的方法（参见 [mappings.md](mappings.md#直接将建图产物保存为地图)）。
 
-### 从 Base64 数据创建地图
+### 从 Base64 数据创建地图 {#create-from-base64}
 
 可以通过提供以下必填字段来创建地图：
 
@@ -126,7 +126,7 @@ curl -X POST \
     http://192.168.25.25:8090/maps/
 ```
 
-### 从本地文件创建地图
+### 从本地文件创建地图 {#create-from-local-file}
 
 如果设备上已存在 `.pbstream` 和 `.png` 文件，您可以通过传递绝对文件路径来创建地图，而无需进行 Base64 编码。
 
@@ -171,7 +171,7 @@ curl -X POST \
 }
 ```
 
-## 修改地图
+## 修改地图 {#modify-a-map}
 
 修改名称和叠加层。
 
@@ -182,13 +182,13 @@ curl -X PATCH \
     http://192.168.25.25:8090/maps/1 {}
 ```
 
-## 删除地图
+## 删除地图 {#delete-a-map}
 
 ```bash
 curl -X DELETE http://192.168.25.25:8090/maps/1
 ```
 
-## 删除所有地图
+## 删除所有地图 {#delete-all-maps}
 
 ```bash
 curl -X DELETE http://192.168.25.25:8090/maps

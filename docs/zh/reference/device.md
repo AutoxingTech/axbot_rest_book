@@ -1,6 +1,6 @@
 # 设备信息 API
 
-## 设备信息
+## 设备信息 {#device-info}
 
 ```bash
 curl http://192.168.25.25:8090/device/info
@@ -56,13 +56,13 @@ curl http://192.168.25.25:8090/device/info
 }
 ```
 
-## 简要设备信息
+## 简要设备信息 {#brief-device-info}
 
 ```bash
 curl http://192.168.25.25:8090/device/info/brief # 获取精简后的设备信息集。
 ```
 
-## Wi-Fi 列表
+## Wi-Fi 列表 {#wifi-list}
 
 ```bash
 curl http://192.168.25.25:8090/device/available_wifis
@@ -85,7 +85,7 @@ curl http://192.168.25.25:8090/device/available_wifis
 ]
 ```
 
-## 网络信息
+## 网络信息 {#network-info}
 
 ```bash
 curl http://192.168.25.25:8090/device/wifi_info
@@ -123,7 +123,7 @@ AP 模式下的响应：
 { "mode": "ap" }
 ```
 
-## 列出 USB 设备
+## 列出 USB 设备 {#list-usb-devices}
 
 USB 设备按树状结构组织。
 
@@ -214,7 +214,7 @@ curl http://192.168.25.25:8090/device/usb_devices
 ]
 ```
 
-## 已保存的 USB 设备
+## 已保存的 USB 设备 {#saved-usb-devices}
 
 由于 USB 设备偶尔可能会断开连接，此 API 允许您备份当前的 USB 设备列表。此备份以后可用于识别任何缺失或断开连接的设备。
 
@@ -239,7 +239,7 @@ curl http://192.168.25.25:8090/device/usb_devices/saved
 curl -X DELETE http://192.168.25.25:8090/device/usb_devices/saved
 ```
 
-## 启动进度
+## 启动进度 {#boot-progress}
 
 在启动过程中，任何 API 请求都将返回 `503 Service Unavailable` 状态码。
 启动过程完成后，API 将恢复正常工作。
@@ -277,7 +277,7 @@ curl http://192.168.25.25:8090/device/boot_progress # 始终返回 200。
 }
 ```
 
-## 时间配置
+## 时间配置 {#time-configuration}
 
 使用 [Chrony](https://chrony-project.org/) 来管理机器人的系统时间。
 
@@ -289,7 +289,7 @@ curl http://192.168.25.25:8090/device/boot_progress # 始终返回 200。
 curl http://192.168.25.25:8090/device/chrony/chrony.conf
 ```
 
-### 时间源
+### 时间源 {#time-source}
 
 Chrony 可以使用已配置的时间源列表。
 
@@ -332,7 +332,7 @@ curl -X PUT \
 curl -X DELETE http://192.168.25.25:8090/device/chrony/allows
 ```
 
-### NTP 服务器
+### NTP 服务器 {#ntp-servers}
 
 Chrony 也可以配置为作为 NTP 服务器运行。
 
@@ -363,7 +363,7 @@ curl http://192.168.25.25:8090/device/chrony/allows
 curl -X DELETE http://192.168.25.25:8090/device/chrony/allows
 ```
 
-## 传感器列表
+## 传感器列表 {#sensors-list}
 
 自 2.12.0 版本起可用。
 
