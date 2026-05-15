@@ -1,0 +1,15 @@
+/* Ensure images don't cause layout shift by providing a default size or box */
+img {
+  max-width: 100%;
+  height: auto;
+  /* Basic protection: if width/height are set in md, they work. 
+     If not, this helps prevent zero-height collapse before load. */
+  display: block;
+}
+
+/* Optional: if you know your average image ratio, you can set a min-height */
+/* 
+.theme-default-content img {
+    min-height: 200px;
+}
+*/

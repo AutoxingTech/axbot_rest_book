@@ -10,6 +10,7 @@
     "@vuepress/client": "2.0.0-rc.30",
     "@vuepress/plugin-search": "2.0.0-rc.130",
     "@vuepress/theme-default": "2.0.0-rc.130",
+    "fg-loadcss": "^3.1.0",
     "markdown-it-anchor": "^9.2.0",
     "markdown-it-attrs": "^4.3.1",
     "markdown-it-imsize": "^2.0.1",
