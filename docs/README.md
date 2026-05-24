@@ -8,3 +8,4 @@ A typed TypeScript client is available as [`@kingsimba/axbot-sdk`](https://www.n
 
 An interactive demo application built on top of the SDK is available at [`axbot-ts-sdk-demo`](https://github.com/AutoxingTech/axbot-ts-sdk-demo). It shows live REST and WebSocket usage and is a useful starting point for custom integrations.
 
+This TypeScript SDK powers the robot monitoring platform [rb-admin.autoxing.com](https://rb-admin.autoxing.com). The SDK and the platform are developed in tandem — API additions, protocol changes, and new capabilities are implemented in the SDK first and consumed by the platform immediately.
