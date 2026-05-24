@@ -34,6 +34,10 @@ export default defineUserConfig({
         },
     },
     theme: defaultTheme({
+        repo: 'AutoxingTech/axbot_rest_book',
+        docsRepo: 'AutoxingTech/axbot_rest_book',
+        docsBranch: 'main',
+        editLink: true,
         locales: {
             "/": {
                 navbar: [],
