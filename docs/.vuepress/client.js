@@ -1,6 +1,5 @@
-import { defineClientConfig } from 'vuepress/client'
+import { defineClientConfig, useRoute } from 'vuepress/client'
 import { onMounted, watch } from 'vue'
-import { useRoute } from 'vue-router'
 
 export default defineClientConfig({
     setup() {
