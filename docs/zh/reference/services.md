@@ -607,10 +607,10 @@ curl http://192.168.25.25:8090/services/query_pose/charger_pose
 
 ```json
 {
-    "pose": {
-        "pos": [4.179, -26.094],
-        "ori": 3.18,
-    }
+  "pose": {
+    "pos": [4.179, -26.094],
+    "ori": 3.18
+  }
 }
 ```
 
@@ -621,18 +621,17 @@ curl http://192.168.25.25:8090/services/query_pose/pallet_pose
 curl http://192.168.25.25:8090/services/query_pose/trailer_pose
 ```
 
-
 ```json
 {
-    "pose": {
-        "pos": [4.179, -26.094],
-        "ori": 3.18,
-    },
+  "pose": {
+    "pos": [4.179, -26.094],
+    "ori": 3.18
+  },
 
-    // 自 2.13.0 起。如果 reference == 'center_of_front_edge'，返回的位姿是
-    // 托盘或挂车前边缘的中心（新逻辑）。
-    // 否则，位姿是托盘或挂车的中心（已弃用）。
-    "ref": "center_of_front_edge"
+  // 自 2.13.0 起。如果 reference == 'center_of_front_edge'，返回的位姿是
+  // 托盘或挂车前边缘的中心（新逻辑）。
+  // 否则，位姿是托盘或挂车的中心（已弃用）。
+  "ref": "center_of_front_edge"
 }
 ```
 
@@ -648,13 +647,20 @@ curl -X POST \
 
 使用 [V2X 健康状态 (V2X Health State)](./websocket.md#v2x-health-state) WebSocket Topic 来监控信标响应和健康状态。
 
-
 ## 校准双激光雷达位姿 (Calibrate Duo Lidar Poses) {#calibrate-duo-lidar-poses}
 
 此服务用于校准安装在左前角和右后角的双激光雷达位姿。
 仅当 "caps.supportsDuoLidar" 为 true 时才应调用此服务。
 
-校准前请确保：
+该服务接受一个可选的 `calibration_step` 参数，用于选择校准模式：
+
+```ts
+interface CalibrateDuoLidarPosesRequest {
+  calibration_step?: 'single_shot' | 'right_wall' | 'front_wall';
+}
+```
+
+### 单次模式（默认）(Single Shot Mode) {#single-shot-mode}
 
 在双激光雷达视野的重叠区域之一，必须有清晰的水平和垂直墙壁。
 
@@ -666,6 +672,42 @@ curl -X POST \
   http://192.168.25.25:8090/services/calibrate_duo_lidar_poses
 ```
 
+### 右墙模式 (Right Wall Mode) {#right-wall-mode}
+
+当难以找到两面垂直墙壁时，可使用此模式和**前墙模式**。只需要一面长墙。
+
+**校准期间，请确保：**
+
+- 机器人右侧应有一面长墙。
+- 机器人右侧与墙壁之间的距离应为 1 – 2 米。
+- 墙壁必须足够长，以便两个激光雷达都能看到。
+- 墙壁与机器人右侧应精确平行——公差小于 0.5°。
+- 地面应平坦。
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"calibration_step": "right_wall"}' \
+  http://192.168.25.25:8090/services/calibrate_duo_lidar_poses
+```
+
+### 前墙模式 (Front Wall Mode) {#front-wall-mode}
+
+先运行**右墙模式**，然后将机器人旋转面向同一面墙。
+
+**校准期间，请确保：**
+
+- 首先完成右墙模式校准。
+- 墙壁必须足够长，以便两个激光雷达都能看到。
+- 墙壁必须距离机器人至少 2 米。
+- 墙壁可以大致与机器人前边缘平行——最大公差为 5°。
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"calibration_step": "front_wall"}' \
+  http://192.168.25.25:8090/services/calibrate_duo_lidar_poses
+```
 
 ## 牵引钩锁定 (Towing Hook Lock) {#towing-hook-lock}
 

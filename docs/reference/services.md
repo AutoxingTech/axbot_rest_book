@@ -597,10 +597,10 @@ curl -X POST http://192.168.25.25:8090/services/clear_fall_risk_warning
 
 ## Query Pose
 
-This API retrieves the coordinates of various points of interest (POIs). 
+This API retrieves the coordinates of various points of interest (POIs).
 
-For example, when the robot docks on a charger, it calculates the charger’s pose 
-based on the robot’s position. 
+For example, when the robot docks on a charger, it calculates the charger’s pose
+based on the robot’s position.
 
 ```bash
 curl http://192.168.25.25:8090/services/query_pose/charger_pose
@@ -608,32 +608,31 @@ curl http://192.168.25.25:8090/services/query_pose/charger_pose
 
 ```json
 {
-    "pose": {
-        "pos": [4.179, -26.094],
-        "ori": 3.18,
-    }
+  "pose": {
+    "pos": [4.179, -26.094],
+    "ori": 3.18
+  }
 }
 ```
 
-Similarly, if a robot (e.g., a forklift or a trailer robot) is parked at a cargo location (e.g., a pallet or trailer), the system can infer the location's pose from the robot's current position. 
+Similarly, if a robot (e.g., a forklift or a trailer robot) is parked at a cargo location (e.g., a pallet or trailer), the system can infer the location's pose from the robot's current position.
 
 ```bash
 curl http://192.168.25.25:8090/services/query_pose/pallet_pose
 curl http://192.168.25.25:8090/services/query_pose/trailer_pose
 ```
 
-
 ```json
 {
-    "pose": {
-        "pos": [4.179, -26.094],
-        "ori": 3.18,
-    },
+  "pose": {
+    "pos": [4.179, -26.094],
+    "ori": 3.18
+  },
 
-    // Since 2.13.0. If reference == 'center_of_front_edge', the returned pose is
-    // the center of the pallet or trailer's front edge (new logic).
-    // Otherwise, the pose is the center of the pallet or trailer (deprecated).
-    "ref": "center_of_front_edge"
+  // Since 2.13.0. If reference == 'center_of_front_edge', the returned pose is
+  // the center of the pallet or trailer's front edge (new logic).
+  // Otherwise, the pose is the center of the pallet or trailer (deprecated).
+  "ref": "center_of_front_edge"
 }
 ```
 
@@ -649,15 +648,22 @@ curl -X POST \
 
 Use the [V2X Health State](./websocket.md#v2x-health-state) WebSocket topic to monitor beacon responses and health status.
 
-
 ## Calibrate Duo Lidar Poses
 
 This service is used to calibrate the poses of duo lidars mounted at the left-front and right-back corners.
 This service should only be called when "caps.supportsDuoLidar" is true.
 
-Before calibration, make sure:
+The service accepts an optional `calibration_step` parameter that selects the calibration mode:
 
-There must be clear horizontal and vertical walls in one of the overlapping areas of the duo lidars' fields of view.
+```ts
+interface CalibrateDuoLidarPosesRequest {
+  calibration_step?: 'single_shot' | 'right_wall' | 'front_wall';
+}
+```
+
+### Single Shot Mode (Default)
+
+Requires clear horizontal and vertical walls in one of the overlapping areas of the duo lidars' fields of view.
 
 ![](./duo-lidars.png)
 
@@ -667,6 +673,42 @@ curl -X POST \
   http://192.168.25.25:8090/services/calibrate_duo_lidar_poses
 ```
 
+### Right Wall Mode
+
+Use this and **Front Wall Mode** when two perpendicular walls are hard to find. Only a single long wall is required.
+
+**During calibration, ensure:**
+
+- There should be a single long wall on the right side of the robot.
+- The distance between the right side of the robot and the wall should be 1 – 2 meters.
+- The wall must be long enough to be visible to both lidars.
+- The wall and the right side of the robot should be precisely parallel — tolerance less than 0.5°.
+- The ground should be flat.
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"calibration_step": "right_wall"}' \
+  http://192.168.25.25:8090/services/calibrate_duo_lidar_poses
+```
+
+### Front Wall Mode
+
+Run **Right Wall Mode** first, then rotate the robot to face the same wall.
+
+**During calibration, ensure:**
+
+- Finish right wall mode calibration first.
+- The wall must be long enough to be visible to both lidars.
+- The wall must be at least 2 meters away from the robot.
+- The wall can be approximately parallel to the front edge of the robot — maximum tolerance of 5°.
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"calibration_step": "front_wall"}' \
+  http://192.168.25.25:8090/services/calibrate_duo_lidar_poses
+```
 
 ## Towing Hook Lock
 

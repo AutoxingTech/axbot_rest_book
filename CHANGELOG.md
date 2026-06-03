@@ -2,6 +2,7 @@
 
 ## 2.14.0
 
+- 2026-06-03 Add three calibration modes (single_shot, right_wall, front_wall) to [Calibrate Duo Lidar Poses](../reference/services.md#calibrate-duo-lidar-poses)
 - 2026-05-11 Add [Submaps](../reference/submaps.md) reference for `/submap_list` and `SubmapQueryV2`
 - 2026-04-29 Add services [Towing Hook Lock, Towing Hook Release, Clear Towing Hook Error](../reference/services.md#towing-hook-lock)
 - 2026-04-29 Add services [Load/Unload Cargo](../reference/services.md#loadunload-cargo)
