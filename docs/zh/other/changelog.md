@@ -2,6 +2,7 @@
 
 ## 2.14.0
 
+- 2026-06-03 为[校准双激光雷达位姿](../reference/services.md#calibrate-duo-lidar-poses)添加三种校准模式（single_shot、right_wall、front_wall）
 - 2026-05-11 为 `/submap_list` 和 `SubmapQueryV2` 添加 [子图](../reference/submaps.md) 参考
 - 2026-04-29 添加服务 [牵引钩锁定、牵引钩释放、清除牵引钩错误](../reference/services.md#towing-hook-lock)
 - 2026-04-29 添加服务 [装载/卸载货物](../reference/services.md#loadunload-cargo)
@@ -9,7 +10,7 @@
 - 支持在 [地图 API](../reference/maps.md#create-map-from-local-files) 中直接从本地文件创建地图
 - 强调通过二进制文件下载建图结果，使用 [pbstream_url](../reference/mappings.md#mapping-list)
 - 在 [/slam/state](../reference/websocket.md#positioning-state) 中添加 `nav_sat_state`
-- 添加 `/devpvt` websocket 通道 [CHC 导航状态 (GNSS/INS)](../reference/websocket.md#devpvt) 
+- 添加 `/devpvt` websocket 通道 [CHC 导航状态 (GNSS/INS)](../reference/websocket.md#devpvt)
 - 添加服务 [/service/jack_self_check](../reference/services.md#jack-device-up-down-self-check)
 
 ## 2.12.0
@@ -57,7 +58,6 @@
 - 添加 [/bumper_state](../reference/websocket.md#bumper-state)
 - 添加滚筒服务。详见 [使用滚筒装载/卸载货物](../reference/services.md#loadunload-cargo-with-roller)
 - 添加滚筒 websocket 主题 [/roll_state](../reference/websocket.md#roller-state)
-
 
 ## 2.8.3
 

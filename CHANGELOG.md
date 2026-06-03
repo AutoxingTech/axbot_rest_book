@@ -10,7 +10,7 @@
 - Support creating maps directly from local files in [Map API](../reference/maps.md#create-map-from-local-files)
 - Emphasize download mapping result by binary file, with [pbstream_url](../reference/mappings.md#mapping-list)
 - Add `nav_sat_state` in [/slam/state](../reference/websocket.md#positioning-state)
-- Add `/devpvt` websocket channel [CHC NavState (GNSS/INS)](../reference/websocket.md#devpvt) 
+- Add `/devpvt` websocket channel [CHC NavState (GNSS/INS)](../reference/websocket.md#devpvt)
 - Add service [/service/jack_self_check](../reference/services.md#jack-device-up-down-self-check)
 
 ## 2.12.0
@@ -58,7 +58,6 @@
 - Add [/bumper_state](../reference/websocket.md#bumper-state)
 - Add roller services. See [Load/Unload Cargo with Roller](../reference/services.md#loadunload-cargo-with-roller)
 - Add roller websocket topic [/roll_state](../reference/websocket.md#roller-state)
-
 
 ## 2.8.3
 
@@ -186,4 +185,4 @@
 - Add service `/services/start_global_positioning`
 - Add `calibrate_pose` in [Imu Calibration](../reference/services.md#recalibrate-imu)
 - Add service `/wake_up_device` in [Wake Up Device](../reference/services.md#wake-up-device)
-ce)
+  ce)
