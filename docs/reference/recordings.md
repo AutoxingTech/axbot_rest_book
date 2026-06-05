@@ -7,7 +7,7 @@ Certain alerts, such as `7002 - position lost`, will trigger the automatic recor
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
-  -d '{"filename_suffix": "xxx"}' \
+  -d '{"filename_suffix": "xxx", "duration": "2m", "category": "pos"}' \
   http://192.168.25.25:8090/recording/
 ```
 
@@ -29,6 +29,13 @@ interface CreateRecordingRequest {
   // The resulting filename will be {time}_{filename_suffix}.bag.
   // If no suffix is provided, the filename will simply be {time}.bag.
   filename_suffix?: string;
+  // Duration of the recording (e.g. "2m", "5m").
+  // Maximum allowed value is 5m.
+  duration?: string;
+  // Category of the recording. Currently only "pos" is supported.
+  // When set to "pos", point clouds are recorded at the original frequency
+  // to aid in reproducing positioning errors.
+  category?: string;
 }
 ```
 

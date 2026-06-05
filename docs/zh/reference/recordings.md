@@ -7,7 +7,7 @@
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
-  -d '{"filename_suffix": "xxx"}' \
+  -d '{"filename_suffix": "xxx", "duration": "2m", "category": "pos"}' \
   http://192.168.25.25:8090/recording/
 ```
 
@@ -29,6 +29,13 @@ interface CreateRecordingRequest {
   // 最终生成的文件名将是 {time}_{filename_suffix}.bag。
   // 如果未提供后缀，文件名将仅为 {time}.bag。
   filename_suffix?: string;
+  // 录制时长（例如 "2m"、"5m"）。
+  // 最大允许值为 5m。
+  duration?: string;
+  // 录制类别。目前仅支持 "pos"。
+  // 设置为 "pos" 时，将以原始频率记录点云数据，
+  // 用于复现定位错误。
+  category?: string;
 }
 ```
 
