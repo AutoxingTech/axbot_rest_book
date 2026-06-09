@@ -4,7 +4,7 @@
 
 ### 内容类型与响应格式 (Content-type & response format) {#content-type--response-format}
 
-默认响应格式为 `application/x-protobuf`。支持 JSON 的端点在请求包含 `Accept: application/json` 头时，会以 `application/json` 格式响应。JSON 响应体通过 `google::protobuf::util::MessageToJsonString`（proto3 JSON 映射 — 字段名为驼峰命名法）序列化生成。
+默认响应格式为 `application/x-protobuf`。支持 JSON 的端点在请求包含 `Accept: application/json` 头时，会以 `application/json` 格式响应。JSON 响应体通过 `google::protobuf::util::MessageToJsonString`（proto3 JSON 映射 — 字段名为蛇形命名法）序列化生成。
 
 | `Accept` 请求头          | `Content-Type` 响应头    | Body                         |
 | ------------------------ | ------------------------ | ---------------------------- |
@@ -117,8 +117,8 @@ curl -H "Accept: application/json" \
     {
       "name": "/tf",
       "type": "tf2_msgs/TFMessage",
-      "publisherCount": 1,
-      "subscriberCount": 3
+      "publisher_count": 1,
+      "subscriber_count": 3
     }
   ]
 }
