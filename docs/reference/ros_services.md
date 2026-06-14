@@ -25,7 +25,7 @@ Protobuf message definitions are published as part of the [`@kingsimba/axbot-sdk
 | ------ | --------------------------------------------------------- | ---------------------------------------------------------- |
 | `GET`  | `/ros/slam/submaps/{uuid}/{trajectory_id}/{submap_index}` | `/submap_query_v2` (`cartographer_ros_msgs/SubmapQueryV2`) |
 | `GET`  | `/ros/rosmaster/topics`                                   | ROS master API (`getTopics` + `getSystemState`)            |
-| `GET`  | `/ros/rosmaster/topics/published`                         | ROS master API (`getSystemState` — publishers only)        |
+| `GET`  | `/ros/rosmaster/topics/published_names`                   | ROS master API (`getSystemState` — publishers only)        |
 
 ---
 
@@ -133,7 +133,7 @@ Returns only the names of topics that have at least one publisher.
 ### Route
 
 ```text
-GET /ros/rosmaster/topics/published
+GET /ros/rosmaster/topics/published_names
 ```
 
 ### Request
@@ -154,11 +154,11 @@ See [`topics.proto`](../ros_message_forward/proto/topics.proto).
 
 ```bash
 # protobuf (default)
-curl http://192.168.25.25:8090/ros/rosmaster/topics/published | protoc --decode_raw
+curl http://192.168.25.25:8090/ros/rosmaster/topics/published_names | protoc --decode_raw
 
 # JSON
 curl -H "Accept: application/json" \
-  http://192.168.25.25:8090/ros/rosmaster/topics/published | jq .
+  http://192.168.25.25:8090/ros/rosmaster/topics/published_names | jq .
 ```
 
 ```json

@@ -25,7 +25,7 @@ Protobuf 消息定义发布在 npm 上的 [`@kingsimba/axbot-sdk`](https://www.n
 | ----- | --------------------------------------------------------- | ---------------------------------------------------------- |
 | `GET` | `/ros/slam/submaps/{uuid}/{trajectory_id}/{submap_index}` | `/submap_query_v2` (`cartographer_ros_msgs/SubmapQueryV2`) |
 | `GET` | `/ros/rosmaster/topics`                                   | ROS master API (`getTopics` + `getSystemState`)            |
-| `GET` | `/ros/rosmaster/topics/published`                         | ROS master API (`getSystemState` — 仅发布者)               |
+| `GET` | `/ros/rosmaster/topics/published_names`                   | ROS master API (`getSystemState` — 仅发布者)               |
 
 ---
 
@@ -133,7 +133,7 @@ curl -H "Accept: application/json" \
 ### 路由 (Route)
 
 ```text
-GET /ros/rosmaster/topics/published
+GET /ros/rosmaster/topics/published_names
 ```
 
 ### 请求 (Request)
@@ -154,11 +154,11 @@ GET /ros/rosmaster/topics/published
 
 ```bash
 # protobuf（默认）
-curl http://192.168.25.25:8090/ros/rosmaster/topics/published | protoc --decode_raw
+curl http://192.168.25.25:8090/ros/rosmaster/topics/published_names | protoc --decode_raw
 
 # JSON
 curl -H "Accept: application/json" \
-  http://192.168.25.25:8090/ros/rosmaster/topics/published | jq .
+  http://192.168.25.25:8090/ros/rosmaster/topics/published_names | jq .
 ```
 
 ```json
