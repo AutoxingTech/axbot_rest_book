@@ -2,6 +2,7 @@
 
 ## 2.14.0
 
+- 2026-06-17 Add `/fused_sensor_state` WebSocket topic
 - 2026-06-14 Rename `topics/published` to `topics/published_names` in ROS services docs
 - 2026-06-09 Add [Forwarded ROS Services](../reference/ros_services.md) reference for ROS submap and topic APIs
 - 2026-06-03 Add three calibration modes (single_shot, right_wall, front_wall) to [Calibrate Duo Lidar Poses](../reference/services.md#calibrate-duo-lidar-poses)

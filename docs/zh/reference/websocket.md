@@ -661,6 +661,22 @@ type PowerState =
 }
 ```
 
+## 融合传感器状态 (Fused Sensor State) {#fused-sensor-state}
+
+```json
+{
+  "topic": "/fused_sensor_state",
+  "slipping": false,
+  "major_slipping": false,
+  "pushed": false,
+  "accelerability": 1,
+  "suggested_speed": 0.5,
+  "is_still": true, // 同时满足 odom_still 和 imu_still
+  "odom_still": true, // 轮速计读数为 0 或接近 0
+  "imu_still": true // 最近 N 秒内 gyro 各轴积分均低于阈值
+}
+```
+
 ## 外部 RGB 摄像头数据 (External RGB Camera Data) {#external-rgb-camera-data}
 
 如果机器人没有内置 RGB 摄像头，可以安装外部摄像头将数据回传给机器人。这使得监控和基于视觉的功能能够保持运行。

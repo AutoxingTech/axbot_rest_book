@@ -662,6 +662,22 @@ A debug topic, to visualize covariance of lidar odom。
 }
 ```
 
+## Fused Sensor State
+
+```json
+{
+  "topic": "/fused_sensor_state",
+  "slipping": false,
+  "major_slipping": false,
+  "pushed": false,
+  "accelerability": 1,
+  "suggested_speed": 0.5,
+  "is_still": true, // Both odom_still and imu_still.
+  "odom_still": true, // Wheel encoder readings are zero or near-zero.
+  "imu_still": true // The integral of gyro readings over the last N seconds is below a threshold on all axes.
+}
+```
+
 ## External RGB Camera Data
 
 If the robot is not equipped with built-in RGB cameras, external cameras can be installed to feed data back to the robot. This allows monitoring and vision-based functions to remain operational.
