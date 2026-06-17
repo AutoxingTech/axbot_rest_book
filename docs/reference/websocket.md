@@ -678,6 +678,29 @@ A debug topic, to visualize covariance of lidar odom。
 }
 ```
 
+## IMU State
+
+Raw inertial data from the IMU sensor.
+
+```json
+{
+  "topic": "/imu_state",
+  "calibrate_state": 0,
+  "calibrate_fail_reason": 0,
+  "temperature": 62.4,
+  "angular_velocity_standard_deviation_10s": [0.02175, 0.02393, 0.02442],
+  "angular_velocity_avg_10s": [0.00021, 0.00191, -0.00253],
+  "linear_acc_standard_deviation_10s": [0.00517, 0.00535, 0.00575],
+  "gyro_calibrating": true,
+
+  "gyro_bias": [0.00123, 0.00235, 0.00346], // current bias
+
+  // when gyro_calibrating is true,
+  // gyro_bias will move slowly towards it
+  "gyro_bias_target": [0.00457, 0.00568, 0.00679]
+}
+```
+
 ## External RGB Camera Data
 
 If the robot is not equipped with built-in RGB cameras, external cameras can be installed to feed data back to the robot. This allows monitoring and vision-based functions to remain operational.
