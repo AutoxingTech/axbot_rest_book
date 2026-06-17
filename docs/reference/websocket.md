@@ -42,11 +42,11 @@ This is intended for debugging purposes, providing a view through the robot's se
 Dark-red pixels represent the actual obstacles, while light-red pixels are extruded based on the robot's inscribed radius. The center of the robot should never enter the red area; doing so indicates a collision.
 
 <!-- prettier-ignore -->
-| Low Res. Costmap           | High Res. Costmap            |
-| -------------------------- | ---------------------------- |
-| /maps/5cm/1hz              | /maps/1cm/1hz                |
-| Used for path planning.    | Used for collision detection. |
-| ![](./low_res_costmap.png) | ![](./high_res_costmap.png)  |
+| Low Res. Costmap | High Res. Costmap |
+| ---------------- | ----------------- |
+| /maps/5cm/1hz    | /maps/1cm/1hz     |
+| Used for path planning. | Used for collision detection. |
+| ![](./low_res_costmap.png) | ![](./high_res_costmap.png) |
 
 ```
 {
@@ -914,7 +914,9 @@ Cross-Origin-Opener-Policy: same-origin
 
 ## Collected Barcode
 
-This topic is used to collect barcodes.
+This topic is used to collect barcodes. It is a latched topic that remains active as long as the robot is running.
+If no barcode is detected, the status is `no_result`. If a barcode is detected and accurately recognized, the status is `ok`.
+If a barcode is detected but the target is too far away or at a bad angle, the status will be `too_far`, `unaligned_with_robot`, etc.
 
 ```json
 {
@@ -922,6 +924,9 @@ This topic is used to collect barcodes.
   "state": "unknown|ok|no_result|not_unique|too_far|unaligned_with_robot",
   "barcode": {
     "id": "D2_125",
+
+    // The global pose of the barcode, defined as its physical center.
+    // Only returned when a map and pose are set.
     "pose": { "pos": [-14.842, 17.595], "ori": -1.457 },
 
     // Since 2.9.1
@@ -931,7 +936,7 @@ This topic is used to collect barcodes.
 }
 ```
 
-Collected barcodes should be added to the map's `overlays`. See [overlays](./overlays.md#barcode). Barcodes in `overlays` can then be used for [global positioning](./services.md#start-global-positioning).
+To use collected barcodes for global positioning or precision docking, they must be added to the map's `overlays`. See [overlays](./overlays.md#barcode). Barcodes in `overlays` can then be used for [global positioning](./services.md#start-global-positioning).
 
 ## Detected Rack
 

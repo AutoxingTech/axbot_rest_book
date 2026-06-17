@@ -715,7 +715,7 @@ type PowerState =
   // 如果为 true，则环境匹配度不高，
   // 或者位姿在全局不是唯一的，应由人工操作员验证。
   //
-  // 如果结果来自成功的条码匹配，
+  // 如果结果来自成功的 barcode 匹配，
   // `needs_confirmation` 始终为 true。
   "needs_confirmation": false,
   "pose": { "pos": [0.32, 0.97], "ori": 0.0 }, // 物体的位置和朝向。
@@ -911,9 +911,11 @@ Referrer-Policy: same-origin
 Cross-Origin-Opener-Policy: same-origin
 ```
 
-## 收集的条码 (Collected Barcode) {#collected-barcode}
+## 收集的 Barcode (Collected Barcode) {#collected-barcode}
 
-此 Topic 用于收集条码。
+此 Topic 用于收集 barcode。这是一个 latched topic（常驻话题），只要机器人运行中，就会持续监测。
+如果没有检测到，status 为 no_result；如果检测到且能准确识别，status 为 ok。
+如果检测到，但目标太远或角度不佳，会返回 too_far、unaligned_with_robot 等状态。
 
 ```json
 {
@@ -921,6 +923,9 @@ Cross-Origin-Opener-Policy: same-origin
   "state": "unknown|ok|no_result|not_unique|too_far|unaligned_with_robot",
   "barcode": {
     "id": "D2_125",
+
+    // barcode 的全局位姿，定义为其物理中心。
+    // 必须已设置地图和位姿，才会返回全局位姿。
     "pose": { "pos": [-14.842, 17.595], "ori": -1.457 },
 
     // 自 2.9.1 起
@@ -930,7 +935,7 @@ Cross-Origin-Opener-Policy: same-origin
 }
 ```
 
-收集到的条码应添加到地图的 `overlays` 中。参见 [overlays](./overlays.md#barcode)。`overlays` 中的条码随后可用于[全局定位](./services.md#start-global-positioning)。
+如果要将收集到的 barcode 用于全局定位或精准对接，需要将其添加到地图的 `overlays` 中。参见 [overlays](./overlays.md#barcode)。添加后即可通过 [`start_global_positioning`](./services.md#start-global-positioning) 使用。
 
 ## 检测到的货架 (Detected Rack) {#detected-rack}
 
