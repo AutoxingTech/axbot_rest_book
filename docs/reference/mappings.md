@@ -52,7 +52,7 @@ interface MappingCreateRequest {
   // (since 1.8.8)
   // zero (default): Use x=0, y=0, ori=0 as the starting point (starts a new coordinate frame).
   // current_pose: Use the current pose as the starting point (inherits the coordinate frame).
-  start_pose_type: 'zero' | 'current_pose';
+  start_pose_type: "zero" | "current_pose";
 }
 ```
 
@@ -82,7 +82,7 @@ curl -X PATCH \
 
 ```ts
 interface MappingFinishRequest {
-  state: 'finished' | 'cancelled'; // Finish or cancel the mapping task
+  state: "finished" | "cancelled"; // Finish or cancel the mapping task
 
   // (since 1.8.8)
   // false (default): Save the entire map.
@@ -107,7 +107,7 @@ curl http://192.168.25.25:8090/mappings/
       "url":"http://192.168.25.25:8090/mappings/48",
       "grid_origin_x":-8.050000190734863,
       "grid_origin_y":-5.650000095367432,
-      "grid_resolution":0.05,     
+      "grid_resolution":0.05,
       "start_time":1647520760,
       "end_time":1647520995,
       "state":"finished",
@@ -118,16 +118,16 @@ curl http://192.168.25.25:8090/mappings/
       //////////////////////////////
 
       // the binary map data file. Supports RANGE + ETAG based downloading.
-      "pbstream_url":"http://192.168.25.25:8090/mappings/48.pbstream",  
+      "pbstream_url":"http://192.168.25.25:8090/mappings/48.pbstream",
       // The PNG image
       "image_url":"http://192.168.25.25:8090/mappings/48.png",
       // landmarks, etc
-      "properties_url": "http://tunnel.autoxing.com:21044/mappings/48/properties.json", 
+      "properties_url": "http://tunnel.autoxing.com:21044/mappings/48/properties.json",
 
       //////////////////////////////
       // Auxiliary data
       //////////////////////////////
-      
+
       // A smaller sized PNG image
       "thumbnail_url":"http://192.168.25.25:8090/mappings/48/thumbnail",
       // the trajectory of this mapping task
@@ -140,7 +140,7 @@ curl http://192.168.25.25:8090/mappings/
       //////////////////////////////
 
       // obsolete. Map data & Image, in JSON format(base64ed). Unsuitable for large map.
-      "download_url":"http://192.168.25.25:8090/mappings/48/download", 
+      "download_url":"http://192.168.25.25:8090/mappings/48/download",
    },
    {
     ...
@@ -263,4 +263,3 @@ curl http://192.168.25.25:8090/mappings/48/landmarks.json
   }
 ]
 ```
-

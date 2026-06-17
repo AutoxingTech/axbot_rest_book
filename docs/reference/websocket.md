@@ -41,6 +41,7 @@ This is intended for debugging purposes, providing a view through the robot's se
 
 Dark-red pixels represent the actual obstacles, while light-red pixels are extruded based on the robot's inscribed radius. The center of the robot should never enter the red area; doing so indicates a collision.
 
+<!-- prettier-ignore -->
 | Low Res. Costmap           | High Res. Costmap            |
 | -------------------------- | ---------------------------- |
 | /maps/5cm/1hz              | /maps/1cm/1hz                |
@@ -71,7 +72,7 @@ Dark-red pixels represent the actual obstacles, while light-red pixels are extru
   "control_mode": "auto", // auto/remote/manual
   "emergency_stop_pressed": true, // Whether in emergency stop mode.
 
-  // Optional. Only supported by specific robot models. 
+  // Optional. Only supported by specific robot models.
   // Some wheels have a release-wheels wire.
   // This flag reflects whether the wire is active.
   "wheels_released": true
@@ -83,7 +84,7 @@ Dark-red pixels represent the actual obstacles, while light-red pixels are extru
 ```json
 {
   "topic": "/slam/state",
-  
+
   // inactive: Idle. Not creating a map, and no map is set.
   // slam: Creating a map.
   // positioning: A map is set, and the robot is in the localization state.
@@ -91,18 +92,18 @@ Dark-red pixels represent the actual obstacles, while light-red pixels are extru
 
   "nav_sat_state": "no_fix", // Since 3.14. no_fix, sat_base or rtk_fixed
 
-  "reliable": true,       // false means the position is lost.
+  "reliable": true, // false means the position is lost.
 
-  // "lidar_reliable = False" means that no constraint exists between newly created 
+  // "lidar_reliable = False" means that no constraint exists between newly created
   // observations (submaps) and the current static map.
-  // 
+  //
   // The position loss steps are as follows:
   // 1. No constraints (between new observations and the static map) exist; "lidar_reliable" becomes false.
   // 2. The robot enters pure dead-reckoning mode, and "position_loss_progress" starts to increase.
   // 3. After some movement, if new constraints are created, "lidar_reliable" becomes true.
   //    However, if "position_loss_progress" reaches 1.0, "reliable" also becomes false.
   "lidar_reliable": false, // since 2.11.0-rc18
-  "position_loss_progress": 0.35,  // since 2.11.0-rc18. Only exists when lidar_reliable = false.
+  "position_loss_progress": 0.35, // since 2.11.0-rc18. Only exists when lidar_reliable = false.
 
   // The quality of positioning (Experimental).
   //
@@ -114,9 +115,9 @@ Dark-red pixels represent the actual obstacles, while light-red pixels are extru
   //  8 - good
   // 10 - excellent
   "position_quality": 10,
-  
+
   // How much the current LiDAR points match the static map.
-  "lidar_matching_score": 0.545, 
+  "lidar_matching_score": 0.545,
 
   // Other debugging flags.
   "lidar_matched": true,
@@ -202,7 +203,7 @@ Since 2.11.0
   "capacity": 14.0, // Ah
   "design_capacity": 15.0, // Ah
   "state_of_health": 0.93, // Percentage.
-  "cycle_count": 80,
+  "cycle_count": 80
 }
 ```
 
@@ -285,16 +286,16 @@ enum StuckState {
   "in_elevator": true, // Optional (since 2.5.2).
   "viewport_blocked": true, // Optional (since 2.5.2).
 
-  // Optional (since 2.9.0). 
+  // Optional (since 2.9.0).
   // Destination is occupied by another robot, so it is waiting at the roadside.
   "is_waiting_for_dest": true,
 
   "docking_with_conveyer": true, // Optional (since 2.9.0).
 
-  // Optional (since 2.11.0). Defaults to 0. 
+  // Optional (since 2.11.0). Defaults to 0.
   // Only valid when moving along a specified route.
   // Indicates the number of points already passed.
-  "given_route_passed_point_count": 3 
+  "given_route_passed_point_count": 3
 }
 ```
 
@@ -339,27 +340,27 @@ Commonly used topic names include:
 
 ```json
 {
-    "topic": "/horizontal_laser_2d/matched",
-    "stamp": 1741764468.939,
-    "fields": [
-        {
-            "name": "x",
-            "data_type": "f32"
-        },
-        {
-            "name": "y",
-            "data_type": "f32"
-        },
-        {
-            "name": "z",
-            "data_type": "f32"
-        },
-        {
-            "name": "intensity",
-            "data_type": "f32"
-        }
-    ],
-    "data": "QphAQHPLmkHDpvk/xcTEPk+RQED22ppBp6..." // Base64-encoded binary data.
+  "topic": "/horizontal_laser_2d/matched",
+  "stamp": 1741764468.939,
+  "fields": [
+    {
+      "name": "x",
+      "data_type": "f32"
+    },
+    {
+      "name": "y",
+      "data_type": "f32"
+    },
+    {
+      "name": "z",
+      "data_type": "f32"
+    },
+    {
+      "name": "intensity",
+      "data_type": "f32"
+    }
+  ],
+  "data": "QphAQHPLmkHDpvk/xcTEPk+RQED22ppBp6..." // Base64-encoded binary data.
 }
 ```
 
@@ -480,11 +481,12 @@ Use `flushingTime: 0` to minimize delay.
 
 ```js
 this.jmuxer = new JMuxer({
-    node: myNativeElement,
-    mode: 'video',
-    flushingTime: 0,
+  node: myNativeElement,
+  mode: "video",
+  flushingTime: 0,
 });
 ```
+
 :::
 
 Current topics (may vary by device):
@@ -521,9 +523,9 @@ Currently topics: (Different devices may differ)
 
 ```ts
 type PowerState =
-  | 'awake' // operational
-  | 'awakening' // Recovering from sleeping to awake. Usually lasts 2-3 seconds.
-  | 'sleeping'; // when sleeping, some sensors are turned off.
+  | "awake" // operational
+  | "awakening" // Recovering from sleeping to awake. Usually lasts 2-3 seconds.
+  | "sleeping"; // when sleeping, some sensors are turned off.
 ```
 
 ```json
@@ -654,9 +656,7 @@ A debug topic, to visualize covariance of lidar odom。
   "topic": "/odom_state",
   "lidar_odom_reliable": true,
   "lidar_odom_cov": [
-    0.000023889469957794063,
-    -0.00002311983917024918,
-    -0.00002311983917024918,
+    0.000023889469957794063, -0.00002311983917024918, -0.00002311983917024918,
     0.00005866867650183849
   ]
 }
@@ -920,20 +920,18 @@ This topic is used to collect barcodes.
 {
   "topic": "/collected_barcode",
   "state": "unknown|ok|no_result|not_unique|too_far|unaligned_with_robot",
-  "barcode": 
-  {
-    "id": "D2_125", 
-    "pose": {"pos": [-14.842, 17.595], "ori": -1.457}, 
+  "barcode": {
+    "id": "D2_125",
+    "pose": { "pos": [-14.842, 17.595], "ori": -1.457 },
 
     // Since 2.9.1
     // It's only accurate when the robot is not moving
-    "relative_pose": {"pos": [-1.992, -0.092], "ori": -0.312} 
+    "relative_pose": { "pos": [-1.992, -0.092], "ori": -0.312 }
   }
 }
 ```
 
 Collected barcodes should be added to the map's `overlays`. See [overlays](./overlays.md#barcode). Barcodes in `overlays` can then be used for [global positioning](./services.md#start-global-positioning).
-
 
 ## Detected Rack
 
@@ -958,7 +956,7 @@ Collected barcodes should be added to the map's `overlays`. See [overlays](./ove
       "ori": 0.0
     },
     "width": 0.66,
-    "height": 0.70
+    "height": 0.7
   }
 }
 ```
@@ -997,9 +995,9 @@ Indicators that signal whether the robot is turning left, turning right, or brak
 {
   "topic": "/robot_signal",
   "turn_left": true, // turning left
-  "turn_right": false,  // turning right
+  "turn_right": false, // turning right
   "brake": false, // braking
-  "reverse": false, // backing up
+  "reverse": false // backing up
 }
 ```
 
@@ -1018,22 +1016,10 @@ This topic is used to visualize the state of auto-doors.
       "mac": "123",
       "state": "closed",
       "polygon": [
-        [
-          2.937,
-          3.875
-        ],
-        [
-          2.899,
-          2.368
-        ],
-        [
-          3.208,
-          2.329
-        ],
-        [
-          3.237,
-          3.904
-        ]
+        [2.937, 3.875],
+        [2.899, 2.368],
+        [3.208, 2.329],
+        [3.237, 3.904]
       ]
     }
   ]
@@ -1063,7 +1049,7 @@ The current state of the roller.
 ```json
 {
   "topic": "/roller_state",
-  "state": "hold", // unknown, hold, loading, unloading
+  "state": "hold" // unknown, hold, loading, unloading
 }
 ```
 
@@ -1079,25 +1065,25 @@ Information about detected pallets.
 
 ```json
 {
-    "topic": "/detected_pallets",
-    "pallets": [
-        {
-            "frame": "map",
-            "pallet_id": "SOME_PALLET_ID",
-            "pose": {
-                "pos": [120.0, 50.0],
-                "ori": 1.618,
-            },
-            "size": {
-                "width": 1.0,
-                "depth": 1.3,
-                "height": 0.3,
-                "pocket_width": 0.3,
-                "pocket_height": 0.2,
-                "pocket_spacing": 0.2,
-            }
-        }
-    ]
+  "topic": "/detected_pallets",
+  "pallets": [
+    {
+      "frame": "map",
+      "pallet_id": "SOME_PALLET_ID",
+      "pose": {
+        "pos": [120.0, 50.0],
+        "ori": 1.618
+      },
+      "size": {
+        "width": 1.0,
+        "depth": 1.3,
+        "height": 0.3,
+        "pocket_width": 0.3,
+        "pocket_height": 0.2,
+        "pocket_spacing": 0.2
+      }
+    }
+  ]
 }
 ```
 
@@ -1111,11 +1097,11 @@ This topic is used to visualize [landmarks](./landmarks.md) identified during th
 {
   "topic": "/landmarks",
   "landmarks": [
-      {
-        "id": "landmark_1",
-        "pos": [0.32, 0.97],
-        "in_use": true
-      }
+    {
+      "id": "landmark_1",
+      "pos": [0.32, 0.97],
+      "in_use": true
+    }
   ]
 }
 ```
@@ -1160,7 +1146,7 @@ Selected update of output pins:
 {
   "topic": "/modify_output_pins",
   "enable": [0, 9, 13],
-  "disable": [2, 4, 6],
+  "disable": [2, 4, 6]
 }
 ```
 
@@ -1172,7 +1158,7 @@ Selected update of output pins:
   "mode": "idle", // idle, push, drive
   "left_activated": false,
   "right_activated": false,
-  "calibrating": true, // Optional. Only present when true
+  "calibrating": true // Optional. Only present when true
 }
 ```
 
@@ -1182,16 +1168,17 @@ Selected update of output pins:
 
 ```json
 {
-    "topic": "/detected_trailer",
-    "detected": true,
-    "hitch_position": [0, -0.35], // Relative to the robot's pose.
-    "hitch_arm_length": 0.4,  // The length of the hitch arm.
-    "width": 0.5, // Width of the trailer.
-    "depth": 1.0, // Depth (length) of the trailer.
-    "pose": {  // Pose of the trailer, relative to the robot.
-        "pos": [0.31, -0.85],
-        "ori": 0.13
-    }
+  "topic": "/detected_trailer",
+  "detected": true,
+  "hitch_position": [0, -0.35], // Relative to the robot's pose.
+  "hitch_arm_length": 0.4, // The length of the hitch arm.
+  "width": 0.5, // Width of the trailer.
+  "depth": 1.0, // Depth (length) of the trailer.
+  "pose": {
+    // Pose of the trailer, relative to the robot.
+    "pos": [0.31, -0.85],
+    "ori": 0.13
+  }
 }
 ```
 
@@ -1203,9 +1190,9 @@ Since 2.12.0
 
 ```json
 {
-    "topic": "/depth_camera/downward/image",
-    "size": [160, 100],
-    "data": "iVBORw0KGgoAAAANSUhEUgAAALYAAAA7BAAAAA..." // Base64-encoded PNG file.
+  "topic": "/depth_camera/downward/image",
+  "size": [160, 100],
+  "data": "iVBORw0KGgoAAAANSUhEUgAAALYAAAA7BAAAAA..." // Base64-encoded PNG file.
 }
 ```
 
@@ -1221,13 +1208,13 @@ Commonly used topic names include:
 
 ```json
 {
-    "topic": "/updated_map_slice",
-    "width": 298,
-    "height": 356,
-    "resolution": 0.05,
-    "origin_x": -4.4,
-    "origin_y": -9.0,
-    "data": "iVBORw0KGgoAAAANSUhEUg..." // Base64-encoded grayscale PNG.
+  "topic": "/updated_map_slice",
+  "width": 298,
+  "height": 356,
+  "resolution": 0.05,
+  "origin_x": -4.4,
+  "origin_y": -9.0,
+  "data": "iVBORw0KGgoAAAANSUhEUg..." // Base64-encoded grayscale PNG.
 }
 ```
 
@@ -1252,11 +1239,11 @@ This topic provides the health status of V2X beacons, including message receptio
 ```json
 {
   "topic": "/v2x_health_state",
-  "test_time_window": 10.0,  // Time window in seconds for testing beacon health.
-  "rate": 2,  // Expected message rate per second.
-  "beacon_ids": ["beacon_001", "beacon_002", "beacon_003"],  // List of beacon identifiers.
-  "beacon_message_counts": [18, 19, 3],  // Number of messages received from each beacon during the test window.
-  "beacon_active_states": [true, true, false]  // Active state of each beacon (true if receiving messages at expected rate).
+  "test_time_window": 10.0, // Time window in seconds for testing beacon health.
+  "rate": 2, // Expected message rate per second.
+  "beacon_ids": ["beacon_001", "beacon_002", "beacon_003"], // List of beacon identifiers.
+  "beacon_message_counts": [18, 19, 3], // Number of messages received from each beacon during the test window.
+  "beacon_active_states": [true, true, false] // Active state of each beacon (true if receiving messages at expected rate).
 }
 ```
 
@@ -1269,9 +1256,9 @@ Raw navigation data from the CHC (华测) GNSS/INS sensor on topic `/devpvt`.
 ```json
 {
   "topic": "/devpvt",
-  "speed": 0.352,           // Ground speed (m/s).
-  "heading": 270.123,       // Track angle — velocity heading in vehicle frame, clockwise, [0, 360] deg.
-  "heading2": 180.654,      // Dual-antenna heading in vehicle frame, clockwise, [0, 360] deg.
+  "speed": 0.352, // Ground speed (m/s).
+  "heading": 270.123, // Track angle — velocity heading in vehicle frame, clockwise, [0, 360] deg.
+  "heading2": 180.654, // Dual-antenna heading in vehicle frame, clockwise, [0, 360] deg.
 
   // Overall INS/GNSS fusion state (stat[0]):
   //   init | sat_nav | combined_nav | pure_inertial
@@ -1283,5 +1270,6 @@ Raw navigation data from the CHC (华测) GNSS/INS sensor on topic `/devpvt`.
   //   single_point_no_heading | pseudorange_diff_no_heading | rtk_fixed_no_heading | rtk_float_no_heading
   "gnss_state": "rtk_fixed",
 
-  "warning": 0              // Sensor warning bitmask (0 = no warning).
+  "warning": 0 // Sensor warning bitmask (0 = no warning).
 }
+```

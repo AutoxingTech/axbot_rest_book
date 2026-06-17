@@ -51,7 +51,7 @@ curl http://192.168.25.25:8090/device/info
     "supportsRgbCamera": true, // Supports RGB camera-related topics.
     "combineImuBiasAndPoseCalibration": true, // Available since version 2.4.0. Combines IMU bias and pose calibration.
     "supportsJackCheck": true, // Supports POST /services/jack_self_check
-    "supportsDuoLidar": true, // Supports POST /services/calibrate_duo_lidar_poses
+    "supportsDuoLidar": true // Supports POST /services/calibrate_duo_lidar_poses
   }
 }
 ```
@@ -101,19 +101,19 @@ Response in Station mode:
   "wifi_ip": "10.10.41.43",
   "wifi_mac": "e4:5f:01:6d:bd:6a",
   "ssid": "AutoXing",
-  "debug_message":"info: Switching to station mode.",
-  "routes":[
+  "debug_message": "info: Switching to station mode.",
+  "routes": [
     "default via 192.168.25.2 dev eth0 src 192.168.25.25 metric 202 ",
     "default via 10.10.40.1 dev wlan0 proto dhcp metric 600 ",
     "10.10.40.0/23 dev wlan0 proto kernel scope link src 10.10.41.43 metric 600 ",
     "192.168.25.0/24 dev eth0 proto dhcp scope link src 192.168.25.25 metric 202 "
   ],
-  "active_access_point":{
-    "ssid":"AutoXing",
-    "hw_address":"a4:fa:76:33:d3:70",
-    "strength":100
+  "active_access_point": {
+    "ssid": "AutoXing",
+    "hw_address": "a4:fa:76:33:d3:70",
+    "strength": 100
   },
-  "last_wifi_connect_result":{}
+  "last_wifi_connect_result": {}
 }
 ```
 
@@ -311,8 +311,8 @@ $ curl http://192.168.25.25:8090/device/chrony/sources
 
 The syntax is a subset of the [Chrony Time Source](https://manpages.debian.org/experimental/chrony/chrony.conf.5.en.html#Time_sources) configuration.
 
-* `server [HOSTNAME] [PORT port] [iburst] [trust]`
-* `pool [NAME] [PORT port] [iburst] [trust]`
+- `server [HOSTNAME] [PORT port] [iburst] [trust]`
+- `pool [NAME] [PORT port] [iburst] [trust]`
 
 It is recommended to configure at least four time sources to mitigate the impact of an inaccurate source (a "falseticker").
 See https://access.redhat.com/solutions/58025
@@ -375,27 +375,27 @@ curl http://192.168.25.25:8090/device/sensors
 
 ```json
 {
-    "depth_cameras": [
-        {
-            "name": "ihawk_upward",
-            "depth_image_topic": "/depth_camera/downward/image"
-        },
-        {
-            "name": "ihawk_downward",
-            "depth_image_topic": "/depth_camera/backward/image"
-        }
-    ],
-    "laser_scanners": [
-        {
-            "name": "lidar_node",
-            "scan_topic": "/horizontal_laser_2d/matched"
-        }
-    ],
-    "rgb_cameras": [
-        {
-            "name": "rgb_forward",
-            "image_topic": "/rgb_cameras/front/compressed"
-        }
-    ]
+  "depth_cameras": [
+    {
+      "name": "ihawk_upward",
+      "depth_image_topic": "/depth_camera/downward/image"
+    },
+    {
+      "name": "ihawk_downward",
+      "depth_image_topic": "/depth_camera/backward/image"
+    }
+  ],
+  "laser_scanners": [
+    {
+      "name": "lidar_node",
+      "scan_topic": "/horizontal_laser_2d/matched"
+    }
+  ],
+  "rgb_cameras": [
+    {
+      "name": "rgb_forward",
+      "image_topic": "/rgb_cameras/front/compressed"
+    }
+  ]
 }
 ```

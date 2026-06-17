@@ -51,7 +51,7 @@ curl http://192.168.25.25:8090/device/info
     "supportsRgbCamera": true, // 支持 RGB 相机相关话题。
     "combineImuBiasAndPoseCalibration": true, // 自 2.4.0 版本起可用。合并 IMU 偏置和位姿校准。
     "supportsJackCheck": true, // 支持 POST /services/jack_self_check
-    "supportsDuoLidar": true, // 支持 POST /services/calibrate_duo_lidar_poses
+    "supportsDuoLidar": true // 支持 POST /services/calibrate_duo_lidar_poses
   }
 }
 ```
@@ -101,19 +101,19 @@ Station 模式下的响应：
   "wifi_ip": "10.10.41.43",
   "wifi_mac": "e4:5f:01:6d:bd:6a",
   "ssid": "AutoXing",
-  "debug_message":"info: Switching to station mode.",
-  "routes":[
+  "debug_message": "info: Switching to station mode.",
+  "routes": [
     "default via 192.168.25.2 dev eth0 src 192.168.25.25 metric 202 ",
     "default via 10.10.40.1 dev wlan0 proto dhcp metric 600 ",
     "10.10.40.0/23 dev wlan0 proto kernel scope link src 10.10.41.43 metric 600 ",
     "192.168.25.0/24 dev eth0 proto dhcp scope link src 192.168.25.25 metric 202 "
   ],
-  "active_access_point":{
-    "ssid":"AutoXing",
-    "hw_address":"a4:fa:76:33:d3:70",
-    "strength":100
+  "active_access_point": {
+    "ssid": "AutoXing",
+    "hw_address": "a4:fa:76:33:d3:70",
+    "strength": 100
   },
-  "last_wifi_connect_result":{}
+  "last_wifi_connect_result": {}
 }
 ```
 
@@ -311,8 +311,8 @@ $ curl http://192.168.25.25:8090/device/chrony/sources
 
 语法是 [Chrony 时间源](https://manpages.debian.org/experimental/chrony/chrony.conf.5.en.html#Time_sources)配置的一个子集。
 
-* `server [HOSTNAME] [PORT port] [iburst] [trust]`
-* `pool [NAME] [PORT port] [iburst] [trust]`
+- `server [HOSTNAME] [PORT port] [iburst] [trust]`
+- `pool [NAME] [PORT port] [iburst] [trust]`
 
 建议至少配置四个时间源，以减轻不准确时间源 (falseticker) 的影响。
 详情请参阅 https://access.redhat.com/solutions/58025
@@ -375,27 +375,27 @@ curl http://192.168.25.25:8090/device/sensors
 
 ```json
 {
-    "depth_cameras": [
-        {
-            "name": "ihawk_upward",
-            "depth_image_topic": "/depth_camera/downward/image"
-        },
-        {
-            "name": "ihawk_downward",
-            "depth_image_topic": "/depth_camera/backward/image"
-        }
-    ],
-    "laser_scanners": [
-        {
-            "name": "lidar_node",
-            "scan_topic": "/horizontal_laser_2d/matched"
-        }
-    ],
-    "rgb_cameras": [
-        {
-            "name": "rgb_forward",
-            "image_topic": "/rgb_cameras/front/compressed"
-        }
-    ]
+  "depth_cameras": [
+    {
+      "name": "ihawk_upward",
+      "depth_image_topic": "/depth_camera/downward/image"
+    },
+    {
+      "name": "ihawk_downward",
+      "depth_image_topic": "/depth_camera/backward/image"
+    }
+  ],
+  "laser_scanners": [
+    {
+      "name": "lidar_node",
+      "scan_topic": "/horizontal_laser_2d/matched"
+    }
+  ],
+  "rgb_cameras": [
+    {
+      "name": "rgb_forward",
+      "image_topic": "/rgb_cameras/front/compressed"
+    }
+  ]
 }
 ```

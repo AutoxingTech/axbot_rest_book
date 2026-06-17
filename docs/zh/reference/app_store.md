@@ -43,19 +43,19 @@ curl -X GET http://192.168.25.25:8090/app_store/packages
 type ListPackageResponse = Package[];
 
 type PackageStatus =
-  | 'not_installed' // 显示“获取”按钮。
-  | 'upgradable' // 显示“下载”按钮。
-  | 'up_to_date'
-  | 'download_queueing'
-  | 'downloading'
-  | 'downloaded' // 显示“安装”按钮。
-  | 'download_failed' // 显示“重试”按钮；调用下载 API。
-  | 'install_queueing'
-  | 'installing'
-  | 'install_failed' // 显示“重试”按钮；调用安装 API。
-  | 'uninstall_queueing'
-  | 'uninstalling'
-  | 'uninstall_failed'
+  | "not_installed" // 显示“获取”按钮。
+  | "upgradable" // 显示“下载”按钮。
+  | "up_to_date"
+  | "download_queueing"
+  | "downloading"
+  | "downloaded" // 显示“安装”按钮。
+  | "download_failed" // 显示“重试”按钮；调用下载 API。
+  | "install_queueing"
+  | "installing"
+  | "install_failed" // 显示“重试”按钮；调用安装 API。
+  | "uninstall_queueing"
+  | "uninstalling"
+  | "uninstall_failed";
 
 interface Package {
   name: string;
@@ -116,7 +116,7 @@ curl -X POST \
 如果请求成功 (状态码 201)：
 
 ```json
-{"py_axbot": {"task_id": 16, "version": "1.1.6-opi64"}}
+{ "py_axbot": { "task_id": 16, "version": "1.1.6-opi64" } }
 ```
 
 ## 安装软件包
@@ -134,7 +134,9 @@ curl -X POST \
 
 ```json
 {
-  "ax": { "error": "installed version(master-pi64) is higher than downloaded version(2.4.1-pi64), skip..." },
+  "ax": {
+    "error": "installed version(master-pi64) is higher than downloaded version(2.4.1-pi64), skip..."
+  },
   "iot": { "error": "installed version(master) is higher than downloaded version(1.0.5), skip..." }
 }
 ```
@@ -142,7 +144,7 @@ curl -X POST \
 如果请求成功 (状态码 201)：
 
 ```json
-{"follow": {"task_id": 19, "version": "1.1.6-opi64"}}
+{ "follow": { "task_id": 19, "version": "1.1.6-opi64" } }
 ```
 
 ## 从本地文件安装软件包

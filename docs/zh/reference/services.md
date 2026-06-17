@@ -55,7 +55,7 @@ curl -X POST \
 
 ```ts
 class SetControlModeRequest {
-  control_mode: 'auto' | 'manual' | 'remote';
+  control_mode: "auto" | "manual" | "remote";
 }
 ```
 
@@ -116,8 +116,8 @@ curl -X POST \
 ```ts
 class ShutdownRequest {
   target:
-    | 'main_computing_unit' // 仅重启或关闭主计算板。
-    | 'main_power_supply'; // 重启或关闭整个设备。
+    | "main_computing_unit" // 仅重启或关闭主计算板。
+    | "main_power_supply"; // 重启或关闭整个设备。
   reboot: boolean; // true 为重启，false 为关机。
 }
 ```
@@ -162,7 +162,7 @@ curl -X POST \
 
 ```ts
 class PowerOnRequest {
-  action: 'power_on' | 'power_off';
+  action: "power_on" | "power_off";
 }
 ```
 
@@ -198,15 +198,11 @@ curl -X POST \
 
 ```ts
 interface SetupWifiRequest {
-  mode: 'ap' | 'station';
+  mode: "ap" | "station";
   ssid?: string; // SSID，Station 模式下必填
   psk?: string; // Wi-Fi 预共享密钥，Station 模式下必填
 
-  route_mode?:
-    | 'eth0_first'
-    | 'wlan0_first'
-    | 'usb0_first'
-    | 'wlan0_usb0_auto_first';
+  route_mode?: "eth0_first" | "wlan0_first" | "usb0_first" | "wlan0_usb0_auto_first";
 }
 ```
 
@@ -225,7 +221,7 @@ curl -X POST \
 
 ```ts
 interface RouteModeRequest {
-  mode: 'eth0_first' | 'wlan0_first' | 'usb0_first' | 'wlan0_usb0_auto_first';
+  mode: "eth0_first" | "wlan0_first" | "usb0_first" | "wlan0_usb0_auto_first";
 }
 ```
 
@@ -656,7 +652,7 @@ curl -X POST \
 
 ```ts
 interface CalibrateDuoLidarPosesRequest {
-  calibration_step?: 'single_shot' | 'right_wall' | 'front_wall';
+  calibration_step?: "single_shot" | "right_wall" | "front_wall";
 }
 ```
 

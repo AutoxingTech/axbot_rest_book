@@ -21,7 +21,7 @@ curl http://192.168.25.25:8090/robot-params
   "/planning/auto_hold": true, // 自 2.3.0 版本起可用。
   "/control/bump_tolerance": 0.5, // 自 2.4.0 版本起可用。
   "/control/bump_based_speed_limit/enable": true, // 自 2.7.4 版本起可用。
-  "/robot/footprint": [[0.248, 0.108], [0.24, 0.174], "..." , [0.248, -0.108]] // 自 2.5.0 版本起可用。
+  "/robot/footprint": [[0.248, 0.108], [0.24, 0.174], "...", [0.248, -0.108]] // 自 2.5.0 版本起可用。
 }
 ```
 

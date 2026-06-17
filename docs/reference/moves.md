@@ -64,9 +64,9 @@ interface MoveActionCreate {
   properties?: { // Optional: since 2.11.0
     inplace_rotate?: boolean; // Optional. since 2.11.0: strictly rotate without any linear velocity.
 
-    // Optional. An index into the layers of a rack stack. 
+    // Optional. An index into the layers of a rack stack.
     // For type = "align_with_rack" and "to_unload_point".
-    rack_layer?: number; 
+    rack_layer?: number;
   }
 }
 ```
@@ -81,11 +81,12 @@ In a typical point-to-point task, the robot should use the following sequence of
 2. **Raise the jack device**: When the move succeeds, call `/services/jack_up`.
    1. The progress of the jack device is reported via the [Jack State Topic](../reference/websocket.md#jack-state).
    2. When the jack is fully up, the footprint of the robot will expand to accommodate that of the rack.
-   The updated footprint can be received via the [Robot Model Topic](../reference/websocket.md#robot-model).
+      The updated footprint can be received via the [Robot Model Topic](../reference/websocket.md#robot-model).
 3. **Move to the unload point**: When the jack is fully up, create another move action with `type=to_unload_point` to move to the unload point.
 4. **Lower the jack device**: Call `/services/jack_down` to unload.
 5. Optionally, create the next move action. The robot will move away from the rack point before initiating the next action.
 
+<!-- prettier-ignore -->
 | Robot Admin Screenshot  | Photo                |
 | ----------------------- | -------------------- |
 | ![](./jack_monitor.png) | ![](./jack_real.jpg) |
@@ -98,22 +99,22 @@ Certain parameters must be configured correctly for safe operation. See [rack.sp
 
 In addition to point-to-point moves, which transport a rack or pallet from one point to another, we also support:
 
-* **Point-to-area move**: This is the most commonly used move when it is not known in advance which points in the target area are empty.
-* **Area-to-area move**: Used when you want to move every rack or pallet from one area to another.
+- **Point-to-area move**: This is the most commonly used move when it is not known in advance which points in the target area are empty.
+- **Area-to-area move**: Used when you want to move every rack or pallet from one area to another.
 
 On the mapping platform, a rack area polygon should be added. All rack points within this area are considered part of a group.
 
-Upon receiving a move action with `type=to_unload_point` and `rack_area_id={SOME_ID}`, the robot scans all rack points in that area and moves to the first empty point. If all points are occupied, the move fails with the error `NoFreeSpaceInRackArea`. 
+Upon receiving a move action with `type=to_unload_point` and `rack_area_id={SOME_ID}`, the robot scans all rack points in that area and moves to the first empty point. If all points are occupied, the move fails with the error `NoFreeSpaceInRackArea`.
 
 Several new failure reasons have been introduced, such as:
 
-* `InvalidRackAreaId`
-* `InvalidRackArea`
-* `UnknownRackSpaceState`
-* `NoRackInRackArea`
-* `AlignFailedInRackArea`
-* `NoFreeSpaceInRackArea`
-* `FailedToUnloadInRackArea`
+- `InvalidRackAreaId`
+- `InvalidRackArea`
+- `UnknownRackSpaceState`
+- `NoRackInRackArea`
+- `AlignFailedInRackArea`
+- `NoFreeSpaceInRackArea`
+- `FailedToUnloadInRackArea`
 
 ### Area-to-Area Move
 
@@ -139,7 +140,6 @@ curl -X POST
 ```
 
 Once this action is created, the user should send target poses via the WebSocket topic `/follow_target_state`: See [Follow Target](../reference/websocket.md#follow-target-state)
-
 
 ## Get Move Action Detail
 
@@ -173,7 +173,7 @@ curl http://192.168.25.25:8090/chassis/moves/4409
 
 ```ts
 interface MoveAction extends MoveActionCreate {
-  state: 'idle' | 'moving' | 'succeeded' | 'failed' | 'cancelled';
+  state: "idle" | "moving" | "succeeded" | "failed" | "cancelled";
   create_time: number; // Unix timestamp (e.g., 1647509573).
   last_modified_time: number; // Unix timestamp (e.g., 1647509573).
   fail_reason: number; // Failure code. Only valid when state="failed".
@@ -266,15 +266,14 @@ curl -X PATCH \
 
 ## Move Failure Reasons
 
-The `fail_reason` field is a numeric code indicating why a move action failed. 
+The `fail_reason` field is a numeric code indicating why a move action failed.
 
 ```ts
-enum MoveFailReason
-{
+enum MoveFailReason {
   none = 0, // None
   unknown = 1, // Unknown reason
   GetMapFailed = 2, // Failed to obtain map (WorldMap)
-  StartingPointOutOfMap = 3,  // Starting point is outside the map
+  StartingPointOutOfMap = 3, // Starting point is outside the map
   EndingPointOutOfMap = 4, // Ending point is outside the map
   StartingPointNotInGround = 5, // Starting point is not in a passable area
   EndingPointNotInGround = 6, // Ending point is not in a passable area

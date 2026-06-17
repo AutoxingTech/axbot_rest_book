@@ -41,6 +41,7 @@ Topic 用于接收机器人的实时信息。
 
 深红色像素代表实际障碍物，而浅红色像素是根据机器人的内切圆半径扩充的。机器人的中心永远不应进入红色区域；否则表示发生了碰撞。
 
+<!-- prettier-ignore -->
 | 低分辨率代价地图 (Low Res. Costmap) | 高分辨率代价地图 (High Res. Costmap) |
 | -------------------------- | ---------------------------- |
 | /maps/5cm/1hz              | /maps/1cm/1hz                |
@@ -83,7 +84,7 @@ Topic 用于接收机器人的实时信息。
 ```json
 {
   "topic": "/slam/state",
-  
+
   // inactive: 空闲。未在建图，且未设置地图。
   // slam: 正在建图。
   // positioning: 已设置地图，机器人处于定位状态。
@@ -91,17 +92,17 @@ Topic 用于接收机器人的实时信息。
 
   "nav_sat_state": "no_fix", // 自 3.14 起。no_fix, sat_base 或 rtk_fixed
 
-  "reliable": true,       // false 表示位置丢失。
+  "reliable": true, // false 表示位置丢失。
 
   // "lidar_reliable = False" 表示新创建的观测值（子图）与当前静态地图之间不存在约束。
-  // 
+  //
   // 位置丢失的步骤如下：
   // 1. 不存在约束（在新观测值与静态地图之间）；"lidar_reliable" 变为 false。
   // 2. 机器人进入纯死推（Dead-reckoning）模式，"position_loss_progress" 开始增加。
   // 3. 移动一段距离后，如果创建了新约束，"lidar_reliable" 变为 true。
   //    然而，如果 "position_loss_progress" 达到 1.0，"reliable" 也会变为 false。
   "lidar_reliable": false, // 自 2.11.0-rc18 起
-  "position_loss_progress": 0.35,  // 自 2.11.0-rc18 起。仅在 lidar_reliable = false 时存在。
+  "position_loss_progress": 0.35, // 自 2.11.0-rc18 起。仅在 lidar_reliable = false 时存在。
 
   // 定位质量（实验性）。
   //
@@ -113,9 +114,9 @@ Topic 用于接收机器人的实时信息。
   //  8 - 好 (good)
   // 10 - 极好 (excellent)
   "position_quality": 10,
-  
+
   // 当前激光雷达点云与静态地图的匹配程度。
-  "lidar_matching_score": 0.545, 
+  "lidar_matching_score": 0.545,
 
   // 其他调试标志。
   "lidar_matched": true,
@@ -201,7 +202,7 @@ enum VisualObjectLabel {
   "capacity": 14.0, // Ah
   "design_capacity": 15.0, // Ah
   "state_of_health": 0.93, // 百分比。
-  "cycle_count": 80,
+  "cycle_count": 80
 }
 ```
 
@@ -293,7 +294,7 @@ enum StuckState {
   // 可选 (自 2.11.0 起)。默认为 0。
   // 仅在沿指定路线移动时有效。
   // 表示已经通过的点数量。
-  "given_route_passed_point_count": 3 
+  "given_route_passed_point_count": 3
 }
 ```
 
@@ -338,27 +339,27 @@ enum StuckState {
 
 ```json
 {
-    "topic": "/horizontal_laser_2d/matched",
-    "stamp": 1741764468.939,
-    "fields": [
-        {
-            "name": "x",
-            "data_type": "f32"
-        },
-        {
-            "name": "y",
-            "data_type": "f32"
-        },
-        {
-            "name": "z",
-            "data_type": "f32"
-        },
-        {
-            "name": "intensity",
-            "data_type": "f32"
-        }
-    ],
-    "data": "QphAQHPLmkHDpvk/xcTEPk+RQED22ppBp6..." // Base64 编码的二进制数据。
+  "topic": "/horizontal_laser_2d/matched",
+  "stamp": 1741764468.939,
+  "fields": [
+    {
+      "name": "x",
+      "data_type": "f32"
+    },
+    {
+      "name": "y",
+      "data_type": "f32"
+    },
+    {
+      "name": "z",
+      "data_type": "f32"
+    },
+    {
+      "name": "intensity",
+      "data_type": "f32"
+    }
+  ],
+  "data": "QphAQHPLmkHDpvk/xcTEPk+RQED22ppBp6..." // Base64 编码的二进制数据。
 }
 ```
 
@@ -479,11 +480,12 @@ H.264 编码的数据流。
 
 ```js
 this.jmuxer = new JMuxer({
-    node: myNativeElement,
-    mode: 'video',
-    flushingTime: 0,
+  node: myNativeElement,
+  mode: "video",
+  flushingTime: 0,
 });
 ```
+
 :::
 
 当前 Topic（可能因设备而异）：
@@ -520,9 +522,9 @@ JPEG 编码的图像流。
 
 ```ts
 type PowerState =
-  | 'awake' // 正常运行
-  | 'awakening' // 正在从睡眠恢复到唤醒。通常持续 2-3 秒。
-  | 'sleeping'; // 睡眠时，部分传感器会关闭。
+  | "awake" // 正常运行
+  | "awakening" // 正在从睡眠恢复到唤醒。通常持续 2-3 秒。
+  | "sleeping"; // 睡眠时，部分传感器会关闭。
 ```
 
 ```json
@@ -653,9 +655,7 @@ type PowerState =
   "topic": "/odom_state",
   "lidar_odom_reliable": true,
   "lidar_odom_cov": [
-    0.000023889469957794063,
-    -0.00002311983917024918,
-    -0.00002311983917024918,
+    0.000023889469957794063, -0.00002311983917024918, -0.00002311983917024918,
     0.00005866867650183849
   ]
 }
@@ -919,20 +919,18 @@ Cross-Origin-Opener-Policy: same-origin
 {
   "topic": "/collected_barcode",
   "state": "unknown|ok|no_result|not_unique|too_far|unaligned_with_robot",
-  "barcode": 
-  {
-    "id": "D2_125", 
-    "pose": {"pos": [-14.842, 17.595], "ori": -1.457}, 
+  "barcode": {
+    "id": "D2_125",
+    "pose": { "pos": [-14.842, 17.595], "ori": -1.457 },
 
     // 自 2.9.1 起
     // 仅在机器人不移动时准确
-    "relative_pose": {"pos": [-1.992, -0.092], "ori": -0.312} 
+    "relative_pose": { "pos": [-1.992, -0.092], "ori": -0.312 }
   }
 }
 ```
 
 收集到的条码应添加到地图的 `overlays` 中。参见 [overlays](./overlays.md#barcode)。`overlays` 中的条码随后可用于[全局定位](./services.md#start-global-positioning)。
-
 
 ## 检测到的货架 (Detected Rack) {#detected-rack}
 
@@ -957,7 +955,7 @@ Cross-Origin-Opener-Policy: same-origin
       "ori": 0.0
     },
     "width": 0.66,
-    "height": 0.70
+    "height": 0.7
   }
 }
 ```
@@ -996,9 +994,9 @@ Cross-Origin-Opener-Policy: same-origin
 {
   "topic": "/robot_signal",
   "turn_left": true, // 正在左转
-  "turn_right": false,  // 正在右转
+  "turn_right": false, // 正在右转
   "brake": false, // 正在制动
-  "reverse": false, // 正在倒车
+  "reverse": false // 正在倒车
 }
 ```
 
@@ -1017,22 +1015,10 @@ Cross-Origin-Opener-Policy: same-origin
       "mac": "123",
       "state": "closed",
       "polygon": [
-        [
-          2.937,
-          3.875
-        ],
-        [
-          2.899,
-          2.368
-        ],
-        [
-          3.208,
-          2.329
-        ],
-        [
-          3.237,
-          3.904
-        ]
+        [2.937, 3.875],
+        [2.899, 2.368],
+        [3.208, 2.329],
+        [3.237, 3.904]
       ]
     }
   ]
@@ -1062,7 +1048,7 @@ Cross-Origin-Opener-Policy: same-origin
 ```json
 {
   "topic": "/roller_state",
-  "state": "hold", // unknown, hold, loading, unloading (未知, 保持, 正在装货, 正在卸货)
+  "state": "hold" // unknown, hold, loading, unloading (未知, 保持, 正在装货, 正在卸货)
 }
 ```
 
@@ -1078,25 +1064,25 @@ Cross-Origin-Opener-Policy: same-origin
 
 ```json
 {
-    "topic": "/detected_pallets",
-    "pallets": [
-        {
-            "frame": "map",
-            "pallet_id": "SOME_PALLET_ID",
-            "pose": {
-                "pos": [120.0, 50.0],
-                "ori": 1.618,
-            },
-            "size": {
-                "width": 1.0,
-                "depth": 1.3,
-                "height": 0.3,
-                "pocket_width": 0.3,
-                "pocket_height": 0.2,
-                "pocket_spacing": 0.2,
-            }
-        }
-    ]
+  "topic": "/detected_pallets",
+  "pallets": [
+    {
+      "frame": "map",
+      "pallet_id": "SOME_PALLET_ID",
+      "pose": {
+        "pos": [120.0, 50.0],
+        "ori": 1.618
+      },
+      "size": {
+        "width": 1.0,
+        "depth": 1.3,
+        "height": 0.3,
+        "pocket_width": 0.3,
+        "pocket_height": 0.2,
+        "pocket_spacing": 0.2
+      }
+    }
+  ]
 }
 ```
 
@@ -1110,11 +1096,11 @@ Cross-Origin-Opener-Policy: same-origin
 {
   "topic": "/landmarks",
   "landmarks": [
-      {
-        "id": "landmark_1",
-        "pos": [0.32, 0.97],
-        "in_use": true
-      }
+    {
+      "id": "landmark_1",
+      "pos": [0.32, 0.97],
+      "in_use": true
+    }
   ]
 }
 ```
@@ -1159,7 +1145,7 @@ IO 引脚的状态：
 {
   "topic": "/modify_output_pins",
   "enable": [0, 9, 13],
-  "disable": [2, 4, 6],
+  "disable": [2, 4, 6]
 }
 ```
 
@@ -1171,7 +1157,7 @@ IO 引脚的状态：
   "mode": "idle", // idle, push, drive (空闲, 推动, 驱动)
   "left_activated": false,
   "right_activated": false,
-  "calibrating": true, // 可选。仅在为 true 时存在
+  "calibrating": true // 可选。仅在为 true 时存在
 }
 ```
 
@@ -1181,16 +1167,17 @@ IO 引脚的状态：
 
 ```json
 {
-    "topic": "/detected_trailer",
-    "detected": true,
-    "hitch_position": [0, -0.35], // 相对于机器人位姿。
-    "hitch_arm_length": 0.4,  // 连接臂长度。
-    "width": 0.5, // 挂车宽度。
-    "depth": 1.0, // 挂车深度（长度）。
-    "pose": {  // 挂车的位姿，相对于机器人。
-        "pos": [0.31, -0.85],
-        "ori": 0.13
-    }
+  "topic": "/detected_trailer",
+  "detected": true,
+  "hitch_position": [0, -0.35], // 相对于机器人位姿。
+  "hitch_arm_length": 0.4, // 连接臂长度。
+  "width": 0.5, // 挂车宽度。
+  "depth": 1.0, // 挂车深度（长度）。
+  "pose": {
+    // 挂车的位姿，相对于机器人。
+    "pos": [0.31, -0.85],
+    "ori": 0.13
+  }
 }
 ```
 
@@ -1202,9 +1189,9 @@ IO 引脚的状态：
 
 ```json
 {
-    "topic": "/depth_camera/downward/image",
-    "size": [160, 100],
-    "data": "iVBORw0KGgoAAAANSUhEUgAAALYAAAA7BAAAAA..." // Base64 编码的 PNG 文件。
+  "topic": "/depth_camera/downward/image",
+  "size": [160, 100],
+  "data": "iVBORw0KGgoAAAANSUhEUgAAALYAAAA7BAAAAA..." // Base64 编码的 PNG 文件。
 }
 ```
 
@@ -1220,13 +1207,13 @@ IO 引脚的状态：
 
 ```json
 {
-    "topic": "/updated_map_slice",
-    "width": 298,
-    "height": 356,
-    "resolution": 0.05,
-    "origin_x": -4.4,
-    "origin_y": -9.0,
-    "data": "iVBORw0KGgoAAAANSUhEUg..." // Base64 编码的灰度 PNG。
+  "topic": "/updated_map_slice",
+  "width": 298,
+  "height": 356,
+  "resolution": 0.05,
+  "origin_x": -4.4,
+  "origin_y": -9.0,
+  "data": "iVBORw0KGgoAAAANSUhEUg..." // Base64 编码的灰度 PNG。
 }
 ```
 
@@ -1251,11 +1238,11 @@ rtn = {
 ```json
 {
   "topic": "/v2x_health_state",
-  "test_time_window": 10.0,  // 测试信标健康的窗口时间，单位：秒。
-  "rate": 2,  // 期望的每秒消息速率。
-  "beacon_ids": ["beacon_001", "beacon_002", "beacon_003"],  // 信标标识符列表。
-  "beacon_message_counts": [18, 19, 3],  // 在测试窗口内收到每个信标的消息数量。
-  "beacon_active_states": [true, true, false]  // 每个信标的激活状态（如果按预期速率接收消息则为 true）。
+  "test_time_window": 10.0, // 测试信标健康的窗口时间，单位：秒。
+  "rate": 2, // 期望的每秒消息速率。
+  "beacon_ids": ["beacon_001", "beacon_002", "beacon_003"], // 信标标识符列表。
+  "beacon_message_counts": [18, 19, 3], // 在测试窗口内收到每个信标的消息数量。
+  "beacon_active_states": [true, true, false] // 每个信标的激活状态（如果按预期速率接收消息则为 true）。
 }
 ```
 
@@ -1268,9 +1255,9 @@ rtn = {
 ```json
 {
   "topic": "/devpvt",
-  "speed": 0.352,           // 地面速度 (m/s)。
-  "heading": 270.123,       // 航迹角 — 车体坐标系下的速度航向，顺时针，[0, 360] 度。
-  "heading2": 180.654,      // 车体坐标系下的双天线航向，顺时针，[0, 360] 度。
+  "speed": 0.352, // 地面速度 (m/s)。
+  "heading": 270.123, // 航迹角 — 车体坐标系下的速度航向，顺时针，[0, 360] 度。
+  "heading2": 180.654, // 车体坐标系下的双天线航向，顺时针，[0, 360] 度。
 
   // 整体 INS/GNSS 融合状态 (stat[0]):
   //   init | sat_nav | combined_nav | pure_inertial
@@ -1282,5 +1269,6 @@ rtn = {
   //   single_point_no_heading | pseudorange_diff_no_heading | rtk_fixed_no_heading | rtk_float_no_heading
   "gnss_state": "rtk_fixed",
 
-  "warning": 0              // 传感器警告掩码 (0 = 无警告)。
+  "warning": 0 // 传感器警告掩码 (0 = 无警告)。
 }
+```

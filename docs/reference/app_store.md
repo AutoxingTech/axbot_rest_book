@@ -43,19 +43,19 @@ curl -X GET http://192.168.25.25:8090/app_store/packages
 type ListPackageResponse = Package[];
 
 type PackageStatus =
-  | 'not_installed' // Displays a 'GET' button.
-  | 'upgradable' // Displays a 'Download' button.
-  | 'up_to_date'
-  | 'download_queueing'
-  | 'downloading'
-  | 'downloaded' // Displays an 'Install' button.
-  | 'download_failed' // Displays a 'Retry' button; calls the download API.
-  | 'install_queueing'
-  | 'installing'
-  | 'install_failed' // Displays a 'Retry' button; calls the install API.
-  | 'uninstall_queueing'
-  | 'uninstalling'
-  | 'uninstall_failed'
+  | "not_installed" // Displays a 'GET' button.
+  | "upgradable" // Displays a 'Download' button.
+  | "up_to_date"
+  | "download_queueing"
+  | "downloading"
+  | "downloaded" // Displays an 'Install' button.
+  | "download_failed" // Displays a 'Retry' button; calls the download API.
+  | "install_queueing"
+  | "installing"
+  | "install_failed" // Displays a 'Retry' button; calls the install API.
+  | "uninstall_queueing"
+  | "uninstalling"
+  | "uninstall_failed";
 
 interface Package {
   name: string;
@@ -116,7 +116,7 @@ If the request fails (status code 400):
 If the request succeeds (status code 201):
 
 ```json
-{"py_axbot": {"task_id": 16, "version": "1.1.6-opi64"}}
+{ "py_axbot": { "task_id": 16, "version": "1.1.6-opi64" } }
 ```
 
 ## Install Packages
@@ -134,7 +134,9 @@ If the request fails (status code 400):
 
 ```json
 {
-  "ax": { "error": "installed version(master-pi64) is higher than downloaded version(2.4.1-pi64), skip..." },
+  "ax": {
+    "error": "installed version(master-pi64) is higher than downloaded version(2.4.1-pi64), skip..."
+  },
   "iot": { "error": "installed version(master) is higher than downloaded version(1.0.5), skip..." }
 }
 ```
@@ -142,7 +144,7 @@ If the request fails (status code 400):
 If the request succeeds (status code 201):
 
 ```json
-{"follow": {"task_id": 19, "version": "1.1.6-opi64"}}
+{ "follow": { "task_id": 19, "version": "1.1.6-opi64" } }
 ```
 
 ## Install Package from a Local File

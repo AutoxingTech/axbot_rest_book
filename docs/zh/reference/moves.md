@@ -63,7 +63,7 @@ interface MoveActionCreate {
 
     // 可选。货架堆叠层数的索引。
     // 用于 type = "align_with_rack" 和 "to_unload_point"。
-    rack_layer?: number; 
+    rack_layer?: number;
   }
 }
 ```
@@ -78,11 +78,12 @@ interface MoveActionCreate {
 2. **升起顶升设备**：当移动成功时，调用 `/services/jack_up`。
    1. 顶升设备的进度通过 [Jack State Topic (顶升状态话题)](../reference/websocket.md#jack-state) 报告。
    2. 当顶升设备完全升起时，机器人的轮廓 (footprint) 将扩大以适配货架的轮廓。
-   更新后的轮廓可以通过 [Robot Model Topic (机器人模型话题)](../reference/websocket.md#robot-model) 获取。
+      更新后的轮廓可以通过 [Robot Model Topic (机器人模型话题)](../reference/websocket.md#robot-model) 获取。
 3. **移动到卸货点**：顶升设备完全升起后，创建另一个 `type=to_unload_point` 的移动动作以移动到卸货点。
 4. **降下顶升设备**：调用 `/services/jack_down` 进行卸货。
 5. （可选）创建下一个移动动作。机器人在发起下一个动作前会先移开货架点。
 
+<!-- prettier-ignore -->
 | Robot Admin 截图        | 实拍图               |
 | ----------------------- | -------------------- |
 | ![](../../reference/jack_monitor.png) | ![](../../reference/jack_real.jpg) |
@@ -95,8 +96,8 @@ interface MoveActionCreate {
 
 除了将货架或托盘从一个点移动到另一个点的点到点移动外，我们还支持：
 
-* **点到区域移动**：当预先不知道目标区域哪些点位是空闲时，这是最常用的移动方式。
-* **区域到区域移动**：用于将一个区域内的所有货架或托盘移动到另一个区域。
+- **点到区域移动**：当预先不知道目标区域哪些点位是空闲时，这是最常用的移动方式。
+- **区域到区域移动**：用于将一个区域内的所有货架或托盘移动到另一个区域。
 
 在建图平台上，应添加货架区域多边形。该区域内的所有货架点都被视为该组的一部分。
 
@@ -104,13 +105,13 @@ interface MoveActionCreate {
 
 引入了几个新的失败原因，例如：
 
-* `InvalidRackAreaId`
-* `InvalidRackArea`
-* `UnknownRackSpaceState`
-* `NoRackInRackArea`
-* `AlignFailedInRackArea`
-* `NoFreeSpaceInRackArea`
-* `FailedToUnloadInRackArea`
+- `InvalidRackAreaId`
+- `InvalidRackArea`
+- `UnknownRackSpaceState`
+- `NoRackInRackArea`
+- `AlignFailedInRackArea`
+- `NoFreeSpaceInRackArea`
+- `FailedToUnloadInRackArea`
 
 ### 区域到区域移动
 
@@ -136,7 +137,6 @@ curl -X POST
 ```
 
 创建此动作后，用户应通过 WebSocket 话题 `/follow_target_state` 发送目标位姿：参见 [Follow Target](../reference/websocket.md#follow-target-state)
-
 
 ## 获取移动动作详情
 
@@ -170,7 +170,7 @@ curl http://192.168.25.25:8090/chassis/moves/4409
 
 ```ts
 interface MoveAction extends MoveActionCreate {
-  state: 'idle' | 'moving' | 'succeeded' | 'failed' | 'cancelled';
+  state: "idle" | "moving" | "succeeded" | "failed" | "cancelled";
   create_time: number; // Unix 时间戳 (例如：1647509573)。
   last_modified_time: number; // Unix 时间戳 (例如：1647509573)。
   fail_reason: number; // 失败代码。仅当 state="failed" 时有效。
@@ -266,12 +266,11 @@ curl -X PATCH \
 `fail_reason` 字段是一个数字代码，指示移动动作失败的原因。
 
 ```ts
-enum MoveFailReason
-{
+enum MoveFailReason {
   none = 0, // 无
   unknown = 1, // 未知原因
   GetMapFailed = 2, // 获取地图失败 (WorldMap)
-  StartingPointOutOfMap = 3,  // 起点在地图外
+  StartingPointOutOfMap = 3, // 起点在地图外
   EndingPointOutOfMap = 4, // 终点在地图外
   StartingPointNotInGround = 5, // 起点不在可行驶区域
   EndingPointNotInGround = 6, // 终点不在可行驶区域

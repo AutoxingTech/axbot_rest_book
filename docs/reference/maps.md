@@ -2,6 +2,7 @@
 
 A map contains the following fields:
 
+<!-- prettier-ignore -->
 | name             | type   | description                                                  |
 | ---------------- | ------ | ------------------------------------------------------------ |
 | uid              | string | Unique ID.                                                   |
@@ -62,6 +63,7 @@ curl http://192.168.25.25:8090/maps/
 
 **Extra Fields**
 
+<!-- prettier-ignore -->
 | name          | description                                                      |
 | ------------- | ---------------------------------------------------------------- |
 | image_url     | The PNG image representation of the map at its original resolution. |
@@ -94,6 +96,7 @@ curl http://192.168.25.25:8090/maps/1
 
 **Extra Fields**
 
+<!-- prettier-ignore -->
 | name          | description                                                   |
 | ------------- | ------------------------------------------------------------- |
 | image_url     | The URL to retrieve the PNG image of the map at its original resolution. |
@@ -108,16 +111,16 @@ Maps can be created using base64-encoded data or from local file paths directly 
 
 A map can be created by providing the following required fields:
 
-* map_name
-* carto_map (Base64-encoded binary map data)
-* occupancy_grid (Base64-encoded PNG image data)
-* grid_origin_x
-* grid_origin_y
-* grid_resolution
-* overlays_version (optional)
-* overlays (optional)
-* uid (optional)
-* map_version (optional)
+- map_name
+- carto_map (Base64-encoded binary map data)
+- occupancy_grid (Base64-encoded PNG image data)
+- grid_origin_x
+- grid_origin_y
+- grid_resolution
+- overlays_version (optional)
+- overlays (optional)
+- uid (optional)
+- map_version (optional)
 
 ```bash
 curl -X POST \
@@ -128,14 +131,15 @@ curl -X POST \
 
 ### Create Map from Local Files
 
-If the `.pbstream` and `.png` files already exist on the device, you can create a map without Base64 encoding by passing absolute file paths. 
+If the `.pbstream` and `.png` files already exist on the device, you can create a map without Base64 encoding by passing absolute file paths.
 
 :::tip
 **Advantages over Base64 JSON:**
+
 - **Instant speed**: No base64 decoding or payload parsing overhead.
 - **Almost 0 memory usage**: Avoids loading huge map files into memory during the API request.
 - **0 additional disk space usage**: Uses hard links directly to your source files so no data is duplicated.
-:::
+  :::
 
 * map_name
 * carto_map_filename (Absolute path to the source `.pbstream` file)

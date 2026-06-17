@@ -8,12 +8,12 @@
 
 ```json
 {
-    "type":"FeatureCollection",
-    "features":[
-        {}, // 特征 1
-        {}, // 特征 2
-        {}, // 特征 3
-    ]
+  "type": "FeatureCollection",
+  "features": [
+    {}, // 特征 1
+    {}, // 特征 2
+    {} // 特征 3
+  ]
 }
 ```
 
@@ -21,40 +21,28 @@
 
 ```json
 {
-    "type":"FeatureCollection",
-    "features":[
-        {
-            "id":"SampleGate",
-            "type":"Feature",
-            "properties":{
-                "regionType": 4,
-                "mac":"30C6F72FAE1C"
-            },
-            "geometry":{
-                "type":"Polygon",
-                "coordinates":[
-                    [
-                        [
-                        -2.702,
-                        -5.784
-                        ],
-                        [
-                        -1.007,
-                        -5.827
-                        ],
-                        [
-                        -1.053,
-                        -6.348
-                        ],
-                        [
-                        -2.546,
-                        -6.385
-                        ]
-                    ]
-                ]
-            }
-        }
-    ]
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "id": "SampleGate",
+      "type": "Feature",
+      "properties": {
+        "regionType": 4,
+        "mac": "30C6F72FAE1C"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-2.702, -5.784],
+            [-1.007, -5.827],
+            [-1.053, -6.348],
+            [-2.546, -6.385]
+          ]
+        ]
+      }
+    }
+  ]
 }
 ```
 
@@ -68,37 +56,22 @@
 
 ```json
 {
-    "id": "19f0684fdf2b1695054df052e002d8f6",
-    "type": "Feature",
-    "properties": {
-        "lineType": "2",
-        "mapOverlay": true
-    },
-    "geometry": {
-        "type": "LineString",
-        "coordinates": [
-            [
-                -35.0222214524365,
-                -14.968376602837452
-            ],
-            [
-                -35.094466030898275,
-                -22.120589758429787
-            ],
-            [
-                2.4727142286451453,
-                -22.554057221952917
-            ],
-            [
-                2.54495880739114,
-                -15.329599487756695
-            ],
-            [
-                -35.0222214524365,
-                -15.112865751092386
-            ]
-        ]
-    }
+  "id": "19f0684fdf2b1695054df052e002d8f6",
+  "type": "Feature",
+  "properties": {
+    "lineType": "2",
+    "mapOverlay": true
+  },
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [-35.0222214524365, -14.968376602837452],
+      [-35.094466030898275, -22.120589758429787],
+      [2.4727142286451453, -22.554057221952917],
+      [2.54495880739114, -15.329599487756695],
+      [-35.0222214524365, -15.112865751092386]
+    ]
+  }
 }
 ```
 
@@ -108,40 +81,25 @@
 
 ```json
 {
-   "id": "4d14040ea1ee7dd2e1d778f04a224d7a",
-   "type": "Feature",
-   "properties": {
-      "blocked": false,
-      "mapOverlay": true,
-      "regionType": "1"
-   },
-   "geometry": {
-      "type": "Polygon",
-      "coordinates": [
-         [
-            [
-               -87.30882859651956,
-               -43.42832073191971
-            ],
-            [
-               -86.96655334631487,
-               -24.85988841115727
-            ],
-            [
-               0.22327395043930665,
-               -25.754819491083936
-            ],
-            [
-               0.22327395043930665,
-               -44.23768299574249
-            ],
-            [
-               -87.30882859651956,
-               -43.42832073191971
-            ]
-         ]
+  "id": "4d14040ea1ee7dd2e1d778f04a224d7a",
+  "type": "Feature",
+  "properties": {
+    "blocked": false,
+    "mapOverlay": true,
+    "regionType": "1"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [-87.30882859651956, -43.42832073191971],
+        [-86.96655334631487, -24.85988841115727],
+        [0.22327395043930665, -25.754819491083936],
+        [0.22327395043930665, -44.23768299574249],
+        [-87.30882859651956, -43.42832073191971]
       ]
-   }
+    ]
+  }
 }
 ```
 
@@ -152,40 +110,25 @@
 
 ```json
 {
-   "id": "e4d544e92262c538dc31e116b630043b",
-   "type": "Feature",
-   "properties": {
-      "blocked": false,
-      "mapOverlay": true,
-      "regionType": "12"
-   },
-   "geometry": {
-      "type": "Polygon",
-      "coordinates": [
-         [
-            [
-               1.1439716297445557,
-               -16.400667528273516
-            ],
-            [
-               3.5214924133697423,
-               -16.438682980748354
-            ],
-            [
-               2.9970246447419413,
-               -25.260207920183575
-            ],
-            [
-               0.6399114661803651,
-               -25.07582059422475
-            ],
-            [
-               1.1439716297445557,
-               -16.400667528273516
-            ]
-         ]
+  "id": "e4d544e92262c538dc31e116b630043b",
+  "type": "Feature",
+  "properties": {
+    "blocked": false,
+    "mapOverlay": true,
+    "regionType": "12"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [1.1439716297445557, -16.400667528273516],
+        [3.5214924133697423, -16.438682980748354],
+        [2.9970246447419413, -25.260207920183575],
+        [0.6399114661803651, -25.07582059422475],
+        [1.1439716297445557, -16.400667528273516]
       ]
-   }
+    ]
+  }
 }
 ```
 
@@ -197,25 +140,20 @@
 
 ```json
 {
-   "id": "642562bcf0e02ee8aff7dea7",
-   "type": "Feature",
-   "geometry": {
-      "type": "Point",
-      "coordinates": [
-         0,
-         0
-      ]
-   },
-   "properties": {
-      "deviceIds": [
-         "6181307902152yI"
-      ],
-      "dockingPointId": "65655d96f0e02ee8afc9cc5e",
-      "mapOverlay": true,
-      "name": "sac_01",
-      "type": "9",
-      "yaw": 90
-   }
+  "id": "642562bcf0e02ee8aff7dea7",
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [0, 0]
+  },
+  "properties": {
+    "deviceIds": ["6181307902152yI"],
+    "dockingPointId": "65655d96f0e02ee8afc9cc5e",
+    "mapOverlay": true,
+    "name": "sac_01",
+    "type": "9",
+    "yaw": 90
+  }
 }
 ```
 
@@ -231,34 +169,22 @@
 
 ```json
 {
-    "type":"Feature",
-    "properties":{
-        "regionType": 4,
-        "mac":"30C6F72FAE1C"
-    },
-    "geometry":{
-        "type":"Polygon",
-        "coordinates":[
-            [
-                [
-                -2.702,
-                -5.784
-                ],
-                [
-                -1.007,
-                -5.827
-                ],
-                [
-                -1.053,
-                -6.348
-                ],
-                [
-                -2.546,
-                -6.385
-                ]
-            ]
-        ]
-    }
+  "type": "Feature",
+  "properties": {
+    "regionType": 4,
+    "mac": "30C6F72FAE1C"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [-2.702, -5.784],
+        [-1.007, -5.827],
+        [-1.053, -6.348],
+        [-2.546, -6.385]
+      ]
+    ]
+  }
 }
 ```
 
@@ -266,7 +192,6 @@
 
 类似于充电桩，此点指示机器人可以在何处找到货架进行装载或卸载。
 它应与 `align_with_rack` 和 `to_unload_point` 移动动作类型配合使用。
-
 
 ## 条码 (Barcode)
 
@@ -304,33 +229,21 @@
 
 ```json
 {
-    "type":"Feature",
-    "properties":{
-        "regionType": 8,
-    },
-    "geometry":{
-        "type":"Polygon",
-        "coordinates":[
-            [
-                [
-                -2.702,
-                -5.784
-                ],
-                [
-                -1.007,
-                -5.827
-                ],
-                [
-                -1.053,
-                -6.348
-                ],
-                [
-                -2.546,
-                -6.385
-                ]
-            ]
-        ]
-    }
+  "type": "Feature",
+  "properties": {
+    "regionType": 8
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [-2.702, -5.784],
+        [-1.007, -5.827],
+        [-1.053, -6.348],
+        [-2.546, -6.385]
+      ]
+    ]
+  }
 }
 ```
 
@@ -343,14 +256,14 @@
 
 ```json
 {
-    "type":"Feature",
-    "properties":{
-        "type": "39",
-        "landmarkId": "landmark_1"
-    },
-    "geometry":{
-        "type":"Point",
-        "coordinates": [-2.702, -5.784]
-    }
+  "type": "Feature",
+  "properties": {
+    "type": "39",
+    "landmarkId": "landmark_1"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [-2.702, -5.784]
+  }
 }
 ```

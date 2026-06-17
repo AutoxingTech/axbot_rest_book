@@ -24,6 +24,7 @@ Submap rendering is an alternative to subscribing to the `/map_v2` WebSocket top
 
 **Submap rendering** represents the map as many small, overlapping PNGs — one per cartographer submap. Unlike uniform image tiles, submaps can overlap and are not equal-sized. This scales to arbitrarily large environments because each image is bounded in size. The trade-off is added complexity: you must maintain a per-submap cache, handle individual network requests, and composite potentially overlapping images at render time. The total number of PNG downloads also increases memory usage.
 
+<!-- prettier-ignore -->
 | | `/map_v2` (single PNG) | Submap rendering |
 | --- | --- | --- |
 | Implementation complexity | Low | High |
@@ -40,7 +41,7 @@ Choose `/map_v2` for typical indoor environments. Switch to submap rendering whe
 Enable the topic with the normal topic WebSocket endpoint:
 
 ```json
-{"enable_topic": "/submap_list"}
+{ "enable_topic": "/submap_list" }
 ```
 
 Example payload:
@@ -74,6 +75,7 @@ Example payload:
 
 ### Fields
 
+<!-- prettier-ignore -->
 | Field | Type | Notes |
 | --- | --- | --- |
 | `slam_state` | string | One of `invalid`, `slam`, or `positioning`. |
@@ -82,6 +84,7 @@ Example payload:
 
 Each entry in `submap` contains:
 
+<!-- prettier-ignore -->
 | Field | Type | Notes |
 | --- | --- | --- |
 | `trajectory_id` | integer | Cartographer trajectory ID. |
@@ -118,6 +121,7 @@ curl \
 
 ### Path Parameters
 
+<!-- prettier-ignore -->
 | Name | Type | Notes |
 | --- | --- | --- |
 | `uuid` | string | Must match the `uuid` from `/submap_list`. |
@@ -126,6 +130,7 @@ curl \
 
 ### Query Parameters
 
+<!-- prettier-ignore -->
 | Name | Required | Notes |
 | --- | --- | --- |
 | `ver` | No | Version token for cache behavior. In normal usage, pass `submap_version`. |
@@ -171,6 +176,7 @@ In practice, clients should pass `submap_version` as `ver` and cache by:
 
 ### Error Responses
 
+<!-- prettier-ignore -->
 | Status | Meaning |
 | --- | --- |
 | `400` | Invalid path parameters |
@@ -201,9 +207,9 @@ The TypeScript SDK provides two levels of abstraction.
 `SubmapCache<TSlice>` is a generic cache that handles fetch de-duplication, 404 caching, retry cooldowns, concurrency limiting, and resource lifecycle. You supply an **adapter** that converts a raw `SubmapTexture` into whatever slice type your renderer uses, and disposes it when evicted.
 
 ```ts
-import { SubmapCache, type SubmapCacheAdapter } from '@kingsimba/axbot-sdk';
-import { submapListEvents } from '@kingsimba/axbot-sdk';
-import type { ros_messages } from '@kingsimba/axbot-sdk/proto';
+import { SubmapCache, type SubmapCacheAdapter } from "@kingsimba/axbot-sdk";
+import { submapListEvents } from "@kingsimba/axbot-sdk";
+import type { ros_messages } from "@kingsimba/axbot-sdk/proto";
 
 // Example: adapter that stores the raw cells as a Uint8Array
 const adapter: SubmapCacheAdapter<Uint8Array> = {
@@ -225,7 +231,13 @@ submapListEvents.on((msg) => {
       .then((cells) => {
         if (!cells) return;
         // render cells...
-        cache.evictOldVersions(msg.uuid, submap.trajectory_id, submap.submap_index, 0, submap.submap_version);
+        cache.evictOldVersions(
+          msg.uuid,
+          submap.trajectory_id,
+          submap.submap_index,
+          0,
+          submap.submap_version,
+        );
       });
   }
 });
@@ -236,6 +248,7 @@ cache.dispose();
 
 `SubmapCache` options:
 
+<!-- prettier-ignore -->
 | Option | Default | Notes |
 | --- | --- | --- |
 | `adapter` | required | `buildSlice` + `disposeSlice` callbacks |
@@ -248,7 +261,7 @@ cache.dispose();
 For one-off fetches or custom caching strategies, call the method directly:
 
 ```ts
-import { robotApi } from '@kingsimba/axbot-sdk/robotApi';
+import { robotApi } from "@kingsimba/axbot-sdk/robotApi";
 
 const result = await robotApi.getSubmapQueryV2(uuid, trajectoryId, submapIndex, version);
 if (result) {

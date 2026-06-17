@@ -19,13 +19,13 @@
 
 采集陆标主要有两种方法：
 
-* **在进行新地图建图任务期间：**
+- **在进行新地图建图任务期间：**
   1. 像往常一样开始建图过程。
-      - **可选：** 您可以通过 [`/landmarks`](../reference/websocket.md#landmarks) WebSocket 通道实时预览采集到的陆标。
+     - **可选：** 您可以通过 [`/landmarks`](../reference/websocket.md#landmarks) WebSocket 通道实时预览采集到的陆标。
   2. 完成建图任务。
-      - 最终的陆标集合可以通过[建图结果详情](../reference/mappings.md#mapping-detail)中的 `landmark_url` 访问。
-* **对于现有地图：**
-   1. 使用[采集陆标 (Collect Landmarks)](./services.md#collect-landmarks) 服务。
+     - 最终的陆标集合可以通过[建图结果详情](../reference/mappings.md#mapping-detail)中的 `landmark_url` 访问。
+- **对于现有地图：**
+  1.  使用[采集陆标 (Collect Landmarks)](./services.md#collect-landmarks) 服务。
 
 采集到的陆标不会被直接使用；相反，它们作为原始数据导入到地图的叠加层 (overlays) 中。将陆标保存到叠加层中。更多信息请参阅[叠加层中的陆标](../reference/overlays.md#landmarks)。
 

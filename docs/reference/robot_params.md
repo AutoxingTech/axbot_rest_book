@@ -21,7 +21,7 @@ curl http://192.168.25.25:8090/robot-params
   "/planning/auto_hold": true, // Available since version 2.3.0.
   "/control/bump_tolerance": 0.5, // Available since version 2.4.0.
   "/control/bump_based_speed_limit/enable": true, // Available since version 2.7.4.
-  "/robot/footprint": [[0.248, 0.108], [0.24, 0.174], "..." , [0.248, -0.108]] // Available since version 2.5.0.
+  "/robot/footprint": [[0.248, 0.108], [0.24, 0.174], "...", [0.248, -0.108]] // Available since version 2.5.0.
 }
 ```
 
@@ -57,7 +57,7 @@ curl http://192.168.25.25:8090/robot-params/default # Available since version 2.
 
 ## Robot Footprint
 
-The `/robot/footprint` parameter should accurately represent the top-down profile of the robot. 
+The `/robot/footprint` parameter should accurately represent the top-down profile of the robot.
 This footprint is used for collision detection and must be configured correctly to ensure safe operation.
 The footprint data must adhere to the following rules:
 
@@ -69,4 +69,3 @@ The footprint data must adhere to the following rules:
 ![](./footprint.png)
 
 Starting from version 2.7.0, you can use the [Robot Model Topic](../reference/websocket.md#robot-model) to monitor real-time changes to the footprint. For example, when a rack is mounted, the footprint automatically updates to the combined convex hull of the robot and the rack.
-

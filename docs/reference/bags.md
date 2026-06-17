@@ -32,15 +32,19 @@ curl http://192.168.25.25:8090/bags/
 The Bag Player API allows for replaying ROS bag files online. It provides metadata about the bag and enables downloading message chunks within specific time ranges.
 
 ### Endpoint
+
 `GET /bags/<filename>/player`
 
 ### 1. Get Bag Metadata
+
 Fetches general information about the bag file, such as the total number of messages and the time duration.
 
 #### Request
+
 `GET /bags/<filename>/player`
 
 ### Success Response
+
 - **Code:** `200 OK`
 - **Content:**
   ```json
@@ -55,12 +59,16 @@ Fetches general information about the bag file, such as the total number of mess
   - `end_time`: Integer timestamp (Unix epoch) of the last message.
 
 ### 2. Get Message Chunks
+
 Fetches messages within a specific time range. This is used by the frontend to stream or download chunks of the bag.
 
 #### Request
+
 `GET /bags/<filename>/player?start_time=<float>&end_time=<float>`
 
 #### Query Parameters
+
+<!-- prettier-ignore -->
 | Parameter | Type | Required | Description |
 | :--- | :--- | :--- | :--- |
 | `start_time` | float | Yes | The start of the time range in seconds (Unix epoch). |
@@ -86,16 +94,17 @@ Fetches messages within a specific time range. This is used by the frontend to s
     ]
   }
   ```
-  - `messages`: A list of JSON-converted ROS messages. 
+  - `messages`: A list of JSON-converted ROS messages.
   - Each message includes:
     - `__stamp`: High-precision timestamp when the message was recorded.
     - `__latched`: Boolean flag set to `true` if the message belongs to a latched topic. This includes both backfilled messages (previous state) and messages occurring within the requested time range.
 
-
 #### Special Behavior: Latched Topics
-When a time range is requested, the API automatically includes the most recent message for "latched" topics that occurred *before* the `start_time`. This ensures the player has the current state for static or slowly-changing topics (like maps or configurations) as soon as the chunk starts.
+
+When a time range is requested, the API automatically includes the most recent message for "latched" topics that occurred _before_ the `start_time`. This ensures the player has the current state for static or slowly-changing topics (like maps or configurations) as soon as the chunk starts.
 
 **Latched topics include:**
+
 - `/map/info`
 - `/alerts`
 - `/map_image`
@@ -114,10 +123,11 @@ When a time range is requested, the API automatically includes the most recent m
 ---
 
 ### Caching
+
 Responses are cached with the following header:
 `Cache-Control: public, max-age=2592000` (30 days)
 
 ### Error Responses
+
 - **Code:** `400 BAD REQUEST`
 - **Content:** `{"error": "string explaining the error"}` (e.g., if the bag file is not found or corrupted).
-

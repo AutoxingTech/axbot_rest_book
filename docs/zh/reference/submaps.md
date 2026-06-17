@@ -24,6 +24,7 @@
 
 **子图渲染**将地图表示为许多小的、重叠的 PNG —— 每个 Cartographer 子图一个。与均匀的图像瓦片不同，子图可以重叠且尺寸不一。由于每个图像的大小都有界限，它可以扩展到任意大的环境。代价是增加了复杂性：您必须维护每个子图的缓存，处理单个网络请求，并在渲染时合成可能重叠的图像。下载的 PNG 总数增加也会增加内存使用量。
 
+<!-- prettier-ignore -->
 | | `/map_v2` (单个 PNG) | 子图渲染 |
 | --- | --- | --- |
 | 实现复杂度 | 低 | 高 |
@@ -40,7 +41,7 @@
 使用正常的 WebSocket 话题接口开启该话题：
 
 ```json
-{"enable_topic": "/submap_list"}
+{ "enable_topic": "/submap_list" }
 ```
 
 示例负载：
@@ -74,6 +75,7 @@
 
 ### 字段说明
 
+<!-- prettier-ignore -->
 | 字段 | 类型 | 备注 |
 | --- | --- | --- |
 | `slam_state` | string | `invalid`、`slam` 或 `positioning` 之一。 |
@@ -82,6 +84,7 @@
 
 `submap` 中的每个条目包含：
 
+<!-- prettier-ignore -->
 | 字段 | 类型 | 备注 |
 | --- | --- | --- |
 | `trajectory_id` | integer | Cartographer 轨迹 ID。 |
@@ -118,6 +121,7 @@ curl \
 
 ### 路径参数
 
+<!-- prettier-ignore -->
 | 名称 | 类型 | 备注 |
 | --- | --- | --- |
 | `uuid` | string | 必须与来自 `/submap_list` 的 `uuid` 匹配。 |
@@ -126,6 +130,7 @@ curl \
 
 ### 查询参数
 
+<!-- prettier-ignore -->
 | 名称 | 是否必填 | 备注 |
 | --- | --- | --- |
 | `ver` | 否 | 缓存行为的版本令牌。正常使用时，请传递 `submap_version`。 |
@@ -171,6 +176,7 @@ curl \
 
 ### 错误响应
 
+<!-- prettier-ignore -->
 | 状态 | 含义 |
 | --- | --- |
 | `400` | 路径参数无效 |
@@ -201,9 +207,9 @@ TypeScript SDK 提供了两个抽象级别。
 `SubmapCache<TSlice>` 是一个通用缓存，处理获取去重、404 缓存、重试冷延迟、并发限制和资源生命周期。您需提供一个**适配器**，将原始 `SubmapTexture` 转换为渲染器使用的切片类型，并在逐出时将其销毁。
 
 ```ts
-import { SubmapCache, type SubmapCacheAdapter } from '@kingsimba/axbot-sdk';
-import { submapListEvents } from '@kingsimba/axbot-sdk';
-import type { ros_messages } from '@kingsimba/axbot-sdk/proto';
+import { SubmapCache, type SubmapCacheAdapter } from "@kingsimba/axbot-sdk";
+import { submapListEvents } from "@kingsimba/axbot-sdk";
+import type { ros_messages } from "@kingsimba/axbot-sdk/proto";
 
 // 示例：将原始单元存储为 Uint8Array 的适配器
 const adapter: SubmapCacheAdapter<Uint8Array> = {
@@ -225,7 +231,13 @@ submapListEvents.on((msg) => {
       .then((cells) => {
         if (!cells) return;
         // 渲染单元...
-        cache.evictOldVersions(msg.uuid, submap.trajectory_id, submap.submap_index, 0, submap.submap_version);
+        cache.evictOldVersions(
+          msg.uuid,
+          submap.trajectory_id,
+          submap.submap_index,
+          0,
+          submap.submap_version,
+        );
       });
   }
 });
@@ -236,6 +248,7 @@ cache.dispose();
 
 `SubmapCache` 选项：
 
+<!-- prettier-ignore -->
 | 选项名 | 默认值 | 备注 |
 | --- | --- | --- |
 | `adapter` | 必填 | `buildSlice` + `disposeSlice` 回调 |
@@ -248,7 +261,7 @@ cache.dispose();
 对于一次性获取或自定义缓存策略，可直接调用此方法：
 
 ```ts
-import { robotApi } from '@kingsimba/axbot-sdk/robotApi';
+import { robotApi } from "@kingsimba/axbot-sdk/robotApi";
 
 const result = await robotApi.getSubmapQueryV2(uuid, trajectoryId, submapIndex, version);
 if (result) {

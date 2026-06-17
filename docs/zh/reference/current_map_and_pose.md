@@ -71,10 +71,7 @@ grid_origin_y: -9.199999809265137
 grid_resolution: 0.05
 map_version: 3
 overlays_version: 1
-overlays: {
-  "map_uid": "62202f9fed0883652d08ad5c",
-  "features": []
-}
+overlays: { "map_uid": "62202f9fed0883652d08ad5c", "features": [] }
 ```
 
 ## 获取当前地图
@@ -99,6 +96,7 @@ curl http://192.168.25.25:8090/chassis/current-map
 
 锁存型 (latched) WebSocket 话题 `/map/info` 包含当前活动地图的信息。
 每当当前地图发生变化时，该话题都会广播一条新消息。
+
 ```bash
 $ wscat -c ws://192.168.25.25:8090/ws/v2/topics
 > {"enable_topic": "/map/info"}
@@ -141,6 +139,7 @@ class SetPoseRequest {
 当 `adjust_position` 设置为 `true` 时，系统会根据激光雷达 (Lidar) 的观测值检测并纠正初始位置误差。
 例如，如果机器人的航向被错误分配，系统将尽力纠正它。
 
+<!-- prettier-ignore -->
 | 纠正前                       | 纠正后                      |
 | ---------------------------- | --------------------------- |
 | ![](../../reference/correction-before.png) | ![](../../reference/correction-after.png) |

@@ -1,6 +1,6 @@
 # IoT Devices
 
-The robot can communicate with automatic doors, elevators, and gateways using two protocols: 
+The robot can communicate with automatic doors, elevators, and gateways using two protocols:
 [ESP-NOW](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_now.html) or BLE.
 
 We recommend using ESP-NOW, as it enables connectionless communication between dozens of devices and typically offers better signal strength than BLE.
@@ -14,19 +14,19 @@ Each controller is identified by a MAC address. The door's MAC address and its p
 
 Using this information, the robot interacts with the door as follows:
 
-* **From the robot side:**
-  * The robot continuously checks if its [global path](../reference/websocket.md#global-path) intersects with an automatic door's polygon.
-  * If a door is detected on the path ahead, the robot broadcasts an `Open Door {MAC} for {ROBOT SN}` command at regular intervals.
-  * If the door reports its state as 'open', the robot proceeds. Otherwise, the door's polygon is treated as an impassable obstacle.
-  * Once the robot has successfully passed through, it stops sending the open-door request.
-* **From the door side:**
-  * The door periodically broadcasts its status (open, closed, opening, or closing) and an Estimated Time of Closing (ETC). Examples include:
-    * `Door {MAC} is closed`
-    * `Door {MAC} is opening`
-    * `Door {MAC} is open, ETC in 3 seconds`    
-    * `Door {MAC} is closing`
-  * If the door controller receives an open-door command, it triggers the door to open.
-  * If no open-door commands are received for three seconds, the door will automatically close.
+- **From the robot side:**
+  - The robot continuously checks if its [global path](../reference/websocket.md#global-path) intersects with an automatic door's polygon.
+  - If a door is detected on the path ahead, the robot broadcasts an `Open Door {MAC} for {ROBOT SN}` command at regular intervals.
+  - If the door reports its state as 'open', the robot proceeds. Otherwise, the door's polygon is treated as an impassable obstacle.
+  - Once the robot has successfully passed through, it stops sending the open-door request.
+- **From the door side:**
+  - The door periodically broadcasts its status (open, closed, opening, or closing) and an Estimated Time of Closing (ETC). Examples include:
+    - `Door {MAC} is closed`
+    - `Door {MAC} is opening`
+    - `Door {MAC} is open, ETC in 3 seconds`
+    - `Door {MAC} is closing`
+  - If the door controller receives an open-door command, it triggers the door to open.
+  - If no open-door commands are received for three seconds, the door will automatically close.
 
 ::: tip
 The status of nearby automatic doors can be monitored via the [Nearby Auto Doors](../reference/websocket.md#nearby-auto-doors) WebSocket topic.

@@ -55,7 +55,7 @@ curl -X POST \
 
 ```ts
 class SetControlModeRequest {
-  control_mode: 'auto' | 'manual' | 'remote';
+  control_mode: "auto" | "manual" | "remote";
 }
 ```
 
@@ -116,8 +116,8 @@ curl -X POST \
 ```ts
 class ShutdownRequest {
   target:
-    | 'main_computing_unit' // Reboot or shutdown only the main computing board.
-    | 'main_power_supply'; // Reboot or shutdown the entire device.
+    | "main_computing_unit" // Reboot or shutdown only the main computing board.
+    | "main_power_supply"; // Reboot or shutdown the entire device.
   reboot: boolean; // true to reboot, false to shutdown.
 }
 ```
@@ -162,7 +162,7 @@ curl -X POST \
 
 ```ts
 class PowerOnRequest {
-  action: 'power_on' | 'power_off';
+  action: "power_on" | "power_off";
 }
 ```
 
@@ -198,15 +198,11 @@ curl -X POST \
 
 ```ts
 interface SetupWifiRequest {
-  mode: 'ap' | 'station';
+  mode: "ap" | "station";
   ssid?: string; // SSID, required for station mode
   psk?: string; // Wi-Fi Protected Access Pre-Shared Key, required for station mode
 
-  route_mode?:
-    | 'eth0_first'
-    | 'wlan0_first'
-    | 'usb0_first'
-    | 'wlan0_usb0_auto_first';
+  route_mode?: "eth0_first" | "wlan0_first" | "usb0_first" | "wlan0_usb0_auto_first";
 }
 ```
 
@@ -225,7 +221,7 @@ curl -X POST \
 
 ```ts
 interface RouteModeRequest {
-  mode: 'eth0_first' | 'wlan0_first' | 'usb0_first' | 'wlan0_usb0_auto_first';
+  mode: "eth0_first" | "wlan0_first" | "usb0_first" | "wlan0_usb0_auto_first";
 }
 ```
 
@@ -657,7 +653,7 @@ The service accepts an optional `calibration_step` parameter that selects the ca
 
 ```ts
 interface CalibrateDuoLidarPosesRequest {
-  calibration_step?: 'single_shot' | 'right_wall' | 'front_wall';
+  calibration_step?: "single_shot" | "right_wall" | "front_wall";
 }
 ```
 

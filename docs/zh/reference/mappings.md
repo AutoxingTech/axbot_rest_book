@@ -52,7 +52,7 @@ interface MappingCreateRequest {
   // (自 1.8.8 以后)
   // zero (默认值)：使用 x=0, y=0, ori=0 作为起点（开启一个新的坐标坐标系）。
   // current_pose：使用当前位姿作为起点（继承现有坐标系）。
-  start_pose_type: 'zero' | 'current_pose';
+  start_pose_type: "zero" | "current_pose";
 }
 ```
 
@@ -82,7 +82,7 @@ curl -X PATCH \
 
 ```ts
 interface MappingFinishRequest {
-  state: 'finished' | 'cancelled'; // 完成或取消建图任务
+  state: "finished" | "cancelled"; // 完成或取消建图任务
 
   // (自 1.8.8 以后)
   // false (默认值)：保存整个地图。
@@ -107,7 +107,7 @@ curl http://192.168.25.25:8090/mappings/
       "url":"http://192.168.25.25:8090/mappings/48",
       "grid_origin_x":-8.050000190734863,
       "grid_origin_y":-5.650000095367432,
-      "grid_resolution":0.05,     
+      "grid_resolution":0.05,
       "start_time":1647520760,
       "end_time":1647520995,
       "state":"finished",
@@ -118,16 +118,16 @@ curl http://192.168.25.25:8090/mappings/
       //////////////////////////////
 
       // 二进制地图数据文件。支持基于 RANGE + ETAG 的下载。
-      "pbstream_url":"http://192.168.25.25:8090/mappings/48.pbstream",  
+      "pbstream_url":"http://192.168.25.25:8090/mappings/48.pbstream",
       // PNG 图像
       "image_url":"http://192.168.25.25:8090/mappings/48.png",
       // 陆标等
-      "properties_url": "http://tunnel.autoxing.com:21044/mappings/48/properties.json", 
+      "properties_url": "http://tunnel.autoxing.com:21044/mappings/48/properties.json",
 
       //////////////////////////////
       // 辅助数据 (Auxiliary data)
       //////////////////////////////
-      
+
       // 较小尺寸的 PNG 图像
       "thumbnail_url":"http://192.168.25.25:8090/mappings/48/thumbnail",
       // 该建图任务的轨迹
@@ -140,7 +140,7 @@ curl http://192.168.25.25:8090/mappings/
       //////////////////////////////
 
       // 已废弃。JSON 格式（base64 编码）的地图数据和图像。不适合大地图。
-      "download_url":"http://192.168.25.25:8090/mappings/48/download", 
+      "download_url":"http://192.168.25.25:8090/mappings/48/download",
    },
    {
     ...

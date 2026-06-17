@@ -71,10 +71,7 @@ grid_origin_y: -9.199999809265137
 grid_resolution: 0.05
 map_version: 3
 overlays_version: 1
-overlays: {
-  "map_uid": "62202f9fed0883652d08ad5c",
-  "features": []
-}
+overlays: { "map_uid": "62202f9fed0883652d08ad5c", "features": [] }
 ```
 
 ## Get Current Map
@@ -99,6 +96,7 @@ If the current map was set directly with data, the `id` will be `-1`.
 
 The latched WebSocket topic `/map/info` contains information about the currently active map.
 A new message is broadcast on this topic whenever the current map changes.
+
 ```bash
 $ wscat -c ws://192.168.25.25:8090/ws/v2/topics
 > {"enable_topic": "/map/info"}
@@ -142,6 +140,7 @@ class SetPoseRequest {
 When `adjust_position` is set to `true`, the system detects and corrects initial position errors based on Lidar observations.
 For instance, if the robot's heading is incorrectly assigned, the system will make its best effort to correct it.
 
+<!-- prettier-ignore -->
 | Before Correction            | After Correction            |
 | ---------------------------- | --------------------------- |
 | ![](./correction-before.png) | ![](./correction-after.png) |

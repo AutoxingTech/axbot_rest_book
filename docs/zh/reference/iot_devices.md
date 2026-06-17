@@ -14,19 +14,19 @@
 
 利用这些信息，机器人与门的交互如下：
 
-* **机器人端：**
-  * 机器人持续检查其[全局路径](../reference/websocket.md#global-path)是否与自动门的多边形相交。
-  * 如果在前方路径上检测到门，机器人会定期广播 `Open Door {MAC} for {ROBOT SN}` (为某 SN 机器人开启某 MAC 地址的门) 命令。
-  * 如果门报告其状态为“开启” (open)，机器人则继续前进。否则，门的多边形将被视为不可通过的障碍物。
-  * 机器人成功通过后，将停止发送开门请求。
-* **门端：**
-  * 门会定期广播其状态（开启、关闭、正在开启或正在关闭）以及预计关闭时间 (ETC)。示例包括：
-    * `Door {MAC} is closed` (门已关闭)
-    * `Door {MAC} is opening` (门正在开启)
-    * `Door {MAC} is open, ETC in 3 seconds` (门已开启，3 秒后关闭)
-    * `Door {MAC} is closing` (门正在关闭)
-  * 如果门控制器收到开门命令，它会触发门开启。
-  * 如果连续三秒未收到开门命令，门将自动关闭。
+- **机器人端：**
+  - 机器人持续检查其[全局路径](../reference/websocket.md#global-path)是否与自动门的多边形相交。
+  - 如果在前方路径上检测到门，机器人会定期广播 `Open Door {MAC} for {ROBOT SN}` (为某 SN 机器人开启某 MAC 地址的门) 命令。
+  - 如果门报告其状态为“开启” (open)，机器人则继续前进。否则，门的多边形将被视为不可通过的障碍物。
+  - 机器人成功通过后，将停止发送开门请求。
+- **门端：**
+  - 门会定期广播其状态（开启、关闭、正在开启或正在关闭）以及预计关闭时间 (ETC)。示例包括：
+    - `Door {MAC} is closed` (门已关闭)
+    - `Door {MAC} is opening` (门正在开启)
+    - `Door {MAC} is open, ETC in 3 seconds` (门已开启，3 秒后关闭)
+    - `Door {MAC} is closing` (门正在关闭)
+  - 如果门控制器收到开门命令，它会触发门开启。
+  - 如果连续三秒未收到开门命令，门将自动关闭。
 
 ::: tip 提示
 附近自动门的状态可以通过 [Nearby Auto Doors (附近自动门)](../reference/websocket.md#nearby-auto-doors) WebSocket 话题进行监控。

@@ -44,6 +44,7 @@ The common patterns are summarized below. In particular:
 - `POST` to a list endpoint creates a new object.
 - `DELETE` a list endpoint deletes all objects in that list.
 
+<!-- prettier-ignore -->
 | Action | Target  | Description                         |
 | ------ | ------- | ----------------------------------- |
 | POST   | /maps   | Create a new map with provided data |

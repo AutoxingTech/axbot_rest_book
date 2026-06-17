@@ -6,6 +6,7 @@
 
 默认响应格式为 `application/x-protobuf`。支持 JSON 的端点在请求包含 `Accept: application/json` 头时，会以 `application/json` 格式响应。JSON 响应体通过 `google::protobuf::util::MessageToJsonString`（proto3 JSON 映射 — 字段名为蛇形命名法）序列化生成。
 
+<!-- prettier-ignore -->
 | `Accept` 请求头          | `Content-Type` 响应头    | Body                         |
 | ------------------------ | ------------------------ | ---------------------------- |
 | (缺省)                   | `application/x-protobuf` | 二进制 protobuf              |
@@ -21,6 +22,7 @@ Protobuf 消息定义发布在 npm 上的 [`@kingsimba/axbot-sdk`](https://www.n
 
 ## 服务索引 (Service index)
 
+<!-- prettier-ignore -->
 | 方法  | 路径                                                      | ROS 源                                                     |
 | ----- | --------------------------------------------------------- | ---------------------------------------------------------- |
 | `GET` | `/ros/slam/submaps/{uuid}/{trajectory_id}/{submap_index}` | `/submap_query_v2` (`cartographer_ros_msgs/SubmapQueryV2`) |
@@ -39,6 +41,7 @@ GET /ros/slam/submaps/{uuid}/{trajectory_id}/{submap_index}
 
 ### 请求参数 (Request)
 
+<!-- prettier-ignore -->
 | 参数            | 类型    | 位置  | 说明                 |
 | --------------- | ------- | ----- | -------------------- |
 | `uuid`          | string  | path  | 透传给 ROS 请求      |
@@ -60,6 +63,7 @@ GET /ros/slam/submaps/{uuid}/{trajectory_id}/{submap_index}
 
 ### 附加错误码 (Additional error codes)
 
+<!-- prettier-ignore -->
 | 状态码 | 含义               |
 | ------ | ------------------ |
 | `404`  | ROS 服务报告未找到 |

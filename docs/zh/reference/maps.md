@@ -2,6 +2,7 @@
 
 地图包含以下字段：
 
+<!-- prettier-ignore -->
 | 名称             | 类型   | 描述                                                         |
 | ---------------- | ------ | ------------------------------------------------------------ |
 | uid              | string | 唯一 ID。                                                    |
@@ -62,6 +63,7 @@ curl http://192.168.25.25:8090/maps/
 
 **额外字段**
 
+<!-- prettier-ignore -->
 | 名称          | 描述                                 |
 | ------------- | ------------------------------------ |
 | image_url     | 地图原始分辨率的 PNG 图像。          |
@@ -94,6 +96,7 @@ curl http://192.168.25.25:8090/maps/1
 
 **额外字段**
 
+<!-- prettier-ignore -->
 | 名称          | 描述                                     |
 | ------------- | ---------------------------------------- |
 | image_url     | 获取地图原始分辨率 PNG 图像的 URL。      |
@@ -108,16 +111,16 @@ curl http://192.168.25.25:8090/maps/1
 
 可以通过提供以下必填字段来创建地图：
 
-* map_name
-* carto_map (Base64 编码的二进制地图数据)
-* occupancy_grid (Base64 编码的 PNG 图像数据)
-* grid_origin_x
-* grid_origin_y
-* grid_resolution
-* overlays_version (可选)
-* overlays (可选)
-* uid (可选)
-* map_version (可选)
+- map_name
+- carto_map (Base64 编码的二进制地图数据)
+- occupancy_grid (Base64 编码的 PNG 图像数据)
+- grid_origin_x
+- grid_origin_y
+- grid_resolution
+- overlays_version (可选)
+- overlays (可选)
+- uid (可选)
+- map_version (可选)
 
 ```bash
 curl -X POST \
@@ -132,10 +135,11 @@ curl -X POST \
 
 :::tip 提示
 **相对于 Base64 JSON 的优势：**
+
 - **极速响应**：无 Base64 解码或 Payload 解析开销。
 - **几乎零内存占用**：避免在 API 请求期间将巨大的地图文件加载到内存中。
 - **零额外磁盘空间占用**：直接对源文件使用硬链接，不重复存储数据。
-:::
+  :::
 
 * map_name
 * carto_map_filename (源 `.pbstream` 文件的绝对路径)
