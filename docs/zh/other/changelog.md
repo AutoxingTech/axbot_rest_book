@@ -2,6 +2,7 @@
 
 ## 2.14.0
 
+- 2026-06-30 添加 [检测到的货架状态](../reference/websocket.md#detected-rack-states) 和 [货架地图状态](../reference/websocket.md#map-rack-states) WebSocket 主题
 - 2026-06-03 为[校准双激光雷达位姿](../reference/services.md#calibrate-duo-lidar-poses)添加三种校准模式（single_shot、right_wall、front_wall）
 - 2026-05-11 为 `/submap_list` 和 `SubmapQueryV2` 添加 [子图](../reference/submaps.md) 参考
 - 2026-04-29 添加服务 [牵引钩锁定、牵引钩释放、清除牵引钩错误](../reference/services.md#towing-hook-lock)
