@@ -1,5 +1,7 @@
 # Submaps
 
+![](./submap-list.png)
+
 Submap rendering is an advanced alternative to the [`/map_v2` WebSocket topic](./websocket.md) for displaying a robot's map. Instead of receiving the entire map as a single PNG, the client composites the map from many small, overlapping PNG images — one per cartographer submap. Unlike regular image tiles, submaps can overlap and vary in size. This approach is necessary for very large maps (> 2–3 km²) where a single full-resolution PNG becomes impractical.
 
 Submap rendering uses two pieces that are designed to work together:
@@ -101,6 +103,12 @@ Each entry in `submap` contains:
 - `uuid` changes when the SLAM session changes. Treat this as a cache boundary.
 - `submap_version` is the invalidation token for the texture payload.
 - The topic does not include the raster cells. It only tells you what to fetch and how to place it.
+
+### Slam Debugger
+
+The Slam Debugger app visualizes the full submap list in a hierarchical view, grouping submaps by trajectory ID, and allowing each submap to be toggled on/off for inspection.
+
+![](./submap-toggle.png)
 
 ## `SubmapQueryV2` HTTP API
 

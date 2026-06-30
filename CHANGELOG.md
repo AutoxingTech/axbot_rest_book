@@ -2,6 +2,7 @@
 
 ## 2.14.0
 
+- 2026-06-30 Add [Detected Rack States](../reference/websocket.md#detected-rack-states) and [Map Rack States](../reference/websocket.md#map-rack-states) WebSocket topics
 - 2026-06-17 Add `/imu_state` WebSocket topic with gyro bias fields
 - 2026-06-17 Add `/fused_sensor_state` WebSocket topic
 - 2026-06-14 Rename `topics/published` to `topics/published_names` in ROS services docs

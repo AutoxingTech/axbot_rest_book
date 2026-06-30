@@ -1004,6 +1004,65 @@ Cross-Origin-Opener-Policy: same-origin
 }
 ```
 
+## 检测到的货架状态 (Detected Rack States) {#detected-rack-states}
+
+机器人附近货架的实时观测结果，通常频率为 1–2 Hz。此 Topic **不进行缓存 (NOT latched)** ——每条消息仅包含机器人传感器当前观测到的货架。后端会将其累积到 `/map_rack_states` 中。
+
+```json
+{
+  "topic": "/detected_rack_states",
+  "map_uid": "a1b2c3d4",
+  "racks": [
+    {
+      "poi_id": "rack_001",
+      "levels": [
+        {
+          "timestamp_ns": 1712345678000000000,
+          "level": 1,
+          "state": "occupied"
+        }
+      ]
+    }
+  ]
+}
+```
+
+- `map_uid` — 货架跟踪所在的地图 ID。
+- `racks` — 观测到的货架状态数组。
+- `poi_id` — 货架兴趣点的唯一标识符。
+- `levels` — 多层货架各层的占用状态。
+- `state` — 取值为 `unknown`、`occupied` 或 `free`。
+
+## 货架地图状态 (Map Rack States) {#map-rack-states}
+
+所有已知货架的累积完整状态。**已缓存 (Latched)** ——缓存最新状态，让后订阅的订阅者能立即获取当前数据，而不仅仅是未来的更新。约 30 分钟未观测到的货架将变为 `unknown` 并被移除。
+
+![](../../reference/map_rack_states.png)
+
+```json
+{
+  "topic": "/map_rack_states",
+  "map_uid": "a1b2c3d4",
+  "racks": [
+    {
+      "poi_id": "rack_001",
+      "levels": [
+        {
+          "timestamp_ns": 1712345678000000000,
+          "level": 1,
+          "state": "occupied"
+        },
+        {
+          "timestamp_ns": 1712345678000000000,
+          "level": 2,
+          "state": "free"
+        }
+      ]
+    }
+  ]
+}
+```
+
 ## 跟随目标状态 (Follow Target State) {#follow-target-state}
 
 此 Topic 用于[跟随移动目标](./moves.md#follow-target)。

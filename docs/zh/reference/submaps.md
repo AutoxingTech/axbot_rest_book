@@ -1,5 +1,7 @@
 # 子图 (Submaps)
 
+![](../../reference/submap-list.png)
+
 子图渲染是相对于 [`/map_v2` WebSocket 话题](./websocket.md)的一种高级替代方案，用于显示机器人的地图。客户端不是接收单个 PNG 格式的完整地图，而是从许多小的、重叠的 PNG 图像（每个 Cartographer 子图一个）组合成地图。与普通的图像瓦片不同，子图可以重叠且尺寸各异。对于超大型地图（> 2–3 km²），单个全分辨率 PNG 变得不切实际，此时必须采用这种方法。
 
 子图渲染使用两个协同工作的组件：
@@ -101,6 +103,12 @@
 - 当 SLAM 会话改变时，`uuid` 会随之改变。请将其视为缓存边界。
 - `submap_version` 是纹理有效负载的失效令牌。
 - 该话题不包含栅格单元。它仅告知您该获取什么以及如何放置它。
+
+### Slam Debugger（SLAM 调试器）
+
+Slam Debugger 应用以层级视图展示完整的子图列表，按轨迹 ID 分组，并允许逐个开关每个子图的可见性以便检查。
+
+![](../../reference/submap-toggle.png)
 
 ## `SubmapQueryV2` HTTP API
 

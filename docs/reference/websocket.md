@@ -1005,6 +1005,65 @@ To use collected barcodes for global positioning or precision docking, they must
 }
 ```
 
+## Detected Rack States
+
+Realtime observations of racks nearby, typically 1–2 Hz. This topic is NOT latched — each message contains only racks currently observed by the robot's sensors. Accumulated into `/map_rack_states` by the backend.
+
+```json
+{
+  "topic": "/detected_rack_states",
+  "map_uid": "a1b2c3d4",
+  "racks": [
+    {
+      "poi_id": "rack_001",
+      "levels": [
+        {
+          "timestamp_ns": 1712345678000000000,
+          "level": 1,
+          "state": "occupied"
+        }
+      ]
+    }
+  ]
+}
+```
+
+- `map_uid` — ID of the map where racks are tracked.
+- `racks` — Array of observed rack states.
+- `poi_id` — Unique identifier for the rack point-of-interest.
+- `levels` — Per-level occupancy for multi-level racks.
+- `state` — One of `unknown`, `occupied`, or `free`.
+
+## Map Rack States
+
+Accumulated full state of all known racks. Latched — caches the latest state so late subscribers receive the current data immediately, not just future updates. Racks not observed for approximately 30 minutes become `unknown` and are removed.
+
+![](./map_rack_states.png)
+
+```json
+{
+  "topic": "/map_rack_states",
+  "map_uid": "a1b2c3d4",
+  "racks": [
+    {
+      "poi_id": "rack_001",
+      "levels": [
+        {
+          "timestamp_ns": 1712345678000000000,
+          "level": 1,
+          "state": "occupied"
+        },
+        {
+          "timestamp_ns": 1712345678000000000,
+          "level": 2,
+          "state": "free"
+        }
+      ]
+    }
+  ]
+}
+```
+
 ## Follow Target State
 
 This topic is used for [following a moving target](./moves.md#follow-target).
