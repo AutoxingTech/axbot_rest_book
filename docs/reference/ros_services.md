@@ -25,6 +25,7 @@ Protobuf message definitions are published as part of the [`@kingsimba/axbot-sdk
 <!-- prettier-ignore -->
 | Method | Path                                                      | ROS source                                                 |
 | ------ | --------------------------------------------------------- | ---------------------------------------------------------- |
+| `GET`  | `/ros/slam/map_image`                                     | `/slam/get_image` (`cartographer_ros_msgs/GetMapImage`)    |
 | `GET`  | `/ros/slam/submaps/{uuid}/{trajectory_id}/{submap_index}` | `/submap_query_v2` (`cartographer_ros_msgs/SubmapQueryV2`) |
 | `GET`  | `/ros/rosmaster/topics`                                   | ROS master API (`getTopics` + `getSystemState`)            |
 | `GET`  | `/ros/rosmaster/topics/published_names`                   | ROS master API (`getSystemState` — publishers only)        |
@@ -76,6 +77,94 @@ No request body.
 curl -i \
   'http://192.168.25.25:8090/ros/slam/submaps/681dc447472ac49d7b074fa1/12/3?ver=42' \
   -o submap_query.pb
+```
+
+---
+
+## SLAM Map Image
+
+Fetches the current SLAM map as a protobuf-encoded PNG image. Proxies to the `/slam/get_image` ROS service.
+
+### Route
+
+```text
+GET /ros/slam/map_image
+```
+
+### Request
+
+<!-- prettier-ignore -->
+| Param              | Type    | Where  | Notes                                         |
+| ------------------ | ------- | ------ | --------------------------------------------- |
+| `trajectory_id`    | integer | query  | Optional. Filter by trajectory ID.            |
+| `resolution`       | number  | query  | Optional. Image resolution in m/pixel.        |
+| `new_trajectory_only` | boolean | query | Optional. Only submaps from the newest trajectory. |
+
+No request body.
+
+### Response
+
+`ros_messages.slam.GetMapImageResponse` — see [`slam/map_image.proto`](../ros_message_forward/proto/slam/map_image.proto) and [`slam/status.proto`](../ros_message_forward/proto/slam/status.proto).
+
+The response includes:
+
+<!-- prettier-ignore -->
+| Field            | Type       | Notes                                              |
+| ---------------- | ---------- | -------------------------------------------------- |
+| `origin_x`       | double     | World X-coordinate of the map image origin.        |
+| `origin_y`       | double     | World Y-coordinate of the map image origin.        |
+| `resolution`     | double     | Map resolution in meters per pixel.                |
+| `png_bytes`      | bytes      | PNG-encoded image data.                            |
+| `status_code`    | StatusCode | Result status code (see `slam/status.proto`).      |
+| `status_message` | string     | Human-readable status message.                     |
+
+### Cache behavior
+
+No caching — the map image is dynamic and reflects the current SLAM state.
+
+### Additional error codes
+
+<!-- prettier-ignore -->
+| Status | Meaning                                    |
+| ------ | ------------------------------------------ |
+| `502`  | ROS service call failed                    |
+| `504`  | ROS service was unavailable before timeout |
+
+### Example
+
+```bash
+# Fetch as binary protobuf
+curl -H "Accept: application/x-protobuf" \
+  'http://192.168.25.25:8090/ros/slam/map_image' \
+  -o map_image.pb
+
+# Fetch as JSON
+curl -H "Accept: application/json" \
+  'http://192.168.25.25:8090/ros/slam/map_image' | jq .
+```
+
+```json
+{
+  "origin_x": -8.1,
+  "origin_y": -4.8,
+  "resolution": 0.05,
+  "status_code": "OK",
+  "status_message": ""
+}
+```
+
+### SDK usage
+
+```ts
+import { RobotApi } from '@kingsimba/axbot-sdk/robotApi';
+
+const api = new RobotApi({ apiBase: 'http://192.168.25.25:8090' });
+const result = await api.getMapImage({ resolution: 0.05 });
+if (result) {
+  const png = new Blob([result.message.png_bytes], { type: 'image/png' });
+  const url = URL.createObjectURL(png);
+  // use url as <img src> or ImageBitmap source
+}
 ```
 
 ---

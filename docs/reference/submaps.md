@@ -149,14 +149,15 @@ Successful responses return:
 
 - `200 OK`
 - `Content-Type: application/x-protobuf`
-- Protobuf message type `ros_messages.SubmapQueryV2Response`
+- Protobuf message type `ros_messages.slam.SubmapQueryV2Response`
 
 The authoritative protobuf definitions live in the SDK source:
 
-- `axbot-ts-sdk/src/proto/submap_query.proto`
+- `axbot-ts-sdk/src/proto/slam/submap_query.proto`
+- `axbot-ts-sdk/src/proto/slam/status.proto`
 - `axbot-ts-sdk/src/proto/geometry.proto`
 
-Use those files as the source of truth for `ros_messages.SubmapQueryV2Response`, `SubmapTexture`, and `Pose`.
+Use those files as the source of truth for `ros_messages.slam.SubmapQueryV2Response`, `SubmapTexture`, and `Pose`. The `status.code` field now uses the `StatusCode` enum instead of a raw `uint32`. See [`slam/status.proto`](https://github.com/AutoxingTech/axbot-ts-sdk/blob/master/src/proto/slam/status.proto) for all enum values.
 
 ### Texture Semantics
 
