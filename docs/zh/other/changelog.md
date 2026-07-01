@@ -2,6 +2,8 @@
 
 ## 2.14.0
 
+- 2026-07-01 添加 [SLAM 地图图片](../reference/ros_services.md#slam-map-image) API，用于获取当前 SLAM 地图的 protobuf 编码 PNG
+- 2026-07-01 更新 proto 命名空间：子图消息移至 `ros_messages.slam`，`StatusResponse.code` 改用 `StatusCode` 枚举
 - 2026-06-30 添加 [检测到的货架状态](../reference/websocket.md#detected-rack-states) 和 [货架地图状态](../reference/websocket.md#map-rack-states) WebSocket 主题
 - 2026-06-03 为[校准双激光雷达位姿](../reference/services.md#calibrate-duo-lidar-poses)添加三种校准模式（single_shot、right_wall、front_wall）
 - 2026-05-11 为 `/submap_list` 和 `SubmapQueryV2` 添加 [子图](../reference/submaps.md) 参考

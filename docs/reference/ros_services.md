@@ -156,12 +156,12 @@ curl -H "Accept: application/json" \
 ### SDK usage
 
 ```ts
-import { RobotApi } from '@kingsimba/axbot-sdk/robotApi';
+import { RobotApi } from "@kingsimba/axbot-sdk/robotApi";
 
-const api = new RobotApi({ apiBase: 'http://192.168.25.25:8090' });
+const api = new RobotApi({ apiBase: "http://192.168.25.25:8090" });
 const result = await api.getMapImage({ resolution: 0.05 });
 if (result) {
-  const png = new Blob([result.message.png_bytes], { type: 'image/png' });
+  const png = new Blob([result.message.png_bytes], { type: "image/png" });
   const url = URL.createObjectURL(png);
   // use url as <img src> or ImageBitmap source
 }
