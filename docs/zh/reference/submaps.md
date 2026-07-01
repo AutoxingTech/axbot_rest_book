@@ -149,14 +149,15 @@ curl \
 
 - `200 OK`
 - `Content-Type: application/x-protobuf`
-- Protobuf 消息类型 `ros_messages.SubmapQueryV2Response`
+- Protobuf 消息类型 `ros_messages.slam.SubmapQueryV2Response`
 
 权威的 Protobuf 定义存在于 SDK 源码中：
 
-- `axbot-ts-sdk/src/proto/submap_query.proto`
+- `axbot-ts-sdk/src/proto/slam/submap_query.proto`
+- `axbot-ts-sdk/src/proto/slam/status.proto`
 - `axbot-ts-sdk/src/proto/geometry.proto`
 
-请以这些文件作为 `ros_messages.SubmapQueryV2Response`、`SubmapTexture` 和 `Pose` 的唯一事实来源。
+请以这些文件作为 `ros_messages.slam.SubmapQueryV2Response`、`SubmapTexture` 和 `Pose` 的唯一事实来源。`status.code` 字段现在使用 `StatusCode` 枚举而非原始的 `uint32`。所有枚举值请参见 [`slam/status.proto`](https://github.com/AutoxingTech/axbot-ts-sdk/blob/master/src/proto/slam/status.proto)。
 
 ### 纹理语义
 
