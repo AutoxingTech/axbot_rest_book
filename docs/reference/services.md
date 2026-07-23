@@ -637,13 +637,13 @@ curl http://192.168.25.25:8090/services/query_pose/trailer_pose
 Calculates the pose of the jack plate's front or rear edge based on the robot's
 current position. This is useful for defining rack POI coordinates on the map.
 
-When placing racks of various sizes, the alignment strategy determines whether
-the front or rear edge of the jack plate is used as the reference point.
-If `rack.specs[0].alignment` is `"back"`, the rear edge is returned;
-otherwise, the front edge is returned.
+The `ref` query parameter specifies which edge to use:
+
+- `center_of_front_edge` (default) — the center of the jack plate's **front** edge
+- `center_of_rear_edge` — the center of the jack plate's **rear** edge
 
 ```bash
-curl http://192.168.25.25:8090/services/query_pose/rack_pose
+curl http://192.168.25.25:8090/services/query_pose/rack_pose?ref=center_of_front_edge
 ```
 
 ```json

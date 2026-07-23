@@ -635,11 +635,13 @@ curl http://192.168.25.25:8090/services/query_pose/trailer_pose
 
 根据机器人当前位置计算顶升铁板前边缘或后边缘的位姿。这用于在地图上定义货架 POI 坐标。
 
-当放置不同尺寸的货架时，对齐策略决定使用顶升铁板的前边缘还是后边缘作为参考点。
-如果 `rack.specs[0].alignment` 为 `"back"`，则返回后边缘；否则返回前边缘。
+通过 `ref` 查询参数指定对齐边缘：
+
+- `center_of_front_edge`（默认）— 顶升铁板**前沿**中心
+- `center_of_rear_edge` — 顶升铁板**后沿**中心
 
 ```bash
-curl http://192.168.25.25:8090/services/query_pose/rack_pose
+curl http://192.168.25.25:8090/services/query_pose/rack_pose?ref=center_of_front_edge
 ```
 
 ```json
