@@ -631,6 +631,28 @@ curl http://192.168.25.25:8090/services/query_pose/trailer_pose
 }
 ```
 
+### 货架位姿 (Rack Pose) {#rack-pose}
+
+根据机器人当前位置计算顶升铁板前边缘或后边缘的位姿。这用于在地图上定义货架 POI 坐标。
+
+当放置不同尺寸的货架时，对齐策略决定使用顶升铁板的前边缘还是后边缘作为参考点。
+如果 `rack.specs[0].alignment` 为 `"back"`，则返回后边缘；否则返回前边缘。
+
+```bash
+curl http://192.168.25.25:8090/services/query_pose/rack_pose
+```
+
+```json
+{
+  "pose": {
+    "pos": [1.234, 5.678], // 货架边缘在世界坐标系下的 [x, y] 坐标
+    "ori": 1.571 // 世界坐标系下的偏航角（弧度）
+  },
+  // 计算的是哪个边缘："center_of_front_edge" 或 "center_of_rear_edge"
+  "ref": "center_of_front_edge"
+}
+```
+
 ## 探测 V2X 信标 (Probe V2X Beacons) {#probe-v2x-beacons}
 
 此服务向信标发送消息以激活它们数秒。这对于测试连接性并触发响应非常有用。

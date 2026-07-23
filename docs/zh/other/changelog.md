@@ -2,6 +2,7 @@
 
 ## 2.14.0
 
+- 2026-07-22 添加 [货架位姿](../reference/services.md#rack-pose) 查询顶升铁板前/后沿位姿，用于定义货架 POI 点
 - 2026-07-01 添加 [SLAM 地图图片](../reference/ros_services.md#slam-map-image) API，用于获取当前 SLAM 地图的 protobuf 编码 PNG
 - 2026-07-01 更新 proto 命名空间：子图消息移至 `ros_messages.slam`，`StatusResponse.code` 改用 `StatusCode` 枚举
 - 2026-06-30 添加 [检测到的货架状态](../reference/websocket.md#detected-rack-states) 和 [货架地图状态](../reference/websocket.md#map-rack-states) WebSocket 主题

@@ -632,6 +632,31 @@ curl http://192.168.25.25:8090/services/query_pose/trailer_pose
 }
 ```
 
+### Rack Pose
+
+Calculates the pose of the jack plate's front or rear edge based on the robot's
+current position. This is useful for defining rack POI coordinates on the map.
+
+When placing racks of various sizes, the alignment strategy determines whether
+the front or rear edge of the jack plate is used as the reference point.
+If `rack.specs[0].alignment` is `"back"`, the rear edge is returned;
+otherwise, the front edge is returned.
+
+```bash
+curl http://192.168.25.25:8090/services/query_pose/rack_pose
+```
+
+```json
+{
+  "pose": {
+    "pos": [1.234, 5.678], // Calculated rack edge coordinates [x, y] in the world frame
+    "ori": 1.571 // Yaw angle in the world frame (radians)
+  },
+  // Which edge was calculated: "center_of_front_edge" or "center_of_rear_edge"
+  "ref": "center_of_front_edge"
+}
+```
+
 ## Probe V2X Beacons
 
 This service sends messages to beacons to activate them for several seconds. This is useful for testing connectivity and triggering responses.

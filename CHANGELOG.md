@@ -2,6 +2,7 @@
 
 ## 2.14.0
 
+- 2026-07-22 Add [Rack Pose](../reference/services.md#rack-pose) to query the jack plate's front/rear edge pose for rack POI definition
 - 2026-07-01 Add [SLAM Map Image](../reference/ros_services.md#slam-map-image) API to fetch the current SLAM map as a protobuf-encoded PNG
 - 2026-07-01 Update proto namespace: submap messages moved to `ros_messages.slam`, `StatusResponse.code` uses the `StatusCode` enum
 - 2026-06-30 Add [Detected Rack States](../reference/websocket.md#detected-rack-states) and [Map Rack States](../reference/websocket.md#map-rack-states) WebSocket topics
