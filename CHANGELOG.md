@@ -2,6 +2,7 @@
 
 ## 2.14.0
 
+- 2026-08-04 Add [Map Overlays](../reference/ros_services.md#map-overlays) API to read/replace dynamic map overlays as GeoJSON
 - 2026-07-22 Add [Rack Pose](../reference/services.md#rack-pose) to query the jack plate's front/rear edge pose for rack POI definition
 - 2026-07-01 Add [SLAM Map Image](../reference/ros_services.md#slam-map-image) API to fetch the current SLAM map as a protobuf-encoded PNG
 - 2026-07-01 Update proto namespace: submap messages moved to `ros_messages.slam`, `StatusResponse.code` uses the `StatusCode` enum

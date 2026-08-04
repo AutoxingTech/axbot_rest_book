@@ -25,10 +25,137 @@ Protobuf 消息定义发布在 npm 上的 [`@kingsimba/axbot-sdk`](https://www.n
 <!-- prettier-ignore -->
 | 方法  | 路径                                                      | ROS 源                                                     |
 | ----- | --------------------------------------------------------- | ---------------------------------------------------------- |
+| `GET` | `/ros/map/overlays`                                       | `/get_map_overlays` (`ax_msgs/GetMapOverlays`)             |
+| `PUT` | `/ros/map/overlays`                                       | `/set_map_overlays` (`ax_msgs/SetMapOverlays`)             |
 | `GET` | `/ros/slam/map_image`                                     | `/slam/get_image` (`cartographer_ros_msgs/GetMapImage`)    |
 | `GET` | `/ros/slam/submaps/{uuid}/{trajectory_id}/{submap_index}` | `/submap_query_v2` (`cartographer_ros_msgs/SubmapQueryV2`) |
 | `GET` | `/ros/rosmaster/topics`                                   | ROS master API (`getTopics` + `getSystemState`)            |
 | `GET` | `/ros/rosmaster/topics/published_names`                   | ROS master API (`getSystemState` — 仅发布者)               |
+
+---
+
+## Map Overlays (地图叠加层) {#map-overlays}
+
+读取或替换动态地图叠加层，格式为 GeoJSON `FeatureCollection`。这是一个原始 JSON 端点 — `Accept` 请求头会被忽略，响应始终为 `application/json`。
+
+### 获取叠加层 (Get overlays) {#get-overlays}
+
+转发 ROS 服务 `/get_map_overlays`（`ax_msgs/GetMapOverlays`）。
+
+#### 路由 (Route)
+
+```text
+GET /ros/map/overlays
+```
+
+#### 请求 (Request)
+
+无参数，无请求体。
+
+#### 响应 (Response)
+
+`200` `application/json` — 叠加层以 GeoJSON `FeatureCollection` 形式自服务原样透传。
+
+```json
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [0, 0],
+            [1, 0],
+            [1, 1],
+            [0, 0]
+          ]
+        ]
+      },
+      "properties": { "kind": "speed_limit_zone" }
+    }
+  ]
+}
+```
+
+#### 缓存行为 (Cache behavior)
+
+`Cache-Control: no-cache` — 叠加层是动态状态。
+
+#### 附加错误码 (Additional error codes)
+
+<!-- prettier-ignore -->
+| 状态码 | 含义                                          |
+| ------ | --------------------------------------------- |
+| `500`  | `map_server` 返回 `success = false`；响应体为其 `message` |
+
+#### 示例 (Example)
+
+```bash
+curl http://192.168.25.25:8090/ros/map/overlays > overlays.json
+```
+
+### 设置叠加层 (Set overlays) {#set-overlays}
+
+转发 ROS 服务 `/set_map_overlays`（`ax_msgs/SetMapOverlays`）。
+
+#### 路由 (Route)
+
+```text
+PUT /ros/map/overlays
+```
+
+#### 请求 (Request)
+
+请求体为 GeoJSON `FeatureCollection`，`Content-Type: application/json`。请求体会作为 `overlays` 字符串原样发送给 ROS 服务。
+
+<!-- prettier-ignore -->
+| `Content-Type` 请求头   | Body                        |
+| ----------------------- | --------------------------- |
+| `application/json`      | GeoJSON `FeatureCollection` |
+| (其他)                  | `415 Unsupported Media Type`|
+
+#### 响应 (Response)
+
+`200` `application/json`:
+
+```json
+{ "success": true, "message": "" }
+```
+
+#### 附加错误码 (Additional error codes)
+
+<!-- prettier-ignore -->
+| 状态码 | 含义                                          |
+| ------ | --------------------------------------------- |
+| `400`  | 请求体格式错误（无效 JSON）                   |
+| `415`  | 不支持的请求 `Content-Type`                   |
+| `500`  | `map_server` 返回 `success = false`；响应体为其 `message` |
+
+#### 示例 (Example)
+
+```bash
+curl -X PUT \
+  -H "Content-Type: application/json" \
+  --data-binary @overlays.json \
+  http://192.168.25.25:8090/ros/map/overlays
+```
+
+### SDK 用法 (SDK usage)
+
+```ts
+import { RobotApi } from "@kingsimba/axbot-sdk/robotApi";
+import type { FeatureCollection } from "@kingsimba/axbot-sdk/geojson";
+
+const api = new RobotApi({ apiBase: "http://192.168.25.25:8090" });
+
+// 读取当前叠加层
+const overlays: FeatureCollection = await api.getMapOverlays();
+
+// 替换叠加层
+await api.setMapOverlays(overlays);
+```
 
 ---
 

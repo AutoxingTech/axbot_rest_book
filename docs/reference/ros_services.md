@@ -25,10 +25,137 @@ Protobuf message definitions are published as part of the [`@kingsimba/axbot-sdk
 <!-- prettier-ignore -->
 | Method | Path                                                      | ROS source                                                 |
 | ------ | --------------------------------------------------------- | ---------------------------------------------------------- |
+| `GET`  | `/ros/map/overlays`                                       | `/get_map_overlays` (`ax_msgs/GetMapOverlays`)             |
+| `PUT`  | `/ros/map/overlays`                                       | `/set_map_overlays` (`ax_msgs/SetMapOverlays`)             |
 | `GET`  | `/ros/slam/map_image`                                     | `/slam/get_image` (`cartographer_ros_msgs/GetMapImage`)    |
 | `GET`  | `/ros/slam/submaps/{uuid}/{trajectory_id}/{submap_index}` | `/submap_query_v2` (`cartographer_ros_msgs/SubmapQueryV2`) |
 | `GET`  | `/ros/rosmaster/topics`                                   | ROS master API (`getTopics` + `getSystemState`)            |
 | `GET`  | `/ros/rosmaster/topics/published_names`                   | ROS master API (`getSystemState` — publishers only)        |
+
+---
+
+## Map Overlays
+
+Reads or replaces the dynamic map overlays as a GeoJSON `FeatureCollection`. This is a raw JSON endpoint — the `Accept` header is ignored and the response is always `application/json`.
+
+### Get overlays
+
+Proxies to the `/get_map_overlays` ROS service (`ax_msgs/GetMapOverlays`).
+
+#### Route
+
+```text
+GET /ros/map/overlays
+```
+
+#### Request
+
+No parameters, no request body.
+
+#### Response
+
+`200` `application/json` — the overlays as a GeoJSON `FeatureCollection`, passed through verbatim from the service.
+
+```json
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [0, 0],
+            [1, 0],
+            [1, 1],
+            [0, 0]
+          ]
+        ]
+      },
+      "properties": { "kind": "speed_limit_zone" }
+    }
+  ]
+}
+```
+
+#### Cache behavior
+
+`Cache-Control: no-cache` — overlays are dynamic state.
+
+#### Additional error codes
+
+<!-- prettier-ignore -->
+| Status | Meaning                                                       |
+| ------ | ------------------------------------------------------------- |
+| `500`  | `map_server` returned `success = false`; body is its `message` |
+
+#### Example
+
+```bash
+curl http://192.168.25.25:8090/ros/map/overlays > overlays.json
+```
+
+### Set overlays
+
+Proxies to the `/set_map_overlays` ROS service (`ax_msgs/SetMapOverlays`).
+
+#### Route
+
+```text
+PUT /ros/map/overlays
+```
+
+#### Request
+
+The body is the overlays as a GeoJSON `FeatureCollection` with `Content-Type: application/json`. The body is sent verbatim as the `overlays` string to the ROS service.
+
+<!-- prettier-ignore -->
+| `Content-Type` request header | Body                        |
+| ----------------------------- | --------------------------- |
+| `application/json`            | GeoJSON `FeatureCollection` |
+| (any other)                   | `415 Unsupported Media Type`|
+
+#### Response
+
+`200` `application/json`:
+
+```json
+{ "success": true, "message": "" }
+```
+
+#### Additional error codes
+
+<!-- prettier-ignore -->
+| Status | Meaning                                                       |
+| ------ | ------------------------------------------------------------- |
+| `400`  | Malformed request body (invalid JSON)                         |
+| `415`  | Unsupported request `Content-Type`                            |
+| `500`  | `map_server` returned `success = false`; body is its `message` |
+
+#### Example
+
+```bash
+curl -X PUT \
+  -H "Content-Type: application/json" \
+  --data-binary @overlays.json \
+  http://192.168.25.25:8090/ros/map/overlays
+```
+
+### SDK usage
+
+```ts
+import { RobotApi } from "@kingsimba/axbot-sdk/robotApi";
+import type { FeatureCollection } from "@kingsimba/axbot-sdk/geojson";
+
+const api = new RobotApi({ apiBase: "http://192.168.25.25:8090" });
+
+// Read the current overlays
+const overlays: FeatureCollection = await api.getMapOverlays();
+
+// Replace the overlays
+await api.setMapOverlays(overlays);
+```
 
 ---
 
