@@ -36,7 +36,7 @@ curl -X POST \
    "state":"running",
    "bag_id":null,
    "bag_url":null,
-   "download_url":null
+   "download_url":null, // removed since 2.14
 }
 ```
 
@@ -139,10 +139,10 @@ curl http://192.168.25.25:8090/mappings/
       "bag_size": 314572800, // size of the bag file, in bytes
 
       //////////////////////////////
-      // Obsolete
+      // Removed since 2.14
       //////////////////////////////
 
-      // obsolete. Map data & Image, in JSON format(base64ed). Unsuitable for large map.
+      // Removed since 2.14. Map data & image in JSON (base64). Use pbstream_url and image_url instead.
       "download_url":"http://192.168.25.25:8090/mappings/48/download",
    },
    {
@@ -175,7 +175,7 @@ curl http://192.168.25.25:8090/mappings/48
   "bag_size": 314572800, // size of the bag file, in bytes
   "pbstream_url": "http://192.168.25.25:8090/mappings/48.pbstream", // the binary map data file
   "pbstream_size": 8354678, // size of the pbstream file, in bytes
-  "download_url": "http://192.168.25.25:8090/mappings/48/download", // Get Base64-encoded map data (binary, used for positioning)
+  "download_url": "http://192.168.25.25:8090/mappings/48/download", // Removed since 2.14. Use pbstream_url and image_url instead
   "trajectories_url": "http://192.168.25.25:8090/mappings/48/trajectories.json",
   "landmark_url": "http://192.168.25.25:8090/mappings/48/landmarks.json" // since 2.11.0
 }

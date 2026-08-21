@@ -36,7 +36,7 @@ curl -X POST \
    "state":"running",
    "bag_id":null,
    "bag_url":null,
-   "download_url":null
+   "download_url":null, // 自 2.14 起移除
 }
 ```
 
@@ -139,10 +139,10 @@ curl http://192.168.25.25:8090/mappings/
       "bag_size": 314572800, // bag 文件大小，单位：字节
 
       //////////////////////////////
-      // 已废弃 (Obsolete)
+      // 自 2.14 起移除 (Removed since 2.14)
       //////////////////////////////
 
-      // 已废弃。JSON 格式（base64 编码）的地图数据和图像。不适合大地图。
+      // 自 2.14 起移除。JSON 格式（base64 编码）的地图数据和图像。请改用 pbstream_url 和 image_url。
       "download_url":"http://192.168.25.25:8090/mappings/48/download",
    },
    {
@@ -175,7 +175,7 @@ curl http://192.168.25.25:8090/mappings/48
   "bag_size": 314572800, // bag 文件大小，单位：字节
   "pbstream_url": "http://192.168.25.25:8090/mappings/48.pbstream", // 二进制地图数据文件
   "pbstream_size": 8354678, // pbstream 文件大小，单位：字节
-  "download_url": "http://192.168.25.25:8090/mappings/48/download", // 获取 Base64 编码的地图数据（二进制，用于定位）
+  "download_url": "http://192.168.25.25:8090/mappings/48/download", // 自 2.14 起移除。请改用 pbstream_url 和 image_url
   "trajectories_url": "http://192.168.25.25:8090/mappings/48/trajectories.json",
   "landmark_url": "http://192.168.25.25:8090/mappings/48/landmarks.json" // 自 2.11.0 起支持
 }

@@ -10,6 +10,18 @@ During this period, the older APIs are considered deprecated. We encourage our u
 
 This document lists deprecated APIs and provides guidance on migrating to their replacements.
 
+## 2.14.0
+
+### Remove `/mappings/:id/download`
+
+This endpoint returned the mapping data and image as Base64-encoded JSON and crashed on large files. It has been removed since 2.14.0.
+
+Replaced by:
+
+- `GET /mappings/:id.pbstream` — the binary map data file, see [Mapping List](../reference/mappings.md#mapping-list)
+- `GET /mappings/:id.png` — the PNG image
+- `GET /mappings/:id.bag` — the bag file
+
 ## 1.8.8
 
 ### Deprecate WebSocket Topics: `/chassis/pose`, `/chassis/path`, `/chassis/occupancy_grid`

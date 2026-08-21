@@ -2,6 +2,7 @@
 
 ## 2.14.0
 
+- 2026-08-21 从[建图](../reference/mappings.md#mapping-list)中移除已废弃的地图下载端点及 `download_url` 字段
 - 2026-08-21 在 [建图](../reference/mappings.md#mapping-list) 和 [地图](../reference/maps.md#map-list) 列表/详情响应中添加文件大小（`pbstream_size`、`image_size`、`bag_size`）
 - 2026-08-04 添加 [地图叠加层](../reference/ros_services.md#map-overlays) API，以 GeoJSON 格式读取/替换动态地图叠加层
 - 2026-07-22 添加 [货架位姿](../reference/services.md#rack-pose) 查询顶升铁板前/后沿位姿，用于定义货架 POI 点

@@ -10,6 +10,18 @@
 
 本文档列出了已弃用的 API，并提供了迁移到其替代品的指南。
 
+## 2.14.0
+
+### 移除 `/mappings/:id/download`
+
+该端点以 Base64 编码的 JSON 返回建图数据和图像，并且在大文件上会崩溃。自 2.14.0 起已移除。
+
+替代方案：
+
+- `GET /mappings/:id.pbstream` — 二进制地图数据文件，参见 [建图列表](../reference/mappings.md#mapping-list)
+- `GET /mappings/:id.png` — PNG 图像
+- `GET /mappings/:id.bag` — bag 文件
+
 ## 1.8.8
 
 ### 弃用 WebSocket 主题：`/chassis/pose`、`/chassis/path`、`/chassis/occupancy_grid`
