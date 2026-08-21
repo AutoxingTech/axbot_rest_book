@@ -119,8 +119,10 @@ curl http://192.168.25.25:8090/mappings/
 
       // the binary map data file. Supports RANGE + ETAG based downloading.
       "pbstream_url":"http://192.168.25.25:8090/mappings/48.pbstream",
+      "pbstream_size": 8354678, // size of the pbstream file, in bytes
       // The PNG image
       "image_url":"http://192.168.25.25:8090/mappings/48.png",
+      "image_size": 1048576, // size of the PNG image, in bytes
       // landmarks, etc
       "properties_url": "http://tunnel.autoxing.com:21044/mappings/48/properties.json",
 
@@ -134,6 +136,7 @@ curl http://192.168.25.25:8090/mappings/
       "trajectories_url": "http://192.168.25.25:8090/mappings/48/trajectories.json",
       // for debugging slam
       "bag_url":"http://192.168.25.25:8090/bags/48.bag",
+      "bag_size": 314572800, // size of the bag file, in bytes
 
       //////////////////////////////
       // Obsolete
@@ -159,6 +162,7 @@ curl http://192.168.25.25:8090/mappings/48
   "id": 48,
   "thumbnail_url": "http://192.168.25.25:8090/mappings/48/thumbnail",
   "image_url": "http://192.168.25.25:8090/mappings/48.png", // Base64-encoded map image (PNG, used for display)
+  "image_size": 1048576, // size of the PNG image, in bytes
   "grid_origin_x": -8.050000190734863,
   "grid_origin_y": -5.650000095367432,
   "grid_resolution": 0.05,
@@ -168,6 +172,9 @@ curl http://192.168.25.25:8090/mappings/48
   "state": "finished", // The current state: running, finished, cancelled, failed
   "bag_id": 27,
   "bag_url": "http://192.168.25.25:8090/bags/27.bag",
+  "bag_size": 314572800, // size of the bag file, in bytes
+  "pbstream_url": "http://192.168.25.25:8090/mappings/48.pbstream", // the binary map data file
+  "pbstream_size": 8354678, // size of the pbstream file, in bytes
   "download_url": "http://192.168.25.25:8090/mappings/48/download", // Get Base64-encoded map data (binary, used for positioning)
   "trajectories_url": "http://192.168.25.25:8090/mappings/48/trajectories.json",
   "landmark_url": "http://192.168.25.25:8090/mappings/48/landmarks.json" // since 2.11.0

@@ -34,6 +34,9 @@ curl http://192.168.25.25:8090/maps/
     "overlays_version": 14,
     "thumbnail_url": "http://192.168.25.25:8090/maps/1/thumbnail",
     "image_url": "http://192.168.25.25:8090/maps/1.png",
+    "image_size": 1048576, // size of the PNG image, in bytes
+    "pbstream_url": "http://192.168.25.25:8090/maps/1.pbstream",
+    "pbstream_size": 8354678, // size of the pbstream file, in bytes
     "url": "http://192.168.25.25:8090/maps/1"
   },
   {
@@ -45,6 +48,9 @@ curl http://192.168.25.25:8090/maps/
     "overlays_version": 8,
     "thumbnail_url": "http://192.168.25.25:8090/maps/2/thumbnail",
     "image_url": "http://192.168.25.25:8090/maps/2.png",
+    "image_size": 524288, // size of the PNG image, in bytes
+    "pbstream_url": "http://192.168.25.25:8090/maps/2.pbstream",
+    "pbstream_size": 4177339, // size of the pbstream file, in bytes
     "url": "http://192.168.25.25:8090/maps/2"
   },
   {
@@ -56,6 +62,9 @@ curl http://192.168.25.25:8090/maps/
     "overlays_version": 3,
     "thumbnail_url": "http://192.168.25.25:8090/maps/3/thumbnail",
     "image_url": "http://192.168.25.25:8090/maps/3.png",
+    "image_size": 2097152, // size of the PNG image, in bytes
+    "pbstream_url": "http://192.168.25.25:8090/maps/3.pbstream",
+    "pbstream_size": 16709356, // size of the pbstream file, in bytes
     "url": "http://192.168.25.25:8090/maps/3"
   }
 ]
@@ -68,6 +77,9 @@ curl http://192.168.25.25:8090/maps/
 | ------------- | ---------------------------------------------------------------- |
 | image_url     | The PNG image representation of the map at its original resolution. |
 | thumbnail_url | The PNG image representation of the map at a low resolution (thumbnail). |
+| pbstream_url  | The URL to retrieve the binary map data (`.pbstream`).           |
+| pbstream_size | The size of the pbstream file, in bytes. `null` if unavailable.  |
+| image_size    | The size of the PNG image, in bytes. `null` if unavailable.      |
 
 ## Get Map Detail
 
@@ -90,7 +102,9 @@ curl http://192.168.25.25:8090/maps/1
   "overlays": "{\"type\": \"FeatureCollection\", \"features\": [{\"id\": ...",
   "thumbnail_url": "http://192.168.25.25:8090/maps/1/thumbnail",
   "image_url": "http://192.168.25.25:8090/maps/1.png",
-  "pbstream_url": "http://192.168.25.25:8090/maps/1.pbstream"
+  "image_size": 1048576, // size of the PNG image, in bytes
+  "pbstream_url": "http://192.168.25.25:8090/maps/1.pbstream",
+  "pbstream_size": 8354678 // size of the pbstream file, in bytes
 }
 ```
 
@@ -102,6 +116,8 @@ curl http://192.168.25.25:8090/maps/1
 | image_url     | The URL to retrieve the PNG image of the map at its original resolution. |
 | thumbnail_url | The URL to retrieve the thumbnail (PNG) image of the map.      |
 | pbstream_url  | The URL to retrieve the binary map data.                      |
+| pbstream_size | The size of the pbstream file, in bytes. `null` if unavailable. |
+| image_size    | The size of the PNG image, in bytes. `null` if unavailable.   |
 
 ## Create a Map
 

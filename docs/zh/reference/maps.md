@@ -34,6 +34,9 @@ curl http://192.168.25.25:8090/maps/
     "overlays_version": 14,
     "thumbnail_url": "http://192.168.25.25:8090/maps/1/thumbnail",
     "image_url": "http://192.168.25.25:8090/maps/1.png",
+    "image_size": 1048576, // PNG 图像大小，单位：字节
+    "pbstream_url": "http://192.168.25.25:8090/maps/1.pbstream",
+    "pbstream_size": 8354678, // pbstream 文件大小，单位：字节
     "url": "http://192.168.25.25:8090/maps/1"
   },
   {
@@ -45,6 +48,9 @@ curl http://192.168.25.25:8090/maps/
     "overlays_version": 8,
     "thumbnail_url": "http://192.168.25.25:8090/maps/2/thumbnail",
     "image_url": "http://192.168.25.25:8090/maps/2.png",
+    "image_size": 524288, // PNG 图像大小，单位：字节
+    "pbstream_url": "http://192.168.25.25:8090/maps/2.pbstream",
+    "pbstream_size": 4177339, // pbstream 文件大小，单位：字节
     "url": "http://192.168.25.25:8090/maps/2"
   },
   {
@@ -56,6 +62,9 @@ curl http://192.168.25.25:8090/maps/
     "overlays_version": 3,
     "thumbnail_url": "http://192.168.25.25:8090/maps/3/thumbnail",
     "image_url": "http://192.168.25.25:8090/maps/3.png",
+    "image_size": 2097152, // PNG 图像大小，单位：字节
+    "pbstream_url": "http://192.168.25.25:8090/maps/3.pbstream",
+    "pbstream_size": 16709356, // pbstream 文件大小，单位：字节
     "url": "http://192.168.25.25:8090/maps/3"
   }
 ]
@@ -64,10 +73,13 @@ curl http://192.168.25.25:8090/maps/
 **额外字段**
 
 <!-- prettier-ignore -->
-| 名称          | 描述                                 |
-| ------------- | ------------------------------------ |
-| image_url     | 地图原始分辨率的 PNG 图像。          |
-| thumbnail_url | 地图低分辨率的 PNG 图像（缩略图）。 |
+| 名称          | 描述                                       |
+| ------------- | ------------------------------------------ |
+| image_url     | 地图原始分辨率的 PNG 图像。                |
+| thumbnail_url | 地图低分辨率的 PNG 图像（缩略图）。        |
+| pbstream_url  | 获取二进制地图数据 (`.pbstream`) 的 URL。  |
+| pbstream_size | pbstream 文件大小，单位：字节。不可用时为 `null`。 |
+| image_size    | PNG 图像大小，单位：字节。不可用时为 `null`。 |
 
 ## 获取地图详情 {#get-map-detail}
 
@@ -90,7 +102,9 @@ curl http://192.168.25.25:8090/maps/1
   "overlays": "{\"type\": \"FeatureCollection\", \"features\": [{\"id\": ...",
   "thumbnail_url": "http://192.168.25.25:8090/maps/1/thumbnail",
   "image_url": "http://192.168.25.25:8090/maps/1.png",
-  "pbstream_url": "http://192.168.25.25:8090/maps/1.pbstream"
+  "image_size": 1048576, // PNG 图像大小，单位：字节
+  "pbstream_url": "http://192.168.25.25:8090/maps/1.pbstream",
+  "pbstream_size": 8354678 // pbstream 文件大小，单位：字节
 }
 ```
 
@@ -102,6 +116,8 @@ curl http://192.168.25.25:8090/maps/1
 | image_url     | 获取地图原始分辨率 PNG 图像的 URL。      |
 | thumbnail_url | 获取地图缩略图 (PNG) 的 URL。            |
 | pbstream_url  | 获取二进制地图数据的 URL。               |
+| pbstream_size | pbstream 文件大小，单位：字节。不可用时为 `null`。 |
+| image_size    | PNG 图像大小，单位：字节。不可用时为 `null`。 |
 
 ## 创建地图 {#create-a-map}
 

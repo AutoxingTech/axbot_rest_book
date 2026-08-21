@@ -119,8 +119,10 @@ curl http://192.168.25.25:8090/mappings/
 
       // 二进制地图数据文件。支持基于 RANGE + ETAG 的下载。
       "pbstream_url":"http://192.168.25.25:8090/mappings/48.pbstream",
+      "pbstream_size": 8354678, // pbstream 文件大小，单位：字节
       // PNG 图像
       "image_url":"http://192.168.25.25:8090/mappings/48.png",
+      "image_size": 1048576, // PNG 图像大小，单位：字节
       // 陆标等
       "properties_url": "http://tunnel.autoxing.com:21044/mappings/48/properties.json",
 
@@ -134,6 +136,7 @@ curl http://192.168.25.25:8090/mappings/
       "trajectories_url": "http://192.168.25.25:8090/mappings/48/trajectories.json",
       // 用于 SLAM 调试
       "bag_url":"http://192.168.25.25:8090/bags/48.bag",
+      "bag_size": 314572800, // bag 文件大小，单位：字节
 
       //////////////////////////////
       // 已废弃 (Obsolete)
@@ -159,6 +162,7 @@ curl http://192.168.25.25:8090/mappings/48
   "id": 48,
   "thumbnail_url": "http://192.168.25.25:8090/mappings/48/thumbnail",
   "image_url": "http://192.168.25.25:8090/mappings/48.png", // Base64 编码的地图图像 (PNG，用于显示)
+  "image_size": 1048576, // PNG 图像大小，单位：字节
   "grid_origin_x": -8.050000190734863,
   "grid_origin_y": -5.650000095367432,
   "grid_resolution": 0.05,
@@ -168,6 +172,9 @@ curl http://192.168.25.25:8090/mappings/48
   "state": "finished", // 当前状态：running (运行中), finished (已完成), cancelled (已取消), failed (失败)
   "bag_id": 27,
   "bag_url": "http://192.168.25.25:8090/bags/27.bag",
+  "bag_size": 314572800, // bag 文件大小，单位：字节
+  "pbstream_url": "http://192.168.25.25:8090/mappings/48.pbstream", // 二进制地图数据文件
+  "pbstream_size": 8354678, // pbstream 文件大小，单位：字节
   "download_url": "http://192.168.25.25:8090/mappings/48/download", // 获取 Base64 编码的地图数据（二进制，用于定位）
   "trajectories_url": "http://192.168.25.25:8090/mappings/48/trajectories.json",
   "landmark_url": "http://192.168.25.25:8090/mappings/48/landmarks.json" // 自 2.11.0 起支持
