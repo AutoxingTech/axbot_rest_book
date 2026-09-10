@@ -28,7 +28,7 @@ interface MoveActionCreate {
     | 'return_to_elevator_waiting_point'
     | 'enter_elevator'
     | 'leave_elevator' // Deprecated. Do not use.
-    | 'along_given_route' // Follow a specified path.
+    | 'along_given_route' // Deprecated. Use another type with `route_coordinates` instead.
     | 'align_with_rack' // Crawl under a rack (to jack it up later).
     | 'to_unload_point' // Move to a rack unload point (to jack it down later).
     | 'follow_target'; // Follow a moving target.
@@ -40,7 +40,7 @@ interface MoveActionCreate {
 
   // A path to follow.
   //
-  // Only valid when `type` is `along_given_route`.
+  // Supported by most move types, e.g. `standard`, `charge`, `align_with_rack`.
   // A list of coordinates as a comma-separated string,
   // in the format "x1, y1, x2, y2".
   route_coordinates?: string;
@@ -48,7 +48,7 @@ interface MoveActionCreate {
   // The allowed detour distance when navigating around an obstacle
   // while following a specified path.
   //
-  // Only valid when `type` is `along_given_route`.
+  // Supported by most move types, e.g. `standard`, `charge`, `align_with_rack`.
   // When 0 is specified, the robot will always stop and wait before an obstacle
   // instead of attempting to go around it.
   detour_tolerance?: number;
@@ -121,6 +121,8 @@ Several new failure reasons have been introduced, such as:
 Create a move action with `type=align_with_rack` and `rack_area_id={SOME_ID}`; the robot patrols the source area, finds the first rack point containing a rack, and aligns with it.
 
 ### Follow Given Route Strictly
+
+`route_coordinates` can be combined with most move types, e.g. `align_with_rack` and `to_unload_point`.
 
 When `route_coordinates` is provided and `detour_tolerance=0`, the robot follows the route as closely as possible and does not attempt to evade obstacles (it will only stop in front of them).
 

@@ -28,7 +28,7 @@ interface MoveActionCreate {
     | 'return_to_elevator_waiting_point'
     | 'enter_elevator'
     | 'leave_elevator' // 已废弃。请勿使用。
-    | 'along_given_route' // 沿着指定路径移动。
+    | 'along_given_route' // 已废弃。请改用其他移动类型并配合 `route_coordinates`。
     | 'align_with_rack' // 钻入货架下方（以便后续顶升）。
     | 'to_unload_point' // 移动到货架卸货点（以便后续落下）。
     | 'follow_target'; // 跟随移动目标。
@@ -40,14 +40,14 @@ interface MoveActionCreate {
 
   // 要遵循的路径。
   //
-  // 仅当 `type` 为 `along_given_route` 时有效。
+  // 大多数移动类型均支持，例如 `standard`、`charge`、`align_with_rack`。
   // 以逗号分隔的坐标列表字符串，
   // 格式为 "x1, y1, x2, y2"。
   route_coordinates?: string;
 
   // 沿着指定路径移动时，绕过障碍物的允许偏航距离。
   //
-  // 仅当 `type` 为 `along_given_route` 时有效。
+  // 大多数移动类型均支持，例如 `standard`、`charge`、`align_with_rack`。
   // 当指定为 0 时，机器人遇到障碍物会始终停止并等待，而不会尝试绕行。
   detour_tolerance?: number;
 
@@ -117,7 +117,9 @@ interface MoveActionCreate {
 
 创建一个 `type=align_with_rack` 且 `rack_area_id={SOME_ID}` 的移动动作；机器人会巡检源区域，找到第一个存放有货架的货架点，并与其对接。
 
-### 严格遵循给定路线
+### 严格遵循给定路线 {#follow-given-route-strictly}
+
+`route_coordinates` 可与大多数移动类型组合使用，例如 `align_with_rack`、`to_unload_point`。
 
 当提供 `route_coordinates` 且 `detour_tolerance=0` 时，机器人会尽可能紧密地遵循路线，且不会尝试避障（只会停在障碍物前）。
 
