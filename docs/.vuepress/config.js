@@ -5,6 +5,12 @@ import { searchPlugin } from '@vuepress/plugin-search'
 import anchor from 'markdown-it-anchor'
 import imsize from 'markdown-it-imsize'
 import attrs from 'markdown-it-attrs'
+import Prism from 'prismjs'
+import 'prismjs/components/prism-json.js'
+import 'prismjs/components/prism-json5.js'
+
+// Prism ships no jsonc grammar; alias it to json5, which also allows comments and trailing commas.
+Prism.languages.jsonc = Prism.languages.json5
 
 export default defineUserConfig({
     base: "/axbot_rest_book/",
