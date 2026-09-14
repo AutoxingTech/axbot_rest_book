@@ -2,6 +2,7 @@
 
 ## 2.14.0
 
+- 2026-09-14 Add [Traffic Info](../reference/ros_services.md#traffic-info) API to read/replace the dynamic no-passing zones of the current map
 - 2026-08-21 Remove the obsolete map download endpoint and `download_url` field from [Mapping](../reference/mappings.md#mapping-list)
 - 2026-08-21 Add file sizes (`pbstream_size`, `image_size`, `bag_size`) to [Mapping](../reference/mappings.md#mapping-list) and [Map](../reference/maps.md#map-list) list/detail responses
 - 2026-08-04 Add [Map Overlays](../reference/ros_services.md#map-overlays) API to read/replace dynamic map overlays as GeoJSON

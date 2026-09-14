@@ -27,6 +27,8 @@ Protobuf message definitions are published as part of the [`@kingsimba/axbot-sdk
 | ------ | --------------------------------------------------------- | ---------------------------------------------------------- |
 | `GET`  | `/ros/map/overlays`                                       | `/get_map_overlays` (`ax_msgs/GetMapOverlays`)             |
 | `PUT`  | `/ros/map/overlays`                                       | `/set_map_overlays` (`ax_msgs/SetMapOverlays`)             |
+| `GET`  | `/ros/map/traffic_info`                                   | `/get_traffic_info` (`ax_msgs/GetTrafficInfo`)             |
+| `PUT`  | `/ros/map/traffic_info`                                   | `/set_traffic_info` (`ax_msgs/SetTrafficInfo`)             |
 | `GET`  | `/ros/slam/map_image`                                     | `/slam/get_image` (`cartographer_ros_msgs/GetMapImage`)    |
 | `GET`  | `/ros/slam/submaps/{uuid}/{trajectory_id}/{submap_index}` | `/submap_query_v2` (`cartographer_ros_msgs/SubmapQueryV2`) |
 | `GET`  | `/ros/rosmaster/topics`                                   | ROS master API (`getTopics` + `getSystemState`)            |
@@ -155,6 +157,155 @@ const overlays: FeatureCollection = await api.getMapOverlays();
 
 // Replace the overlays
 await api.setMapOverlays(overlays);
+```
+
+---
+
+## Traffic Info
+
+Reads or replaces the dynamic traffic info (no-passing zones) of the currently loaded map, as a lightweight JSON document. This is a raw JSON endpoint — the `Accept` header is ignored and the response is always `application/json`.
+
+Traffic info is stored separately from [Map Overlays](#map-overlays): the server converts each zone into a `Polygon` feature marked `properties.trafficInfo = true` and appends it to the current overlays. Calling `set_map` or `set_map_overlays` discards those generated features.
+
+### Get traffic info
+
+Proxies to the `/get_traffic_info` ROS service (`ax_msgs/GetTrafficInfo`).
+
+#### Route
+
+```text
+GET /ros/map/traffic_info
+```
+
+#### Request
+
+No parameters, no request body.
+
+#### Response
+
+`200` `application/json` — the traffic info JSON document.
+
+```jsonc
+{
+  // Format version; only 1 is supported.
+  "version": 1,
+
+  // UID of the map this traffic info belongs to.
+  "map_uid": "6246b10c21e1f5ce844af829",
+
+  // No-passing zone list, full-replacement semantics.
+  "no_passing_zones": [
+    {
+      // Unique within the list.
+      "id": "npz-001",
+
+      // Vertices as [x, y] pairs in map coordinates, at least 3;
+      // the ring is closed automatically.
+      "polygon": [
+        [1.0, 2.0],
+        [3.0, 2.0],
+        [3.0, 5.0],
+        [1.0, 5.0]
+      ],
+
+      // Reserved. Stored but not evaluated in version 1 — zones are always active.
+      "time_rules": []
+    }
+  ]
+}
+```
+
+#### Cache behavior
+
+`Cache-Control: no-cache` — traffic info is dynamic state.
+
+#### Additional error codes
+
+<!-- prettier-ignore -->
+| Status | Meaning                                                       |
+| ------ | ------------------------------------------------------------- |
+| `500`  | `map_server` returned `success = false`; body is its `message` |
+
+#### Example
+
+```bash
+curl http://192.168.25.25:8090/ros/map/traffic_info > traffic_info.json
+```
+
+### Set traffic info
+
+Proxies to the `/set_traffic_info` ROS service (`ax_msgs/SetTrafficInfo`).
+
+#### Route
+
+```text
+PUT /ros/map/traffic_info
+```
+
+#### Request
+
+The body is the traffic info JSON document with `Content-Type: application/json`. The body is sent verbatim as the `traffic_info` string to the ROS service.
+
+<!-- prettier-ignore -->
+| `Content-Type` request header | Body                        |
+| ----------------------------- | --------------------------- |
+| `application/json`            | Traffic info JSON           |
+| (any other)                   | `415 Unsupported Media Type`|
+
+The call is a **full replacement**: zones omitted from `no_passing_zones` are deleted, and an empty array clears every dynamic no-passing zone. `map_uid` must match the UID of the currently loaded map.
+
+#### Response
+
+`200` `application/json`:
+
+```json
+{ "success": true, "message": "" }
+```
+
+#### Additional error codes
+
+<!-- prettier-ignore -->
+| Status | Meaning                                                       |
+| ------ | ------------------------------------------------------------- |
+| `400`  | Malformed request body (invalid JSON)                         |
+| `415`  | Unsupported request `Content-Type`                            |
+| `500`  | `map_server` returned `success = false`; body is its `message` |
+
+`500` covers validation failures such as a missing map, a `map_uid` that does not match the currently loaded map, a duplicate zone `id`, or a polygon with fewer than 3 vertices.
+
+#### Example
+
+```bash
+curl -X PUT \
+  -H "Content-Type: application/json" \
+  --data-binary @traffic_info.json \
+  http://192.168.25.25:8090/ros/map/traffic_info
+```
+
+### SDK usage
+
+```ts
+import { RobotApi } from "@kingsimba/axbot-sdk/robotApi";
+import type { TrafficInfo } from "@kingsimba/axbot-sdk/robotApiType";
+
+const api = new RobotApi({ apiBase: "http://192.168.25.25:8090" });
+
+// Read the current traffic info
+const trafficInfo: TrafficInfo = await api.getTrafficInfo();
+
+// Replace the no-passing zones
+trafficInfo.no_passing_zones = [
+  {
+    id: "npz-001",
+    polygon: [
+      [1.0, 2.0],
+      [3.0, 2.0],
+      [3.0, 5.0],
+      [1.0, 5.0],
+    ],
+  },
+];
+await api.setTrafficInfo(trafficInfo);
 ```
 
 ---

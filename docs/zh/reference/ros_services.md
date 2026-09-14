@@ -27,6 +27,8 @@ Protobuf 消息定义发布在 npm 上的 [`@kingsimba/axbot-sdk`](https://www.n
 | ----- | --------------------------------------------------------- | ---------------------------------------------------------- |
 | `GET` | `/ros/map/overlays`                                       | `/get_map_overlays` (`ax_msgs/GetMapOverlays`)             |
 | `PUT` | `/ros/map/overlays`                                       | `/set_map_overlays` (`ax_msgs/SetMapOverlays`)             |
+| `GET` | `/ros/map/traffic_info`                                   | `/get_traffic_info` (`ax_msgs/GetTrafficInfo`)             |
+| `PUT` | `/ros/map/traffic_info`                                   | `/set_traffic_info` (`ax_msgs/SetTrafficInfo`)             |
 | `GET` | `/ros/slam/map_image`                                     | `/slam/get_image` (`cartographer_ros_msgs/GetMapImage`)    |
 | `GET` | `/ros/slam/submaps/{uuid}/{trajectory_id}/{submap_index}` | `/submap_query_v2` (`cartographer_ros_msgs/SubmapQueryV2`) |
 | `GET` | `/ros/rosmaster/topics`                                   | ROS master API (`getTopics` + `getSystemState`)            |
@@ -155,6 +157,154 @@ const overlays: FeatureCollection = await api.getMapOverlays();
 
 // 替换叠加层
 await api.setMapOverlays(overlays);
+```
+
+---
+
+## Traffic Info (动态交通信息) {#traffic-info}
+
+读取或替换当前已加载地图的动态交通信息（禁行区域），格式为轻量 JSON 文档。这是一个原始 JSON 端点 — `Accept` 请求头会被忽略，响应始终为 `application/json`。
+
+交通信息与[地图叠加层](#map-overlays)分开存储：服务端会把每个 zone 转换为带 `properties.trafficInfo = true` 标记的 `Polygon` feature 追加到当前叠加层中。调用 `set_map` 或 `set_map_overlays` 会清除这些生成的 feature。
+
+### 获取交通信息 (Get traffic info) {#get-traffic-info}
+
+转发 ROS 服务 `/get_traffic_info`（`ax_msgs/GetTrafficInfo`）。
+
+#### 路由 (Route)
+
+```text
+GET /ros/map/traffic_info
+```
+
+#### 请求 (Request)
+
+无参数，无请求体。
+
+#### 响应 (Response)
+
+`200` `application/json` — 交通信息 JSON 文档。
+
+```jsonc
+{
+  // 接口格式版本；当前仅支持 1。
+  "version": 1,
+
+  // 该交通信息所属地图的 UID。
+  "map_uid": "6246b10c21e1f5ce844af829",
+
+  // 禁行区域列表，全量替换语义。
+  "no_passing_zones": [
+    {
+      // 列表内唯一。
+      "id": "npz-001",
+
+      // 地图坐标系下的 [x, y] 顶点对，至少 3 个；首尾自动闭合。
+      "polygon": [
+        [1.0, 2.0],
+        [3.0, 2.0],
+        [3.0, 5.0],
+        [1.0, 5.0]
+      ],
+
+      // 预留字段。version 1 中仅存储不生效 — 禁行区域恒生效。
+      "time_rules": []
+    }
+  ]
+}
+```
+
+#### 缓存行为 (Cache behavior)
+
+`Cache-Control: no-cache` — 交通信息是动态状态。
+
+#### 附加错误码 (Additional error codes)
+
+<!-- prettier-ignore -->
+| 状态码 | 含义                                          |
+| ------ | --------------------------------------------- |
+| `500`  | `map_server` 返回 `success = false`；响应体为其 `message` |
+
+#### 示例 (Example)
+
+```bash
+curl http://192.168.25.25:8090/ros/map/traffic_info > traffic_info.json
+```
+
+### 设置交通信息 (Set traffic info) {#set-traffic-info}
+
+转发 ROS 服务 `/set_traffic_info`（`ax_msgs/SetTrafficInfo`）。
+
+#### 路由 (Route)
+
+```text
+PUT /ros/map/traffic_info
+```
+
+#### 请求 (Request)
+
+请求体为交通信息 JSON 文档，`Content-Type: application/json`。请求体会作为 `traffic_info` 字符串原样发送给 ROS 服务。
+
+<!-- prettier-ignore -->
+| `Content-Type` 请求头   | Body                        |
+| ----------------------- | --------------------------- |
+| `application/json`      | 交通信息 JSON               |
+| (其他)                  | `415 Unsupported Media Type`|
+
+该调用为**全量替换**语义：未出现在 `no_passing_zones` 中的区域会被删除，传空数组即清空所有动态禁行区域。`map_uid` 必须与当前已加载地图的 UID 一致。
+
+#### 响应 (Response)
+
+`200` `application/json`:
+
+```json
+{ "success": true, "message": "" }
+```
+
+#### 附加错误码 (Additional error codes)
+
+<!-- prettier-ignore -->
+| 状态码 | 含义                                          |
+| ------ | --------------------------------------------- |
+| `400`  | 请求体格式错误（无效 JSON）                   |
+| `415`  | 不支持的请求 `Content-Type`                   |
+| `500`  | `map_server` 返回 `success = false`；响应体为其 `message` |
+
+`500` 覆盖以下校验失败：未加载地图、`map_uid` 与当前地图不一致、zone `id` 重复、多边形顶点少于 3 个。
+
+#### 示例 (Example)
+
+```bash
+curl -X PUT \
+  -H "Content-Type: application/json" \
+  --data-binary @traffic_info.json \
+  http://192.168.25.25:8090/ros/map/traffic_info
+```
+
+### SDK 用法 (SDK usage)
+
+```ts
+import { RobotApi } from "@kingsimba/axbot-sdk/robotApi";
+import type { TrafficInfo } from "@kingsimba/axbot-sdk/robotApiType";
+
+const api = new RobotApi({ apiBase: "http://192.168.25.25:8090" });
+
+// 读取当前交通信息
+const trafficInfo: TrafficInfo = await api.getTrafficInfo();
+
+// 替换禁行区域
+trafficInfo.no_passing_zones = [
+  {
+    id: "npz-001",
+    polygon: [
+      [1.0, 2.0],
+      [3.0, 2.0],
+      [3.0, 5.0],
+      [1.0, 5.0],
+    ],
+  },
+];
+await api.setTrafficInfo(trafficInfo);
 ```
 
 ---
