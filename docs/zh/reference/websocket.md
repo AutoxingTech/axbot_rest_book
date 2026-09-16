@@ -248,6 +248,12 @@ enum StuckState {
   move_stucked, // 移动受阻
   target_spin_stucked, // 目标旋转受阻
 }
+
+enum CargoAction {
+  none,
+  load, // 货叉已经到达货物下方，可以执行 `/load_cargo`。
+  unload, // 货叉已经到达目标货架上方，可以执行 `/unload_cargo`。
+}
 ```
 
 ```json
@@ -294,7 +300,12 @@ enum StuckState {
   // 可选 (自 2.11.0 起)。默认为 0。
   // 仅在沿指定路线移动时有效。
   // 表示已经通过的点数量。
-  "given_route_passed_point_count": 3
+  "given_route_passed_point_count": 3,
+
+  // 可选。默认为 "none"。
+  // 机器人接下来期望执行的货物动作，业务端可据此决定执行 `/load_cargo` 还是 `/unload_cargo`。
+  // 见 CargoAction。
+  "expected_cargo_action": "load"
 }
 ```
 

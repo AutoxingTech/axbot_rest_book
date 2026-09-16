@@ -249,6 +249,12 @@ enum StuckState {
   move_stucked,
   target_spin_stucked,
 }
+
+enum CargoAction {
+  none,
+  load, // The fork is already under the cargo, so `/load_cargo` can be called.
+  unload, // The fork is already above the target rack, so `/unload_cargo` can be called.
+}
 ```
 
 ```json
@@ -295,7 +301,12 @@ enum StuckState {
   // Optional (since 2.11.0). Defaults to 0.
   // Only valid when moving along a specified route.
   // Indicates the number of points already passed.
-  "given_route_passed_point_count": 3
+  "given_route_passed_point_count": 3,
+
+  // Optional. Defaults to "none".
+  // The cargo action the robot is expecting next, so the business layer knows
+  // whether to run `/load_cargo` or `/unload_cargo`. See CargoAction.
+  "expected_cargo_action": "load"
 }
 ```
 
