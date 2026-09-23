@@ -33,6 +33,8 @@ Protobuf message definitions are published as part of the [`@kingsimba/axbot-sdk
 | `GET`  | `/ros/slam/submaps/{uuid}/{trajectory_id}/{submap_index}` | `/submap_query_v2` (`cartographer_ros_msgs/SubmapQueryV2`) |
 | `GET`  | `/ros/rosmaster/topics`                                   | ROS master API (`getTopics` + `getSystemState`)            |
 | `GET`  | `/ros/rosmaster/topics/published_names`                   | ROS master API (`getSystemState` — publishers only)        |
+| `POST` | `/ros/imu/clear_gyro_scale`                               | `/imu/clear_gyro_scale` (`std_srvs/Trigger`)               |
+| `POST` | `/ros/jack_mast/calibrate_mast_tick_base`                 | `/calibrate_mast_tick_base` (`std_srvs/Trigger`)           |
 
 ---
 
@@ -536,4 +538,91 @@ curl -H "Accept: application/json" \
 {
   "names": ["/tf", "/scan", "/odom"]
 }
+```
+
+---
+
+## Clear Gyro Scale
+
+Proxies to the `/imu/clear_gyro_scale` ROS service (`std_srvs/Trigger`) provided by `imu_node`. Clears the IMU gyro scale calibration, marking the gyro as not calibrated.
+
+### Route
+
+```text
+POST /ros/imu/clear_gyro_scale
+```
+
+### Request
+
+No parameters, no request body. `Accept` is ignored — the response is always `application/json`.
+
+### Response
+
+`200` `application/json`:
+
+```json
+{ "success": true, "message": "Gyro scale cleared." }
+```
+
+### Additional error codes
+
+<!-- prettier-ignore -->
+| Status | Meaning                                                       |
+| ------ | ------------------------------------------------------------- |
+| `500`  | `imu_node` returned `success = false`; body is its `message`  |
+| `502`  | ROS service call failed                                       |
+| `504`  | ROS service was unavailable before timeout                    |
+
+### Example
+
+```bash
+curl -X POST http://192.168.25.25:8090/ros/imu/clear_gyro_scale
+```
+
+### SDK usage
+
+```ts
+import { RobotApi } from "@kingsimba/axbot-sdk/robotApi";
+
+const api = new RobotApi({ apiBase: "http://192.168.25.25:8090" });
+await api.clearGyroScale();
+```
+
+---
+
+## Calibrate Mast Tick Base
+
+Proxies to the `/calibrate_mast_tick_base` ROS service (`std_srvs/Trigger`) provided by `jack_mast_node`. Triggers a mast tick-base calibration.
+
+### Route
+
+```text
+POST /ros/jack_mast/calibrate_mast_tick_base
+```
+
+### Request
+
+No parameters, no request body. `Accept` is ignored — the response is always `application/json`.
+
+### Response
+
+`200` `application/json`:
+
+```json
+{ "success": true, "message": "..." }
+```
+
+### Additional error codes
+
+<!-- prettier-ignore -->
+| Status | Meaning                                                       |
+| ------ | ------------------------------------------------------------- |
+| `500`  | `jack_mast_node` returned `success = false`; body is its `message` |
+| `502`  | ROS service call failed                                       |
+| `504`  | ROS service was unavailable before timeout                    |
+
+### Example
+
+```bash
+curl -X POST http://192.168.25.25:8090/ros/jack_mast/calibrate_mast_tick_base
 ```

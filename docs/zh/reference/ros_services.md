@@ -33,6 +33,8 @@ Protobuf 消息定义发布在 npm 上的 [`@kingsimba/axbot-sdk`](https://www.n
 | `GET` | `/ros/slam/submaps/{uuid}/{trajectory_id}/{submap_index}` | `/submap_query_v2` (`cartographer_ros_msgs/SubmapQueryV2`) |
 | `GET` | `/ros/rosmaster/topics`                                   | ROS master API (`getTopics` + `getSystemState`)            |
 | `GET` | `/ros/rosmaster/topics/published_names`                   | ROS master API (`getSystemState` — 仅发布者)               |
+| `POST` | `/ros/imu/clear_gyro_scale`                               | `/imu/clear_gyro_scale` (`std_srvs/Trigger`)               |
+| `POST` | `/ros/jack_mast/calibrate_mast_tick_base`                 | `/calibrate_mast_tick_base` (`std_srvs/Trigger`)           |
 
 ---
 
@@ -535,4 +537,91 @@ curl -H "Accept: application/json" \
 {
   "names": ["/tf", "/scan", "/odom"]
 }
+```
+
+---
+
+## Clear Gyro Scale (清除陀螺仪比例标定) {#clear-gyro-scale}
+
+转发 `imu_node` 提供的 ROS 服务 `/imu/clear_gyro_scale`（`std_srvs/Trigger`）。清除 IMU 陀螺仪比例标定，将陀螺仪标记为未标定。
+
+### 路由 (Route)
+
+```text
+POST /ros/imu/clear_gyro_scale
+```
+
+### 请求 (Request)
+
+无参数，无请求体。`Accept` 请求头会被忽略 — 响应始终为 `application/json`。
+
+### 响应 (Response)
+
+`200` `application/json`:
+
+```json
+{ "success": true, "message": "Gyro scale cleared." }
+```
+
+### 附加错误码 (Additional error codes)
+
+<!-- prettier-ignore -->
+| 状态码 | 含义                                                      |
+| ------ | --------------------------------------------------------- |
+| `500`  | `imu_node` 返回 `success = false`；响应体为其 `message`   |
+| `502`  | ROS 服务调用失败                                          |
+| `504`  | ROS 服务超时不可用                                        |
+
+### 示例 (Example)
+
+```bash
+curl -X POST http://192.168.25.25:8090/ros/imu/clear_gyro_scale
+```
+
+### SDK 用法 (SDK usage)
+
+```ts
+import { RobotApi } from "@kingsimba/axbot-sdk/robotApi";
+
+const api = new RobotApi({ apiBase: "http://192.168.25.25:8090" });
+await api.clearGyroScale();
+```
+
+---
+
+## Calibrate Mast Tick Base (校准顶升桅杆刻度基准) {#calibrate-mast-tick-base}
+
+转发 `jack_mast_node` 提供的 ROS 服务 `/calibrate_mast_tick_base`（`std_srvs/Trigger`）。触发顶升桅杆刻度基准校准。
+
+### 路由 (Route)
+
+```text
+POST /ros/jack_mast/calibrate_mast_tick_base
+```
+
+### 请求 (Request)
+
+无参数，无请求体。`Accept` 请求头会被忽略 — 响应始终为 `application/json`。
+
+### 响应 (Response)
+
+`200` `application/json`:
+
+```json
+{ "success": true, "message": "..." }
+```
+
+### 附加错误码 (Additional error codes)
+
+<!-- prettier-ignore -->
+| 状态码 | 含义                                                      |
+| ------ | --------------------------------------------------------- |
+| `500`  | `jack_mast_node` 返回 `success = false`；响应体为其 `message` |
+| `502`  | ROS 服务调用失败                                          |
+| `504`  | ROS 服务超时不可用                                        |
+
+### 示例 (Example)
+
+```bash
+curl -X POST http://192.168.25.25:8090/ros/jack_mast/calibrate_mast_tick_base
 ```

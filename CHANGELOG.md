@@ -2,6 +2,8 @@
 
 ## 2.14.0
 
+- 2026-09-23 Add [Calibrate Mast Tick Base](../reference/ros_services.md#calibrate-mast-tick-base) forwarded ROS service
+- 2026-09-19 Add [Clear Gyro Scale](../reference/ros_services.md#clear-gyro-scale) forwarded ROS service
 - 2026-09-16 Add `expected_cargo_action` in [/planning_state](../reference/websocket.md#planning-state)
 - 2026-09-14 Add [Traffic Info](../reference/ros_services.md#traffic-info) API to read/replace the dynamic no-passing zones of the current map
 - 2026-08-21 Remove the obsolete map download endpoint and `download_url` field from [Mapping](../reference/mappings.md#mapping-list)
