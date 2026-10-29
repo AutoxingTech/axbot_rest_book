@@ -2,6 +2,7 @@
 
 ## 2.14.0
 
+- 2026-10-29 Add [Load/Unload on Truck](../reference/moves.md#truck-load-unload) move types
 - 2026-09-23 Add [Calibrate Mast Tick Base](../reference/ros_services.md#calibrate-mast-tick-base) forwarded ROS service
 - 2026-09-19 Add [Clear Gyro Scale](../reference/ros_services.md#clear-gyro-scale) forwarded ROS service
 - 2026-09-16 Add `expected_cargo_action` in [/planning_state](../reference/websocket.md#planning-state)

@@ -31,7 +31,9 @@ interface MoveActionCreate {
     | 'along_given_route' // Deprecated. Use another type with `route_coordinates` instead.
     | 'align_with_rack' // Crawl under a rack (to jack it up later).
     | 'to_unload_point' // Move to a rack unload point (to jack it down later).
-    | 'follow_target'; // Follow a moving target.
+    | 'follow_target' // Follow a moving target.
+    | 'load_onto_truck' // Load a rack the robot is carrying onto a truck.
+    | 'unload_from_truck'; // Unload a rack from a truck.
   target_x?: number;
   target_y?: number;
   target_z?: number;
@@ -67,6 +69,12 @@ interface MoveActionCreate {
     // Optional. An index into the layers of a rack stack.
     // For type = "align_with_rack" and "to_unload_point".
     rack_layer?: number;
+
+    // The truck point to operate on, in the format "<truck SN>/<point name>",
+    // e.g. "PS55606h08893jr/GL".
+    // Used by type = "load_onto_truck" and "unload_from_truck", which do not
+    // navigate to a target pose.
+    target_id?: string;
   }
 }
 ```
@@ -142,6 +150,47 @@ curl -X POST
 ```
 
 Once this action is created, the user should send target poses via the WebSocket topic `/follow_target_state`: See [Follow Target](../reference/websocket.md#follow-target-state)
+
+### Load / Unload on Truck {#truck-load-unload}
+
+These types move cargo between the robot and a truck equipped with a liftable tail board (liftgate).
+One move action performs the whole sequence — drive onto the liftgate, drive into the truck body,
+raise or lower the jack, then drive back to the ground point. Coordination with the truck, such as
+waiting for the liftgate to be lowered or to be level with the truck body, is part of the action, so
+the action stays `moving` while the liftgate moves.
+
+| Move type           | Jack state when started | Description                                                 |
+| ------------------- | ----------------------- | ----------------------------------------------------------- |
+| `load_onto_truck`   | Raised                  | Deliver the rack the robot is carrying into the truck body. |
+| `unload_from_truck` | Lowered                 | Pick a rack up from the truck body and bring it back down.  |
+
+The robot must already be standing on a truck **ground point** (the waiting point), normally reached
+by a preceding `standard` move. The truck and its lane are matched from the robot's current pose, so
+the robot must be within 1.0 m and 30° of a ground point; otherwise the action fails immediately
+with `NotAtTruckGroundPoint`. This action does not drive to a target pose, so specify the truck point
+in `properties.target_id` (the create request still requires one of `target_x`/`target_y`,
+`target_ori`, or `properties.target_id`):
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"creator": "xxx", "type": "load_onto_truck", "properties": {"target_id": "PS55606h08893jr/GL"}}' \
+  http://192.168.25.25:8090/chassis/moves
+```
+
+`target_id` is `<truck SN>/<point name>`. Truck points are not part of the map: they belong to the
+truck model and move with the parked truck, so the point IDs must match the site's truck
+configuration:
+
+| Point        | Left lane | Right lane | Description                                              |
+| ------------ | --------- | ---------- | -------------------------------------------------------- |
+| Ground point | `GL`      | `GR`       | Where the robot waits; also the end point of the action. |
+| Liftgate     | `DL`      | `DR`       | The liftgate the robot drives over to board the truck.   |
+| Rack slots   | `L1`–`L3` | `R1`–`R3`  | Slots inside the truck body.                             |
+
+The jack must be in the state required by the move type when the action starts, otherwise the action
+fails with `LoadInJackDownState` or `UnloadInJackUpState`. On success the robot is back on the ground
+point.
 
 ## Get Move Action Detail
 
@@ -326,6 +375,11 @@ enum MoveFailReason {
   PoiDetectionError = 700, // POI detection error
   PoiUnreachable = 701, // POI unreachable
   BarcodeDetectionError = 702, // Barcode detection error
+  NotAtTruckGroundPoint = 800, // Robot is not at a truck ground point
+  LiftgateWaitTimeout = 801, // Timed out waiting for the truck liftgate
+  JackOperationFailed = 802, // Jack up/down failed or timed out
+  LoadInJackDownState = 803, // Loading onto a truck while the jack is lowered
+  UnloadInJackUpState = 804, // Unloading from a truck while the jack is raised
   PlatformAlertError = 1000, // System exception
   ServiceCallError = 1001, // Service call error (restapi usage)
   InternalError = 1002, // Internal ASSERT error

@@ -31,7 +31,9 @@ interface MoveActionCreate {
     | 'along_given_route' // 已废弃。请改用其他移动类型并配合 `route_coordinates`。
     | 'align_with_rack' // 钻入货架下方（以便后续顶升）。
     | 'to_unload_point' // 移动到货架卸货点（以便后续落下）。
-    | 'follow_target'; // 跟随移动目标。
+    | 'follow_target' // 跟随移动目标。
+    | 'load_onto_truck' // 将机器人载着的货架装到货车上。
+    | 'unload_from_truck'; // 从货车上卸下货架。
   target_x?: number;
   target_y?: number;
   target_z?: number;
@@ -64,6 +66,11 @@ interface MoveActionCreate {
     // 可选。货架堆叠层数的索引。
     // 用于 type = "align_with_rack" 和 "to_unload_point"。
     rack_layer?: number;
+
+    // 要操作的货车点位，格式为 "<货车 SN>/<点名>"，
+    // 例如 "PS55606h08893jr/GL"。
+    // 用于 type = "load_onto_truck" 和 "unload_from_truck"，这两个类型不驶向目标位姿。
+    target_id?: string;
   }
 }
 ```
@@ -139,6 +146,41 @@ curl -X POST
 ```
 
 创建此动作后，用户应通过 WebSocket 话题 `/follow_target_state` 发送目标位姿：参见 [Follow Target](../reference/websocket.md#follow-target-state)
+
+### 货车装货与卸货 {#truck-load-unload}
+
+这两个类型用于在机器人与货车之间转运货物。货车尾部带有可升降的尾板，一个移动动作会完成整个流程：
+上尾板、进入车厢、升起或降下顶升，再返回候车点。与货车的协作（例如等待尾板落地、等待尾板与车厢
+持平）也由该动作内部完成，因此尾板运行期间动作会一直保持 `moving` 状态。
+
+| 移动类型            | 开始时的顶升状态 | 说明                               |
+| ------------------- | ---------------- | ---------------------------------- |
+| `load_onto_truck`   | 升起             | 把机器人载着的货架送到货车车厢内。 |
+| `unload_from_truck` | 降下             | 从货车车厢内取出货架并带回地面。   |
+
+机器人必须已经停在货车的**候车点**（地面点）上，通常由前一个 `standard` 移动动作送达。货车与
+通道由机器人当前位姿匹配，因此机器人需在某个候车点 1.0 m、30° 以内，否则动作会立即失败并报
+`NotAtTruckGroundPoint`。该动作不会驶向目标位姿，请通过 `properties.target_id` 指定货车点位
+（创建请求仍需包含 `target_x`/`target_y`、`target_ori` 或 `properties.target_id` 之一）：
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"creator": "xxx", "type": "load_onto_truck", "properties": {"target_id": "PS55606h08893jr/GL"}}' \
+  http://192.168.25.25:8090/chassis/moves
+```
+
+`target_id` 的格式为 `<货车 SN>/<点名>`。货车点位不在 MapInfo 中：它们属于货车模型，并随货车的
+实际停靠位置变化，因此点位 ID 需与现场货车配置一致：
+
+| 点位     | 左通道    | 右通道    | 说明                             |
+| -------- | --------- | --------- | -------------------------------- |
+| 候车点   | `GL`      | `GR`      | 机器人等待的位置，也是动作终点。 |
+| 尾板点   | `DL`      | `DR`      | 机器人经尾板上货车的点位。       |
+| 车厢货位 | `L1`–`L3` | `R1`–`R3` | 货车车厢内的货架位。             |
+
+动作开始时顶升必须处于该类型要求的状态，否则动作会以 `LoadInJackDownState` 或
+`UnloadInJackUpState` 失败。动作成功后，机器人回到候车点。
 
 ## 获取移动动作详情
 
@@ -323,6 +365,11 @@ enum MoveFailReason {
   PoiDetectionError = 700, // POI 检测错误
   PoiUnreachable = 701, // POI 不可达
   BarcodeDetectionError = 702, // 条码检测错误
+  NotAtTruckGroundPoint = 800, // 不在货车候车点
+  LiftgateWaitTimeout = 801, // 等待货车尾板超时
+  JackOperationFailed = 802, // 顶升升降失败或超时
+  LoadInJackDownState = 803, // 卡车装货时顶升处于降下状态
+  UnloadInJackUpState = 804, // 卡车卸货时顶升处于升起状态
   PlatformAlertError = 1000, // 系统异常
   ServiceCallError = 1001, // 服务调用错误 (restapi 使用层)
   InternalError = 1002, // 内部 ASSERT 错误

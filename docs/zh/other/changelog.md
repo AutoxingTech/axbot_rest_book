@@ -2,6 +2,7 @@
 
 ## 2.14.0
 
+- 2026-10-29 添加移动类型 [货车装货与卸货](../reference/moves.md#truck-load-unload)
 - 2026-09-23 添加转发 ROS 服务 [校准顶升桅杆刻度基准](../reference/ros_services.md#calibrate-mast-tick-base)
 - 2026-09-19 添加转发 ROS 服务 [清除陀螺仪比例标定](../reference/ros_services.md#clear-gyro-scale)
 - 2026-09-16 在 [/planning_state](../reference/websocket.md#planning-state) 中添加 `expected_cargo_action`
