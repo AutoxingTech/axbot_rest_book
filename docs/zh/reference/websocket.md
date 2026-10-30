@@ -15,6 +15,36 @@ Topic 用于接收机器人的实时信息。
 {"disable_topic": ["/actions", "/alerts", "/tracked_pose"]} // 自 2.7.0 起
 ```
 
+## Protobuf 消息 (Protobuf Messages) {#protobuf-messages}
+
+部分 Topic 以二进制 protobuf WebSocket 帧发送，其他 Topic 使用 JSON 文本消息。一个连接可以同时接收这两种格式。在支持的服务器上，可添加 `?pb=1`，优先使用支持两种格式的 Topic 的 protobuf 格式。
+
+二进制帧格式如下：
+
+```text
+[topic_length: 1 byte][topic: UTF-8 bytes][flags: 1 byte][publisher_index: 1 byte, optional][payload]
+```
+
+Topic 长度是 Topic 名称的字节数。标志位 0 表示负载经 gzip 压缩；标志位 1 表示包含发布者索引字节。其他标志位为保留位。必要时先解压负载，再将其解码为 `ax_proto_msgs.RosMessageWrapper`。其 `type` 标识消息类型，对应的负载字段包含 Topic 数据。
+
+[RosMessageWrapper 定义](https://github.com/AutoxingTech/axbot-ts-sdk/blob/master/src/proto/ros_message_wrapper.proto)列出了支持的消息类型和负载。[protobuf 源码目录](https://github.com/AutoxingTech/axbot-ts-sdk/tree/master/src/proto)包含这些消息的定义。也可通过 [`@kingsimba/axbot-sdk`](https://www.npmjs.com/package/@kingsimba/axbot-sdk) TypeScript SDK 获取这些定义。
+
+## 应用事件 (App Events) {#app-events}
+
+订阅 `/app_events` 可接收应用事件。此 Topic 不缓存，订阅前发布的事件不会重播。事件使用可靠通道，但该通道不是持久化事件日志。
+
+此 Topic 使用 [protobuf 帧格式](#protobuf-messages)，其 wrapper 类型为 `APP_EVENT` (27)，负载为 `app_event`（字段 37）：
+
+```proto
+message AppEvent {
+  string node_id = 1;
+  uint64 stamp_ns = 2;
+  string message = 3;
+}
+```
+
+`node_id` 标识事件所属节点，`stamp_ns` 是纳秒时间戳，`message` 是事件文本。请将 `stamp_ns` 保留为 64 位整数或十进制字符串，以避免精度损失。
+
 ## 地图 (Map) {#map}
 
 在纯定位模式下，`/map` Topic 包含当前使用的地图，且仅更新一次。

@@ -15,6 +15,36 @@ Since version 2.7.0, multiple topic names are supported. This requires the `supp
 {"disable_topic": ["/actions", "/alerts", "/tracked_pose"]} // since 2.7.0
 ```
 
+## Protobuf Messages
+
+Some topics are sent as binary protobuf WebSocket frames; others use JSON text messages. A connection can receive both formats. On servers that support it, append `?pb=1` to prefer protobuf for topics available in both formats.
+
+Binary frames have this layout:
+
+```text
+[topic_length: 1 byte][topic: UTF-8 bytes][flags: 1 byte][publisher_index: 1 byte, optional][payload]
+```
+
+The topic length is the number of bytes in the topic name. Flag bit 0 indicates a gzip-compressed payload; bit 1 indicates that the publisher index byte is present. Other flag bits are reserved. Decompress the payload when necessary, then decode it as `ax_proto_msgs.RosMessageWrapper`. Its `type` identifies the message, and the corresponding payload field contains the topic data.
+
+The [RosMessageWrapper definition](https://github.com/AutoxingTech/axbot-ts-sdk/blob/master/src/proto/ros_message_wrapper.proto) lists the supported message types and payloads. The [protobuf source directory](https://github.com/AutoxingTech/axbot-ts-sdk/tree/master/src/proto) contains their message definitions. These definitions are also available through the [`@kingsimba/axbot-sdk`](https://www.npmjs.com/package/@kingsimba/axbot-sdk) TypeScript SDK.
+
+## App Events
+
+Subscribe to `/app_events` to receive application events. This topic is not latched: events published before subscription are not replayed. Events use the reliable channel, but are not a persistent event log.
+
+This topic uses the [protobuf frame format](#protobuf-messages), with wrapper type `APP_EVENT` (27) and payload `app_event` (field 37):
+
+```proto
+message AppEvent {
+  string node_id = 1;
+  uint64 stamp_ns = 2;
+  string message = 3;
+}
+```
+
+`node_id` identifies the event's node, `stamp_ns` is its timestamp in nanoseconds, and `message` contains the event text. Preserve `stamp_ns` as a 64-bit integer or decimal string to avoid precision loss.
+
 ## Map
 
 In pure-localization mode, the `/map` topic contains the currently used map and is updated only once.
