@@ -60,10 +60,10 @@ interface MappingCreateRequest {
 
 在建图过程中，使用 WebSockets 接收实时反馈：
 
-- [当前位姿](./websocket.md#current-pose)
-- [地图](./websocket.md#map)：定期更新。
-- [轨迹](./websocket.md#mapping-trajectory)：轨迹历史记录，帮助您识别已访问过地图的哪些部分。
-- [点云](./websocket.md#lidar-point-cloud) 和 [障碍物地图](./websocket.md#obstacle-map)：这些有助于在远程建图期间避免碰撞。
+- [当前位姿](./websocket-localization.md#current-pose)
+- [地图](./websocket-mapping.md#map)：定期更新。
+- [轨迹](./websocket-mapping.md#trajectory)：轨迹历史记录，帮助您识别已访问过地图的哪些部分。
+- [点云](./websocket-perception.md#lidar-point-cloud) 和 [障碍物地图](./websocket-mapping.md#obstacle-map)：这些有助于在远程建图期间避免碰撞。
 
 它们的渲染效果如下：
 

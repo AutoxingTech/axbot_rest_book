@@ -2,7 +2,7 @@
 
 The robot may be equipped with one or more RGB cameras. During operation, it records video clips that can be downloaded via the Video API.
 
-For real-time video streaming, see the [WebSocket](./websocket.md#rgb-video-stream) documentation.
+For real-time video streaming, see the [WebSocket](./websocket-perception.md#rgb-video-stream) documentation.
 
 Video clips are provided in raw H.264 stream format.
 

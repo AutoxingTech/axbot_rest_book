@@ -136,7 +136,7 @@ curl http://192.168.25.25:8090/system/settings/effective
 
 This section documents available configuration options.
 
-### rack.specs
+### rack.specs {#rack-specs}
 
 Defines the physical dimensions of a rack and how the robot should interact with it.
 

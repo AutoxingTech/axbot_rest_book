@@ -15,7 +15,7 @@
 利用这些信息，机器人与门的交互如下：
 
 - **机器人端：**
-  - 机器人持续检查其[全局路径](../reference/websocket.md#global-path)是否与自动门的多边形相交。
+  - 机器人持续检查其[全局路径](./websocket-navigation.md#global-path)是否与自动门的多边形相交。
   - 如果在前方路径上检测到门，机器人会定期广播 `Open Door {MAC} for {ROBOT SN}` (为某 SN 机器人开启某 MAC 地址的门) 命令。
   - 如果门报告其状态为“开启” (open)，机器人则继续前进。否则，门的多边形将被视为不可通过的障碍物。
   - 机器人成功通过后，将停止发送开门请求。
@@ -29,7 +29,7 @@
   - 如果连续三秒未收到开门命令，门将自动关闭。
 
 ::: tip 提示
-附近自动门的状态可以通过 [Nearby Auto Doors (附近自动门)](../reference/websocket.md#nearby-auto-doors) WebSocket 话题进行监控。
+附近自动门的状态可以通过 [Nearby Auto Doors (附近自动门)](./websocket-environment.md#nearby-auto-doors) WebSocket 话题进行监控。
 :::
 
 ## 蓝牙 API

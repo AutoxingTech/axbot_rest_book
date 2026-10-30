@@ -2,75 +2,76 @@
 
 ## 2.14.0
 
-- 2026-10-30 添加 [/app_events](../reference/websocket.md#app-events) WebSocket 主题
+- 2026-10-31 按功能重新组织[服务 API](../reference/services.md)与 [WebSocket](../reference/websocket.md)参考手册；转发 ROS 服务不再单独成页，并入服务参考手册
+- 2026-10-30 添加 [/app_events](../reference/websocket-system.md#app-events) WebSocket 主题
 - 2026-10-29 添加移动类型 [货车装货与卸货](../reference/moves.md#truck-load-unload)
-- 2026-09-23 添加转发 ROS 服务 [校准顶升桅杆刻度基准](../reference/ros_services.md#calibrate-mast-tick-base)
-- 2026-09-19 添加转发 ROS 服务 [清除陀螺仪比例标定](../reference/ros_services.md#clear-gyro-scale)
-- 2026-09-16 在 [/planning_state](../reference/websocket.md#planning-state) 中添加 `expected_cargo_action`
-- 2026-09-14 添加 [动态交通信息](../reference/ros_services.md#traffic-info) API，用于读取/替换当前地图的动态禁行区域
+- 2026-09-23 添加转发 ROS 服务 [校准顶升桅杆刻度基准](../reference/services-calibration.md#calibrate-mast-tick-base)
+- 2026-09-19 添加转发 ROS 服务 [清除陀螺仪比例标定](../reference/services-calibration.md#clear-gyro-scale)
+- 2026-09-16 在 [/planning_state](../reference/websocket-navigation.md#planning-state) 中添加 `expected_cargo_action`
+- 2026-09-14 添加 [动态交通信息](../reference/services-mapping.md#traffic-info) API，用于读取/替换当前地图的动态禁行区域
 - 2026-08-21 从[建图](../reference/mappings.md#mapping-list)中移除已废弃的地图下载端点及 `download_url` 字段
 - 2026-08-21 在 [建图](../reference/mappings.md#mapping-list) 和 [地图](../reference/maps.md#map-list) 列表/详情响应中添加文件大小（`pbstream_size`、`image_size`、`bag_size`）
-- 2026-08-04 添加 [地图叠加层](../reference/ros_services.md#map-overlays) API，以 GeoJSON 格式读取/替换动态地图叠加层
-- 2026-07-22 添加 [货架位姿](../reference/services.md#rack-pose) 查询顶升铁板前/后沿位姿，用于定义货架 POI 点
-- 2026-07-01 添加 [SLAM 地图图片](../reference/ros_services.md#slam-map-image) API，用于获取当前 SLAM 地图的 protobuf 编码 PNG
+- 2026-08-04 添加 [地图叠加层](../reference/services-mapping.md#map-overlays) API，以 GeoJSON 格式读取/替换动态地图叠加层
+- 2026-07-22 添加 [货架位姿](../reference/services-localization.md#rack-pose) 查询顶升铁板前/后沿位姿，用于定义货架 POI 点
+- 2026-07-01 添加 [SLAM 地图图片](../reference/services-mapping.md#slam-map-image) API，用于获取当前 SLAM 地图的 protobuf 编码 PNG
 - 2026-07-01 更新 proto 命名空间：子图消息移至 `ros_messages.slam`，`StatusResponse.code` 改用 `StatusCode` 枚举
-- 2026-06-30 添加 [检测到的货架状态](../reference/websocket.md#detected-rack-states) 和 [货架地图状态](../reference/websocket.md#map-rack-states) WebSocket 主题
-- 2026-06-03 为[校准双激光雷达位姿](../reference/services.md#calibrate-duo-lidar-poses)添加三种校准模式（single_shot、right_wall、front_wall）
+- 2026-06-30 添加 [检测到的货架状态](../reference/websocket-cargo.md#detected-rack-states) 和 [货架地图状态](../reference/websocket-cargo.md#map-rack-states) WebSocket 主题
+- 2026-06-03 为[校准双激光雷达位姿](../reference/services-calibration.md#calibrate-duo-lidar-poses)添加三种校准模式（single_shot、right_wall、front_wall）
 - 2026-05-11 为 `/submap_list` 和 `SubmapQueryV2` 添加 [子图](../reference/submaps.md) 参考
-- 2026-04-29 添加服务 [牵引钩锁定、牵引钩释放、清除牵引钩错误](../reference/services.md#towing-hook-lock)
-- 2026-04-29 添加服务 [装载/卸载货物](../reference/services.md#loadunload-cargo)
-- 添加 `/services/query_pose/trailer_pose` [查询位姿](../reference/services.md#query-pose)
+- 2026-04-29 添加服务 [牵引钩锁定、牵引钩释放、清除牵引钩错误](../reference/services-cargo.md#towing-hook-lock)
+- 2026-04-29 添加服务 [装载/卸载货物](../reference/services-cargo.md#load-unload-cargo)
+- 添加 `/services/query_pose/trailer_pose` [查询位姿](../reference/services-localization.md#query-pose)
 - 支持在 [地图 API](../reference/maps.md#create-map-from-local-files) 中直接从本地文件创建地图
 - 强调通过二进制文件下载建图结果，使用 [pbstream_url](../reference/mappings.md#mapping-list)
-- 在 [/slam/state](../reference/websocket.md#positioning-state) 中添加 `nav_sat_state`
-- 添加 `/devpvt` websocket 通道 [CHC 导航状态 (GNSS/INS)](../reference/websocket.md#devpvt)
-- 添加服务 [/service/jack_self_check](../reference/services.md#jack-device-up-down-self-check)
+- 在 [/slam/state](../reference/websocket-localization.md#positioning-state) 中添加 `nav_sat_state`
+- 添加 `/devpvt` websocket 通道 [CHC 导航状态 (GNSS/INS)](../reference/websocket-environment.md#devpvt)
+- 添加服务 [/service/jack_self_check](../reference/services-cargo.md#jack-device-up-down-self-check)
 
 ## 2.12.0
 
-- 添加 websocket 通道 [V2X 健康状态](../reference/websocket.md#v2x-health-state)
-- 添加服务 [探测 V2X 信标](../reference/services.md#probe-v2x-beacons)
-- 添加 websocket 通道 [原始 IO 板状态](../reference/websocket.md#raw-io-board-state)
-- 在 [/path](../reference/websocket.md#global-path) 中添加路径朝向
-- 在 [/robot_model](../reference/websocket.md#robot-model) 中添加 `expanded_footprint`
-- 添加 websocket 通道 [更新的地图切片](../reference/websocket.md#updated-map-slice)
-- 添加 `/services/query_pose` [查询位姿](../reference/services.md#query-pose)
+- 添加 websocket 通道 [V2X 健康状态](../reference/websocket-environment.md#v2x-health-state)
+- 添加服务 [探测 V2X 信标](../reference/services-perception.md#probe-v2x-beacons)
+- 添加 websocket 通道 [原始 IO 板状态](../reference/websocket-system.md#raw-io-board-state)
+- 在 [/path](../reference/websocket-navigation.md#global-path) 中添加路径朝向
+- 在 [/robot_model](../reference/websocket-navigation.md#robot-model) 中添加 `expanded_footprint`
+- 添加 websocket 通道 [更新的地图切片](../reference/websocket-mapping.md#updated-map-slice)
+- 添加 `/services/query_pose` [查询位姿](../reference/services-localization.md#query-pose)
 - 添加 `/device/sensors` [传感器列表](../reference/device.md#sensor-list)，用于质量控制流程。
-- 添加 `/xxxx_laser_2d/matched` [单个激光雷达设备的点云](../reference/websocket.md#point-cloud-for-individual-lidar-device)。
-- 添加 `/depth_camera/xxx/image` [深度相机图像](../reference/websocket.md#depth-camera-images)
+- 添加 `/xxxx_laser_2d/matched` [单个激光雷达设备的点云](../reference/websocket-perception.md#point-cloud-for-individual-lidar-devices)。
+- 添加 `/depth_camera/xxx/image` [深度相机图像](../reference/websocket-perception.md#depth-camera-images)
 
 ## 2.11.0
 
-- 添加服务 [清除跌落风险警告](../reference/services.md#clear-fall-risk-warning)。
-- 在 [详细电池状态](../reference/websocket.md#detailed-battery-state) 中添加 `capacity`、`design_capacity`、`state_of_health` 和 `cycle_count`。
-- 添加 websocket 主题 [检测到的拖车](../reference/websocket.md#detected-trailer)
-- 添加 websocket 主题 [推杆状态](../reference/websocket.md#push-handle-state)
-- 添加 websocket 主题 [详细电池状态](../reference/websocket.md#detailed-battery-state)
-- 添加 [清除顶升错误](../reference/services.md#clear-jack-errors)
+- 添加服务 [清除跌落风险警告](../reference/services-system.md#clear-fall-risk-warning)。
+- 在 [详细电池状态](../reference/websocket-system.md#detailed-battery-state) 中添加 `capacity`、`design_capacity`、`state_of_health` 和 `cycle_count`。
+- 添加 websocket 主题 [检测到的拖车](../reference/websocket-cargo.md#detected-trailer)
+- 添加 websocket 主题 [推杆状态](../reference/websocket-chassis.md#push-handle-state)
+- 添加 websocket 主题 [详细电池状态](../reference/websocket-system.md#detailed-battery-state)
+- 添加 [清除顶升错误](../reference/services-cargo.md#clear-jack-errors)
 - 添加 [地标 (Landmarks)](../reference/landmarks.md)
-- 添加 [确认急停](../reference/services.md#confirm-emergency-stop)
+- 添加 [确认急停](../reference/services-motion.md#confirm-emergency-stop)
 - 支持 [从本地文件加载地图](../reference/current_map_and_pose.md#set-current-map-by-loading-local-files)
-- 支持新服务 [校准深度相机掩码](../reference/services.md#calibrate-depth-camera-masks)
+- 支持新服务 [校准深度相机掩码](../reference/services-calibration.md#calibrate-depth-camera-masks)
 - 添加 `/services/start_collecting_landmarks`、`/services/stop_collecting_landmarks` 和 `/collected_data`
 
 ## 2.10.0
 
-- 添加 websocket 主题 [/detected_pallets](../reference/websocket.md#detected-pallets)
+- 添加 websocket 主题 [/detected_pallets](../reference/websocket-cargo.md#detected-pallets)
 - 在建图任务对象中添加 `properties`。它将用于存储地标。
 
 ## 2.9.1
 
-- 在 [/collected_barcode](../reference/websocket.md#collected-barcode) 中添加 `relative_pose`
+- 在 [/collected_barcode](../reference/websocket-localization.md#collected-barcode) 中添加 `relative_pose`
 
 ## 2.9.0
 
 - 添加 [系统设置](../reference/system_settings.md)
 - 弃用 [机器人参数](../reference/robot_params.md)
-- 在 [/planning_state](../reference/websocket.md#planning-state) 中添加 `docking_with_conveyer` 和 `is_waiting_for_dest`
-- 在 [/wheel_state](../reference/websocket.md#wheel-state) 中添加 `wheels_released`。
-- 添加 [/bumper_state](../reference/websocket.md#bumper-state)
-- 添加滚筒服务。详见 [使用滚筒装载/卸载货物](../reference/services.md#loadunload-cargo-with-roller)
-- 添加滚筒 websocket 主题 [/roll_state](../reference/websocket.md#roller-state)
+- 在 [/planning_state](../reference/websocket-navigation.md#planning-state) 中添加 `docking_with_conveyer` 和 `is_waiting_for_dest`
+- 在 [/wheel_state](../reference/websocket-chassis.md#wheel-state) 中添加 `wheels_released`。
+- 添加 [/bumper_state](../reference/websocket-chassis.md#bumper-state)
+- 添加滚筒服务。详见 [使用滚筒装载/卸载货物](../reference/services-cargo.md#load-unload-cargo-with-roller)
+- 添加滚筒 websocket 主题 [/roll_state](../reference/websocket-cargo.md#roller-state)
 
 ## 2.8.3
 
@@ -78,10 +79,10 @@
 
 ## 2.8.0
 
-- 支持 [获取导航缩略图服务](../reference/services.md#get-nav-thumbnail)
-- 支持 websocket 主题 [/robot_signal](../reference/websocket.md#robot-signal)
-- 支持 [获取 RGB 图像服务](../reference/services.md#get-rgb-image)
-- 支持 Websocket 主题 [/nearby_auto_doors](../reference/websocket.md#nearby-auto-doors)
+- 支持 [获取导航缩略图服务](../reference/services-perception.md#get-nav-thumbnail)
+- 支持 websocket 主题 [/robot_signal](../reference/websocket-navigation.md#robot-signal)
+- 支持 [获取 RGB 图像服务](../reference/services-perception.md#get-rgb-image)
+- 支持 Websocket 主题 [/nearby_auto_doors](../reference/websocket-environment.md#nearby-auto-doors)
 
 ## 2.7.7
 
@@ -98,14 +99,14 @@
 
 - 支持 [自动门和网关](../reference/iot_devices.md#auto-door-and-gateway)。
 - 支持启用主题列表。例如 `{"enable_topic": ["/actions", "/alerts", "/tracked_pose"]}`
-- 支持 [基于反光条的全局定位](../reference/services.md#barcode)
+- 支持 [基于反光条的全局定位](../reference/services-localization.md#barcode)
   - 新的能力标记：`supportsBarcodeGp`
   - 在服务 `/services/start_global_positioning` 中添加两个参数。
-  - 添加 websocket 主题 `/collected_barcode`。详见 [采集到的反光条](../reference/websocket.md#collected-barcode)
+  - 添加 websocket 主题 `/collected_barcode`。详见 [采集到的反光条](../reference/websocket-localization.md#collected-barcode)
 - 支持 [Bag 包循环录制](../reference/bags.md)
   - 新的能力标记：`supportsBags`
 - 添加新参数 [/wheel_control/acc_smoother/smooth_level](../reference/robot_params.md)
-- 支持 [修正时间误差](../reference/services.md#step-time)
+- 支持 [修正时间误差](../reference/services-system.md#step-time)
 - 支持 [从本地文件安装软件包](../reference/app_store.md#install-package-from-local-file)
 - 支持 [启动进度](../reference/device.md#boot-progress)
 - 支持 [直接使用数据设置地图](../reference/current_map_and_pose.md#set-current-map)。
@@ -113,23 +114,23 @@
   - 新的能力标记：`supportsJack`
   - 新的移动动作类型：`align_with_rack` (与货架对齐)、`to_unload_point` (前往卸货点)。详见 [顶升设备](../reference/moves.md#jack-device)
   - 新的移动动作失败原因 `rack_moved` (货架已移动)。
-  - 添加服务。详见 [顶升/降下](../reference/services.md#jack-device-up-down-self-check)
-  - 添加 websocket 主题 [`/jack_state`](../reference/websocket.md#jack-state)
+  - 添加服务。详见 [顶升/降下](../reference/services-cargo.md#jack-device-up-down-self-check)
+  - 添加 websocket 主题 [`/jack_state`](../reference/websocket-cargo.md#jack-state)
 - 支持 [动态轮廓 (Dynamic Footprint)](../reference/robot_params.md#robot-footprint)：
   - 新的能力标记：`supportsDynamicFootprints`。
-  - 添加新的 websocket 主题 [`/nearby_robot_footprints`](../reference/websocket.md#nearby-robot-footprints)
-  - 添加新的 websocket 主题 [`/robot_model`](../reference/websocket.md#robot-model)
-  - [`/nearby_robots`](../reference/websocket.md#nearby-robots) 主题新增属性 `footprint_digest`。
+  - 添加新的 websocket 主题 [`/nearby_robot_footprints`](../reference/websocket-environment.md#nearby-robot-footprints)
+  - 添加新的 websocket 主题 [`/robot_model`](../reference/websocket-navigation.md#robot-model)
+  - [`/nearby_robots`](../reference/websocket-environment.md#nearby-robots) 主题新增属性 `footprint_digest`。
 
 ## 2.6.1
 
 - 添加 API `/hostnames`，以添加/删除本地 DNS 条目。
-- 支持 [缓存的主题](../reference/websocket.md#cached-topics)。
+- 支持 [缓存的主题](../reference/websocket-mapping.md#cached-topics)。
 - 添加新能力标记：`supportsCachedTopics`。
 
 ## 2.6.0
 
-- 支持全自动 [增量建图](../reference/websocket.md#incremental-map)。
+- 支持全自动 [增量建图](../reference/websocket-mapping.md#incremental-map)。
 - 添加新能力标记：`supportsIncrementalMapping`
 
 ## 2.5.6
@@ -140,21 +141,21 @@
 ## 2.5.2
 
 - `map_uid` 可用于 [设置当前地图](../reference/current_map_and_pose.md#set-current-map)。
-- 在 Websocket `/planning_state` 中添加 `action_type`、`in_elevator`、`viewport_blocked`。详见 [规划状态](../reference/websocket.md#planning-state)。
-- 支持 [`POST /services/clear_range_data_all_zero_error`](../reference/services.md#clear-range-data-all-zero-error)。
+- 在 Websocket `/planning_state` 中添加 `action_type`、`in_elevator`、`viewport_blocked`。详见 [规划状态](../reference/websocket-navigation.md#planning-state)。
+- 支持 [`POST /services/clear_range_data_all_zero_error`](../reference/services-system.md#clear-range-data-all-zero-error)。
 - Websocket `/trajectory` 可在建图和纯定位模式下显示轨迹。
 
 ## 2.5.0
 
-- 在 [校准陀螺仪刻度](../reference/services.md#calibrate-gyroscope-scale) 中添加 `/services/calibrate_gyro_scale`
+- 在 [校准陀螺仪刻度](../reference/services-calibration.md#calibrate-gyroscope-scale) 中添加 `/services/calibrate_gyro_scale`
 - 添加 [应用商店 API](../reference/app_store.md)
 - 添加 USB 设备 API
   - [列出 USB 设备](../reference/device.md#list-usb-devices)
   - [保存的 USB 设备](../reference/device.md#saved-usb-devices)
-  - [重置 USB 设备](../reference/services.md#reset-usb-devices)
+  - [重置 USB 设备](../reference/services-system.md#reset-usb-devices)
 - 支持在 `/robot-params` 中调整机器人轮廓。需要重启才能生效。
 - 添加新能力标记：`supportsGyroscopeScaleCalibration`、`supportsParamFiles`、`supportsAppStore`、`supportsUsbDevices`
-- 支持服务 [`POST /services/clear_system_down_unexpectedly`](../reference/services.md#clear-alert-system-down-unexpectedly)
+- 支持服务 [`POST /services/clear_system_down_unexpectedly`](../reference/services-system.md#clear-system-down-unexpectedly-alert)
 
 ## 2.4.0
 
@@ -163,10 +164,10 @@
 
 ## 2.3.0
 
-- 在 Websocket `/slam/state` 中添加 `position_quality` 和 `lidar_matched`。详见 [定位状态](../reference/websocket.md#positioning-state)
+- 在 Websocket `/slam/state` 中添加 `position_quality` 和 `lidar_matched`。详见 [定位状态](../reference/websocket-localization.md#positioning-state)
 - 在 `/device/available_wifis` 中添加 `open`。详见 [可用 WIFI 列表](../reference/device.md#wifi-list)
 - 在 `/robot-params` 中添加 `/planning/auto_hold`。详见 [机器人参数](../reference/robot_params.md)
-- 在 [网络设置](../reference/services.md#set-route-mode) 和 [网络信息](../reference/device.md#network-information) 中添加 `/services/set_route_mode`
+- 在 [网络设置](../reference/services-network.md#set-route-mode) 和 [网络信息](../reference/device.md#network-information) 中添加 `/services/set_route_mode`
 
 ## 2.2.0
 
@@ -196,5 +197,5 @@
 
 - 在 `/device/info` 中添加关于底部传感器包和深度相机的固件信息。
 - 添加服务 `/services/start_global_positioning`
-- 在 [IMU 校准](../reference/services.md#recalibrate-imu) 中添加 `calibrate_pose`
-- 在 [唤醒设备](../reference/services.md#wake-up-device) 中添加服务 `/wake_up_device`
+- 在 [IMU 校准](../reference/services-calibration.md#recalibrate-imu) 中添加 `calibrate_pose`
+- 在 [唤醒设备](../reference/services-system.md#wake-up-the-device) 中添加服务 `/wake_up_device`

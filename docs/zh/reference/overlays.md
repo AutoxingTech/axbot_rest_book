@@ -157,7 +157,7 @@
 }
 ```
 
-## 自动门
+## 自动门 {#auto-door}
 
 定义自动门后，机器人可以开启其路径上的门。
 门由多边形表示，且必须包含 `mac` 属性。
@@ -193,9 +193,9 @@
 类似于充电桩，此点指示机器人可以在何处找到货架进行装载或卸载。
 它应与 `align_with_rack` 和 `to_unload_point` 移动动作类型配合使用。
 
-## 条码 (Barcode)
+## 条码 (Barcode) {#barcode}
 
-[条码](./services.md#barcode)用于唯一确定机器人的全局位姿。
+[条码](./services-localization.md#barcode)用于唯一确定机器人的全局位姿。
 
 ```json
 {
@@ -247,7 +247,7 @@
 }
 ```
 
-## 陆标 (Landmarks)
+## 陆标 (Landmarks) {#landmarks}
 
 自 2.11.0 起支持
 

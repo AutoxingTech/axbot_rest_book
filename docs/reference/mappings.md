@@ -60,10 +60,10 @@ interface MappingCreateRequest {
 
 During mapping, use WebSockets to receive real-time feedback:
 
-- [Current Pose](./websocket.md#current-pose)
-- [Map](./websocket.md#map): Updated at regular intervals.
-- [Trajectory](./websocket.md#mapping-trajectory): A history of the trajectory that helps you identify which parts of the map have been visited.
-- [Point Cloud](./websocket.md#lidar-point-cloud) and [Obstacle Map](./websocket.md#obstacle-map): These help avoid collisions during remote mapping.
+- [Current Pose](./websocket-localization.md#current-pose)
+- [Map](./websocket-mapping.md#map): Updated at regular intervals.
+- [Trajectory](./websocket-mapping.md#trajectory): A history of the trajectory that helps you identify which parts of the map have been visited.
+- [Point Cloud](./websocket-perception.md#lidar-point-cloud) and [Obstacle Map](./websocket-mapping.md#obstacle-map): These help avoid collisions during remote mapping.
 
 They can be rendered like this:
 

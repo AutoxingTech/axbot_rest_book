@@ -2,7 +2,7 @@
 
 机器人可能配备一个或多个 RGB 摄像头。运行过程中，它会录制视频剪辑，可通过视频 API 下载。
 
-有关实时视频流，请参阅 [WebSocket](./websocket.md#rgb-视频流) 文档。
+有关实时视频流，请参阅 [WebSocket](./websocket-perception.md#rgb-video-stream) 文档。
 
 视频剪辑以原始 H.264 流格式提供。
 

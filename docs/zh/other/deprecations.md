@@ -48,9 +48,9 @@ $ wscat -c ws://192.168.25.25:8090/ws/v2/topics
 
 替代方案：
 
-- `POST /services/wheel_control/set_control_mode` [设置控制模式](../reference/services.md#set-control-mode)
-- `POST /services/wheel_control/set_emergency_stop_pressed` [设置急停](../reference/services.md#setclear-emergency-stop)
-- `POST /services/wheel_control/clear_errors` [清除车轮错误](../reference/services.md#clear-wheel-errors)
+- `POST /services/wheel_control/set_control_mode` [设置控制模式](../reference/services-motion.md#set-control-mode)
+- `POST /services/wheel_control/set_emergency_stop_pressed` [设置急停](../reference/services-motion.md#set-or-clear-emergency-stop)
+- `POST /services/wheel_control/clear_errors` [清除车轮错误](../reference/services-motion.md#clear-wheel-errors)
 
 ### 弃用 WebSocket 主题：`/chassis_state`
 
@@ -73,7 +73,7 @@ $ wscat -c ws://192.168.25.25:8090/ws/topics
 
 替代方案：
 
-- `/wheel_state`，详见 [车轮状态](../reference/websocket.md#wheel-state)。
+- `/wheel_state`，详见 [车轮状态](../reference/websocket-chassis.md#wheel-state)。
 
 ## 1.8.0
 
@@ -83,6 +83,6 @@ $ wscat -c ws://192.168.25.25:8090/ws/topics
 
 替代方案：
 
-- `POST /services/imu/recalibrate` [IMU 校准](../reference/services.md#recalibrate-imu)
-- `POST /services/restart_service` [重启服务](../reference/services.md#restart-service)
-- `POST /services/baseboard/shutdown` [重启/关机](../reference/services.md#shutdownreboot-device)
+- `POST /services/imu/recalibrate` [IMU 校准](../reference/services-calibration.md#recalibrate-imu)
+- `POST /services/restart_service` [重启服务](../reference/services-system.md#restart-services)
+- `POST /services/baseboard/shutdown` [重启/关机](../reference/services-system.md#shutdown-or-reboot-the-device)

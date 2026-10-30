@@ -48,9 +48,9 @@ This API was previously used to change the control mode, set the emergency stop,
 
 Replaced by:
 
-- `POST /services/wheel_control/set_control_mode` [Set Control Mode](../reference/services.md#set-control-mode)
-- `POST /services/wheel_control/set_emergency_stop_pressed` [Set Emergency Stop](../reference/services.md#setclear-emergency-stop)
-- `POST /services/wheel_control/clear_errors` [Clear wheel errors](../reference/services.md#clear-wheel-errors)
+- `POST /services/wheel_control/set_control_mode` [Set Control Mode](../reference/services-motion.md#set-control-mode)
+- `POST /services/wheel_control/set_emergency_stop_pressed` [Set Emergency Stop](../reference/services-motion.md#set-or-clear-emergency-stop)
+- `POST /services/wheel_control/clear_errors` [Clear wheel errors](../reference/services-motion.md#clear-wheel-errors)
 
 ### Deprecate WebSocket Topic: `/chassis_state`
 
@@ -73,7 +73,7 @@ $ wscat -c ws://192.168.25.25:8090/ws/topics
 
 Replaced by:
 
-- `/wheel_state`, see [Wheel State](../reference/websocket.md#wheel-state).
+- `/wheel_state`, see [Wheel State](../reference/websocket-chassis.md#wheel-state).
 
 ## 1.8.0
 
@@ -83,6 +83,6 @@ This API was used for IMU calibration and for rebooting the service or the devic
 
 Replaced by:
 
-- `POST /services/imu/recalibrate` [IMU Calibration](../reference/services.md#recalibrate-imu)
-- `POST /services/restart_service` [Restart Service](../reference/services.md#restart-service)
-- `POST /services/baseboard/shutdown` [Reboot/Power Off](../reference/services.md#shutdownreboot-device)
+- `POST /services/imu/recalibrate` [IMU Calibration](../reference/services-calibration.md#recalibrate-imu)
+- `POST /services/restart_service` [Restart Service](../reference/services-system.md#restart-services)
+- `POST /services/baseboard/shutdown` [Reboot/Power Off](../reference/services-system.md#shutdown-or-reboot-the-device)

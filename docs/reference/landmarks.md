@@ -21,11 +21,11 @@ There are two primary methods for collecting landmarks:
 
 - **During a new mapping task:**
   1. Begin the mapping process as usual.
-     - **Optional:** You can preview collected landmarks in real-time via the [`/landmarks`](../reference/websocket.md#landmarks) WebSocket channel.
+     - **Optional:** You can preview collected landmarks in real-time via the [`/landmarks`](./websocket-localization.md#landmarks) WebSocket channel.
   2. Complete the mapping task.
      - The final set of landmarks can be accessed via the `landmark_url` in the [mapping result details](../reference/mappings.md#mapping-detail).
 - **For an existing map:**
-  1.  Use the [Collect Landmarks](./services.md#collect-landmarks) service.
+  1.  Use the [Collect Landmarks](./services-mapping.md#collect-landmarks) service.
 
 Collected landmarks are not used directly; instead, they serve as raw data to be imported into the map's overlays. Save the landmarks into the overlays. For more information, see [landmarks in overlays](../reference/overlays.md#landmarks).
 

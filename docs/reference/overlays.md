@@ -157,7 +157,7 @@ Chargers are used with the `charge` move action type.
 }
 ```
 
-## Automatic Door
+## Automatic Door {#auto-door}
 
 When automatic doors are defined, the robot can open doors in its path.
 A door is represented as a polygon and must include a `mac` property.
@@ -195,7 +195,7 @@ It should be used with the `align_with_rack` and `to_unload_point` move action t
 
 ## Barcode
 
-[Barcodes](./services.md#barcode) are used to uniquely determine the global pose of the robot.
+[Barcodes](./services-localization.md#barcode) are used to uniquely determine the global pose of the robot.
 
 ```json
 {

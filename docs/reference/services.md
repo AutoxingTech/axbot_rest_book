@@ -1,778 +1,142 @@
 # Service API
 
-## Recalibrate IMU
-
-Initiates IMU calibration. The robot must remain perfectly still on a hard, flat surface during this process.
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  http://192.168.25.25:8090/services/imu/recalibrate
-```
-
-This service call only triggers the calibration; the actual process typically takes 10 to 20 seconds to complete.
-
-Once the calibration is finished, a notification will be sent via the `/action` WebSocket topic.
-
-**Sample Success Output:**
-
-```json
-{
-  "topic": "/action",
-  "timestamp": 1681733608.653,
-  "email": "",
-  "username": "",
-  "deviceName": "718220110000909",
-  "action": "recalibrate_imu",
-  "message": "IMU calibration succeeded"
-}
-```
-
-**Sample Failure Output:**
-
-```json
-{
-  "topic": "/action",
-  "timestamp": 1681733580.702,
-  "email": "",
-  "username": "",
-  "deviceName": "718220110000909",
-  "action": "recalibrate_imu",
-  "message": "error: IMU calibration failed. Failed to rotate to right"
-}
-```
-
-## Set Control Mode
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"control_mode": "auto"}' \
-  http://192.168.25.25:8090/services/wheel_control/set_control_mode
-```
-
-**Parameters**
-
-```ts
-class SetControlModeRequest {
-  control_mode: "auto" | "manual" | "remote";
-}
-```
-
-Use the `/wheel_state` WebSocket topic to monitor the current control mode and wheel status.
-
-```bash
-$ wscat -c ws://192.168.25.25:8090/ws/v2/topics
-> {"enable_topic": "/wheel_state"}
-< {"topic": "/wheel_state", "control_mode": "auto", "emergency_stop_pressed": true }
-```
-
-## Set or Clear Emergency Stop
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"enable": true}' \
-  http://192.168.25.25:8090/services/wheel_control/set_emergency_stop
-```
-
-**Parameters**
-
-```ts
-class SetEmergencyStopRequest {
-  enable: boolean;
-}
-```
-
-Use the `/wheel_state` WebSocket topic to monitor the emergency stop status.
-
-```bash
-$ wscat -c ws://192.168.25.25:8090/ws/v2/topics
-> {"enable_topic": "/wheel_state"}
-< {"topic": "/wheel_state", "control_mode": "auto", "emergency_stop_pressed": true }
-```
-
-## Restart Services
-
-Restarts all software services on the robot.
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  http://192.168.25.25:8090/services/restart_service
-```
-
-## Shutdown or Reboot the Device
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"target": "main_power_supply", reboot: false}' \
-  http://192.168.25.25:8090/services/baseboard/shutdown
-```
-
-**Parameters**
-
-```ts
-class ShutdownRequest {
-  target:
-    | "main_computing_unit" // Reboot or shutdown only the main computing board.
-    | "main_power_supply"; // Reboot or shutdown the entire device.
-  reboot: boolean; // true to reboot, false to shutdown.
-}
-```
-
-## Clear Wheel Errors
-
-```bash
-curl -X POST http://192.168.25.25:8090/services/wheel_control/clear_errors
-```
-
-## Clear Flip Error
-
-Error `8004` (flip error) indicates a serious issue, such as the robot having tipped over.
-This requires manual inspection. Once the issue is resolved, use this service to clear the error and restore the robot to an operational state.
-
-```bash
-curl -X POST http://192.168.25.25:8090/services/monitor/clear_flip_error
-```
-
-## Clear Slide Error
-
-:::warning
-Experimental Feature
-:::
-
-Error `2008` (slide error) indicates that the robot may have had a significant impact with an invisible obstacle. Manual inspection is required before clearing this error.
-
-```bash
-curl -X POST http://192.168.25.25:8090/services/monitor/clear_slipping_error
-```
-
-## Power On or Off the Lidar
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"action": "power_on"}' \
-  http://192.168.25.25:8090/services/baseboard/power_on_lidar
-```
-
-**Parameters**
-
-```ts
-class PowerOnRequest {
-  action: "power_on" | "power_off";
-}
-```
-
-## Power On or Off the Depth Camera
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"enable": true}' \
-  http://192.168.25.25:8090/services/depth_camera/enable_cameras
-```
-
-**Parameters**
-
-```ts
-class EnableDepthCameraRequest {
-  enable: boolean;
-}
-```
-
-## Configure Wi-Fi
-
-Switches the Wi-Fi between Access Point (AP) and Station mode.
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"mode": "station", "ssid":"xxxxxxxxx", "psk": "xxxxx"}' \
-  http://192.168.25.25:8090/services/setup_wifi
-```
-
-**Parameters**
-
-```ts
-interface SetupWifiRequest {
-  mode: "ap" | "station";
-  ssid?: string; // SSID, required for station mode
-  psk?: string; // Wi-Fi Protected Access Pre-Shared Key, required for station mode
-
-  route_mode?: "eth0_first" | "wlan0_first" | "usb0_first" | "wlan0_usb0_auto_first";
-}
-```
-
-## Set Route Mode
-
-Configures the routing table rules for the robot's chassis.
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"mode": "xxx"}' \
-  http://192.168.25.25:8090/services/set_route_mode
-```
-
-**Parameters**
-
-```ts
-interface RouteModeRequest {
-  mode: "eth0_first" | "wlan0_first" | "usb0_first" | "wlan0_usb0_auto_first";
-}
-```
-
-`route_mode`: Determines the priority of network interfaces in the routing table:
-
-- `eth0_first`: Sets `eth0` as the default route, if available.
-- `wlan0_first`: Sets `wlan0` as the default route, if available.
-- `usb0_first`: Sets `usb0` as the default route, if available.
-- `wlan0_usb0_auto_first`: Based on `ping` results: if `wlan0` has internet connectivity, it is used as the default route; otherwise, `usb0` is used.
-
-A static HTML page for network configuration is also available on the local network at: `http://192.168.25.25:8090/wifi_setup`
-
-![](./network_setup.png)
-
-## Wake Up the Device
-
-Wakes the robot from its sleep state. If the robot is already awake, this command has no effect.
-
-```bash
-curl -X POST http://192.168.25.25:8090/services/wake_up_device
-```
-
-Monitor the [Sensor Manager State](./websocket.md#sensor-manager-state) WebSocket topic for sleep, awake, or awakening status.
-
-## Start Global Positioning
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json"
-  http://192.168.25.25:8090/services/start_global_positioning
-```
-
-**Parameters**
-
-```ts
-interface StartGlobalPositioningRequest {
-  use_barcode?: boolean; // default to true.
-  use_base_map_match?: boolean; // default to true.
-}
-```
-
-Feedback can be monitored via the [Global Positioning State](./websocket.md#global-positioning-state) WebSocket topic.
-
-### Barcode
-
-![](./barcode.png)
-
-A barcode is a marker composed of interleaved reflective and non-reflective surfaces.
-Each barcode at a site contains a unique ID, allowing the robot to determine its exact location unambiguously upon detection.
-
-When `use_barcode` is set to `true`, it takes priority over point-cloud-based matching. Detected barcode matches are always considered highly reliable.
-To utilize this feature, barcodes and their corresponding poses must be [collected and added to the map's overlays](./websocket.md#collected-barcode).
-
-## Auto-Mapping
-
-:::warning
-Experimental Feature
-:::
-
-When auto-mapping is enabled, the robot will automatically explore and map its environment.
-This feature is only available while the robot is in mapping mode.
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"enable": true}' \
-  http://192.168.25.25:8090/services/enable_auto_mapping
-```
-
-**Parameters**
-
-```ts
-interface EnableAutoMappingRequest {
-  enable: boolean;
-}
-```
-
-## Recheck Errors
-
-```
-POST /services/monitor_recheck_errors
-```
-
-## Calibrate Depth Cameras
-
-This service aligns the point clouds from the depth cameras with the point cloud from the horizontal Lidar.
-
-Before initiating calibration, ensure that:
-
-- The robot is on a flat, level surface.
-- The robot is facing a wall corner or a large, rectangular object.
-
-![](./2023-02-02-16-44-19.png)
-
-```
-POST /services/calibrate_depth_cameras
-```
-
-## Calibrate Gyroscope Scale
-
-Initiates gyroscope scale calibration. The robot must remain perfectly still on a hard, flat surface during this process.
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  http://192.168.25.25:8090/services/imu/calibrate_gyro_scale
-```
-
-This service call only triggers the calibration; the actual process typically takes about 20 seconds to complete.
-
-Once the calibration is finished, a notification will be sent via the `/action` WebSocket topic.
-
-**Sample Success Output:**
-
-```json
-{
-  "topic": "/action",
-  "timestamp": 1681733608.653,
-  "email": "",
-  "username": "",
-  "deviceName": "718220110000909",
-  "action": "calibrate_gyro_scale",
-  "message": "Gyroscope scale calibration succeeded"
-}
-```
-
-**Sample Failure Output:**
-
-```json
-{
-  "topic": "/action",
-  "timestamp": 1681733580.702,
-  "email": "",
-  "username": "",
-  "deviceName": "718220110000909",
-  "action": "calibrate_gyro_scale",
-  "message": "error: Gyroscope scale calibration failed. Please remove nearby obstacles."
-}
-```
-
-## Reset USB Devices
-
-Resetting the USB hub can sometimes help recover malfunctioning hardware devices.
-
-The format `"1/3"` represents the `bus_id/dev_id` in the device tree. For more information, see [List USB Devices](./device.md#list-usb-devices).
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"devices_to_reset": ["1/3", "8/1"]}' \
-  http://192.168.25.25:8090/services/reset_usb_devices
-```
-
-## Clear "System Down Unexpectedly" Alert
-
-![](./system-down-alert.png)
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  http://192.168.25.25:8090/services/clear_system_down_unexpectedly
-```
-
-## Clear "Range Data All Zero" Error
-
-If all Lidar points return a value of 0, it indicates that the Lidar device is malfunctioning or failing.
-
-This service temporarily clears the associated error message.
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  http://192.168.25.25:8090/services/clear_range_data_all_zero_error
-```
-
-## Jack Device Up, Down, Self-Check
-
-Raise or lower the jack device. The state of the jack device is available via the WebSocket [Jack State](./websocket.md#jack-state).
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  http://192.168.25.25:8090/services/jack_up
-```
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  http://192.168.25.25:8090/services/jack_down
-```
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  http://192.168.25.25:8090/services/jack_self_check
-```
-
-## Step Time
-
-Use this service to correct the system time if it is inaccurate.
-
-::: warning
-`GET` is used to detect time errors. Do not call it frequently. Use the WebSocket `/alerts` topic instead to monitor time errors.
-:::
-
-```bash
-curl http://192.168.25.25:8090/services/step_time
-```
-
-```json
-{
-  "should_step": false, // No need to correct time
-  "message": "there is no need to make step: system time is 0.000253560 seconds fast of NTP time"
-}
-```
-
-`POST` is used to correct the time.
-
-```bash
-curl -X POST http://192.168.25.25:8090/services/step_time
-```
-
-```json
-{
-  "message": "Step time successfully"
-}
-```
-
-## Get Nav. Thumbnail
-
-Since 2.8.0, requires `caps.supportsGetNavThumbnail`.
-
-Retrieves an image snapshot of the robot and its surroundings, including the map, costmap, point cloud, and virtual walls.
-
-The image is 200x200 pixels and can be used for error reporting.
-
-![](./navi_thumbnail.png)
-
-```json
-{
-  "stamp": 1707211001,
-  "map_name": "Ground Floor",
-  "map_uid": "xxxxx",
-  "map_version": 3,
-  "overlays_version": 8,
-  "map": {
-    "resolution": 0.05,
-    "size": [200, 200],
-    "origin": [12.12345, -3.12345],
-    "data": "iVBORw0KGgoAAAANS..." // base64 encoded PNG
-  }
-}
-```
-
-## Get RGB Image
-
-Since 2.8.0, requires `caps.supportsGetRgbImage`.
-
-Retrieves the latest image from an RGB camera. This is similar to the [WebSocket RGB Image Stream](./websocket.md#rgb-image-stream) but is more efficient for use cases that only require occasional images.
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"topic": "/rgb_cameras/front/compressed"}' \
-  http://192.168.25.25:8090/services/get_rgb_image
-```
-
-The response format is identical to the WebSocket topic.
-
-## Load/Unload Cargo with Roller
-
-Since 2.9.0.
-
-The state of the roller is available via the WebSocket [Roller State](./websocket.md#roller-state).
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  http://192.168.25.25:8090/services/roller_load
-```
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  http://192.168.25.25:8090/services/roller_unload
-```
-
-## Start Rack Size Detection
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  http://192.168.25.25:8090/services/start_rack_size_detection
-
-curl -X POST \
-  -H "Content-Type: application/json" \
-  http://192.168.25.25:8090/services/stop_rack_size_detection
-```
-
-Detect the width and depth of a rack using the robot's laser scanner.
-
-:::warning
-It is generally more accurate to refer to the rack's technical specifications or measure it manually with a ruler. Use this service only as a last resort.
-:::
-
-Steps to use:
-
-1. Position the robot directly in front of the rack.
-2. Call `/start_rack_size_detection`.
-3. Subscribe to the [/detected_rack WebSocket topic](./websocket.md#detected-rack).
-4. Slowly push the robot under the rack.
-5. Once successfully detected, stop pushing and record the rack dimensions.
-6. Enter the width and depth into the [system settings](./system_settings.md#rackspecs).
-
-## Clear Jack Errors
-
-The jack device will report an error if it becomes overloaded.
-
-When this occurs, most jack models can still accept new commands. However, some rare models require errors to be cleared manually before they will accept further commands.
-
-```bash
-curl -X POST http://192.168.25.25:8090/services/clear_jack_errors
-```
-
-## Confirm Emergency Stop
-
-When the robot is on a slope or in a designated slope area (specified in overlays), the wheels will not be released even if the emergency stop is pressed. A warning message will appear in the `/alerts` WebSocket topic:
-
-![](./estop_warning.png)
-
-If you need to push the robot manually, use the following command to confirm releasing the wheels.
-
-```bash
-curl -X POST http://192.168.25.25:8090/services/confirm_estop
-```
-
-## Calibrate Depth Camera Masks
-
-Some depth cameras may capture parts of the robot's own body. This service identifies which pixels should be masked to prevent the robot from mistaking itself for an obstacle.
-
-Before calibrating, place the robot in an open area with no obstacles in the field of view of any depth cameras.
-
-```bash
-curl -X POST http://192.168.25.25:8090/services/calibrate_depth_camera_masks
-```
-
-## Collect Landmarks
-
-This service is used to collect landmarks for an existing map.
-
-```bash
-curl -X POST http://192.168.25.25:8090/services/start_collecting_landmarks
-curl -X POST http://192.168.25.25:8090/services/stop_collecting_landmarks
-```
-
-The result is stored at:
-
-```bash
-curl http://192.168.25.25:8090/collected_data
-```
-
-The collected data serves as raw material. Developers must manually insert these landmarks into [overlays](./overlays.md#landmarks) for them to be used.
-
-## Clear Fall Risk Warning
-
-```bash
-curl -X POST http://192.168.25.25:8090/services/clear_fall_risk_warning
-```
-
-## Query Pose
-
-This API retrieves the coordinates of various points of interest (POIs).
-
-For example, when the robot docks on a charger, it calculates the charger’s pose
-based on the robot’s position.
-
-```bash
-curl http://192.168.25.25:8090/services/query_pose/charger_pose
-```
-
-```json
-{
-  "pose": {
-    "pos": [4.179, -26.094],
-    "ori": 3.18
-  }
-}
-```
-
-Similarly, if a robot (e.g., a forklift or a trailer robot) is parked at a cargo location (e.g., a pallet or trailer), the system can infer the location's pose from the robot's current position.
-
-```bash
-curl http://192.168.25.25:8090/services/query_pose/pallet_pose
-curl http://192.168.25.25:8090/services/query_pose/trailer_pose
-```
-
-```json
-{
-  "pose": {
-    "pos": [4.179, -26.094],
-    "ori": 3.18
-  },
-
-  // Since 2.13.0. If reference == 'center_of_front_edge', the returned pose is
-  // the center of the pallet or trailer's front edge (new logic).
-  // Otherwise, the pose is the center of the pallet or trailer (deprecated).
-  "ref": "center_of_front_edge"
-}
-```
-
-### Rack Pose
-
-Calculates the pose of the jack plate's front or rear edge based on the robot's
-current position. This is useful for defining rack POI coordinates on the map.
-
-The `ref` query parameter specifies which edge to use:
-
-- `center_of_front_edge` (default) — the center of the jack plate's **front** edge
-- `center_of_rear_edge` — the center of the jack plate's **rear** edge
-
-```bash
-curl http://192.168.25.25:8090/services/query_pose/rack_pose?ref=center_of_front_edge
-```
-
-```json
-{
-  "pose": {
-    "pos": [1.234, 5.678], // Calculated rack edge coordinates [x, y] in the world frame
-    "ori": 1.571 // Yaw angle in the world frame (radians)
-  },
-  // Which edge was calculated: "center_of_front_edge" or "center_of_rear_edge"
-  "ref": "center_of_front_edge"
-}
-```
-
-## Probe V2X Beacons
-
-This service sends messages to beacons to activate them for several seconds. This is useful for testing connectivity and triggering responses.
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  http://192.168.25.25:8090/services/probe_v2x_beacons
-```
-
-Use the [V2X Health State](./websocket.md#v2x-health-state) WebSocket topic to monitor beacon responses and health status.
-
-## Calibrate Duo Lidar Poses
-
-This service is used to calibrate the poses of duo lidars mounted at the left-front and right-back corners.
-This service should only be called when "caps.supportsDuoLidar" is true.
-
-The service accepts an optional `calibration_step` parameter that selects the calibration mode:
-
-```ts
-interface CalibrateDuoLidarPosesRequest {
-  calibration_step?: "single_shot" | "right_wall" | "front_wall";
-}
-```
-
-### Single Shot Mode (Default)
-
-Requires clear horizontal and vertical walls in one of the overlapping areas of the duo lidars' fields of view.
-
-![](./duo-lidars.png)
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  http://192.168.25.25:8090/services/calibrate_duo_lidar_poses
-```
-
-### Right Wall Mode
-
-Use this and **Front Wall Mode** when two perpendicular walls are hard to find. Only a single long wall is required.
-
-**During calibration, ensure:**
-
-- There should be a single long wall on the right side of the robot.
-- The distance between the right side of the robot and the wall should be 1 – 2 meters.
-- The wall must be long enough to be visible to both lidars.
-- The wall and the right side of the robot should be precisely parallel — tolerance less than 0.5°.
-- The ground should be flat.
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"calibration_step": "right_wall"}' \
-  http://192.168.25.25:8090/services/calibrate_duo_lidar_poses
-```
-
-### Front Wall Mode
-
-Run **Right Wall Mode** first, then rotate the robot to face the same wall.
-
-**During calibration, ensure:**
-
-- Finish right wall mode calibration first.
-- The wall must be long enough to be visible to both lidars.
-- The wall must be at least 2 meters away from the robot.
-- The wall can be approximately parallel to the front edge of the robot — maximum tolerance of 5°.
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"calibration_step": "front_wall"}' \
-  http://192.168.25.25:8090/services/calibrate_duo_lidar_poses
-```
-
-## Towing Hook Lock
-
-Locks the towing hook to secure an attached trailer.
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  http://192.168.25.25:8090/services/towing_hook_lock
-```
-
-## Towing Hook Release
-
-Releases the towing hook to detach an attached trailer.
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  http://192.168.25.25:8090/services/towing_hook_release
-```
-
-## Clear Towing Hook Error
-
-Clears an error reported by the towing hook device.
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  http://192.168.25.25:8090/services/clear_towing_hook_error
-```
-
-## Load/Unload Cargo
-
-Triggers loading or unloading of cargo via the robot's cargo handling mechanism.
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  http://192.168.25.25:8090/services/load_cargo
-```
-
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  http://192.168.25.25:8090/services/unload_cargo
-```
+Services are HTTP endpoints that trigger an action on the robot. Send an empty body unless a parameter block is shown.
+
+Every endpoint uses one of two URL prefixes:
+
+- `/services/...` — a robot service. Usually `POST`; responds with JSON.
+- `/ros/...` — a service proxied from ROS. Defaults to binary protobuf and returns proto3 JSON when the request sends `Accept: application/json`. A few endpoints (map overlays, traffic info) are raw JSON.
+
+The reference is grouped by what the service does:
+
+- [Motion & Chassis Control](./services-motion.md) — drive modes, emergency stop, wheel and chassis errors.
+- [Localization](./services-localization.md) — global positioning and pose queries for chargers, pallets, trailers, and racks.
+- [Mapping](./services-mapping.md) — auto-mapping, landmarks, overlays, traffic info, submaps, and the SLAM map image.
+- [Cargo Handling](./services-cargo.md) — jack, roller, towing hook, cargo load/unload, and rack size detection.
+- [Perception & Sensors](./services-perception.md) — lidar and depth camera power, RGB frames, nav thumbnail, and V2X beacons.
+- [Calibration](./services-calibration.md) — IMU, gyro scale, depth cameras, duo lidar, and jack mast calibration.
+- [Network](./services-network.md) — Wi-Fi mode and route priority.
+- [System & Maintenance](./services-system.md) — power, time, restarts, error recovery, and ROS topic introspection.
+
+## Conventions {#conventions}
+
+### Content-type & response format {#content-type--response-format}
+
+Endpoints under `/services/` speak JSON. Services proxied under `/ros/` default to `application/x-protobuf`; they respond with `application/json` when the request includes `Accept: application/json`. JSON bodies are generated by serializing the same protobuf message via `google::protobuf::util::MessageToJsonString` (proto3 JSON mapping — field names are snake_case).
+
+<!-- prettier-ignore -->
+| `Accept` request header  | `Content-Type` response  | Body                         |
+| ------------------------ | ------------------------ | ---------------------------- |
+| (absent)                 | `application/x-protobuf` | binary protobuf              |
+| `application/x-protobuf` | `application/x-protobuf` | binary protobuf              |
+| `application/json`       | `application/json`       | proto3 JSON                  |
+| (any other)              | `text/plain`             | `415 Unsupported Media Type` |
+
+The raw JSON endpoints (map overlays and traffic info) ignore `Accept` and always return `application/json`.
+
+### Protobuf definitions {#protobuf-definitions}
+
+Protobuf message definitions are published as part of the [`@kingsimba/axbot-sdk`](https://www.npmjs.com/package/@kingsimba/axbot-sdk) TypeScript SDK on npm. The `.proto` source files are available in the [axbot-ts-sdk repository](https://github.com/AutoxingTech/axbot-ts-sdk/tree/master/src/proto). Each endpoint references its own response message.
+
+## Service index {#service-index}
+
+### Motion & Chassis Control
+
+<!-- prettier-ignore -->
+| Endpoint                                                    | Method | Description                                                          |
+| ----------------------------------------------------------- | ------ | -------------------------------------------------------------------- |
+| [`/services/wheel_control/set_control_mode`](./services-motion.md#set-control-mode)                     | `POST` | Switch between `auto`, `manual`, and `remote` control.               |
+| [`/services/wheel_control/set_emergency_stop`](./services-motion.md#set-or-clear-emergency-stop)        | `POST` | Press or release the software emergency stop.                        |
+| [`/services/confirm_estop`](./services-motion.md#confirm-emergency-stop)                                | `POST` | Release the wheels on a slope after the emergency stop is pressed.   |
+| [`/services/wheel_control/clear_errors`](./services-motion.md#clear-wheel-errors)                       | `POST` | Clear errors reported by the wheel controller.                       |
+| [`/services/monitor/clear_flip_error`](./services-motion.md#clear-flip-error)                           | `POST` | Clear error `8004` after a tip-over has been inspected.              |
+| [`/services/monitor/clear_slipping_error`](./services-motion.md#clear-slide-error)                      | `POST` | Clear error `2008` after a heavy impact (experimental).              |
+
+### Localization
+
+<!-- prettier-ignore -->
+| Endpoint                                              | Method | Description                                                              |
+| ----------------------------------------------------- | ------ | ------------------------------------------------------------------------ |
+| [`/services/start_global_positioning`](./services-localization.md#start-global-positioning) | `POST` | Localize the robot globally with barcodes and base-map matching.          |
+| [`/services/query_pose/<poi>`](./services-localization.md#query-pose)                       | `GET`  | Query the map pose of a charger, pallet, trailer, or rack edge.           |
+
+### Mapping
+
+<!-- prettier-ignore -->
+| Endpoint                                                    | Method    | Description                                                  |
+| ----------------------------------------------------------- | --------- | ------------------------------------------------------------ |
+| [`/services/enable_auto_mapping`](./services-mapping.md#auto-mapping)                       | `POST`    | Let the robot explore and map on its own (experimental).      |
+| [`/services/start_collecting_landmarks`](./services-mapping.md#collect-landmarks)           | `POST`    | Collect landmarks for the current map.                        |
+| [`/services/stop_collecting_landmarks`](./services-mapping.md#collect-landmarks)            | `POST`    | Stop collecting landmarks.                                    |
+| [`/ros/map/overlays`](./services-mapping.md#map-overlays)                                   | `GET/PUT` | Read or replace the dynamic map overlays as GeoJSON.          |
+| [`/ros/map/traffic_info`](./services-mapping.md#traffic-info)                               | `GET/PUT` | Read or replace the dynamic no-passing zones.                 |
+| [`/ros/slam/submaps/{uuid}/{trajectory_id}/{submap_index}`](./services-mapping.md#submap-query-v2) | `GET` | Fetch one Cartographer submap.                          |
+| [`/ros/slam/map_image`](./services-mapping.md#slam-map-image)                               | `GET`     | Fetch the current SLAM map as a protobuf-encoded PNG.         |
+
+### Cargo Handling
+
+<!-- prettier-ignore -->
+| Endpoint                                                    | Method | Description                                                     |
+| ----------------------------------------------------------- | ------ | --------------------------------------------------------------- |
+| [`/services/jack_up`](./services-cargo.md#jack-device-up-down-self-check)                   | `POST` | Raise the jack.                                                 |
+| [`/services/jack_down`](./services-cargo.md#jack-device-up-down-self-check)                 | `POST` | Lower the jack.                                                 |
+| [`/services/jack_self_check`](./services-cargo.md#jack-device-up-down-self-check)           | `POST` | Self-check the jack.                                            |
+| [`/services/clear_jack_errors`](./services-cargo.md#clear-jack-errors)                      | `POST` | Clear jack overload errors.                                     |
+| [`/services/roller_load`](./services-cargo.md#load-unload-cargo-with-roller)                | `POST` | Load cargo with the roller.                                     |
+| [`/services/roller_unload`](./services-cargo.md#load-unload-cargo-with-roller)              | `POST` | Unload cargo with the roller.                                   |
+| [`/services/load_cargo`](./services-cargo.md#load-unload-cargo)                             | `POST` | Load cargo with the lifting mechanism.                          |
+| [`/services/unload_cargo`](./services-cargo.md#load-unload-cargo)                           | `POST` | Unload cargo with the lifting mechanism.                        |
+| [`/services/towing_hook_lock`](./services-cargo.md#towing-hook-lock)                        | `POST` | Lock the towing hook.                                           |
+| [`/services/towing_hook_release`](./services-cargo.md#towing-hook-release)                  | `POST` | Release the towing hook.                                        |
+| [`/services/clear_towing_hook_error`](./services-cargo.md#clear-towing-hook-error)          | `POST` | Clear a towing-hook device error.                               |
+| [`/services/start_rack_size_detection`](./services-cargo.md#start-rack-size-detection)      | `POST` | Measure a rack's width and depth with the laser scanner.        |
+| [`/services/stop_rack_size_detection`](./services-cargo.md#start-rack-size-detection)       | `POST` | Stop the rack size measurement.                                 |
+
+### Perception & Sensors
+
+<!-- prettier-ignore -->
+| Endpoint                                                    | Method | Description                                                          |
+| ----------------------------------------------------------- | ------ | -------------------------------------------------------------------- |
+| [`/services/baseboard/power_on_lidar`](./services-perception.md#power-on-or-off-the-lidar)              | `POST` | Power the lidar on or off.                                           |
+| [`/services/depth_camera/enable_cameras`](./services-perception.md#power-on-or-off-the-depth-camera)    | `POST` | Enable or disable the depth cameras.                                 |
+| [`/services/get_rgb_image`](./services-perception.md#get-rgb-image)                                     | `POST` | Fetch the latest RGB camera frame.                                   |
+| [`/services/get_nav_thumbnail`](./services-perception.md#get-nav-thumbnail)                             | `POST` | Fetch a 200×200 snapshot of the robot and its surroundings.          |
+| [`/services/probe_v2x_beacons`](./services-perception.md#probe-v2x-beacons)                             | `POST` | Activate V2X beacons for a few seconds to test connectivity.         |
+
+### Calibration
+
+<!-- prettier-ignore -->
+| Endpoint                                                    | Method | Description                                                       |
+| ----------------------------------------------------------- | ------ | ----------------------------------------------------------------- |
+| [`/services/imu/recalibrate`](./services-calibration.md#recalibrate-imu)                                | `POST` | Recalibrate the IMU while the robot stands still.                 |
+| [`/services/imu/calibrate_gyro_scale`](./services-calibration.md#calibrate-gyroscope-scale)            | `POST` | Calibrate the gyroscope scale.                                    |
+| [`/ros/imu/clear_gyro_scale`](./services-calibration.md#clear-gyro-scale)                               | `POST` | Clear the stored gyroscope scale calibration.                     |
+| [`/services/calibrate_depth_cameras`](./services-calibration.md#calibrate-depth-cameras)                | `POST` | Align the depth-camera point clouds with the lidar.               |
+| [`/services/calibrate_depth_camera_masks`](./services-calibration.md#calibrate-depth-camera-masks)      | `POST` | Mask the parts of the robot seen by its own depth cameras.        |
+| [`/services/calibrate_duo_lidar_poses`](./services-calibration.md#calibrate-duo-lidar-poses)            | `POST` | Calibrate the poses of the left-front and right-back lidars.      |
+| [`/ros/jack_mast/calibrate_mast_tick_base`](./services-calibration.md#calibrate-mast-tick-base)         | `POST` | Calibrate the tick base of the jack mast.                        |
+
+### Network
+
+<!-- prettier-ignore -->
+| Endpoint                                                    | Method | Description                                                     |
+| ----------------------------------------------------------- | ------ | --------------------------------------------------------------- |
+| [`/services/setup_wifi`](./services-network.md#configure-wi-fi)                             | `POST` | Switch Wi-Fi between AP and station mode.                       |
+| [`/services/set_route_mode`](./services-network.md#set-route-mode)                          | `POST` | Choose which network interface is the default route.            |
+
+### System & Maintenance
+
+<!-- prettier-ignore -->
+| Endpoint                                                    | Method | Description                                                          |
+| ----------------------------------------------------------- | ------ | -------------------------------------------------------------------- |
+| [`/services/wake_up_device`](./services-system.md#wake-up-the-device)                                   | `POST` | Wake the robot from sleep.                                           |
+| [`/services/restart_service`](./services-system.md#restart-services)                                    | `POST` | Restart all robot software.                                          |
+| [`/services/baseboard/shutdown`](./services-system.md#shutdown-or-reboot-the-device)                    | `POST` | Reboot or shut down the main computer or the whole device.            |
+| [`/services/step_time`](./services-system.md#step-time)                                                 | `GET/POST` | Check for a time offset (`GET`) or step the clock (`POST`).      |
+| [`/services/monitor_recheck_errors`](./services-system.md#recheck-errors)                               | `POST` | Re-run the error checks.                                             |
+| [`/services/reset_usb_devices`](./services-system.md#reset-usb-devices)                                 | `POST` | Reset selected USB devices by `bus/dev`.                             |
+| [`/services/clear_system_down_unexpectedly`](./services-system.md#clear-system-down-unexpectedly-alert) | `POST` | Clear the “system down unexpectedly” alert.                           |
+| [`/services/clear_range_data_all_zero_error`](./services-system.md#clear-range-data-all-zero-error)     | `POST` | Clear the “range data all zero” lidar error.                          |
+| [`/services/clear_fall_risk_warning`](./services-system.md#clear-fall-risk-warning)                     | `POST` | Clear the fall-risk warning.                                         |
+| [`/ros/rosmaster/topics`](./services-system.md#topic-list)                                              | `GET`  | List published ROS topics with types and counts.                     |
+| [`/ros/rosmaster/topics/published_names`](./services-system.md#published-topic-names)                   | `GET`  | List the names of published ROS topics.                              |

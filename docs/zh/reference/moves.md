@@ -75,7 +75,7 @@ interface MoveActionCreate {
 }
 ```
 
-### 顶升设备
+### 顶升设备 {#jack-device}
 
 自 2.7.0 起，新增了一个型号（代号为 **Longjack**），它可以钻入货架下方并将其顶起。
 
@@ -83,9 +83,9 @@ interface MoveActionCreate {
 
 1. **钻入货架下方**：创建一个 `type=align_with_rack` 的移动动作以钻入货架下方。
 2. **升起顶升设备**：当移动成功时，调用 `/services/jack_up`。
-   1. 顶升设备的进度通过 [Jack State Topic (顶升状态话题)](../reference/websocket.md#jack-state) 报告。
+   1. 顶升设备的进度通过 [Jack State Topic (顶升状态话题)](./websocket-cargo.md#jack-state) 报告。
    2. 当顶升设备完全升起时，机器人的轮廓 (footprint) 将扩大以适配货架的轮廓。
-      更新后的轮廓可以通过 [Robot Model Topic (机器人模型话题)](../reference/websocket.md#robot-model) 获取。
+      更新后的轮廓可以通过 [Robot Model Topic (机器人模型话题)](./websocket-navigation.md#robot-model) 获取。
 3. **移动到卸货点**：顶升设备完全升起后，创建另一个 `type=to_unload_point` 的移动动作以移动到卸货点。
 4. **降下顶升设备**：调用 `/services/jack_down` 进行卸货。
 5. （可选）创建下一个移动动作。机器人在发起下一个动作前会先移开货架点。
@@ -96,7 +96,7 @@ interface MoveActionCreate {
 | ![](../../reference/jack_monitor.png) | ![](../../reference/jack_real.jpg) |
 
 :::warning 注意
-必须正确配置某些参数才能确保安全运行。参见 [rack.specs](./system_settings.md#rackspecs)
+必须正确配置某些参数才能确保安全运行。参见 [rack.specs](./system_settings.md#rack-specs)
 :::
 
 ### 点到区域移动
@@ -134,7 +134,7 @@ interface MoveActionCreate {
 
 ![](../../reference/follow_given_route.png)
 
-### 跟随目标
+### 跟随目标 {#follow-target}
 
 此动作指示机器人跟随一个移动的目标。
 
@@ -145,7 +145,7 @@ curl -X POST
   http://192.168.25.25:8090/chassis/moves
 ```
 
-创建此动作后，用户应通过 WebSocket 话题 `/follow_target_state` 发送目标位姿：参见 [Follow Target](../reference/websocket.md#follow-target-state)
+创建此动作后，用户应通过 WebSocket 话题 `/follow_target_state` 发送目标位姿：参见 [Follow Target](./websocket-navigation.md#follow-target-state)
 
 ### 货车装货与卸货 {#truck-load-unload}
 

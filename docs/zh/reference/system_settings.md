@@ -136,7 +136,7 @@ curl http://192.168.25.25:8090/system/settings/effective
 
 本节记录了可用的配置选项。
 
-### rack.specs (货架规格)
+### rack.specs (货架规格) {#rack-specs}
 
 定义货架的物理尺寸以及机器人应如何与其交互。
 

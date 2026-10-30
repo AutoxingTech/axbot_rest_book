@@ -15,7 +15,7 @@ Each controller is identified by a MAC address. The door's MAC address and its p
 Using this information, the robot interacts with the door as follows:
 
 - **From the robot side:**
-  - The robot continuously checks if its [global path](../reference/websocket.md#global-path) intersects with an automatic door's polygon.
+  - The robot continuously checks if its [global path](./websocket-navigation.md#global-path) intersects with an automatic door's polygon.
   - If a door is detected on the path ahead, the robot broadcasts an `Open Door {MAC} for {ROBOT SN}` command at regular intervals.
   - If the door reports its state as 'open', the robot proceeds. Otherwise, the door's polygon is treated as an impassable obstacle.
   - Once the robot has successfully passed through, it stops sending the open-door request.
@@ -29,7 +29,7 @@ Using this information, the robot interacts with the door as follows:
   - If no open-door commands are received for three seconds, the door will automatically close.
 
 ::: tip
-The status of nearby automatic doors can be monitored via the [Nearby Auto Doors](../reference/websocket.md#nearby-auto-doors) WebSocket topic.
+The status of nearby automatic doors can be monitored via the [Nearby Auto Doors](./websocket-environment.md#nearby-auto-doors) WebSocket topic.
 :::
 
 ## Bluetooth API

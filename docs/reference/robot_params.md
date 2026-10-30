@@ -68,4 +68,4 @@ The footprint data must adhere to the following rules:
 
 ![](./footprint.png)
 
-Starting from version 2.7.0, you can use the [Robot Model Topic](../reference/websocket.md#robot-model) to monitor real-time changes to the footprint. For example, when a rack is mounted, the footprint automatically updates to the combined convex hull of the robot and the rack.
+Starting from version 2.7.0, you can use the [Robot Model Topic](./websocket-navigation.md#robot-model) to monitor real-time changes to the footprint. For example, when a rack is mounted, the footprint automatically updates to the combined convex hull of the robot and the rack.

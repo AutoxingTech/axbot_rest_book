@@ -87,9 +87,9 @@ In a typical point-to-point task, the robot should use the following sequence of
 
 1. **Crawl under the rack**: Create a move action with `type=align_with_rack` to crawl under the rack.
 2. **Raise the jack device**: When the move succeeds, call `/services/jack_up`.
-   1. The progress of the jack device is reported via the [Jack State Topic](../reference/websocket.md#jack-state).
+   1. The progress of the jack device is reported via the [Jack State Topic](./websocket-cargo.md#jack-state).
    2. When the jack is fully up, the footprint of the robot will expand to accommodate that of the rack.
-      The updated footprint can be received via the [Robot Model Topic](../reference/websocket.md#robot-model).
+      The updated footprint can be received via the [Robot Model Topic](./websocket-navigation.md#robot-model).
 3. **Move to the unload point**: When the jack is fully up, create another move action with `type=to_unload_point` to move to the unload point.
 4. **Lower the jack device**: Call `/services/jack_down` to unload.
 5. Optionally, create the next move action. The robot will move away from the rack point before initiating the next action.
@@ -100,7 +100,7 @@ In a typical point-to-point task, the robot should use the following sequence of
 | ![](./jack_monitor.png) | ![](./jack_real.jpg) |
 
 :::warning
-Certain parameters must be configured correctly for safe operation. See [rack.specs](./system_settings.md#rackspecs)
+Certain parameters must be configured correctly for safe operation. See [rack.specs](./system_settings.md#rack-specs)
 :::
 
 ### Point-to-Area Move
@@ -149,7 +149,7 @@ curl -X POST
   http://192.168.25.25:8090/chassis/moves
 ```
 
-Once this action is created, the user should send target poses via the WebSocket topic `/follow_target_state`: See [Follow Target](../reference/websocket.md#follow-target-state)
+Once this action is created, the user should send target poses via the WebSocket topic `/follow_target_state`: See [Follow Target](./websocket-navigation.md#follow-target-state)
 
 ### Load / Unload on Truck {#truck-load-unload}
 

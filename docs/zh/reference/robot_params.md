@@ -68,4 +68,4 @@ curl http://192.168.25.25:8090/robot-params/default # 自 2.7.6 版本起可用�
 
 ![](../../reference/footprint.png)
 
-从 2.7.0 版本起，您可以使用 [Robot Model Topic (机器人模型话题)](../reference/websocket.md#robot-model) 监控轮廓的实时变化。例如，当挂载货架时，轮廓会自动更新为机器人和货架的合并凸包。
+从 2.7.0 版本起，您可以使用 [Robot Model Topic (机器人模型话题)](./websocket-navigation.md#robot-model) 监控轮廓的实时变化。例如，当挂载货架时，轮廓会自动更新为机器人和货架的合并凸包。
