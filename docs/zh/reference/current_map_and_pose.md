@@ -1,6 +1,6 @@
 # 当前地图与位姿 API
 
-## 设置当前地图
+## 设置当前地图 {#set-current-map}
 
 有几种方式可以设置当前地图：
 
@@ -44,7 +44,7 @@ class SetCurrentMapWithDataRequest {
 }
 ```
 
-### 通过加载本地文件设置当前地图
+### 通过加载本地文件设置当前地图 {#set-current-map-by-loading-local-files}
 
 从 2.11.0 版本起，可以直接从机器人上的本地文件加载当前地图。
 

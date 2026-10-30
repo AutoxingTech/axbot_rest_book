@@ -121,7 +121,7 @@ curl http://192.168.25.25:8090/maps/1
 
 ## 创建地图 {#create-a-map}
 
-可以使用 Base64 编码的数据创建地图，或直接从服务器上的本地文件路径创建。还有一种从建图任务直接创建地图的方法（参见 [mappings.md](mappings.md#直接将建图产物保存为地图)）。
+可以使用 Base64 编码的数据创建地图，或直接从服务器上的本地文件路径创建。还有一种从建图任务直接创建地图的方法（参见 [mappings.md](mappings.md#save-mapping-as-map)）。
 
 ### 从 Base64 数据创建地图 {#create-from-base64}
 

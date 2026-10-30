@@ -21,7 +21,7 @@
 - 2026-04-29 添加服务 [牵引钩锁定、牵引钩释放、清除牵引钩错误](../reference/services-cargo.md#towing-hook-lock)
 - 2026-04-29 添加服务 [装载/卸载货物](../reference/services-cargo.md#load-unload-cargo)
 - 添加 `/services/query_pose/trailer_pose` [查询位姿](../reference/services-localization.md#query-pose)
-- 支持在 [地图 API](../reference/maps.md#create-map-from-local-files) 中直接从本地文件创建地图
+- 支持在 [地图 API](../reference/maps.md#create-from-local-file) 中直接从本地文件创建地图
 - 强调通过二进制文件下载建图结果，使用 [pbstream_url](../reference/mappings.md#mapping-list)
 - 在 [/slam/state](../reference/websocket-localization.md#positioning-state) 中添加 `nav_sat_state`
 - 添加 `/devpvt` websocket 通道 [CHC 导航状态 (GNSS/INS)](../reference/websocket-environment.md#devpvt)
@@ -36,7 +36,7 @@
 - 在 [/robot_model](../reference/websocket-navigation.md#robot-model) 中添加 `expanded_footprint`
 - 添加 websocket 通道 [更新的地图切片](../reference/websocket-mapping.md#updated-map-slice)
 - 添加 `/services/query_pose` [查询位姿](../reference/services-localization.md#query-pose)
-- 添加 `/device/sensors` [传感器列表](../reference/device.md#sensor-list)，用于质量控制流程。
+- 添加 `/device/sensors` [传感器列表](../reference/device.md#sensors-list)，用于质量控制流程。
 - 添加 `/xxxx_laser_2d/matched` [单个激光雷达设备的点云](../reference/websocket-perception.md#point-cloud-for-individual-lidar-devices)。
 - 添加 `/depth_camera/xxx/image` [深度相机图像](../reference/websocket-perception.md#depth-camera-images)
 
@@ -92,8 +92,8 @@
 
 ## 2.7.1
 
-- 支持 [时间源](../reference/device.md#time-sources) 管理
-- 支持将机器人用作 [NTP 服务器](../reference/device.md#ntp-server)
+- 支持 [时间源](../reference/device.md#time-source) 管理
+- 支持将机器人用作 [NTP 服务器](../reference/device.md#ntp-servers)
 
 ## 2.7.0
 
@@ -167,7 +167,7 @@
 - 在 Websocket `/slam/state` 中添加 `position_quality` 和 `lidar_matched`。详见 [定位状态](../reference/websocket-localization.md#positioning-state)
 - 在 `/device/available_wifis` 中添加 `open`。详见 [可用 WIFI 列表](../reference/device.md#wifi-list)
 - 在 `/robot-params` 中添加 `/planning/auto_hold`。详见 [机器人参数](../reference/robot_params.md)
-- 在 [网络设置](../reference/services-network.md#set-route-mode) 和 [网络信息](../reference/device.md#network-information) 中添加 `/services/set_route_mode`
+- 在 [网络设置](../reference/services-network.md#set-route-mode) 和 [网络信息](../reference/device.md#network-info) 中添加 `/services/set_route_mode`
 
 ## 2.2.0
 

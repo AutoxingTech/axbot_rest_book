@@ -49,13 +49,13 @@ curl -X POST \
   http://192.168.25.25:8090/robot-params
 ```
 
-## 获取默认参数
+## 获取默认参数 {#get-default-params}
 
 ```bash
 curl http://192.168.25.25:8090/robot-params/default # 自 2.7.6 版本起可用。
 ```
 
-## 机器人轮廓 (Robot Footprint)
+## 机器人轮廓 (Robot Footprint) {#robot-footprint}
 
 `/robot/footprint` 参数应准确代表机器人的俯视轮廓。
 此轮廓用于碰撞检测，必须正确配置以确保安全运行。

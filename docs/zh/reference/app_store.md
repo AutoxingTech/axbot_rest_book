@@ -2,7 +2,7 @@
 
 自 2.5.0 版本起可用
 
-## 列出软件包
+## 列出软件包 {#list-packages}
 
 软件包列表包含所有可用软件包及其当前的更新状态。
 
@@ -147,7 +147,7 @@ curl -X POST \
 { "follow": { "task_id": 19, "version": "1.1.6-opi64" } }
 ```
 
-## 从本地文件安装软件包
+## 从本地文件安装软件包 {#install-package-from-local-file}
 
 ```bash
 curl -X POST \
