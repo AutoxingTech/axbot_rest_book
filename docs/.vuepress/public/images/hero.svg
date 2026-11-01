@@ -1,0 +1,151 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 640 420"
+  width="640"
+  height="420"
+  role="img"
+  aria-label="Robot control console showing a navigation map, live pose and API endpoints"
+>
+  <defs>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0B1526" />
+      <stop offset="0.55" stop-color="#0A1222" />
+      <stop offset="1" stop-color="#0C1B33" />
+    </linearGradient>
+    <linearGradient id="route" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#38BDF8" />
+      <stop offset="1" stop-color="#00E5C0" />
+    </linearGradient>
+    <linearGradient id="robot" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4F8BFF" />
+      <stop offset="1" stop-color="#00C8DE" />
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22D3EE" />
+      <stop offset="1" stop-color="#3B82F6" />
+    </linearGradient>
+    <radialGradient id="glowBlue" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#3B82F6" stop-opacity="0.38" />
+      <stop offset="1" stop-color="#3B82F6" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glowCyan" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#22D3EE" stop-opacity="0.32" />
+      <stop offset="1" stop-color="#22D3EE" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#2A3F63" stroke-width="1" opacity="0.55" />
+    </pattern>
+    <clipPath id="panelClip">
+      <rect width="640" height="420" rx="24" />
+    </clipPath>
+    <clipPath id="mapClip">
+      <rect x="20" y="64" width="380" height="336" rx="16" />
+    </clipPath>
+    <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <g clip-path="url(#panelClip)" font-family="'Segoe UI', 'Microsoft YaHei', ui-sans-serif, system-ui, sans-serif">
+    <!-- surface -->
+    <rect width="640" height="420" fill="url(#panel)" />
+    <ellipse cx="120" cy="50" rx="240" ry="170" fill="url(#glowBlue)" />
+    <ellipse cx="560" cy="392" rx="210" ry="150" fill="url(#glowCyan)" />
+    <rect width="640" height="420" fill="url(#grid)" opacity="0.18" />
+
+    <!-- title bar -->
+    <path d="M0 52h640" stroke="#1C2C4A" stroke-width="1" />
+    <circle cx="24" cy="26" r="4.5" fill="#FF5F57" opacity="0.5" />
+    <circle cx="42" cy="26" r="4.5" fill="#FEBC2E" opacity="0.5" />
+    <circle cx="60" cy="26" r="4.5" fill="#28C840" opacity="0.5" />
+    <text x="84" y="31" fill="#C6D6EE" font-size="14" font-weight="600" letter-spacing="0.3">
+      axbot · robot-01
+    </text>
+    <g>
+      <rect x="516" y="14" width="100" height="24" rx="12" fill="#22D3EE" fill-opacity="0.1" stroke="#22D3EE" stroke-opacity="0.35" />
+      <circle cx="532" cy="26" r="3.5" fill="#22D3EE" />
+      <text x="544" y="31" fill="#7DE6F5" font-size="10.5" font-weight="700" letter-spacing="1.2">LIVE</text>
+    </g>
+
+    <!-- map panel -->
+    <rect x="20" y="64" width="380" height="336" rx="16" fill="#0A1526" stroke="#1E3050" />
+    <g clip-path="url(#mapClip)">
+      <rect x="20" y="64" width="380" height="336" fill="url(#grid)" opacity="0.5" />
+      <text x="40" y="90" fill="#6C82A6" font-size="10" font-weight="700" letter-spacing="1.6">NAVIGATION MAP</text>
+      <circle cx="388" cy="86" r="3" fill="#22D3EE" opacity="0.8" />
+      <circle cx="388" cy="86" r="9" fill="none" stroke="#22D3EE" stroke-opacity="0.35" />
+
+      <!-- lidar sweep -->
+      <path d="M168 322 L168 212 A110 110 0 0 1 245.8 244.2 Z" fill="#22D3EE" fill-opacity="0.07" />
+      <g fill="none" stroke="#22D3EE">
+        <circle cx="168" cy="322" r="52" stroke-opacity="0.2" stroke-dasharray="4 7" />
+        <circle cx="168" cy="322" r="84" stroke-opacity="0.13" stroke-dasharray="4 7" />
+        <circle cx="168" cy="322" r="116" stroke-opacity="0.07" stroke-dasharray="4 7" />
+      </g>
+
+      <!-- planned route -->
+      <path
+        d="M56 372 L112 316 L168 328 L232 262 L292 250 L344 204"
+        fill="none"
+        stroke="url(#route)"
+        stroke-width="3.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-dasharray="8 7"
+        opacity="0.9"
+      />
+      <circle cx="112" cy="316" r="4" fill="#0A1526" stroke="#38BDF8" stroke-width="2" />
+      <circle cx="232" cy="262" r="4" fill="#0A1526" stroke="#38BDF8" stroke-width="2" />
+      <circle cx="344" cy="204" r="10" fill="none" stroke="#00E5C0" stroke-opacity="0.75" stroke-width="2" />
+      <circle cx="344" cy="204" r="3.6" fill="#00E5C0" filter="url(#softGlow)" />
+      <circle cx="56" cy="372" r="4.5" fill="#22D3EE" opacity="0.8" />
+
+      <!-- robot -->
+      <g>
+        <rect x="146" y="312" width="5" height="22" rx="2.5" fill="#2C456D" />
+        <rect x="185" y="312" width="5" height="22" rx="2.5" fill="#2C456D" />
+        <rect x="152" y="306" width="32" height="32" rx="9" fill="url(#robot)" filter="url(#softGlow)" />
+        <rect x="160" y="314" width="16" height="16" rx="5" fill="#0A1526" fill-opacity="0.55" />
+        <circle cx="168" cy="322" r="4.6" fill="#EAF7FF" />
+        <rect x="163" y="303.5" width="10" height="2.5" rx="1.25" fill="#A5F3FC" />
+      </g>
+
+      <text x="40" y="386" fill="#6C82A6" font-size="10" letter-spacing="0.4">global path · 6 waypoints</text>
+    </g>
+
+    <!-- pose card -->
+    <g>
+      <rect x="416" y="64" width="204" height="100" rx="16" fill="#0A1526" stroke="#1E3050" />
+      <text x="434" y="88" fill="#6C82A6" font-size="10" font-weight="700" letter-spacing="1.6">POSE</text>
+      <text x="434" y="118" fill="#E9F1FF" font-size="17" font-weight="600">x 12.40</text>
+      <text x="434" y="144" fill="#E9F1FF" font-size="17" font-weight="600">y 4.85</text>
+      <text x="546" y="118" fill="#22D3EE" font-size="13" font-weight="600">θ 1.57</text>
+      <text x="546" y="144" fill="#6C82A6" font-size="10" letter-spacing="0.6">rad</text>
+    </g>
+
+    <!-- battery card -->
+    <g>
+      <rect x="416" y="176" width="204" height="100" rx="16" fill="#0A1526" stroke="#1E3050" />
+      <text x="434" y="200" fill="#6C82A6" font-size="10" font-weight="700" letter-spacing="1.6">BATTERY</text>
+      <text x="434" y="238" fill="#E9F1FF" font-size="24" font-weight="700">82%</text>
+      <rect x="434" y="252" width="168" height="7" rx="3.5" fill="#1B2C4A" />
+      <rect x="434" y="252" width="138" height="7" rx="3.5" fill="url(#bar)" />
+    </g>
+
+    <!-- endpoints card -->
+    <g>
+      <rect x="416" y="288" width="204" height="112" rx="16" fill="#0A1526" stroke="#1E3050" />
+      <text x="434" y="312" fill="#6C82A6" font-size="10" font-weight="700" letter-spacing="1.6">ENDPOINTS</text>
+      <rect x="434" y="324" width="168" height="28" rx="9" fill="#3B82F6" fill-opacity="0.12" stroke="#3B82F6" stroke-opacity="0.32" />
+      <text x="446" y="343" fill="#9FC0FF" font-size="11" font-weight="600" letter-spacing="0.2">POST /chassis/moves</text>
+      <rect x="434" y="360" width="168" height="28" rx="9" fill="#22D3EE" fill-opacity="0.09" stroke="#22D3EE" stroke-opacity="0.28" />
+      <text x="446" y="379" fill="#8EE9F7" font-size="11" font-weight="600" letter-spacing="0.2">WS /topics/pose</text>
+    </g>
+
+    <rect x="0.5" y="0.5" width="639" height="419" rx="24" fill="none" stroke="#FFFFFF" stroke-opacity="0.08" />
+  </g>
+</svg>

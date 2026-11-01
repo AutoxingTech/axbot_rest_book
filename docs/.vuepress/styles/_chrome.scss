@@ -1,0 +1,434 @@
+/* ==========================================================================
+   Chrome: navbar, sidebar, search, toggles
+   ========================================================================== */
+
+/* ------------------------------------------------------------------ navbar */
+.vp-navbar {
+  border-bottom: 0;
+  background: var(--ax-navbar-bg);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+
+    height: 1px;
+
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--vp-c-divider) 12%,
+      var(--vp-c-divider) 88%,
+      transparent 100%
+    );
+  }
+}
+
+/* a soft shadow appears once the page is scrolled (progressive enhancement) */
+@supports (animation-timeline: scroll()) {
+  .vp-navbar {
+    animation: ax-navbar-lift linear both;
+    animation-timeline: scroll();
+    animation-range: 0 96px;
+  }
+
+  @keyframes ax-navbar-lift {
+    from {
+      box-shadow: 0 0 0 0 rgb(10 20 38 / 0%);
+    }
+
+    to {
+      box-shadow: 0 10px 30px -24px rgb(10 20 38 / 55%);
+    }
+  }
+}
+
+/* brand */
+.vp-navbar > span > .route-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.vp-site-logo {
+  height: 1.85rem;
+  margin-inline-end: 0;
+  border-radius: 7px;
+  box-shadow: 0 2px 8px -4px rgb(31 111 235 / 55%);
+}
+
+.vp-site-name {
+  font-weight: 700;
+  font-size: 1.06rem;
+  letter-spacing: -0.022em;
+}
+
+/* links */
+.vp-navbar-items {
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.vp-navbar-item {
+  display: inline-flex;
+  align-items: center;
+  margin-inline-start: 0.15rem;
+}
+
+.vp-navbar-item:first-child {
+  margin-inline-start: 0;
+}
+
+.vp-navbar-item > .auto-link,
+.vp-navbar-dropdown-title {
+  padding: 0.42rem 0.72rem;
+  border-radius: var(--ax-radius-sm);
+
+  color: var(--vp-c-text-mute);
+
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.4rem;
+
+  transition:
+    background-color 0.16s ease,
+    color 0.16s ease;
+}
+
+.vp-navbar-item > .auto-link {
+  border-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.vp-navbar-item > .auto-link:hover,
+.vp-navbar-item > .auto-link.route-link-active,
+.vp-navbar-dropdown-title:hover {
+  background: var(--vp-c-control);
+  color: var(--vp-c-text);
+}
+
+.vp-navbar-item > .auto-link.route-link-active {
+  color: var(--vp-c-accent);
+  background: var(--vp-c-accent-soft);
+}
+
+/* dropdown panel */
+.vp-navbar-dropdown-wrapper:not(.mobile) .vp-navbar-dropdown {
+  margin-top: 0.4rem;
+  padding: 0.4rem;
+  border: 1px solid var(--ax-line);
+  border-radius: var(--ax-radius-md);
+  background: var(--vp-c-bg-elv);
+  box-shadow: var(--ax-shadow-3);
+}
+
+.vp-navbar-dropdown-item {
+  border-radius: 8px;
+  line-height: 1.6rem;
+}
+
+.vp-navbar-dropdown-item .auto-link {
+  padding: 0.3rem 0.7rem;
+  border-radius: 8px;
+  color: var(--vp-c-text-mute);
+  font-size: 0.875rem;
+}
+
+.vp-navbar-dropdown-item .auto-link:hover {
+  background: var(--vp-c-control);
+}
+
+.vp-navbar-dropdown-item .auto-link.route-link-active {
+  background: var(--vp-c-accent-soft);
+  color: var(--vp-c-accent);
+}
+
+.vp-navbar-dropdown-item .auto-link.route-link-active::after {
+  display: none;
+}
+
+/* color mode switch */
+.vp-toggle-color-mode-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2.2rem;
+  height: 2.2rem;
+  margin-inline-start: 0.35rem;
+
+  border-radius: 50%;
+
+  opacity: 1;
+  color: var(--vp-c-text-mute);
+
+  transition:
+    background-color 0.16s ease,
+    color 0.16s ease;
+
+  &:hover {
+    background: var(--vp-c-control);
+    color: var(--vp-c-text);
+  }
+}
+
+/* ------------------------------------------------------------------- search */
+.search-box {
+  margin-inline-start: 0.5rem;
+}
+
+.search-box input {
+  width: var(--search-input-width);
+  height: 2.25rem;
+  padding-inline: 2rem 0.7rem;
+  border: 1px solid var(--ax-line);
+  border-radius: var(--ax-radius-sm);
+
+  background-color: var(--ax-search-bg);
+  background-size: 0.95rem;
+  background-position: 0.7rem center;
+
+  color: var(--vp-c-text);
+  font-size: 0.84rem;
+
+  transition:
+    border-color 0.16s ease,
+    background-color 0.16s ease,
+    box-shadow 0.16s ease;
+
+  &::placeholder {
+    color: var(--vp-c-text-subtle);
+  }
+
+  &:focus {
+    border-color: color-mix(in srgb, var(--vp-c-accent) 55%, var(--ax-line));
+    background-color: var(--vp-c-bg);
+    box-shadow: var(--ax-ring);
+  }
+}
+
+.search-box .suggestions {
+  top: 2.5rem;
+  padding: 0.4rem;
+  border: 1px solid var(--ax-line);
+  border-radius: var(--ax-radius-md);
+  background: var(--vp-c-bg-elv);
+  box-shadow: var(--ax-shadow-3);
+}
+
+.search-box .suggestion {
+  border-radius: 8px;
+  padding: 0.45rem 0.6rem;
+}
+
+.search-box .suggestion.focus {
+  background-color: var(--vp-c-accent-soft);
+}
+
+.search-box .suggestion .page-title {
+  color: var(--vp-c-text);
+  font-weight: 600;
+}
+
+.search-box .suggestion .page-header {
+  color: var(--vp-c-text-subtle);
+}
+
+.search-box .suggestion.focus a {
+  color: var(--vp-c-accent);
+}
+
+/* ------------------------------------------------------------------ sidebar */
+.vp-sidebar {
+  padding: 1.15rem 0.85rem 3rem;
+  border-inline-end: 1px solid var(--vp-c-divider);
+
+  scrollbar-color: var(--vp-c-border) transparent;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background: var(--vp-c-border);
+    background-clip: content-box;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--vp-c-border-hard);
+    background-clip: content-box;
+  }
+}
+
+.vp-sidebar-items {
+  padding: 0;
+}
+
+/* group rhythm */
+.vp-sidebar-items > li + li {
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--vp-c-divider);
+}
+
+.vp-sidebar-item.vp-sidebar-heading {
+  margin: 0;
+  padding: 0.35rem 0.75rem 0.45rem;
+  border: 0;
+
+  color: var(--vp-c-text-subtle);
+
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.09em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.vp-sidebar-item:not(.vp-sidebar-heading) {
+  display: block;
+
+  margin: 1px 0;
+  padding: 0.42rem 0.72rem;
+
+  border: 0;
+  border-inline-start: 2px solid transparent;
+  border-radius: 0 8px 8px 0;
+
+  color: var(--vp-c-text-mute);
+
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.45;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+
+  &:hover {
+    background: var(--vp-c-control);
+    color: var(--vp-c-text);
+  }
+
+  &.active {
+    border-inline-start-color: var(--vp-c-accent);
+    background: var(--vp-c-accent-soft);
+    color: var(--vp-c-accent);
+    font-weight: 600;
+  }
+}
+
+.vp-sidebar-children {
+  margin: 0;
+}
+
+/* Nested heading lists. The default theme only pads the first nested level
+   (1.75rem), which makes that level look far more indented than the ones
+   below it. Every level now steps by the same 0.9rem. */
+.vp-sidebar .vp-sidebar-item:not(.vp-sidebar-heading) + .vp-sidebar-children {
+  padding-inline-start: 0.9rem;
+}
+
+.vp-sidebar
+  .vp-sidebar-children
+  .vp-sidebar-children
+  .vp-sidebar-item:not(.vp-sidebar-heading) {
+  padding-inline: 0.72rem;
+}
+
+/* mobile nav list inside the sidebar */
+.vp-sidebar .vp-navbar-items {
+  margin-bottom: 0.75rem;
+  padding: 0.25rem 0 0.9rem;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.vp-sidebar .vp-navbar-item {
+  display: block;
+  margin: 0;
+  padding: 0.15rem 0;
+  font-size: 0.95rem;
+}
+
+.vp-sidebar .vp-navbar-item > .auto-link,
+.vp-sidebar .vp-navbar-dropdown-title-mobile {
+  display: block;
+
+  padding: 0.45rem 0.75rem;
+  border-radius: 8px;
+
+  color: var(--vp-c-text);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.vp-sidebar .vp-navbar-items .auto-link:hover {
+  background: var(--vp-c-control);
+  color: var(--vp-c-accent);
+}
+
+/* ------------------------------------------------------------------ toggles */
+.vp-toggle-sidebar-button {
+  top: 0.75rem;
+  inset-inline-start: 0.9rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  color: var(--vp-c-text-mute);
+
+  &:hover {
+    background: var(--vp-c-control);
+  }
+}
+
+.vp-sidebar-mask {
+  background: rgb(7 13 24 / 42%);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+/* ------------------------------------------------------------------ narrow */
+/* Below ~1080px the four configured nav links no longer fit next to the
+   brand, language menu, repo link, colour switch and search box. They are the
+   first four navbar items in config.js; the sidebar still covers navigation. */
+@media (max-width: 1079px) {
+  .vp-navbar .vp-navbar-items > .vp-navbar-item:nth-child(-n + 4) {
+    display: none;
+  }
+
+  .vp-navbar-items-wrapper {
+    padding-inline-start: 0.75rem;
+  }
+
+  .search-box {
+    margin-inline-start: 0.4rem;
+  }
+
+  .search-box input {
+    width: 10.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-box input {
+    width: 8.75rem;
+  }
+}
+
+/* the drawer sits under the fixed navbar, so keep its content clear of it */
+@media (max-width: 719px) {
+  .vp-sidebar {
+    padding-top: calc(var(--navbar-height) + 0.5rem);
+  }
+}

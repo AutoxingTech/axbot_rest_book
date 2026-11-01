@@ -12,9 +12,18 @@ import 'prismjs/components/prism-json5.js'
 // Prism ships no jsonc grammar; alias it to json5, which also allows comments and trailing commas.
 Prism.languages.jsonc = Prism.languages.json5
 
+// Deployment base path. Kept in one place so head links stay in sync.
+const BASE = '/axbot_rest_book/'
+
 export default defineUserConfig({
-    base: "/axbot_rest_book/",
+    base: BASE,
     bundler: viteBundler(),
+    head: [
+        ['link', { rel: 'icon', type: 'image/svg+xml', href: `${BASE}images/favicon.svg` }],
+        ['link', { rel: 'apple-touch-icon', href: `${BASE}images/logo.svg` }],
+        ['meta', { name: 'theme-color', content: '#ffffff' }],
+        ['meta', { name: 'theme-color', content: '#070d18', media: '(prefers-color-scheme: dark)' }],
+    ],
     plugins: [
         searchPlugin({
             locales: {
@@ -43,10 +52,19 @@ export default defineUserConfig({
         repo: 'AutoxingTech/axbot_rest_book',
         docsRepo: 'AutoxingTech/axbot_rest_book',
         docsBranch: 'main',
+        logo: '/images/logo.svg',
+        logoAlt: 'Autoxing',
         editLink: true,
         locales: {
             "/": {
-                navbar: [],
+                selectLanguageName: 'English',
+                selectLanguageText: 'Language',
+                navbar: [
+                    { text: 'Guide', link: '/overview/getting_start.md' },
+                    { text: 'API Reference', link: '/reference/maps.md' },
+                    { text: 'WebSocket', link: '/reference/websocket.md' },
+                    { text: 'Changelog', link: '/other/changelog.md' },
+                ],
                 sidebar: [
                     {
                         text: 'Guide',
@@ -121,7 +139,14 @@ export default defineUserConfig({
                 lastUpdatedText: 'Last Updated'
             },
             "/zh/": {
-                navbar: [],
+                selectLanguageName: '简体中文',
+                selectLanguageText: '语言',
+                navbar: [
+                    { text: '入门指南', link: '/zh/overview/getting_start.md' },
+                    { text: '参考手册', link: '/zh/reference/maps.md' },
+                    { text: 'WebSocket 话题', link: '/zh/reference/websocket.md' },
+                    { text: '更新日志', link: '/zh/other/changelog.md' },
+                ],
                 sidebar: [
                     {
                         text: '入门指南',

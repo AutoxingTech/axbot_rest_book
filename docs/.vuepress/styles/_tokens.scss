@@ -1,0 +1,175 @@
+/* ==========================================================================
+   Autoxing docs — design tokens
+   Light is the default; dark theme tokens mirror the theme's [data-theme]
+   switch so the site keeps its identity in both modes.
+   ========================================================================== */
+
+:root {
+  // brand ---------------------------------------------------------------
+  --ax-blue-700: #1450b8;
+  --ax-blue-600: #1a5fdc;
+  --ax-blue-500: #1f6feb;
+  --ax-blue-400: #3b82f6;
+  --ax-cyan-500: #00c8de;
+  --ax-cyan-400: #22d3ee;
+  --ax-gradient: linear-gradient(115deg, #2d7bff 0%, #1f6feb 46%, #00c8de 100%);
+  --ax-gradient-soft: linear-gradient(
+    120deg,
+    rgb(45 123 255 / 12%) 0%,
+    rgb(0 200 222 / 12%) 100%
+  );
+
+  // surfaces ------------------------------------------------------------
+  --ax-surface: #ffffff;
+  --ax-surface-soft: #f7f9fd;
+  --ax-surface-raised: #ffffff;
+  --ax-line: #e6ecf5;
+  --ax-line-strong: #d7e0ee;
+  --ax-code-inline-bg: #eef4fe;
+  --ax-code-inline-border: #dbe6fa;
+  --ax-code-inline-text: #14509e;
+  --ax-navbar-bg: rgb(255 255 255 / 88%);
+  --ax-search-bg: #f2f6fc;
+
+  // radii ---------------------------------------------------------------
+  --ax-radius-xs: 6px;
+  --ax-radius-sm: 10px;
+  --ax-radius-md: 14px;
+  --ax-radius-lg: 20px;
+  --ax-radius-xl: 28px;
+
+  // elevation -----------------------------------------------------------
+  --ax-ring: 0 0 0 3px rgb(31 111 235 / 18%);
+  --ax-shadow-1:
+    0 1px 2px rgb(10 20 38 / 5%), 0 1px 3px rgb(10 20 38 / 4%);
+  --ax-shadow-2:
+    0 6px 20px -10px rgb(10 20 38 / 16%), 0 2px 6px -4px rgb(10 20 38 / 8%);
+  --ax-shadow-3:
+    0 22px 48px -24px rgb(10 20 38 / 30%), 0 8px 20px -14px rgb(10 20 38 / 16%);
+  --ax-shadow-glow: 0 12px 30px -12px rgb(31 111 235 / 55%);
+
+  // fonts ---------------------------------------------------------------
+  --font-family:
+    'Segoe UI Variable Text', 'Segoe UI', -apple-system, blinkmacsystemfont,
+    system-ui, roboto, 'Helvetica Neue', 'PingFang SC', 'HarmonyOS Sans SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --code-font-family:
+    'Cascadia Code', 'JetBrains Mono', 'SFMono-Regular', menlo, consolas,
+    'Liberation Mono', monospace;
+
+  // theme mapping -------------------------------------------------------
+  --vp-c-accent: #1a5fdc;
+  --vp-c-accent-bg: #1f6feb;
+  --vp-c-accent-hover: #1450b8;
+  --vp-c-accent-text: #ffffff;
+  --vp-c-accent-soft: rgb(31 111 235 / 10%);
+
+  --vp-c-bg: #ffffff;
+  --vp-c-bg-alt: #f7f9fd;
+  --vp-c-bg-elv: #ffffff;
+
+  --vp-c-text: #182740;
+  --vp-c-text-mute: #52617a;
+  --vp-c-text-subtle: #74839b;
+
+  --vp-c-divider: #e6ecf5;
+  --vp-c-border: #dbe3ef;
+  --vp-c-border-hard: #c9d5e6;
+
+  --vp-c-shadow: rgb(10 20 38 / 14%);
+  --vp-c-control: rgb(31 111 235 / 7%);
+  --vp-c-control-hover: rgb(31 111 235 / 12%);
+
+  --vp-navbar-c-bg: transparent;
+  --vp-sidebar-c-bg: var(--ax-surface-soft);
+
+  // layout --------------------------------------------------------------
+  --navbar-height: 4rem;
+  --navbar-padding-v: 0.75rem;
+  --navbar-padding-h: 1.75rem;
+  --sidebar-width: 19rem;
+  --content-width: 780px;
+  --homepage-width: 1120px;
+
+  // code & search -------------------------------------------------------
+  --code-c-bg: #0b1424;
+  --code-c-text: #dbe7f6;
+  --code-c-line-number: #56698a;
+  --code-c-highlight-bg: rgb(255 255 255 / 7%);
+  --code-font-size: 0.84rem;
+  --code-line-height: 1.7;
+  --code-padding-x: 1.25rem;
+  --code-padding-y: 1.1rem;
+  --code-line-number-width: 3rem;
+  --code-border-radius: 14px;
+
+  --back-to-top-c-bg: #ffffff;
+  --back-to-top-c-shadow: rgb(10 20 38 / 16%);
+  --back-to-top-c-accent-bg: var(--vp-c-accent);
+  --back-to-top-c-accent-hover: var(--vp-c-accent-hover);
+
+  --search-input-width: 12rem;
+  --search-result-width: 24rem;
+
+  --nprogress-c: var(--ax-gradient);
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --ax-surface: #0a1220;
+  --ax-surface-soft: #0a1322;
+  --ax-surface-raised: #0e1829;
+  --ax-line: #1a2740;
+  --ax-line-strong: #24344f;
+  --ax-code-inline-bg: rgb(96 150 255 / 12%);
+  --ax-code-inline-border: rgb(120 170 255 / 18%);
+  --ax-code-inline-text: #b9d3ff;
+  --ax-navbar-bg: rgb(7 13 24 / 86%);
+  --ax-search-bg: #101b2e;
+
+  --ax-ring: 0 0 0 3px rgb(120 170 255 / 26%);
+  --ax-shadow-1: 0 1px 2px rgb(0 0 0 / 40%), 0 1px 3px rgb(0 0 0 / 30%);
+  --ax-shadow-2: 0 8px 24px -12px rgb(0 0 0 / 70%), 0 2px 6px -4px rgb(0 0 0 / 50%);
+  --ax-shadow-3: 0 24px 52px -26px rgb(0 0 0 / 85%), 0 8px 20px -14px rgb(0 0 0 / 70%);
+  --ax-shadow-glow: 0 12px 30px -12px rgb(47 123 246 / 70%);
+
+  --vp-c-accent: #7fadff;
+  --vp-c-accent-bg: #2f7bf6;
+  --vp-c-accent-hover: #4c8fff;
+  --vp-c-accent-text: #ffffff;
+  --vp-c-accent-soft: rgb(88 150 255 / 14%);
+
+  --vp-c-bg: #070d18;
+  --vp-c-bg-alt: #0a1322;
+  --vp-c-bg-elv: #0e1829;
+
+  --vp-c-text: #e8eef9;
+  --vp-c-text-mute: #a7b6cd;
+  --vp-c-text-subtle: #8395ae;
+
+  --vp-c-divider: #1a2740;
+  --vp-c-border: #22314b;
+  --vp-c-border-hard: #2d3e5c;
+
+  --vp-c-shadow: rgb(0 0 0 / 60%);
+  --vp-c-control: rgb(120 170 255 / 10%);
+  --vp-c-control-hover: rgb(120 170 255 / 16%);
+
+  --code-c-bg: #0c1728;
+  --code-c-text: #dbe7f6;
+  --code-c-line-number: #5b7091;
+  --code-c-highlight-bg: rgb(255 255 255 / 8%);
+
+  --search-c-divider: #22314b;
+  --search-c-bg: #0e1829;
+  --search-c-item-text: var(--vp-c-text-mute);
+  --search-c-item-focus: rgb(88 150 255 / 16%);
+  --search-c-accent: #7fadff;
+  --search-c-text: #e8eef9;
+
+  --back-to-top-c-bg: #0e1829;
+  --back-to-top-c-shadow: rgb(0 0 0 / 55%);
+  --back-to-top-c-accent-bg: #7fadff;
+  --back-to-top-c-accent-hover: #a8c6ff;
+}
