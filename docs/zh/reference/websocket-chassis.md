@@ -63,10 +63,12 @@
   "linear_acc_standard_deviation_10s": [0.00517, 0.00535, 0.00575],
   "gyro_calibrating": true,
 
-  "gyro_bias": [0.00123, 0.00235, 0.00346], // 当前偏差
+  // 自 2.14.0 起。当前陀螺零偏，单位：弧度/秒。
+  // 注意：相邻的几个角速度字段是度/秒，这两个字段不是。
+  "gyro_bias": [0.00123, 0.00235, 0.00346],
 
-  // 当 gyro_calibrating 为 true 时，
-  // gyro_bias 将缓慢向此值靠近
+  // 自 2.14.0 起。当 gyro_calibrating 为 true 时，
+  // gyro_bias 会缓慢向此值靠近。单位：弧度/秒。
   "gyro_bias_target": [0.00457, 0.00568, 0.00679]
 }
 ```

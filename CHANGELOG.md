@@ -10,6 +10,8 @@
 - 2026-09-16 Add `expected_cargo_action` in [/planning_state](../reference/websocket-navigation.md#planning-state)
 - 2026-09-14 Add [Traffic Info](../reference/services-mapping.md#traffic-info) API to read/replace the dynamic no-passing zones of the current map
 - 2026-09-12 Add [Bag Streaming API](../reference/bags.md#bag-streaming-api) to replay any bag over plain HTTP with raw message payloads
+- 2026-08-21 Add `lat`/`lon` in [/devpvt](../reference/websocket-environment.md#devpvt)
+- 2026-06-17 Add `gyro_bias` and `gyro_bias_target` in [/imu_state](../reference/websocket-chassis.md#imu-state)
 - 2026-08-21 Remove the obsolete map download endpoint and `download_url` field from [Mapping](../reference/mappings.md#mapping-list)
 - 2026-08-21 Add file sizes (`pbstream_size`, `image_size`, `bag_size`) to [Mapping](../reference/mappings.md#mapping-list) and [Map](../reference/maps.md#map-list) list/detail responses
 - 2026-08-04 Add [Map Overlays](../reference/services-mapping.md#map-overlays) API to read/replace dynamic map overlays as GeoJSON

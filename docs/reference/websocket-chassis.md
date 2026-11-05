@@ -63,10 +63,12 @@ Raw inertial data from the IMU sensor.
   "linear_acc_standard_deviation_10s": [0.00517, 0.00535, 0.00575],
   "gyro_calibrating": true,
 
-  "gyro_bias": [0.00123, 0.00235, 0.00346], // current bias
+  // Since 2.14.0. Current gyro bias, in radians/second.
+  // Note: the angular-velocity fields above are in degrees/second; these two are not.
+  "gyro_bias": [0.00123, 0.00235, 0.00346],
 
-  // when gyro_calibrating is true,
-  // gyro_bias will move slowly towards it
+  // Since 2.14.0. When gyro_calibrating is true,
+  // gyro_bias moves slowly towards it. In radians/second.
   "gyro_bias_target": [0.00457, 0.00568, 0.00679]
 }
 ```

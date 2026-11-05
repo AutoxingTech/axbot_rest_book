@@ -114,13 +114,15 @@ This topic provides the health status of V2X beacons, including message receptio
 
 ## CHC NavState (GNSS/INS) <a id="devpvt"></a> {#devpvt}
 
-Since [master](no final release yet).
+Since 2.14.0.
 
 Raw navigation data from the CHC (华测) GNSS/INS sensor on topic `/devpvt`.
 
 ```json
 {
   "topic": "/devpvt",
+  "lat": 31.2301235, // Latitude in degrees, rounded to 7 decimals (about 1 cm).
+  "lon": 121.4736543, // Longitude in degrees, rounded to 7 decimals.
   "speed": 0.352, // Ground speed (m/s).
   "heading": 270.123, // Track angle — velocity heading in vehicle frame, clockwise, [0, 360] deg.
   "heading2": 180.654, // Dual-antenna heading in vehicle frame, clockwise, [0, 360] deg.
