@@ -27,9 +27,119 @@ curl http://192.168.25.25:8090/bags/
 ]
 ```
 
-## 数据包播放器 API
+## 数据包流式回放 API {#bag-streaming-api}
 
-数据包播放器 API 允许在线回放 ROS bag 文件。它提供有关数据包的元数据，并支持在特定时间范围内下载消息分块。
+把录制好的数据包推送给远端播放器。接口分两半：**索引**给出每条消息的连接与时间戳，不读取任何消息内容；**消息段**返回原始、仍然保持序列化状态的字节。因为内容原样透传，所以任何话题类型都能回放——不需要为每种消息维护转换器，新增消息类型也无需改动服务端。
+
+需要 `bagStreaming` 能力标志。
+
+### 数据源
+
+路径里的第一个元素选择数据包目录：
+
+<!-- prettier-ignore -->
+| 数据源 | 内容 |
+| :--- | :--- |
+| `bags` | 循环录制的数据包（持续录制） |
+| `recordings` | 用户主动保存的录制 |
+
+### 端点
+
+```text
+GET /ros/bag-player/{source}/{filename}/meta
+GET /ros/bag-player/{source}/{filename}/index
+GET /ros/bag-player/{source}/{filename}/messages?start=<n>&end=<n>
+```
+
+### 1. 获取数据包元数据
+
+`GET /ros/bag-player/{source}/{filename}/meta` 返回 `200 application/json`：
+
+```json
+{
+  "startTime": 1674650000.123,
+  "endTime": 1674653600.456,
+  "startTimeUs": 1674650000123456,
+  "endTimeUs": 1674653600456000,
+  "totalMessages": 5000,
+  "segmentSize": 1024,
+  "connections": [
+    {
+      "conn": 0,
+      "topic": "/tracked_pose",
+      "type": "geometry_msgs/PoseStamped",
+      "messageDefinition": "..."
+    }
+  ]
+}
+```
+
+<!-- prettier-ignore -->
+| 字段 | 说明 |
+| :--- | :--- |
+| `startTime`、`endTime` | 首末消息时间戳，单位：秒。 |
+| `startTimeUs`、`endTimeUs` | 同一时间戳的微秒精确值。需要精确排序时用这两个，秒形式会丢精度。 |
+| `totalMessages` | 已建立索引的消息条数。 |
+| `segmentSize` | `/messages` 每段建议的消息条数。 |
+| `connections` | 每个数据包连接一项：`conn` 是索引里使用的连接号，`topic` 与 `type` 描述消息内容，`messageDefinition` 是录制下来的 `.msg` 文本。 |
+
+话题不等于连接：只要发布者身份变化，录制器就会新开一个连接，因此同一个话题可能分散在多个 `conn` 上。始终通过 `connections[conn].topic` 解析轨道。
+
+### 2. 获取索引
+
+`GET /ros/bag-player/{source}/{filename}/index` 返回 `200 application/x-protobuf`，内容为 `bagstream.BagIndex`：每个连接一条轨道，记录全局消息序号与相对数据包起点的微秒时间戳。两个数组都做了差分编码与压缩打包，大文件也只占几 KB。
+
+每个数据包取一次索引，之后的播放全部基于它。
+
+### 3. 获取消息内容
+
+`GET /ros/bag-player/{source}/{filename}/messages?start=<n>&end=<n>` 返回 `200 application/x-protobuf`，内容为 `bagstream.MessageBatch`：按全局序号取 `[start, end)` 区间的消息，每条带自己的序号与原始序列化字节。
+
+<!-- prettier-ignore -->
+| 参数 | 类型 | 必填 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `start` | integer | 是 | 起始消息序号，含。 |
+| `end` | integer | 是 | 结束消息序号，不含；超过 `totalMessages` 时按总数截断。 |
+
+`start` 与 `end` 是**消息序号，不是时间戳**。用索引把播放位置换算成消息序号，再按 `segmentSize` 分段请求。
+
+一段请求会复用途经的每个数据块，因此连续取一段比在包里零散地跳着取便宜得多。
+
+### 解析消息内容
+
+`BagEntry.data` 是 `connections[conn].type` 所指消息类型的 ROS 1 序列化字节——与 `rosbag` 存放的内容完全相同。用对应的消息定义解析即可，接口不做重新编码、过滤或转换。
+
+本接口的消息定义在 TypeScript SDK 中公开：[`src/proto/bagstream.proto`](https://github.com/AutoxingTech/axbot-ts-sdk/blob/master/src/proto/bagstream.proto)；同一仓库也提供官方 SDK 使用的消息类。
+
+### 缓存
+
+所有响应都是不可变的，三个端点都会返回：
+
+```text
+Cache-Control: public, max-age=31536000, immutable
+ETag: W/"<hash>"
+```
+
+带上 `If-None-Match` 可得到 `304 Not Modified`。响应还带 `X-Response-Time-Ms`，表示服务端生成该响应的耗时（含首次请求时的索引构建）。
+
+### 错误响应
+
+<!-- prettier-ignore -->
+| 状态码 | 原因 |
+| :--- | :--- |
+| `400` | 文件名非法、缺少 `start`/`end`，或消息区间越界。 |
+| `404` | 数据源不存在，或没有该数据包。 |
+| `500` | 数据包打不开。 |
+
+`500` 包含无法建立索引的数据包。只支持 ROS 1 v2.0 分块数据包，不支持 ROS 2 数据包（mcap、sqlite3）。录制过程没有正常结束的数据包不含索引记录，会被拒绝并提示先执行 `rosbag reindex <file>`——没有索引时，枚举消息只能把整个文件解压一遍。
+
+## 数据包播放器 API（旧）
+
+::: warning 已废弃
+请改用[数据包流式回放 API](#bag-streaming-api)：它对任何话题类型都返回原始消息字节，而这个端点只能回放机器人已有 JSON 转换器的消息类型。
+:::
+
+旧的播放器在服务端把每条消息转成 JSON，并支持回填锁存话题。
 
 ### 端点
 

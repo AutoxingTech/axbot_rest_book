@@ -1,13 +1,13 @@
-import { defaultTheme } from '@vuepress/theme-default'
-import { defineUserConfig } from 'vuepress'
 import { viteBundler } from '@vuepress/bundler-vite'
 import { searchPlugin } from '@vuepress/plugin-search'
+import { defaultTheme } from '@vuepress/theme-default'
 import anchor from 'markdown-it-anchor'
-import imsize from 'markdown-it-imsize'
 import attrs from 'markdown-it-attrs'
+import imsize from 'markdown-it-imsize'
 import Prism from 'prismjs'
 import 'prismjs/components/prism-json.js'
 import 'prismjs/components/prism-json5.js'
+import { defineUserConfig } from 'vuepress'
 
 // Prism ships no jsonc grammar; alias it to json5, which also allows comments and trailing commas.
 Prism.languages.jsonc = Prism.languages.json5
@@ -86,6 +86,7 @@ export default defineUserConfig({
                             '/reference/current_map_and_pose.md',
                             '/reference/overlays.md',
                             '/reference/mappings.md',
+                            '/reference/bags.md',
                             '/reference/iot_devices.md',
                             '/reference/device.md',
                             '/reference/robot_params.md',
@@ -168,6 +169,7 @@ export default defineUserConfig({
                             '/zh/reference/current_map_and_pose.md',
                             '/zh/reference/overlays.md',
                             '/zh/reference/mappings.md',
+                            '/zh/reference/bags.md',
                             '/zh/reference/iot_devices.md',
                             '/zh/reference/device.md',
                             '/zh/reference/robot_params.md',
