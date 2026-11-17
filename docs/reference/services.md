@@ -114,6 +114,7 @@ Protobuf message definitions are published as part of the [`@kingsimba/axbot-sdk
 | [`/services/calibrate_depth_cameras`](./services-calibration.md#calibrate-depth-cameras)                | `POST` | Align the depth-camera point clouds with the lidar.               |
 | [`/services/calibrate_depth_camera_masks`](./services-calibration.md#calibrate-depth-camera-masks)      | `POST` | Mask the parts of the robot seen by its own depth cameras.        |
 | [`/services/calibrate_duo_lidar_poses`](./services-calibration.md#calibrate-duo-lidar-poses)            | `POST` | Calibrate the poses of the left-front and right-back lidars.      |
+| [`/services/calibrate_forklift_head_lidar`](./services-calibration.md#calibrate-forklift-head-lidar)     | `POST` | Level the forklift head lidar and align it with the main lidar.   |
 | [`/ros/jack_mast/calibrate_mast_tick_base`](./services-calibration.md#calibrate-mast-tick-base)         | `POST` | Calibrate the tick base of the jack mast.                        |
 
 ### Network

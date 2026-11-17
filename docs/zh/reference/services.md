@@ -114,6 +114,7 @@ Protobuf 消息定义随 [`@kingsimba/axbot-sdk`](https://www.npmjs.com/package/
 | [`/services/calibrate_depth_cameras`](./services-calibration.md#calibrate-depth-cameras)                | `POST` | 将深度摄像头点云与激光雷达对齐。                      |
 | [`/services/calibrate_depth_camera_masks`](./services-calibration.md#calibrate-depth-camera-masks)      | `POST` | 遮罩深度摄像头拍到的机器人自身部分。                  |
 | [`/services/calibrate_duo_lidar_poses`](./services-calibration.md#calibrate-duo-lidar-poses)            | `POST` | 校准左前、右后双激光雷达的位姿。                      |
+| [`/services/calibrate_forklift_head_lidar`](./services-calibration.md#calibrate-forklift-head-lidar)     | `POST` | 校准叉车车头激光雷达并与主激光雷达对齐。              |
 | [`/ros/jack_mast/calibrate_mast_tick_base`](./services-calibration.md#calibrate-mast-tick-base)         | `POST` | 校准顶升桅杆的刻度基准。                              |
 
 ### 网络 (Network)

@@ -221,6 +221,56 @@ curl -X POST \
   http://192.168.25.25:8090/services/calibrate_duo_lidar_poses
 ```
 
+## 校准叉车车头激光雷达 (Calibrate Forklift Head Lidar) {#calibrate-forklift-head-lidar}
+
+将叉车车头 3D 激光雷达调平到地面，并与主激光雷达对齐。主雷达位姿被视为基准且不会被修改；校准后的车头雷达位姿会保存到用户设置，并重启 TF。
+
+校准前请确保：
+
+- 叉车处于完全静止状态。
+- 车头雷达能看到叉车前方的平坦地面。
+- 在主雷达高度上，两个雷达都能看到至少两面不平行的墙 — 例如叉车正对墙角。
+
+### 路由 (Route)
+
+```text
+POST /services/calibrate_forklift_head_lidar
+```
+
+### 请求 (Request)
+
+无参数，无请求体。
+
+### 响应 (Response)
+
+`201` `application/json`:
+
+```json
+{ "returncode": 0, "message": "...", "stderr": "..." }
+```
+
+### 附加错误码 (Additional error codes)
+
+<!-- prettier-ignore -->
+| 状态码 | 含义                                                                        |
+| ------ | --------------------------------------------------------------------------- |
+| `500`  | 标定脚本以非零 `returncode` 退出；响应体重复该值并附上 `message` 与 `stderr` |
+
+### 示例 (Example)
+
+```bash
+curl -X POST http://192.168.25.25:8090/services/calibrate_forklift_head_lidar
+```
+
+### SDK 用法 (SDK usage)
+
+```ts
+import { RobotApi } from "@kingsimba/axbot-sdk/robotApi";
+
+const api = new RobotApi({ apiBase: "http://192.168.25.25:8090" });
+await api.calibrateForkliftHeadLidar();
+```
+
 ## Calibrate Mast Tick Base (校准顶升桅杆刻度基准) {#calibrate-mast-tick-base}
 
 转发 `jack_mast_node` 提供的 ROS 服务 `/calibrate_mast_tick_base`（`std_srvs/Trigger`）。触发顶升桅杆刻度基准校准。

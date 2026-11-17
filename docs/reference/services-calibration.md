@@ -221,6 +221,56 @@ curl -X POST \
   http://192.168.25.25:8090/services/calibrate_duo_lidar_poses
 ```
 
+## Calibrate Forklift Head Lidar {#calibrate-forklift-head-lidar}
+
+Levels the forklift head 3D lidar on the ground and aligns it with the main lidar. The main lidar pose is treated as ground truth and is not modified; the calibrated head lidar pose is saved to user settings and TF is restarted afterward.
+
+Before calibrating, ensure that:
+
+- The forklift is completely stationary.
+- The head lidar sees flat ground in front of the forklift.
+- At the main lidar height, both lidars see at least two non-parallel walls — for example, the forklift faces a corner.
+
+### Route
+
+```text
+POST /services/calibrate_forklift_head_lidar
+```
+
+### Request
+
+No parameters, no request body.
+
+### Response
+
+`201` `application/json`:
+
+```json
+{ "returncode": 0, "message": "...", "stderr": "..." }
+```
+
+### Additional error codes
+
+<!-- prettier-ignore -->
+| Status | Meaning                                                                    |
+| ------ | -------------------------------------------------------------------------- |
+| `500`  | The calibration script exited with a non-zero `returncode`; body repeats it with `message` and `stderr` |
+
+### Example
+
+```bash
+curl -X POST http://192.168.25.25:8090/services/calibrate_forklift_head_lidar
+```
+
+### SDK usage
+
+```ts
+import { RobotApi } from "@kingsimba/axbot-sdk/robotApi";
+
+const api = new RobotApi({ apiBase: "http://192.168.25.25:8090" });
+await api.calibrateForkliftHeadLidar();
+```
+
 ## Calibrate Mast Tick Base {#calibrate-mast-tick-base}
 
 Proxies to the `/calibrate_mast_tick_base` ROS service (`std_srvs/Trigger`) provided by `jack_mast_node`. Triggers a mast tick-base calibration.
