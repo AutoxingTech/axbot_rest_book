@@ -2,6 +2,7 @@
 
 ## 2.14.0
 
+- 2026-11-18 Support updating maps from local files in [Map API](../reference/maps.md#modify-map)
 - 2026-11-17 Add [Calibrate Forklift Head Lidar](../reference/services-calibration.md#calibrate-forklift-head-lidar) service
 - 2026-10-31 Reorganize the [Service API](../reference/services.md) and [WebSocket](../reference/websocket.md) references by function; forwarded ROS services are now part of the service reference instead of a separate page
 - 2026-10-30 Add [/app_events](../reference/websocket-system.md#app-events) WebSocket topic

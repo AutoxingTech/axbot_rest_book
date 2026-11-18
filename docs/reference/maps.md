@@ -154,7 +154,7 @@ If the `.pbstream` and `.png` files already exist on the device, you can create 
 
 - **Instant speed**: No base64 decoding or payload parsing overhead.
 - **Almost 0 memory usage**: Avoids loading huge map files into memory during the API request.
-- **0 additional disk space usage**: Uses hard links directly to your source files so no data is duplicated.
+- **No map data duplication**: Uses hard links to your source files. Metadata and thumbnails still require a small amount of disk space.
   :::
 
 * map_name
@@ -193,14 +193,46 @@ curl -X POST \
 
 ## Modify Map
 
-Modify the name and overlays.
+### Modify Map from Base64 Data (Deprecated)
+
+This method is deprecated. Use local file paths instead. The legacy method sends Base64-encoded map data directly in the request body.
 
 ```bash
 curl -X PATCH \
     -H "Content-Type: application/json" \
-    -d '{"map_name": "...", "overlays": "..."}' \
-    http://192.168.25.25:8090/maps/1 {}
+    -d '{"carto_map": "<base64-encoded pbstream data>", "occupancy_grid": "<base64-encoded PNG data>", "grid_origin_x": 1.5, "grid_origin_y": 2.5, "grid_resolution": 0.05, "map_version": 2}' \
+    http://192.168.25.25:8090/maps/1
 ```
+
+### Modify Map from Local Files (Recommended)
+
+To replace an existing map's files without Base64 encoding, send `POST /maps/{id}` with local file paths. This is a partial update: the map ID is preserved and omitted fields remain unchanged. The filename fields are also supported by `PATCH` and `PUT`.
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  --data '{"carto_map_filename": "/path/to/replacement.pbstream", "occupancy_grid_filename": "/path/to/replacement.png", "grid_origin_x": 1.5, "grid_origin_y": 2.5, "grid_resolution": 0.05, "map_version": 2}' \
+  http://192.168.25.25:8090/maps/1
+```
+
+You may provide either filename or both. Include updated grid coordinates and resolution when they change. `map_version` and `overlays_version` follow the existing version checks when provided; they are not automatically incremented. Do not provide both a filename and Base64 data for the same file.
+
+**Response: `200 OK`**
+
+```json
+{
+  "id": 1,
+  "uid": "620620f9c0fd0ecb0f66d981",
+  "map_name": "5层地图",
+  "create_time": 1644568815,
+  "map_version": 2,
+  "overlays_version": 14
+}
+```
+
+:::warning Local file requirements
+Source files must be absolute paths on the device and on the same filesystem as map storage (`/opt/ax-cache/maps`). Updates use hard links, not copies; invalid paths and cross-filesystem sources return `400 Bad Request`. Metadata and thumbnails still consume some disk space. Do not modify source files in place after linking: doing so also changes the stored map. Removing the source filename does not remove the map's hard link.
+:::
 
 ## Delete Map
 

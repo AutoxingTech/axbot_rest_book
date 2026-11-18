@@ -154,7 +154,7 @@ curl -X POST \
 
 - **极速响应**：无 Base64 解码或 Payload 解析开销。
 - **几乎零内存占用**：避免在 API 请求期间将巨大的地图文件加载到内存中。
-- **零额外磁盘空间占用**：直接对源文件使用硬链接，不重复存储数据。
+- **不重复存储地图数据**：直接对源文件使用硬链接。元数据和缩略图仍需少量磁盘空间。
   :::
 
 * map_name
@@ -193,14 +193,46 @@ curl -X POST \
 
 ## 修改地图 {#modify-a-map}
 
-修改名称和叠加层。
+### 直接传入 Base64 数据修改地图（已废弃）
+
+此方式已废弃，请改用本地文件路径。旧方式在请求体中直接传入 Base64 编码的地图数据。
 
 ```bash
 curl -X PATCH \
     -H "Content-Type: application/json" \
-    -d '{"map_name": "...", "overlays": "..."}' \
-    http://192.168.25.25:8090/maps/1 {}
+    -d '{"carto_map": "<base64-encoded pbstream data>", "occupancy_grid": "<base64-encoded PNG data>", "grid_origin_x": 1.5, "grid_origin_y": 2.5, "grid_resolution": 0.05, "map_version": 2}' \
+    http://192.168.25.25:8090/maps/1
 ```
+
+### 使用本地文件修改地图（推荐）
+
+要替换已有地图的文件而不进行 Base64 编码，请向 `POST /maps/{id}` 传入本地文件路径。这是部分更新：保留地图 ID，未提供的字段保持不变。`PATCH` 和 `PUT` 也支持这些文件路径字段。
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  --data '{"carto_map_filename": "/path/to/replacement.pbstream", "occupancy_grid_filename": "/path/to/replacement.png", "grid_origin_x": 1.5, "grid_origin_y": 2.5, "grid_resolution": 0.05, "map_version": 2}' \
+  http://192.168.25.25:8090/maps/1
+```
+
+可以只提供一个文件路径，也可以同时提供两个。如果栅格原点或分辨率发生变化，请同时更新对应字段。提供 `map_version` 或 `overlays_version` 时会执行现有版本校验，版本号不会自动递增。同一个文件不能同时提供路径和 Base64 数据。
+
+**响应：`200 OK`**
+
+```json
+{
+  "id": 1,
+  "uid": "620620f9c0fd0ecb0f66d981",
+  "map_name": "5层地图",
+  "create_time": 1644568815,
+  "map_version": 2,
+  "overlays_version": 14
+}
+```
+
+:::warning 本地文件要求
+源文件必须使用设备上的绝对路径，且与地图存储目录（`/opt/ax-cache/maps`）位于同一文件系统。更新使用硬链接，不复制数据；无效路径或跨文件系统的源文件会返回 `400 Bad Request`。元数据和缩略图仍会占用少量磁盘空间。建立硬链接后不要原地修改源文件，否则已保存的地图也会随之改变。删除源文件名不会删除地图的硬链接。
+:::
 
 ## 删除地图 {#delete-a-map}
 
