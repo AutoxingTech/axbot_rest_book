@@ -11,6 +11,7 @@
 
 - [运动与底盘控制](./services-motion.md) —— 驱动模式、急停、车轮与底盘错误。
 - [定位](./services-localization.md) —— 全局定位，以及充电桩、托盘、挂车、货架的位姿查询。
+- [导航](./services-navigation.md) —— 两个位姿之间的一级路线规划。
 - [建图](./services-mapping.md) —— 自动建图、地标、叠加层、交通信息、子图与 SLAM 地图图片。
 - [货物搬运](./services-cargo.md) —— 顶升、辊道、牵引钩、货物装卸与货架尺寸检测。
 - [感知与传感器](./services-perception.md) —— 激光雷达与深度摄像头电源、RGB 图像、导航缩略图与 V2X 信标。
@@ -59,6 +60,13 @@ Protobuf 消息定义随 [`@kingsimba/axbot-sdk`](https://www.npmjs.com/package/
 | ------------------------------------------------------- | ------ | -------------------------------------------------------- |
 | [`/services/start_global_positioning`](./services-localization.md#start-global-positioning) | `POST` | 使用条码和基础地图匹配进行全局定位。                     |
 | [`/services/query_pose/<poi>`](./services-localization.md#query-pose)                       | `GET`  | 查询充电桩、托盘、挂车或货架边缘的地图位姿。             |
+
+### 导航 (Navigation)
+
+<!-- prettier-ignore -->
+| 接口                                                    | 方法   | 说明                                           |
+| ------------------------------------------------------- | ------ | ---------------------------------------------- |
+| [`/ros/navi/plan_route`](./services-navigation.md#plan-route)                               | `POST` | 在当前地图上规划两个位姿之间的一级路线。       |
 
 ### 建图 (Mapping)
 

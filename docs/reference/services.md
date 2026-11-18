@@ -11,6 +11,7 @@ The reference is grouped by what the service does:
 
 - [Motion & Chassis Control](./services-motion.md) — drive modes, emergency stop, wheel and chassis errors.
 - [Localization](./services-localization.md) — global positioning and pose queries for chargers, pallets, trailers, and racks.
+- [Navigation](./services-navigation.md) — primary route planning between two poses.
 - [Mapping](./services-mapping.md) — auto-mapping, landmarks, overlays, traffic info, submaps, and the SLAM map image.
 - [Cargo Handling](./services-cargo.md) — jack, roller, towing hook, cargo load/unload, and rack size detection.
 - [Perception & Sensors](./services-perception.md) — lidar and depth camera power, RGB frames, nav thumbnail, and V2X beacons.
@@ -59,6 +60,13 @@ Protobuf message definitions are published as part of the [`@kingsimba/axbot-sdk
 | ----------------------------------------------------- | ------ | ------------------------------------------------------------------------ |
 | [`/services/start_global_positioning`](./services-localization.md#start-global-positioning) | `POST` | Localize the robot globally with barcodes and base-map matching.          |
 | [`/services/query_pose/<poi>`](./services-localization.md#query-pose)                       | `GET`  | Query the map pose of a charger, pallet, trailer, or rack edge.           |
+
+### Navigation
+
+<!-- prettier-ignore -->
+| Endpoint                                                    | Method | Description                                                  |
+| ----------------------------------------------------------- | ------ | ------------------------------------------------------------ |
+| [`/ros/navi/plan_route`](./services-navigation.md#plan-route)                               | `POST` | Plan a primary route between two poses on the current map.    |
 
 ### Mapping
 

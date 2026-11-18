@@ -2,6 +2,7 @@
 
 ## 2.14.0
 
+- 2026-11-18 添加[路线规划](../reference/services-navigation.md#plan-route)服务，用于规划两个位姿之间的一级路线
 - 2026-11-18 支持通过本地文件[修改地图](../reference/maps.md#modify-a-map)
 - 2026-11-17 添加[校准叉车车头激光雷达](../reference/services-calibration.md#calibrate-forklift-head-lidar)服务
 - 2026-10-31 按功能重新组织[服务 API](../reference/services.md)与 [WebSocket](../reference/websocket.md)参考手册；转发 ROS 服务不再单独成页，并入服务参考手册
