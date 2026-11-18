@@ -10,6 +10,17 @@
 
 本文档列出了已弃用的 API，并提供了迁移到其替代品的指南。
 
+## 2.15.0
+
+### 弃用通过内联地图数据设置当前地图的 `POST /chassis/current-map`
+
+通过请求体中的 Base64 编码 `carto_map` 和 `occupancy_grid` 字段设置当前地图的方式自 2.7.0 版本起可用，现自 2.15.0 起弃用且已不可用：地图必须以 `.pbstream` 文件的形式存在于设备上，否则请求会失败并返回 `Failed to load carto_map. pbstream file not found.`。
+
+替代方案：
+
+- 使用 `map_id` 或 `map_uid` 调用 `POST /chassis/current-map`，参见[设置当前地图](../reference/current_map_and_pose.md#set-current-map)
+- 使用 `data_url` 指向本地文件调用 `POST /chassis/current-map`，参见[通过加载本地文件设置当前地图](../reference/current_map_and_pose.md#set-current-map-by-loading-local-files)
+
 ## 2.14.0
 
 ### 移除 `/mappings/:id/download`

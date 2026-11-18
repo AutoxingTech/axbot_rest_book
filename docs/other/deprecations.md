@@ -10,6 +10,17 @@ During this period, the older APIs are considered deprecated. We encourage our u
 
 This document lists deprecated APIs and provides guidance on migrating to their replacements.
 
+## 2.15.0
+
+### Deprecate `POST /chassis/current-map` with inline map data
+
+Setting the current map from Base64-encoded `carto_map` and `occupancy_grid` fields in the request body was available since 2.7.0. It is deprecated in 2.15.0 and no longer works: the map must exist as a `.pbstream` file on the device, so such a request now fails with `Failed to load carto_map. pbstream file not found.`
+
+Replaced by:
+
+- `POST /chassis/current-map` with `map_id` or `map_uid`, see [Set Current Map](../reference/current_map_and_pose.md#set-current-map)
+- `POST /chassis/current-map` with `data_url` pointing at local files, see [Set Current Map by Loading Local Files](../reference/current_map_and_pose.md#set-current-map-by-loading-local-files)
+
 ## 2.14.0
 
 ### Remove `/mappings/:id/download`

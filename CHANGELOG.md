@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.15.0
+
+- 2026-11-18 Deprecate setting the current map with inline map data in [Current Map API](../reference/current_map_and_pose.md#set-current-map)
+
 ## 2.14.0
 
 - 2026-11-18 Add [Plan Route](../reference/services-navigation.md#plan-route) service to plan a primary route between two poses

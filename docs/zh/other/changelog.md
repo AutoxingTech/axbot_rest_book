@@ -1,5 +1,9 @@
 # 更新日志
 
+## 2.15.0
+
+- 2026-11-18 [当前地图 API](../reference/current_map_and_pose.md#set-current-map)弃用通过内联地图数据设置当前地图
+
 ## 2.14.0
 
 - 2026-11-18 添加[路线规划](../reference/services-navigation.md#plan-route)服务，用于规划两个位姿之间的一级路线

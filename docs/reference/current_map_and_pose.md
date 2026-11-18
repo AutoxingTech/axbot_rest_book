@@ -5,8 +5,8 @@
 There are several ways to set the current map:
 
 - Using a `map_id` or `map_uid`.
-- Providing the map data directly (available since version 2.7.0).
 - Loading from a local file (available since version 2.11.0).
+- Providing the map data directly (available since version 2.7.0, deprecated in 2.15.0).
 
 ```bash
 curl -X POST \
@@ -27,9 +27,17 @@ class SetCurrentMapRequest {
 }
 ```
 
-### Set Current Map with Data
+### Set Current Map with Data (Deprecated)
 
-Starting from version 2.7.0, you can use the following `POST` request to set the current map directly.
+:::warning
+This option is deprecated in 2.15.0 and no longer works. The map must exist as a
+`.pbstream` file on the device, so a request that only carries Base64 data now
+fails with `Failed to load carto_map. pbstream file not found.`
+
+Use [local files](#set-current-map-by-loading-local-files) instead.
+:::
+
+It was available since 2.7.0. The following `POST` request set the current map directly from the payload.
 **Note:** This method can be very slow for large maps.
 
 ```ts
@@ -92,7 +100,7 @@ curl http://192.168.25.25:8090/chassis/current-map
 ```
 
 The `id` corresponds to an entry in the [Map List](./maps.md#map-list).
-If the current map was set directly with data, the `id` will be `-1`.
+Maps set from inline data used to be reported with an `id` of `-1`; that option is deprecated in 2.15.0.
 
 The latched WebSocket topic `/map/info` contains information about the currently active map.
 A new message is broadcast on this topic whenever the current map changes.
