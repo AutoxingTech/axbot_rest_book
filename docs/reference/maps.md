@@ -155,7 +155,7 @@ If the `.pbstream` and `.png` files already exist on the device, you can create 
 - **Instant speed**: No base64 decoding or payload parsing overhead.
 - **Almost 0 memory usage**: Avoids loading huge map files into memory during the API request.
 - **No map data duplication**: Uses hard links to your source files. Metadata and thumbnails still require a small amount of disk space.
-  :::
+:::
 
 * map_name
 * carto_map_filename (Absolute path to the source `.pbstream` file)
